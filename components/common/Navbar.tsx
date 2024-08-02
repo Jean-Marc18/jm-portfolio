@@ -46,7 +46,7 @@ export const NavBar: React.FC<{ tabs: Route[] }> = ({ tabs }) => {
       {tabs.map((link, i) => (
         <Link
           href={link.path}
-          key={i}
+          key={i + link.path}
           id={"uuu-btn-" + i}
           onClick={() => {
             fired.current = true;
