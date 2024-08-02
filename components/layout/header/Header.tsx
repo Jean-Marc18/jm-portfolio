@@ -15,7 +15,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex sm:flex-col items-center justify-between py-4 fixed w-full px-4 sm:justify-center sm:gap-3">
+    <header className="flex sm:flex-col items-center justify-between py-4 fixed w-full px-4 sm:justify-center sm:gap-3 backdrop-blur-sm z-10">
       <div className="z-20 font-labil text-gray-800 dark:text-white text-3xl">
         <p className="relative">
           Jmk<span className="text-sm absolute top-0">®</span>
@@ -27,14 +27,16 @@ const Header = () => {
 
       {/* Mobile menu */}
       <nav
-        className={`flex p-[5px] border-b border-black dark:border-white absolute dark:bg-black bg-slate-100 text-black dark:text-white duration-300 -mx-4 flex-col h-screen w-screen items-center justify-center gap-4 ${
+        className={`fixed flex p-[5px] border-b border-black dark:border-white dark:bg-black bg-slate-100 text-black dark:text-white duration-300 -mx-4 flex-col h-dvh w-screen items-center justify-center gap-4 overflow-hidden ${
           showMenu ? "top-0" : "-top-[100vh]"
         }`}
       >
-        {routes.map((route) => (
+        {routes.map((route, index) => (
           <>
             <Link
+              key={route.name + index}
               href={route.path}
+              onClick={onShowMenu}
               className="text-xl font-labil px-4 py-2 hover:bg-white hover:text-black rounded-full duration-200"
             >
               {route.name}

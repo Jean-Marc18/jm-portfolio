@@ -10,6 +10,13 @@
   src: url("/fonts/LabilGrotesk-Medium.woff2") format("woff2");
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
