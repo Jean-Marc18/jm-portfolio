@@ -75,6 +75,7 @@ const config = {
     },
     fontFamily: {
       labil: ["Labil Grotesk"],
+      labilBold: ["Labil Grotesk Bold"],
     },
   },
   plugins: [require("tailwindcss-animate")],
