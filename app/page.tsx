@@ -12,12 +12,12 @@ export default function Home() {
         <Projet />
         <Expertise />
       </div>
-      <ScrollVelocity velocity={3}>
-        react, nextjs, tailwindcss, typescript, git, github,
-      </ScrollVelocity>
-      <div className="px-24 md:px-16 max-sm:px-8">
-        <Testimonial />
+      <div className="pt-16">
+        <ScrollVelocity velocity={3}>
+          react, nextjs, tailwindcss, typescript, git, github,
+        </ScrollVelocity>
       </div>
+      <div className="px-24 md:px-16 max-sm:px-8">{/* <Testimonial /> */}</div>
     </main>
   );
 }

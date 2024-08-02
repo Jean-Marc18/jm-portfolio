@@ -12,7 +12,7 @@ interface BoxRevealProps {
 
 export const BoxReveal = ({
   children,
-  width = "fit-content",
+  width = "100%",
   boxColor,
   duration,
 }: BoxRevealProps) => {

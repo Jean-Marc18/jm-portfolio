@@ -17,7 +17,7 @@ const Footer = () => {
   return (
     <footer
       id="contact"
-      className="relative w-full min-h-[40vh] flex flex-col items-start justify-center text-center"
+      className="relative w-full min-h-[70vh] flex flex-col items-start justify-center text-center"
     >
       <div className="py-24 max-sm:py-12 flex-1 flex flex-col items-center justify-center h-full w-full gap-11 max-sm:gap-7">
         <BoxReveal boxColor={"transparent"} duration={0.25}>
@@ -27,13 +27,15 @@ const Footer = () => {
         </BoxReveal>
 
         <BoxReveal boxColor={"transparent"} duration={0.15}>
-          <Link
-            href="mailto:jeanmarc.dev.18@gmail.com"
-            className="rounded-full p-7 max-sm:p-5 group bg-black text-white text-sm relative w-fit flex items-center justify-center text-center gap-1 hover:opacity-90 border dark:border-neutral-800 border-white"
-          >
-            jeanmarc.dev.18@gmail.com{" "}
-            <ArrowRight className="h-6 w-6 -rotate-45 duration-200 group-hover:rotate-0 relative -top-0 group-hover:top-0" />
-          </Link>
+          <div className="flex flex-col items-center justify-center">
+            <Link
+              href="mailto:jeanmarc.dev.18@gmail.com"
+              className="rounded-full p-7 max-sm:p-5 group bg-black text-white text-sm relative w-fit flex items-center justify-center text-center gap-1 hover:opacity-90 border dark:border-neutral-800 border-white"
+            >
+              jeanmarc.dev.18@gmail.com{" "}
+              <ArrowRight className="h-6 w-6 -rotate-45 duration-200 group-hover:rotate-0 relative -top-0 group-hover:top-0" />
+            </Link>
+          </div>
         </BoxReveal>
       </div>
       <div className="py-5 pb-9 flex max-sm:flex-col-reverse max-sm:gap-5 items-center justify-between px-4 h-full w-full">
