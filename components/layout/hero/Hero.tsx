@@ -12,11 +12,11 @@ const Hero = () => {
           </BoxReveal>
         </div>
         <BoxReveal boxColor={"transparent"} duration={0.5}>
-          <div className="grid grid-cols-1 lg:grid-cols-3 max-sm:gap-10 md:gap-14">
+          <div className="grid grid-cols-1 lg:grid-cols-3 max-sm:gap-8 md:gap-14">
             <h1 className="text-[17vw] col-span-2 font-bold font-labilBold">
               Branding
             </h1>
-            <div className="col-span-1 flex flex-col items-end lg:items-center max-sm:items-end justify-center">
+            <div className="col-span-1 flex flex-col items-end lg:items-center justify-center">
               <span className="bg-slate-100 dark:text-black px-4 sm:px-8 py-5 sm:py-7 rounded-full text-base sm:text-xl flex gap-2 uppercase font-labil">
                 scroll down <ArrowDown />
               </span>

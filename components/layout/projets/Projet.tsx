@@ -30,10 +30,10 @@ const Projet = () => {
     <section id="projects" className="mt-36 sm:mt-44 mb-7">
       <div className="grid grid-cols-1 sm:grid-cols-2 max-sm:gap-4">
         <div className="flex-auto flex flex-col w-full items-start justify-center h-full gap-4">
-          <BoxReveal boxColor={"transparent"} duration={0.8}>
+          <BoxReveal boxColor={"transparent"} duration={0.25}>
             <h1 className="text-5xl font-labil font-semibold">Projects</h1>
           </BoxReveal>
-          <BoxReveal boxColor={"transparent"} duration={0.9}>
+          <BoxReveal boxColor={"transparent"} duration={0.15}>
             <p className="text-balance font-labil">
               Explore my projects, showcasing my expertise in crafting <br />{" "}
               user-friendly web design and digital solutions.
@@ -42,13 +42,15 @@ const Projet = () => {
         </div>
         <div className="flex-auto flex w-full items-end justify-end h-full">
           <BoxReveal boxColor={"transparent"} duration={0.6}>
-            <Button
-              variant="ghost"
-              className="text-lg"
-              onClick={() => router.push("/projects")}
-            >
-              Voir plus <ArrowRight className="w-6 h-6 ml-2" />
-            </Button>
+            <div className="flex flex-col items-end justify-center">
+              <Button
+                variant="ghost"
+                className="text-lg"
+                onClick={() => router.push("/projects")}
+              >
+                Voir plus <ArrowRight className="w-6 h-6 ml-2" />
+              </Button>
+            </div>
           </BoxReveal>
         </div>
       </div>
