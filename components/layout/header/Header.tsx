@@ -32,16 +32,14 @@ const Header = () => {
         }`}
       >
         {routes.map((route, index) => (
-          <>
-            <Link
-              key={route.name + index}
-              href={route.path}
-              onClick={onShowMenu}
-              className="text-xl font-labil px-4 py-2 hover:bg-white hover:text-black rounded-full duration-200"
-            >
-              {route.name}
-            </Link>
-          </>
+          <Link
+            key={route.path}
+            href={route.path}
+            onClick={onShowMenu}
+            className="text-xl font-labil px-4 py-2 hover:bg-white hover:text-black rounded-full duration-200"
+          >
+            {route.name}
+          </Link>
         ))}
 
         <Separator className="w-24 my-4 bg-black dark:bg-white" />
