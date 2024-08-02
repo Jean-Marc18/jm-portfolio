@@ -15,11 +15,11 @@ const Header = () => {
   };
 
   return (
-    <header className="flex sm:flex-col items-center justify-between py-4 fixed w-full px-4 sm:justify-center sm:gap-3 backdrop-blur-sm z-10">
+    <header className="flex sm:flex-col items-center justify-between py-4 fixed w-full px-4 sm:justify-center sm:gap-3 backdrop-blur-sm z-10 bg-white/15 dark:bg-black/15">
       <div className="z-20 font-labil text-gray-800 dark:text-white text-3xl">
-        <p className="relative">
+        <Link href="/" className="relative">
           Jmk<span className="text-sm absolute top-0">®</span>
-        </p>
+        </Link>
       </div>
 
       {/* Desktop menu */}
