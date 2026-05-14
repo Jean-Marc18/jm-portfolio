@@ -1,85 +1,129 @@
 "use client";
 
-import BoxReveal from "@/components/magicui/box-reveal";
+import { ButtonLink, Label } from "@/components/ui";
+import { ArrowDiagonal } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { Briefcase } from "lucide-react";
-
-const SKILLS = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "TanStack Query",
-  "Zustand",
-  "React Hook Form",
-  "Zod",
-  "Radix UI",
-  "Framer Motion",
-  "GSAP",
-  "Sanity",
-  "NextAuth.js",
-  "Clean Architecture",
-  "Hexagonal Architecture",
-];
 
 const About = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="mt-36 sm:mt-44 mb-7 scroll-mt-24">
-      <div className="grid grid-cols-1 sm:grid-cols-2 max-sm:gap-4">
-        <div className="flex-auto flex flex-col w-full items-start justify-center h-full gap-4">
-          <BoxReveal boxColor={"transparent"} duration={0.25}>
-            <h2 className="text-5xl font-labil font-semibold">
-              {t.about.title}
-            </h2>
-          </BoxReveal>
-          <BoxReveal boxColor={"transparent"} duration={0.15}>
-            <p className="text-balance font-labil">{t.about.subtitle}</p>
-          </BoxReveal>
+    <section
+      className="ho-section pf-section-band"
+      id="about"
+      style={{ scrollMarginTop: 96 }}
+    >
+      <div className="ho-grid-about pf-reveal">
+        <div>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {t.about.label}
+          </Label>
+          <h2
+            className="pf-display"
+            style={{
+              fontSize: "clamp(30px, 4vw, 48px)",
+              margin: 0,
+              lineHeight: 1.05,
+            }}
+          >
+            {t.about.h1}
+          </h2>
+          <ButtonLink
+            href="#contact"
+            variant="primary"
+            trailing={<ArrowDiagonal />}
+            style={{ marginTop: 28, fontSize: 13 }}
+          >
+            {t.about.cta}
+          </ButtonLink>
         </div>
-      </div>
+        <div>
+          <p
+            style={{
+              fontSize: 17,
+              lineHeight: 1.6,
+              color: "var(--ink)",
+              marginTop: 0,
+              maxWidth: 600,
+            }}
+          >
+            {t.about.p1}
+          </p>
+          <p
+            style={{
+              fontSize: 15.5,
+              lineHeight: 1.65,
+              color: "var(--muted)",
+              maxWidth: 600,
+            }}
+          >
+            {t.about.p2a}
+            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+              {t.about.p2b}
+            </strong>
+            {t.about.p2c}
+            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+              {t.about.p2d}
+            </strong>
+            {t.about.p2e}
+            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+              {t.about.p2f}
+            </strong>
+            {t.about.p2g}
+          </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-12 mt-10">
-        <BoxReveal boxColor={"transparent"} duration={0.3}>
-          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 sm:p-8 h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <Briefcase className="w-5 h-5" />
-              <h3 className="text-xl font-labil font-semibold">
-                {t.about.experienceTitle}
-              </h3>
-            </div>
-            <p className="font-labil font-semibold text-lg">
-              {t.about.currentRole}
-            </p>
-            <p className="text-sm opacity-70 font-labil mb-4">
-              {t.about.period}
-            </p>
-            <ul className="space-y-2 list-disc pl-5 font-labil">
-              {t.about.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-          </div>
-        </BoxReveal>
-
-        <BoxReveal boxColor={"transparent"} duration={0.3}>
-          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 sm:p-8 h-full">
-            <h3 className="text-xl font-labil font-semibold mb-4">
-              {t.about.stackTitle}
-            </h3>
-            <ul className="flex flex-wrap gap-2">
-              {SKILLS.map((s) => (
-                <li
-                  key={s}
-                  className="px-3 py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-sm font-labil"
+          <div
+            style={{
+              borderTop: "1px solid var(--line)",
+              marginTop: 36,
+              paddingTop: 28,
+            }}
+          >
+            <Label style={{ display: "block", marginBottom: 20 }}>
+              {t.about.expLabel}
+            </Label>
+            <div className="ho-exp-row">
+              <div className="pf-display" style={{ fontSize: 22 }}>
+                {t.about.period}
+              </div>
+              <div>
+                <div
+                  style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}
                 >
-                  {s}
-                </li>
-              ))}
-            </ul>
+                  {t.about.role}{" "}
+                  <span style={{ color: "var(--muted)", fontWeight: 400 }}>
+                    {t.about.roleAt}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    fontSize: 13.5,
+                    color: "var(--muted)",
+                    marginBottom: 14,
+                  }}
+                >
+                  {t.about.roleCtx}
+                </div>
+                <ul
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                    listStyle: "none",
+                    display: "grid",
+                    gap: 8,
+                    fontSize: 14,
+                    color: "var(--ink)",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {t.about.bullets.map((b, j) => (
+                    <li key={j}>· {b}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-        </BoxReveal>
+        </div>
       </div>
     </section>
   );

@@ -1,56 +1,64 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils";
+import {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
+  type ReactNode,
+} from "react";
 
-import { cn } from "@/lib/utils"
+export type ButtonVariant = "primary" | "ghost" | "light" | "darkghost";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
+const VARIANT_CLASS: Record<ButtonVariant, string> = {
+  primary: "pf-btn-primary",
+  ghost: "pf-btn-ghost",
+  light: "pf-btn-light",
+  darkghost: "pf-btn-darkghost",
+};
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-}
+type CommonProps = {
+  variant?: ButtonVariant;
+  /** Content rendered after the children (typically an icon). */
+  trailing?: ReactNode;
+  /** Content rendered before the children. */
+  leading?: ReactNode;
+};
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & CommonProps;
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { variant = "primary", className, children, leading, trailing, ...rest },
+  ref
+) {
+  return (
+    <button
+      ref={ref}
+      className={cn("pf-btn", VARIANT_CLASS[variant], className)}
+      {...rest}
+    >
+      {leading}
+      {children}
+      {trailing}
+    </button>
+  );
+});
+
+export type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & CommonProps;
+
+export const ButtonLink = forwardRef<HTMLAnchorElement, ButtonLinkProps>(
+  function ButtonLink(
+    { variant = "primary", className, children, leading, trailing, ...rest },
+    ref
+  ) {
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <a
         ref={ref}
-        {...props}
-      />
-    )
+        className={cn("pf-btn", VARIANT_CLASS[variant], className)}
+        {...rest}
+      >
+        {leading}
+        {children}
+        {trailing}
+      </a>
+    );
   }
-)
-Button.displayName = "Button"
-
-export { Button, buttonVariants }
+);

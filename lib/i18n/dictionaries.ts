@@ -4,43 +4,85 @@ export const dictionaries = {
   fr: {
     nav: {
       home: "Accueil",
+      travaux: "Travaux",
+      services: "Services",
       about: "À propos",
-      projects: "Projets",
       contact: "Contact",
+      menu: "Menu",
+      available: "Disponible pour de nouveaux projets",
+      emailCta: "Me contacter",
     },
     hero: {
-      letsTalk: "Discutons",
-      bio: "Bonjour, je suis Jean-Marc, développeur front-end avec plus de 2 ans d'expérience dans la fintech. Je conçois des interfaces performantes, accessibles et optimisées SEO, en m'appuyant sur des architectures modernes (clean architecture, hexagonale, feature-component). Mon objectif : transformer des produits complexes en expériences utilisateur fluides et durables.",
-      downloadCV: "Télécharger mon CV",
-      scrollDown: "Faire défiler",
+      h1l1: "Crafting Front-End",
+      h1l2: "Experiences That",
+      h1l3: "Scale With Your Product.",
+      lede: "Développeur front-end basé à Abidjan, je conçois des interfaces performantes et accessibles, ancrées dans des architectures modernes — pour des produits fintech, agences et institutions.",
+      cv: "Télécharger mon CV",
+      viewProjects: "Voir les projets",
     },
-    about: {
-      title: "À propos",
-      subtitle: "Mon parcours et mon expertise.",
-      experienceTitle: "Expérience professionnelle",
-      currentRole: "Développeur Front-End — Inexa (Fintech, Abidjan)",
-      period: "Août 2024 → Avril 2026",
-      bullets: [
-        "Conception et développement de l'extranet CDC-CI (Caisse des Dépôts ivoirienne).",
-        "Application de Contrôle Dépositaire : gestion des SGI, SGO et émetteurs sur le marché UMOA.",
-        "Mise en place d'un monorepo Next.js partagé entre plusieurs produits métier.",
-        "Application de la clean architecture / hexagonale et d'une organisation feature-component.",
+    banner: {
+      label: "Dernier poste",
+      company: "Inexa",
+      suffix: "— Fintech",
+      ctx: "Extranet CDC-CI · Marché UMOA · Abidjan",
+      location: "Côte d'Ivoire · GMT+0",
+      years: "2+ ans à construire\ndes produits web complexes",
+      bigA: "Front-End",
+      bigB: "that performs.",
+      avail: "Disponible",
+      when: "Freelance ou poste —\ndisponible immédiatement",
+      contactLabel: "Me contacter",
+    },
+    toolkit: "Ma stack",
+    services: {
+      label: "— Services",
+      h1a: "A focused look at",
+      h1b: "what I do, and how I deliver.",
+      intro:
+        "Quatre piliers d'intervention, pensés pour les équipes produit qui veulent construire vite mais durablement. Du wireframe à la mise en production, en passant par l'architecture.",
+      process: "Voir mon process",
+      items: [
+        {
+          title: "Architecture Frontend",
+          desc: "Architectures modulaires et évolutives : clean, hexagonale, monorepo et organisation feature-component. Du code maintenable, testable et prêt à l'échelle.",
+          tags: ["Clean Architecture", "Hexagonal", "Monorepo"],
+        },
+        {
+          title: "Interfaces UI/UX",
+          desc: "Interfaces accessibles, animées et intuitives. Respect des standards WCAG, design system avec Radix et Tailwind, animations Framer Motion et GSAP.",
+          tags: ["WCAG AA", "Design Systems", "Animation"],
+          featured: true,
+          badge: "Most requested",
+        },
+        {
+          title: "Performance & SEO",
+          desc: "Optimisation Core Web Vitals, rendu SSR/SSG avec Next.js, métadonnées structurées et Open Graph. Pour des sites rapides, indexables et bien classés.",
+          tags: ["Core Web Vitals", "SSR / SSG", "Open Graph"],
+        },
+        {
+          title: "Intégration produit",
+          desc: "Plus de 2 ans à transformer des produits fintech complexes (extranet CDC-CI, marché UMOA) en expériences utilisateur fluides et durables.",
+          tags: ["Fintech", "UMOA", "B2B"],
+        },
       ],
-      stackTitle: "Compétences techniques",
+    },
+    work: {
+      label: "— Selected work",
+      h1: "Recent projects.",
+      all: "All work →",
     },
     projects: {
-      title: "Projets",
-      subtitle:
-        "Une sélection de projets en production illustrant mon expertise en interfaces web et solutions digitales.",
-      seeMore: "Voir plus",
       visitSite: "Visiter le site",
       items: [
         {
           slug: "pipv-pped",
           name: "PIPV-PPED",
-          tagline: "Plateforme institutionnelle ivoirienne",
+          shortName: "PIPV",
+          tag: "Public Sector",
+          year: "2025",
+          sub: "Plateforme institutionnelle ivoirienne",
           description:
-            "Plateforme officielle de gestion et de suivi pour une institution publique de Côte d'Ivoire. Authentification sécurisée, gestion de rôles, upload de documents et tableau de bord administratif.",
+            "Plateforme officielle de gestion et de suivi pour une institution publique de Côte d'Ivoire. Authentification sécurisée, gestion des rôles, upload de documents et tableau de bord administratif.",
           url: "https://pipv-pped.ci",
           stack: [
             "Next.js 14",
@@ -57,7 +99,10 @@ export const dictionaries = {
         {
           slug: "tacomfav",
           name: "TaComFav",
-          tagline: "Site agence de communication",
+          shortName: "TaComFav",
+          tag: "Agency",
+          year: "2025",
+          sub: "Site agence de communication",
           description:
             "Site vitrine animé pour une agence de communication, intégrant un CMS headless et des animations soignées. Performance, SEO et expérience visuelle au cœur du projet.",
           url: "https://tacomfav.com",
@@ -76,7 +121,10 @@ export const dictionaries = {
         {
           slug: "e-panacee",
           name: "e-Panacee",
-          tagline: "E-commerce ivoirien",
+          shortName: "e-Panacee",
+          tag: "E-commerce",
+          year: "2024",
+          sub: "E-commerce ivoirien",
           description:
             "Plateforme e-commerce complète : catalogue, panier, gestion de commandes, paiement et back-office. Pensée pour la performance mobile et l'accessibilité.",
           url: "https://e-panacee.com",
@@ -93,77 +141,129 @@ export const dictionaries = {
         },
       ],
     },
-    expertise: {
-      title: "Expertise",
-      subtitle: "Des solutions digitales sur-mesure, centrées utilisateur.",
-      items: [
-        {
-          title: "Architecture Frontend",
-          description:
-            "Mise en place d'architectures modulaires et évolutives : clean architecture, hexagonale, organisation feature-component, monorepos Next.js. Code maintenable, testable, prêt à l'échelle.",
-        },
-        {
-          title: "Interfaces UI/UX",
-          description:
-            "Conception d'interfaces accessibles et intuitives, avec un soin particulier pour les animations, la cohérence visuelle et le respect des standards WCAG. Tailwind, Radix, Framer Motion, GSAP.",
-        },
-        {
-          title: "Performance & SEO",
-          description:
-            "Optimisation Core Web Vitals, rendu SSR/SSG avec Next.js, métadonnées structurées, sitemap, Open Graph. Sites rapides, indexables et bien classés.",
-        },
-        {
-          title: "Stack moderne",
-          description:
-            "Maîtrise de React 18/19, Next.js (App Router), TypeScript, TanStack Query, Zustand, Zod. Intégration de CMS headless (Sanity) et de services tiers (NextAuth, Resend, UploadThing).",
-        },
+    about: {
+      label: "— À propos",
+      h1: "Transformer des produits complexes en expériences fluides.",
+      cta: "Discutons",
+      p1: "Bonjour, je suis Jean-Marc, développeur front-end avec plus de 2 ans d'expérience dans la fintech.",
+      p2a: "Je conçois des interfaces performantes, accessibles et optimisées SEO, en m'appuyant sur des architectures modernes : ",
+      p2b: "clean architecture",
+      p2c: ", ",
+      p2d: "hexagonale",
+      p2e: ", ",
+      p2f: "feature-component",
+      p2g: ".",
+      expLabel: "Expérience",
+      period: "2024 — 26",
+      role: "Développeur Front-End",
+      roleAt: "— Inexa",
+      roleCtx: "Fintech · Abidjan · CDC-CI / Marché UMOA",
+      bullets: [
+        "Conception et développement de l'extranet CDC-CI (Caisse des Dépôts ivoirienne).",
+        "Application de Contrôle Dépositaire : gestion des SGI, SGO et émetteurs sur le marché UMOA.",
+        "Mise en place d'un monorepo Next.js partagé entre plusieurs produits métier.",
+        "Application de la clean architecture / hexagonale et d'une organisation feature-component.",
       ],
     },
+    contact: {
+      label: "— Contact",
+      h1a: "Let's start building",
+      h1b: "your next product",
+      h1c: "together.",
+      intro:
+        "Une opportunité freelance ou un poste à pourvoir ? Parlons-en — je réponds sous 24h en semaine.",
+      cta: "Réserver un appel",
+      status: "Disponible",
+    },
     footer: {
-      title: "Discutons !",
-      copyright: "© 2026 Jmk — Portfolio",
+      tag: "Développeur front-end · Abidjan, Côte d'Ivoire. Disponible pour des missions freelance ou un poste.",
+      elsewhere: "Ailleurs",
+      rights: "© 2026 Koffi N'Guessan Jean-Marc — Tous droits réservés",
+      built: "Built with Next.js · Designed in Abidjan",
     },
   },
   en: {
     nav: {
       home: "Home",
+      travaux: "Work",
+      services: "Services",
       about: "About",
-      projects: "Projects",
       contact: "Contact",
+      menu: "Menu",
+      available: "Available for new projects",
+      emailCta: "Get in touch",
     },
     hero: {
-      letsTalk: "Let's Talk",
-      bio: "Hi, I'm Jean-Marc, a front-end developer with 2+ years of experience in fintech. I build performant, accessible and SEO-optimized interfaces, leveraging modern architectures (clean, hexagonal, feature-component). My goal: turn complex products into smooth, durable user experiences.",
-      downloadCV: "Download my CV",
-      scrollDown: "scroll down",
+      h1l1: "Crafting Front-End",
+      h1l2: "Experiences That",
+      h1l3: "Scale With Your Product.",
+      lede: "Front-end developer based in Abidjan. I build performant, accessible interfaces rooted in modern architectures — for fintech, agency, and institutional products.",
+      cv: "Download my CV",
+      viewProjects: "View projects",
     },
-    about: {
-      title: "About",
-      subtitle: "My background and expertise.",
-      experienceTitle: "Professional experience",
-      currentRole: "Front-End Developer — Inexa (Fintech, Abidjan)",
-      period: "August 2024 → April 2026",
-      bullets: [
-        "Design and development of the CDC-CI extranet (Ivorian Deposits Fund).",
-        "Custodian Control application: managing SGI, SGO and issuers on the UMOA market.",
-        "Built a Next.js monorepo shared across multiple business products.",
-        "Applied clean / hexagonal architecture and feature-component organization.",
+    banner: {
+      label: "Latest role",
+      company: "Inexa",
+      suffix: "— Fintech",
+      ctx: "CDC-CI Extranet · UMOA market · Abidjan",
+      location: "Ivory Coast · GMT+0",
+      years: "2+ years building\ncomplex web products",
+      bigA: "Front-End",
+      bigB: "that performs.",
+      avail: "Available",
+      when: "Freelance or full-time —\navailable immediately",
+      contactLabel: "Get in touch",
+    },
+    toolkit: "My toolkit",
+    services: {
+      label: "— Services",
+      h1a: "A focused look at",
+      h1b: "what I do, and how I deliver.",
+      intro:
+        "Four areas of focus, built for product teams who want to ship fast and sustainably — from wireframe to production, including the architecture in between.",
+      process: "See my process",
+      items: [
+        {
+          title: "Frontend Architecture",
+          desc: "Modular, scalable architectures: clean, hexagonal, monorepo and feature-component organisation. Maintainable, testable code ready to scale.",
+          tags: ["Clean Architecture", "Hexagonal", "Monorepo"],
+        },
+        {
+          title: "UI / UX Interfaces",
+          desc: "Accessible, animated and intuitive interfaces. WCAG standards, design system on Radix and Tailwind, motion with Framer Motion and GSAP.",
+          tags: ["WCAG AA", "Design Systems", "Animation"],
+          featured: true,
+          badge: "Most requested",
+        },
+        {
+          title: "Performance & SEO",
+          desc: "Core Web Vitals optimisation, SSR / SSG rendering with Next.js, structured metadata and Open Graph — for fast, indexable, well-ranked sites.",
+          tags: ["Core Web Vitals", "SSR / SSG", "Open Graph"],
+        },
+        {
+          title: "Product integration",
+          desc: "2+ years turning complex fintech products (CDC-CI extranet, UMOA market) into fluid, durable user experiences.",
+          tags: ["Fintech", "UMOA", "B2B"],
+        },
       ],
-      stackTitle: "Technical skills",
+    },
+    work: {
+      label: "— Selected work",
+      h1: "Recent projects.",
+      all: "All work →",
     },
     projects: {
-      title: "Projects",
-      subtitle:
-        "A selection of production projects showcasing my expertise in web interfaces and digital solutions.",
-      seeMore: "See more",
       visitSite: "Visit site",
       items: [
         {
           slug: "pipv-pped",
           name: "PIPV-PPED",
-          tagline: "Ivorian institutional platform",
+          shortName: "PIPV",
+          tag: "Public Sector",
+          year: "2025",
+          sub: "Ivorian institutional platform",
           description:
-            "Official platform for an Ivorian public institution. Secure authentication, role management, document upload and admin dashboard.",
+            "Official management and tracking platform for an Ivorian public institution. Secure auth, role-based access, document uploads and admin dashboard.",
           url: "https://pipv-pped.ci",
           stack: [
             "Next.js 14",
@@ -180,9 +280,12 @@ export const dictionaries = {
         {
           slug: "tacomfav",
           name: "TaComFav",
-          tagline: "Communication agency website",
+          shortName: "TaComFav",
+          tag: "Agency",
+          year: "2025",
+          sub: "Communication agency website",
           description:
-            "Animated showcase site for a communication agency, with headless CMS and polished animations. Performance, SEO and visual experience at the core.",
+            "Animated marketing site for a communication agency, with headless CMS and refined motion. Performance, SEO and visual experience at the core.",
           url: "https://tacomfav.com",
           stack: [
             "Next.js 16",
@@ -199,9 +302,12 @@ export const dictionaries = {
         {
           slug: "e-panacee",
           name: "e-Panacee",
-          tagline: "Ivorian e-commerce",
+          shortName: "e-Panacee",
+          tag: "E-commerce",
+          year: "2024",
+          sub: "Ivorian e-commerce platform",
           description:
-            "Complete e-commerce platform: catalog, cart, order management, payment and back-office. Built for mobile performance and accessibility.",
+            "Full e-commerce platform: catalogue, cart, order management, payment and back-office. Built for mobile performance and accessibility.",
           url: "https://e-panacee.com",
           stack: [
             "Next.js 15",
@@ -216,35 +322,45 @@ export const dictionaries = {
         },
       ],
     },
-    expertise: {
-      title: "Expertise",
-      subtitle: "Tailored, user-centric digital solutions.",
-      items: [
-        {
-          title: "Frontend Architecture",
-          description:
-            "Modular, scalable architectures: clean, hexagonal, feature-component organization, Next.js monorepos. Maintainable, testable, ready to scale.",
-        },
-        {
-          title: "UI/UX Interfaces",
-          description:
-            "Accessible and intuitive interfaces, with careful animations, visual consistency and WCAG compliance. Tailwind, Radix, Framer Motion, GSAP.",
-        },
-        {
-          title: "Performance & SEO",
-          description:
-            "Core Web Vitals optimization, SSR/SSG with Next.js, structured metadata, sitemap, Open Graph. Fast, indexable, well-ranked sites.",
-        },
-        {
-          title: "Modern Stack",
-          description:
-            "React 18/19, Next.js (App Router), TypeScript, TanStack Query, Zustand, Zod. Headless CMS (Sanity) and third-party services (NextAuth, Resend, UploadThing).",
-        },
+    about: {
+      label: "— About",
+      h1: "Turning complex products into fluid experiences.",
+      cta: "Let's talk",
+      p1: "Hi, I'm Jean-Marc, a front-end developer with 2+ years of fintech experience.",
+      p2a: "I build performant, accessible, SEO-friendly interfaces backed by modern architectures: ",
+      p2b: "clean architecture",
+      p2c: ", ",
+      p2d: "hexagonal",
+      p2e: ", ",
+      p2f: "feature-component",
+      p2g: ".",
+      expLabel: "Experience",
+      period: "2024 — 26",
+      role: "Front-End Developer",
+      roleAt: "— Inexa",
+      roleCtx: "Fintech · Abidjan · CDC-CI / UMOA market",
+      bullets: [
+        "Designed and built the CDC-CI extranet (Ivorian Deposits Fund).",
+        "Custody Control application: managing SGIs, SGOs and issuers on the UMOA market.",
+        "Set up a Next.js monorepo shared across several business products.",
+        "Applied clean / hexagonal architecture and a feature-component organisation.",
       ],
     },
+    contact: {
+      label: "— Contact",
+      h1a: "Let's start building",
+      h1b: "your next product",
+      h1c: "together.",
+      intro:
+        "Freelance opportunity or full-time role? Let's talk — I reply within 24h on weekdays.",
+      cta: "Book a call",
+      status: "Available",
+    },
     footer: {
-      title: "Let's talk!",
-      copyright: "© 2026 Jmk — Portfolio",
+      tag: "Front-end developer · Abidjan, Ivory Coast. Available for freelance missions or a permanent role.",
+      elsewhere: "Elsewhere",
+      rights: "© 2026 Koffi N'Guessan Jean-Marc — All rights reserved",
+      built: "Built with Next.js · Designed in Abidjan",
     },
   },
 };

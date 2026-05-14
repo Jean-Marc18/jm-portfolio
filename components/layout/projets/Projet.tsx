@@ -1,103 +1,156 @@
 "use client";
 
-import BoxReveal from "@/components/magicui/box-reveal";
+import { ButtonLink, Card, Label, Pill, Tag, TagList } from "@/components/ui";
+import { ArrowUpRightSm } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
-// Local screenshots — deposit PNG/JPG files in public/projects/ and add the
-// slug → path entry below to override the automatic thum.io capture.
 const LOCAL_SCREENSHOTS: Record<string, string> = {
   "pipv-pped": "/projects/pipv-pped.png",
   tacomfav: "/projects/tacomfav.png",
   "e-panacee": "/projects/e-panacee.png",
 };
 
-const screenshotUrl = (slug: string, url: string) => {
-  if (LOCAL_SCREENSHOTS[slug]) return LOCAL_SCREENSHOTS[slug];
-  const stripped = url.replace(/^https?:\/\//, "");
-  return `https://image.thum.io/get/width/1200/crop/750/noanimate/https://${stripped}`;
-};
-
 const Projet = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="projects" className="mt-36 sm:mt-44 mb-7 scroll-mt-24">
-      <div className="grid grid-cols-1 sm:grid-cols-2 max-sm:gap-4">
-        <div className="flex-auto flex flex-col w-full items-start justify-center h-full gap-4">
-          <BoxReveal boxColor={"transparent"} duration={0.25}>
-            <h2 className="text-5xl font-labil font-semibold">
-              {t.projects.title}
-            </h2>
-          </BoxReveal>
-          <BoxReveal boxColor={"transparent"} duration={0.15}>
-            <p className="text-balance font-labil">{t.projects.subtitle}</p>
-          </BoxReveal>
+    <section
+      className="ho-section"
+      id="travaux"
+      style={{ paddingTop: 24, scrollMarginTop: 96 }}
+    >
+      <div
+        className="pf-reveal"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "end",
+          marginBottom: 40,
+          gap: 16,
+          flexWrap: "wrap",
+        }}
+      >
+        <div>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {t.work.label}
+          </Label>
+          <h2
+            className="pf-display"
+            style={{
+              fontSize: "clamp(34px, 4.5vw, 56px)",
+              margin: 0,
+              lineHeight: 1.05,
+            }}
+          >
+            {t.work.h1}
+          </h2>
         </div>
+        <ButtonLink href="#contact" variant="ghost" style={{ fontSize: 13 }}>
+          {t.work.all}
+        </ButtonLink>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-7 mt-10 w-full py-12">
-        {t.projects.items.map((project, idx) => (
-          <BoxReveal
-            key={project.slug}
-            boxColor={"transparent"}
-            duration={0.3 + idx * 0.05}
-          >
-            <article className="group flex flex-col gap-4 w-full">
-              <Link
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative block overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-800 aspect-[16/10] bg-neutral-100 dark:bg-neutral-900"
-                aria-label={`${t.projects.visitSite} — ${project.name}`}
-              >
-                <Image
-                  src={screenshotUrl(project.slug, project.url)}
-                  alt={`${project.name} — ${project.tagline}`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  unoptimized
-                />
-                <span className="absolute top-3 right-3 rounded-full bg-black/80 text-white p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </Link>
-
-              <div className="space-y-2">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-2xl font-labil font-semibold">
-                    {project.name}
-                  </h3>
-                  <Link
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs underline opacity-70 hover:opacity-100 shrink-0 font-labil"
+      <div className="ho-grid-projects">
+        {t.projects.items.map((p, i) => {
+          const screenshot = LOCAL_SCREENSHOTS[p.slug];
+          return (
+            <a
+              key={p.slug}
+              href={p.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", color: "inherit" }}
+              aria-label={`${t.projects.visitSite} — ${p.name}`}
+            >
+              <Card className="pf-reveal" style={{ overflow: "hidden" }}>
+                <div className={`ho-cover ho-cover-${i + 1}`}>
+                  {screenshot ? (
+                    <Image
+                      src={screenshot}
+                      alt={`${p.name} — ${p.sub}`}
+                      fill
+                      sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw"
+                      className="ho-cover-image"
+                      style={{ opacity: 0.92 }}
+                    />
+                  ) : (
+                    <div className="pf-display ho-cover-text">{p.shortName}</div>
+                  )}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 18,
+                      left: 18,
+                      zIndex: 2,
+                    }}
                   >
-                    {t.projects.visitSite}
-                  </Link>
+                    <Pill variant="on-pastel" style={{ fontSize: 11 }}>
+                      {p.tag}
+                    </Pill>
+                  </div>
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 18,
+                      right: 18,
+                      zIndex: 2,
+                    }}
+                    className="ho-cover-year"
+                  >
+                    {p.year}
+                  </div>
                 </div>
-                <p className="text-sm opacity-70 font-labil">
-                  {project.tagline}
-                </p>
-                <p className="font-labil">{project.description}</p>
-                <ul className="flex flex-wrap gap-1.5 pt-2">
-                  {project.stack.map((s) => (
-                    <li
-                      key={s}
-                      className="px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 text-xs font-labil"
+                <div style={{ padding: 24 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "baseline",
+                      marginBottom: 4,
+                      gap: 8,
+                    }}
+                  >
+                    <h3
+                      className="pf-display"
+                      style={{ fontSize: 20, margin: 0 }}
                     >
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          </BoxReveal>
-        ))}
+                      {p.name}
+                    </h3>
+                    <span
+                      className="pf-arrow"
+                      style={{ width: 28, height: 28 }}
+                      aria-hidden="true"
+                    >
+                      <ArrowUpRightSm />
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      fontSize: 13,
+                      color: "var(--muted)",
+                      marginBottom: 12,
+                    }}
+                  >
+                    {p.sub}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 13.5,
+                      color: "var(--muted)",
+                      lineHeight: 1.55,
+                      margin: 0,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {p.description}
+                  </p>
+                  <TagList items={p.stack} max={5} />
+                </div>
+              </Card>
+            </a>
+          );
+        })}
       </div>
     </section>
   );
