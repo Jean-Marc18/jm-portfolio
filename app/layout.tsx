@@ -1,65 +1,77 @@
 import type { Metadata, Viewport } from "next";
+import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
+
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-geist",
+  display: "swap",
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 const SITE_URL = "https://jmk-portfolio.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Jean-Marc Koffi — Développeur Front-End",
+    default: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
     template: "%s | Jean-Marc Koffi",
   },
   description:
-    "Portfolio de Jean-Marc Koffi, développeur front-end (Next.js, React, TypeScript) avec 2+ ans d'expérience en fintech. Projets en production : PIPV-PPED, TaComFav, e-Panacee.",
+    "Développeur front-end basé à Abidjan. Interfaces performantes, accessibles et optimisées SEO. Architectures modernes (clean, hexagonale, feature-component) — fintech, agences, institutions.",
   keywords: [
     "Jean-Marc Koffi",
+    "Koffi N'Guessan Jean-Marc",
     "développeur front-end",
     "frontend developer",
     "Next.js",
     "React",
     "TypeScript",
     "Tailwind CSS",
-    "portfolio",
     "Abidjan",
     "France",
     "Canada",
     "fintech",
   ],
-  authors: [{ name: "Jean-Marc Koffi" }],
-  creator: "Jean-Marc Koffi",
+  authors: [{ name: "Koffi N'Guessan Jean-Marc" }],
+  creator: "Koffi N'Guessan Jean-Marc",
   alternates: {
     canonical: "/",
-    languages: {
-      fr: "/",
-      en: "/",
-    },
+    languages: { fr: "/", en: "/" },
   },
   openGraph: {
     type: "website",
     locale: "fr_FR",
     alternateLocale: ["en_US"],
     url: SITE_URL,
-    title: "Jean-Marc Koffi — Développeur Front-End",
+    title: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
     description:
-      "Développeur front-end (Next.js, React, TypeScript), 2+ ans d'expérience en fintech. Découvrez mes projets en production.",
-    siteName: "Jean-Marc Koffi — Portfolio",
+      "Interfaces performantes et accessibles, architectures modernes — fintech, agences, institutions.",
+    siteName: "Koffi N'Guessan Jean-Marc — Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Jean-Marc Koffi — Portfolio",
+        alt: "Koffi N'Guessan Jean-Marc — Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jean-Marc Koffi — Développeur Front-End",
+    title: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
     description:
-      "Développeur front-end (Next.js, React, TypeScript), 2+ ans d'expérience en fintech.",
+      "Interfaces performantes et accessibles, architectures modernes.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -80,8 +92,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#F7F5F0" },
+    { media: "(prefers-color-scheme: dark)", color: "#13110E" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -93,11 +105,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className="font-labil font-medium">
+    <html
+      lang="fr"
+      suppressHydrationWarning
+      className={`${geist.variable} ${plusJakarta.variable}`}
+    >
+      <body
+        style={{
+          fontFamily:
+            'var(--font-geist), var(--font-jakarta), system-ui, sans-serif',
+        }}
+      >
         <Providers>
           <Header />
-          {children}
+          <main>{children}</main>
           <Footer />
         </Providers>
       </body>

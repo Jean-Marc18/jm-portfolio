@@ -1,9 +1,11 @@
-export type RouteKey = "home" | "about" | "projects" | "contact";
+export type RouteKey = "travaux" | "services" | "about" | "contact";
 export type Route = { path: string; name: string; key: RouteKey };
 
 export const routePaths: Record<RouteKey, string> = {
-  home: "/",
+  travaux: "#travaux",
+  services: "#services",
   about: "#about",
-  projects: "#projects",
   contact: "#contact",
 };
+
+export const NAV_ORDER: RouteKey[] = ["travaux", "services", "about", "contact"];
