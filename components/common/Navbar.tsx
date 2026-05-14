@@ -6,8 +6,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import ThemeSwitch from "./ThemeSwitch";
 import { Separator } from "../ui/separator";
+import LanguageSwitch from "./LanguageSwitch";
 
-export const NavBar: React.FC<{ tabs: Route[] }> = ({ tabs }) => {
+export const NavBar: React.FC<{ tabs: Route[]; projectsCount?: number }> = ({
+  tabs,
+  projectsCount,
+}) => {
   const fired = useRef(false);
   const defaultSelectedTabIndex = 0;
   const [currentLink, setCurrentLink] = useState<{
@@ -73,25 +77,15 @@ export const NavBar: React.FC<{ tabs: Route[] }> = ({ tabs }) => {
             currentLink.index === i && "dark:text-neutral-900 text-black",
             fired.current
               ? ""
-              : `${defaultSelectedTabStyles[defaultSelectedTabIndex]} px-4 py-3`
+              : `${defaultSelectedTabStyles[defaultSelectedTabIndex]} px-4 py-3`,
           )}
         >
-          {link.name === "Projets" && (
-            <span
-              className={twMerge(
-                "font-labil duration-200 rounded-full px-1.5 py-1 text-xs mr-1",
-                currentLink.index === i
-                  ? "bg-gray-800 text-white"
-                  : "bg-white text-gray-800"
-              )}
-            >
-              10
-            </span>
-          )}
           {link.name}
         </Link>
       ))}
 
+      <Separator orientation="vertical" className="h-6" />
+      <LanguageSwitch />
       <Separator orientation="vertical" className="h-6" />
       <ThemeSwitch />
 
@@ -105,7 +99,7 @@ export const NavBar: React.FC<{ tabs: Route[] }> = ({ tabs }) => {
             className={twMerge(
               `transition-[color,left,width] duration-300 absolute top-1/2 -translate-y-1/2 h-full rounded-full -z-[1]`,
               //just skips animation on page load
-              fired.current ? "dark:bg-white bg-white" : "bg-transparent"
+              fired.current ? "dark:bg-white bg-white" : "bg-transparent",
             )}
           />
         </div>

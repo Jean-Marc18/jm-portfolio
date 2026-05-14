@@ -2,17 +2,30 @@
 
 import { NavBar } from "@/components/common/Navbar";
 import ThemeSwitch from "@/components/common/ThemeSwitch";
+import LanguageSwitch from "@/components/common/LanguageSwitch";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { routes } from "@/constants";
+import { routePaths, type Route, type RouteKey } from "@/constants";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+const ORDER: RouteKey[] = ["home", "about", "projects", "contact"];
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const onShowMenu = () => {
-    setShowMenu((prev) => !prev);
-  };
+  const { t } = useLanguage();
+  const onShowMenu = () => setShowMenu((prev) => !prev);
+
+  const routes = useMemo<Route[]>(
+    () =>
+      ORDER.map((key) => ({
+        key,
+        path: routePaths[key],
+        name: t.nav[key],
+      })),
+    [t]
+  );
 
   return (
     <header className="flex sm:flex-col items-center justify-between py-4 fixed w-full px-4 sm:justify-center sm:gap-3 backdrop-blur-sm z-10 bg-white/15 dark:bg-black/15">
@@ -23,7 +36,7 @@ const Header = () => {
       </div>
 
       {/* Desktop menu */}
-      <NavBar tabs={routes} />
+      <NavBar tabs={routes} projectsCount={t.projects.items.length} />
 
       {/* Mobile menu */}
       <nav
@@ -31,7 +44,7 @@ const Header = () => {
           showMenu ? "top-0" : "-top-[100vh]"
         }`}
       >
-        {routes.map((route, index) => (
+        {routes.map((route) => (
           <Link
             key={route.path}
             href={route.path}
@@ -43,7 +56,12 @@ const Header = () => {
         ))}
 
         <Separator className="w-24 my-4 bg-black dark:bg-white" />
-        <ThemeSwitch />
+        <div className="flex items-center gap-4">
+          <div className="rounded-full bg-black p-1">
+            <LanguageSwitch />
+          </div>
+          <ThemeSwitch />
+        </div>
       </nav>
 
       <Button
