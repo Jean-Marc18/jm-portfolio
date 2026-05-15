@@ -25,7 +25,7 @@ const Footer = () => {
             }}
           >
             <Logo size="md" />
-            <div className="pf-display" style={{ fontSize: 18 }}>
+            <div className="pf-display font-labil" style={{ fontSize: 18 }}>
               Jean-Marc Koffi
             </div>
           </div>

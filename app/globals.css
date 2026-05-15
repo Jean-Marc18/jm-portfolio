@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Labil Grotesk";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/LabilGrotesk-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Labil Grotesk Bold";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/LabilGrotesk-Bold.woff2") format("woff2");
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
 /* ── Design tokens ───────────────────────────────────────── */
 :root {
   --bg: #f7f5f0;
