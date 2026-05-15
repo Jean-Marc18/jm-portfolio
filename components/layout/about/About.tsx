@@ -29,7 +29,7 @@ const About = () => {
             {t.about.h1}
           </h2>
           <ButtonLink
-            href="#contact"
+            href="/contact"
             variant="primary"
             trailing={<ArrowDiagonal />}
             style={{ marginTop: 28, fontSize: 13 }}

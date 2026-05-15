@@ -2,8 +2,10 @@
 
 import { ButtonLink, Card, Label, Pill, Tag, TagList } from "@/components/ui";
 import { ArrowUpRightSm } from "@/components/ui/icons";
+import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import Image from "next/image";
+import Link from "next/link";
 
 const LOCAL_SCREENSHOTS: Record<string, string> = {
   "pipv-pped": "/projects/pipv-pped.png",
@@ -46,7 +48,7 @@ const Projet = () => {
             {t.work.h1}
           </h2>
         </div>
-        <ButtonLink href="#contact" variant="ghost" style={{ fontSize: 13 }}>
+        <ButtonLink href="/travaux" variant="ghost" style={{ fontSize: 13 }}>
           {t.work.all}
         </ButtonLink>
       </div>
@@ -54,12 +56,18 @@ const Projet = () => {
       <div className="ho-grid-projects">
         {t.projects.items.map((p, i) => {
           const screenshot = LOCAL_SCREENSHOTS[p.slug];
+          const caseStudy = PROJECT_PATHS[p.slug];
+          const linkProps = caseStudy
+            ? { href: caseStudy }
+            : {
+                href: p.url,
+                target: "_blank" as const,
+                rel: "noopener noreferrer" as const,
+              };
           return (
-            <a
+            <Link
               key={p.slug}
-              href={p.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...linkProps}
               style={{ textDecoration: "none", color: "inherit" }}
               aria-label={`${t.projects.visitSite} — ${p.name}`}
             >
@@ -148,7 +156,7 @@ const Projet = () => {
                   <TagList items={p.stack} max={5} />
                 </div>
               </Card>
-            </a>
+            </Link>
           );
         })}
       </div>

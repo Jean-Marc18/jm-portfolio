@@ -39,7 +39,7 @@ const Services = () => {
             {t.services.intro}
           </p>
           <ButtonLink
-            href="#contact"
+            href="/contact"
             variant="ghost"
             style={{ marginTop: 24, fontSize: 13 }}
           >
@@ -90,7 +90,7 @@ const Services = () => {
                   ))}
                 </div>
                 <ArrowLink
-                  href="#contact"
+                  href="/contact"
                   aria-label={s.title}
                   variant={featured ? "accent" : "default"}
                 />
