@@ -14,7 +14,7 @@ const Services = () => {
             {t.services.label}
           </Label>
           <h2
-            className="pf-display"
+            className="pf-display text-balance"
             style={{
               fontSize: "clamp(34px, 4.5vw, 56px)",
               margin: 0,

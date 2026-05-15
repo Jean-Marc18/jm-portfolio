@@ -41,7 +41,9 @@ const Header = () => {
           >
             ×
           </button>
-          <div style={{ marginTop: 24, display: "flex", flexDirection: "column" }}>
+          <div
+            style={{ marginTop: 24, display: "flex", flexDirection: "column" }}
+          >
             <a href="/" onClick={closeMenu}>
               {t.nav.home}
             </a>
@@ -58,7 +60,14 @@ const Header = () => {
           >
             jeanmarc.dev.18@gmail.com
           </ButtonLink>
-          <div style={{ display: "flex", gap: 12, marginTop: 24, alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              marginTop: 24,
+              alignItems: "center",
+            }}
+          >
             <LanguageSwitch />
             <ThemeSwitch />
           </div>
@@ -86,7 +95,7 @@ const Header = () => {
         </div>
       )}
 
-      <nav className="pf-nav">
+      <nav className="pf-nav backdrop-blur-sm">
         <div className="pf-nav-inner">
           <a className="pf-brand" href="/">
             <Logo size="md" />

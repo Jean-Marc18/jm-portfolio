@@ -46,7 +46,7 @@ export default function TravauxPage() {
           <div className="m"><strong>03</strong><span>{tp.m1}</span></div>
           <div className="m"><strong>13+</strong><span>{tp.m2}</span></div>
           <div className="m"><strong>{tp.m3v}</strong><span>{tp.m3}</span></div>
-          <div className="m"><strong>UMOA</strong><span>{tp.m4}</span></div>
+          <div className="m"><strong>{tp.m4v}</strong><span>{tp.m4}</span></div>
         </div>
       </section>
 

@@ -10,10 +10,9 @@ const Hero = () => {
   return (
     <section className="ho-section-hero">
       <div className="ho-grid-hero pf-reveal">
-        <div>
-          <h1 className="pf-display ho-h1">
-            {t.hero.h1l1}
-            <br />
+        <div className="text-balance">
+          <h1 className="pf-display text-[5rem] leading-[1.05]">
+            {t.hero.h1l1} <br />
             {t.hero.h1l2}
             <br />
             <span className="ho-h1-muted">{t.hero.h1l3}</span>
@@ -49,15 +48,22 @@ const Hero = () => {
                 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", lineHeight: 1 }}
               >
                 {t.banner.company}{" "}
-                <span
-                  className="ho-banner-meta"
-                  style={{ fontSize: "0.55em" }}
-                >
+                <span className="ho-banner-meta" style={{ fontSize: "0.55em" }}>
                   {t.banner.suffix}
                 </span>
               </div>
               <div
-                style={{ fontSize: 14, marginTop: 4 }}
+                style={{
+                  fontSize: 15,
+                  marginTop: 4,
+                  fontWeight: 500,
+                  color: "#1A1A18",
+                }}
+              >
+                {t.banner.dates}
+              </div>
+              <div
+                style={{ fontSize: 14, marginTop: 2 }}
                 className="ho-banner-meta"
               >
                 {t.banner.ctx}
@@ -92,34 +98,12 @@ const Hero = () => {
                 {t.banner.bigB}
               </span>
             </h2>
-            <div className="ho-banner-cta">
-              <div style={{ textAlign: "right" }}>
-                <Label
-                  style={{
-                    display: "block",
-                    marginBottom: 6,
-                    color: "rgba(26,26,24,0.55)",
-                  }}
-                >
-                  {t.banner.avail}
-                </Label>
-                <div
-                  style={{
-                    fontSize: 13,
-                    color: "#1A1A18",
-                    whiteSpace: "pre-line",
-                  }}
-                >
-                  {t.banner.when}
-                </div>
-              </div>
-              <ArrowLink
-                href="/contact"
-                aria-label={t.banner.contactLabel}
-                size="lg"
-                variant="dark"
-              />
-            </div>
+            <ArrowLink
+              href="/contact"
+              aria-label={t.banner.contactLabel}
+              size="lg"
+              variant="dark"
+            />
           </div>
         </div>
       </div>
