@@ -24,9 +24,9 @@ const Footer = () => {
               marginBottom: 14,
             }}
           >
-            <Logo size="sm" />
+            <Logo size="md" />
             <div className="pf-display" style={{ fontSize: 18 }}>
-              Koffi N&apos;Guessan Jean-Marc
+              Jean-Marc Koffi
             </div>
           </div>
           <p

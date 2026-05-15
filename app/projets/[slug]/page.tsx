@@ -9,7 +9,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { use } from "react";
 
-type CaseStudy = Dictionary["projectPage"]["cases"][keyof Dictionary["projectPage"]["cases"]];
+type CaseStudy =
+  Dictionary["projectPage"]["cases"][keyof Dictionary["projectPage"]["cases"]];
 
 const COVER_HEADLINE: Record<string, [string, string]> = {
   "pipv-pped": ["PIPV", "—PPED."],
@@ -18,7 +19,13 @@ const COVER_HEADLINE: Record<string, [string, string]> = {
 };
 
 const BackIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 14 14"
+    fill="none"
+    aria-hidden="true"
+  >
     <path
       d="M9 4 L4 7 L9 10"
       stroke="currentColor"
@@ -54,7 +61,12 @@ export default function ProjectPage({
         <Link
           href="/travaux"
           className="pf-link"
-          style={{ fontSize: 14, display: "inline-flex", alignItems: "center", gap: 8 }}
+          style={{
+            fontSize: 14,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+          }}
         >
           <BackIcon />
           {t.projectPage.back}
@@ -75,7 +87,7 @@ export default function ProjectPage({
         </div>
         <div className="pj-info pf-reveal">
           {study.info.map(([k, v]) => (
-            <div key={k} className="pj-info-cell">
+            <div key={k} className="pj-info-cell px-1">
               <Label>{k}</Label>
               <strong>{v}</strong>
             </div>
@@ -103,7 +115,9 @@ export default function ProjectPage({
             {coverB && (
               <>
                 <br />
-                <span style={{ fontStyle: "italic", fontWeight: 300 }}>{coverB}</span>
+                <span style={{ fontStyle: "italic", fontWeight: 300 }}>
+                  {coverB}
+                </span>
               </>
             )}
           </h2>
@@ -118,7 +132,9 @@ export default function ProjectPage({
               >
                 {study.coverTypeLabel}
               </Label>
-              <div style={{ fontSize: 16, color: "#1A1A18" }}>{study.coverTypeValue}</div>
+              <div style={{ fontSize: 16, color: "#1A1A18" }}>
+                {study.coverTypeValue}
+              </div>
             </div>
             <div style={{ textAlign: "right" }}>
               <Label
@@ -130,7 +146,9 @@ export default function ProjectPage({
               >
                 {study.coverStackLabel}
               </Label>
-              <div style={{ fontSize: 16, color: "#1A1A18" }}>{study.coverStackValue}</div>
+              <div style={{ fontSize: 16, color: "#1A1A18" }}>
+                {study.coverStackValue}
+              </div>
             </div>
           </div>
         </div>
@@ -138,7 +156,9 @@ export default function ProjectPage({
 
       <section className="pj-context">
         <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 18 }}>{study.ctxLabel}</Label>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {study.ctxLabel}
+          </Label>
           <h2 className="pf-display">{study.ctxH1}</h2>
           <div className="pj-tags">
             {study.ctxTags.map((tg) => (
@@ -164,7 +184,9 @@ export default function ProjectPage({
       <section className="pj-challenges">
         <div className="pj-challenges-head pf-reveal">
           <div>
-            <Label style={{ display: "block", marginBottom: 18 }}>{study.appLabel}</Label>
+            <Label style={{ display: "block", marginBottom: 18 }}>
+              {study.appLabel}
+            </Label>
             <h2
               className="pf-display"
               style={{
@@ -200,7 +222,7 @@ export default function ProjectPage({
         </div>
       </section>
 
-      <section className="pj-mock">
+      {/* <section className="pj-mock">
         <div className="pj-mock-band pf-reveal">
           <Label
             style={{
@@ -258,12 +280,14 @@ export default function ProjectPage({
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="pj-stack">
         <div className="pj-stack-head pf-reveal">
           <div>
-            <Label style={{ display: "block", marginBottom: 18 }}>{study.skLabel}</Label>
+            <Label style={{ display: "block", marginBottom: 18 }}>
+              {study.skLabel}
+            </Label>
             <h2
               className="pf-display"
               style={{
@@ -304,10 +328,16 @@ export default function ProjectPage({
 
       <section className="pj-results">
         <div className="pj-results-head pf-reveal">
-          <Label style={{ display: "block", marginBottom: 18 }}>{study.resLabel}</Label>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {study.resLabel}
+          </Label>
           <h2
             className="pf-display"
-            style={{ fontSize: "clamp(34px, 5vw, 56px)", margin: 0, lineHeight: 1.05 }}
+            style={{
+              fontSize: "clamp(34px, 5vw, 56px)",
+              margin: 0,
+              lineHeight: 1.05,
+            }}
           >
             {study.resH1}
           </h2>
@@ -324,7 +354,9 @@ export default function ProjectPage({
 
       <section className="pj-next">
         <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 18 }}>{study.nextLabel}</Label>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {study.nextLabel}
+          </Label>
           <h2 className="pf-display">{study.nextH1}</h2>
         </div>
 
@@ -338,7 +370,9 @@ export default function ProjectPage({
               <h3 className="pf-display pj-cover-headline">
                 TaCom
                 <br />
-                <span style={{ fontStyle: "italic", fontWeight: 300 }}>—Fav.</span>
+                <span style={{ fontStyle: "italic", fontWeight: 300 }}>
+                  —Fav.
+                </span>
               </h3>
             </div>
             <div className="pj-next-info">
@@ -346,13 +380,20 @@ export default function ProjectPage({
               <h3 className="pf-display">{study.nextH3}</h3>
               <p>{study.nextP}</p>
               <div
-                style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 4 }}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 5,
+                  marginTop: 4,
+                }}
               >
-                {["Next.js 16", "Sanity", "GSAP", "Framer Motion", "Lenis"].map((s) => (
-                  <Tag key={s} style={{ fontSize: 11 }}>
-                    {s}
-                  </Tag>
-                ))}
+                {["Next.js 16", "Sanity", "GSAP", "Framer Motion", "Lenis"].map(
+                  (s) => (
+                    <Tag key={s} style={{ fontSize: 11 }}>
+                      {s}
+                    </Tag>
+                  ),
+                )}
               </div>
               <span
                 className="pf-btn pf-btn-ghost"

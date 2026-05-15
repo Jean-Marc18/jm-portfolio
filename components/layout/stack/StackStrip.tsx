@@ -17,6 +17,8 @@ const STACK = [
   "GSAP",
   "Sanity",
   "NextAuth.js",
+  "Angular",
+  "React Native (Expo)",
 ];
 
 const StackStrip = () => {

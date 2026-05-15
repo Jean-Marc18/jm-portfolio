@@ -14,7 +14,9 @@ export default function AboutPage() {
 
       <section className="ap-hero">
         <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 20 }}>{ap.heroLabel}</Label>
+          <Label style={{ display: "block", marginBottom: 20 }}>
+            {ap.heroLabel}
+          </Label>
           <h1 className="pf-display ap-h1">
             {ap.heroH1a}
             <br />
@@ -32,16 +34,18 @@ export default function AboutPage() {
             .
           </h1>
         </div>
-        <div className="ap-portrait pf-reveal">
+        <div className="ap-portrait pf-reveal border">
           <div className="ap-portrait-mono">JM</div>
           <div className="ap-portrait-label">
             <div
               className="pf-display"
               style={{ fontSize: 18, marginBottom: 2, color: "#1A1A18" }}
             >
-              Koffi N&apos;Guessan Jean-Marc
+              Jean-Marc Koffi
             </div>
-            <div style={{ fontSize: 13, color: "#6B6961" }}>{ap.portraitRole}</div>
+            <div style={{ fontSize: 13, color: "#6B6961" }}>
+              {ap.portraitRole}
+            </div>
           </div>
         </div>
       </section>
@@ -49,7 +53,9 @@ export default function AboutPage() {
       <section className="ap-bio">
         <div className="ap-bio-grid pf-reveal">
           <div>
-            <Label style={{ display: "block", marginBottom: 14 }}>{ap.bioLabel}</Label>
+            <Label style={{ display: "block", marginBottom: 14 }}>
+              {ap.bioLabel}
+            </Label>
             <Pill leading={<StatusDot />}>{ap.avail}</Pill>
           </div>
           <div>
@@ -57,9 +63,13 @@ export default function AboutPage() {
             <p>{ap.p2}</p>
             <p>
               {ap.p3a}
-              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{ap.p3inexa}</strong>
+              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+                {ap.p3inexa}
+              </strong>
               {ap.p3b}
-              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{ap.p3cdc}</strong>
+              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
+                {ap.p3cdc}
+              </strong>
               {ap.p3c}
             </p>
           </div>
@@ -68,7 +78,7 @@ export default function AboutPage() {
 
       <section className="ap-stats pf-reveal">
         {ap.stats.map(([v, l]) => (
-          <div key={l} className="ap-stat">
+          <div key={l} className="ap-stat mx-1">
             <strong>{v}</strong>
             <span>{l}</span>
           </div>
@@ -78,10 +88,16 @@ export default function AboutPage() {
       <section className="ap-exp">
         <div className="ap-exp-head pf-reveal">
           <div>
-            <Label style={{ display: "block", marginBottom: 18 }}>{ap.parLabel}</Label>
+            <Label style={{ display: "block", marginBottom: 18 }}>
+              {ap.parLabel}
+            </Label>
             <h2
               className="pf-display"
-              style={{ fontSize: "clamp(34px, 5vw, 56px)", margin: 0, lineHeight: 1.05 }}
+              style={{
+                fontSize: "clamp(34px, 5vw, 56px)",
+                margin: 0,
+                lineHeight: 1.05,
+              }}
             >
               {ap.parH1}
             </h2>
@@ -105,13 +121,24 @@ export default function AboutPage() {
             <strong className="pf-display">{ap.expRole}</strong>
             <span>Inexa · {ap.expCtx}</span>
             <div
-              style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 12 }}
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 5,
+                marginTop: 12,
+              }}
             >
-              {["Next.js", "TypeScript", "TanStack Query", "Radix UI", "Tailwind"].map(
-                (s) => (
-                  <Tag key={s} style={{ fontSize: 11 }}>{s}</Tag>
-                )
-              )}
+              {[
+                "Next.js",
+                "TypeScript",
+                "TanStack Query",
+                "Radix UI",
+                "Tailwind",
+              ].map((s) => (
+                <Tag key={s} style={{ fontSize: 11 }}>
+                  {s}
+                </Tag>
+              ))}
             </div>
           </div>
           <ul className="ap-exp-bullets">
@@ -125,10 +152,16 @@ export default function AboutPage() {
       <section className="ap-skills">
         <div className="ap-skills-head pf-reveal">
           <div>
-            <Label style={{ display: "block", marginBottom: 18 }}>{ap.skLabel}</Label>
+            <Label style={{ display: "block", marginBottom: 18 }}>
+              {ap.skLabel}
+            </Label>
             <h2
               className="pf-display"
-              style={{ fontSize: "clamp(34px, 5vw, 56px)", margin: 0, lineHeight: 1.05 }}
+              style={{
+                fontSize: "clamp(34px, 5vw, 56px)",
+                margin: 0,
+                lineHeight: 1.05,
+              }}
             >
               {ap.skH1}
             </h2>
@@ -164,10 +197,16 @@ export default function AboutPage() {
 
       <section className="ap-values">
         <div className="ap-values-head pf-reveal">
-          <Label style={{ display: "block", marginBottom: 18 }}>{ap.valLabel}</Label>
+          <Label style={{ display: "block", marginBottom: 18 }}>
+            {ap.valLabel}
+          </Label>
           <h2
             className="pf-display"
-            style={{ fontSize: "clamp(34px, 5vw, 56px)", margin: 0, lineHeight: 1.05 }}
+            style={{
+              fontSize: "clamp(34px, 5vw, 56px)",
+              margin: 0,
+              lineHeight: 1.05,
+            }}
           >
             {ap.valH1}
           </h2>
@@ -186,13 +225,19 @@ export default function AboutPage() {
       </section>
 
       <section className="ap-cta pf-reveal">
-        <Label style={{ display: "block", marginBottom: 24 }}>{ap.ctaLabel}</Label>
+        <Label style={{ display: "block", marginBottom: 24 }}>
+          {ap.ctaLabel}
+        </Label>
         <h2 className="pf-display">
           {ap.ctaH1a}
           <br />
           {ap.ctaH1b}{" "}
           <span
-            style={{ color: "var(--accent)", fontStyle: "italic", fontWeight: 300 }}
+            style={{
+              color: "var(--accent)",
+              fontStyle: "italic",
+              fontWeight: 300,
+            }}
           >
             {ap.ctaH1c}
           </span>{" "}
@@ -207,7 +252,9 @@ export default function AboutPage() {
             flexWrap: "wrap",
           }}
         >
-          <ButtonLink href="/contact" variant="primary">{ap.ctaPrimary}</ButtonLink>
+          <ButtonLink href="/contact" variant="primary">
+            {ap.ctaPrimary}
+          </ButtonLink>
           <ButtonLink href="/cv-jean-marc-koffi.pdf" download variant="ghost">
             {ap.ctaCv}
           </ButtonLink>

@@ -24,14 +24,14 @@ const SITE_URL = "https://jmk-portfolio.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
+    default: "Jean-Marc Koffi — Développeur Front-End",
     template: "%s | Jean-Marc Koffi",
   },
   description:
-    "Développeur front-end basé à Abidjan. Interfaces performantes, accessibles et optimisées SEO. Architectures modernes (clean, hexagonale, feature-component) — fintech, agences, institutions.",
+    "Développeur front-end basé à Abidjan. Interfaces performantes, accessibles et optimisées SEO. Architectures modernes (clean, hexagonale, feature-component) — pour des produits qui doivent durer, tous secteurs confondus.",
   keywords: [
     "Jean-Marc Koffi",
-    "Koffi N'Guessan Jean-Marc",
+    "Jean-Marc Koffi",
     "développeur front-end",
     "frontend developer",
     "Next.js",
@@ -41,10 +41,14 @@ export const metadata: Metadata = {
     "Abidjan",
     "France",
     "Canada",
+    "remote",
+    "freelance",
+    "e-commerce",
+    "institutionnel",
     "fintech",
   ],
-  authors: [{ name: "Koffi N'Guessan Jean-Marc" }],
-  creator: "Koffi N'Guessan Jean-Marc",
+  authors: [{ name: "Jean-Marc Koffi" }],
+  creator: "Jean-Marc Koffi",
   alternates: {
     canonical: "/",
     languages: { fr: "/", en: "/" },
@@ -54,22 +58,22 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     alternateLocale: ["en_US"],
     url: SITE_URL,
-    title: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
+    title: "Jean-Marc Koffi — Développeur Front-End",
     description:
       "Interfaces performantes et accessibles, architectures modernes — fintech, agences, institutions.",
-    siteName: "Koffi N'Guessan Jean-Marc — Portfolio",
+    siteName: "Jean-Marc Koffi — Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Koffi N'Guessan Jean-Marc — Portfolio",
+        alt: "Jean-Marc Koffi — Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Koffi N'Guessan Jean-Marc — Développeur Front-End",
+    title: "Jean-Marc Koffi — Développeur Front-End",
     description:
       "Interfaces performantes et accessibles, architectures modernes.",
     images: ["/og-image.png"],
@@ -99,6 +103,52 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}#person`,
+      name: "Jean-Marc Koffi",
+      alternateName: "Jean-Marc Koffi",
+      jobTitle: "Développeur Front-End",
+      url: SITE_URL,
+      email: "mailto:jeanmarc.dev.18@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Abidjan",
+        addressCountry: "CI",
+      },
+      worksFor: {
+        "@type": "Organization",
+        name: "Inexa",
+      },
+      knowsAbout: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Clean Architecture",
+        "Hexagonal Architecture",
+        "Accessibility (WCAG)",
+        "Performance & SEO",
+      ],
+      sameAs: [
+        "https://www.linkedin.com/in/jean-marc-koffi/",
+        "https://github.com/Jean-Marc18",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      url: SITE_URL,
+      name: "Jean-Marc Koffi — Portfolio",
+      inLanguage: ["fr", "en"],
+      author: { "@id": `${SITE_URL}#person` },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -110,10 +160,16 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geist.variable} ${plusJakarta.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         style={{
           fontFamily:
-            'var(--font-geist), var(--font-jakarta), system-ui, sans-serif',
+            "var(--font-geist), var(--font-jakarta), system-ui, sans-serif",
         }}
       >
         <Providers>
