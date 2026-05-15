@@ -35,10 +35,10 @@ export default function AboutPage() {
           </h1>
         </div>
         <div className="ap-portrait pf-reveal border">
-          <div className="ap-portrait-mono">JM</div>
+          <div className="ap-portrait-mono font-labil">JM</div>
           <div className="ap-portrait-label">
             <div
-              className="pf-display"
+              className="pf-display font-labil"
               style={{ fontSize: 18, marginBottom: 2, color: "#1A1A18" }}
             >
               Jean-Marc Koffi

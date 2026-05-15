@@ -8,14 +8,14 @@ import Footer from "@/components/layout/footer/Footer";
 const geist = Geist({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-geist",
+  variable: "--font-sans",
   display: "swap",
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-jakarta",
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -155,11 +155,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="fr"
-      suppressHydrationWarning
-      className={`${geist.variable} ${plusJakarta.variable}`}
-    >
+    <html lang="fr" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -167,9 +163,10 @@ export default function RootLayout({
         />
       </head>
       <body
+        className={`${geist.variable} ${plusJakarta.variable} antialiased`}
         style={{
           fontFamily:
-            "var(--font-geist), var(--font-jakarta), system-ui, sans-serif",
+            "var(--font-geist), var(--font-mono), system-ui, sans-serif",
         }}
       >
         <Providers>
