@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact — Koffi N'Guessan Jean-Marc</title>
+<meta name="description" content="Discutons d'une opportunité freelance ou d'un poste. Réponse sous 24h en semaine." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  try { document.documentElement.dataset.theme = localStorage.getItem('pf-theme') || 'light'; document.documentElement.lang = localStorage.getItem('pf-lang') || 'fr'; } catch (e) {}
+</script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Geist", "Plus Jakarta Sans", system-ui, sans-serif; }
+  ::selection { background: var(--ink, #1A1A18); color: var(--bg, #F7F5F0); }
+  html { scroll-behavior: smooth; background: #F7F5F0; }
+  html[data-theme="dark"] { background: #13110E; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="portfolio-data.jsx"></script>
+<script type="text/babel" src="portfolio-layout.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function PageContact() {
+    const [lang] = window.useLang();
+    const [form, setForm] = React.useState({ name: '', email: '', subject: 'mission-freelance', message: '' });
+    const [sent, setSent] = React.useState(false);
+
+    const S = {
+      fr: {
+        heroLabel: '— Contact', heroH1: 'Discutons',
+        heroP: 'Mission freelance, poste à pourvoir, ou simple discussion sur un projet en cours de réflexion : je réponds sous 24h en semaine. La meilleure entrée en matière reste un email un peu détaillé.',
+        formH2: 'Parlons du projet', formSub: 'Ouvre votre client mail avec le message pré-rempli.',
+        f_name: 'Nom complet', ph_name: 'Aïcha Konaté',
+        f_email: 'Email', ph_email: 'aicha@entreprise.ci',
+        f_type: 'Type de demande',
+        radios: [
+          ['mission-freelance', 'Mission freelance'],
+          ['poste-cdi', 'Poste salarié'],
+          ['collaboration', 'Collaboration'],
+          ['autre', 'Autre'],
+        ],
+        f_msg: 'Décrivez brièvement votre projet',
+        ph_msg: 'Contexte, objectifs, stack envisagée, timing souhaité, budget approximatif si possible…',
+        disclaimer: 'Vos informations restent privées. Aucun email marketing — je vous réponds personnellement.',
+        send: 'Envoyer le message',
+        sideEmailHead: 'Email direct',
+        sideEmailP: 'Le plus rapide. Soyez précis sur le contexte et le timing — ça aide à vous répondre vite et bien.',
+        sideAvailHead: 'Disponibilité',
+        sideAvailStrong: 'Ouvert aux discussions',
+        sideAvailP_a: 'À partir d’', sideAvailP_b: 'avril 2026', sideAvailP_c: ' pour une mission longue. Disponible dès maintenant pour des missions courtes (< 3 semaines) ou un cadrage technique.',
+        sideLinksHead: 'Ailleurs',
+        sideCoordHead: 'Coordonnées',
+        coord_loc: 'Localisation', coord_loc_v: 'Abidjan, Côte d’Ivoire (GMT+0)',
+        coord_lang: 'Langues', coord_lang_v: 'Français · Anglais (pro)',
+        coord_st: 'Statut', coord_st_v: 'Salarié · Ouvert à freelance & opportunités',
+        successPill: 'Message en route',
+        successH1: 'Votre client mail s’est ouvert.', successH1b: 'Vérifiez et envoyez le message.',
+        successP_a: 'Si rien ne s’est passé, écrivez-moi directement à ',
+        backCta: '← Envoyer un autre message',
+        subjects: { 'mission-freelance': 'Mission freelance', 'poste-cdi': 'Poste salarié', 'collaboration': 'Collaboration / partenariat', 'autre': 'Autre' },
+        prefix: '[Portfolio] ',
+      },
+      en: {
+        heroLabel: '— Contact', heroH1: 'Let’s talk',
+        heroP: 'Freelance mission, full-time role, or just a discussion about an idea you’re kicking around: I reply within 24h on weekdays. A detailed email is always the best opener.',
+        formH2: 'Tell me about the project', formSub: 'Opens your email client with the message pre-filled.',
+        f_name: 'Full name', ph_name: 'Aïcha Konaté',
+        f_email: 'Email', ph_email: 'aicha@company.com',
+        f_type: 'Request type',
+        radios: [
+          ['mission-freelance', 'Freelance mission'],
+          ['poste-cdi', 'Full-time role'],
+          ['collaboration', 'Collaboration'],
+          ['autre', 'Other'],
+        ],
+        f_msg: 'Briefly describe your project',
+        ph_msg: 'Context, goals, stack you have in mind, desired timeline, rough budget if possible…',
+        disclaimer: 'Your info stays private. No marketing emails — I reply personally.',
+        send: 'Send the message',
+        sideEmailHead: 'Direct email',
+        sideEmailP: 'The fastest path. Be precise about context and timing — it helps me reply fast and well.',
+        sideAvailHead: 'Availability',
+        sideAvailStrong: 'Open to conversations',
+        sideAvailP_a: 'From ', sideAvailP_b: 'April 2026', sideAvailP_c: ' for a long mission. Available right now for short missions (< 3 weeks) or a technical scoping.',
+        sideLinksHead: 'Elsewhere',
+        sideCoordHead: 'Details',
+        coord_loc: 'Location', coord_loc_v: 'Abidjan, Ivory Coast (GMT+0)',
+        coord_lang: 'Languages', coord_lang_v: 'French · English (pro)',
+        coord_st: 'Status', coord_st_v: 'Employed · Open to freelance & opportunities',
+        successPill: 'Message on its way',
+        successH1: 'Your email client opened.', successH1b: 'Review and send the message.',
+        successP_a: 'If nothing happened, email me directly at ',
+        backCta: '← Send another message',
+        subjects: { 'mission-freelance': 'Freelance mission', 'poste-cdi': 'Full-time role', 'collaboration': 'Collaboration / partnership', 'autre': 'Other' },
+        prefix: '[Portfolio] ',
+      },
+    };
+    const t = S[lang];
+
+    function update(k, v) { setForm((f) => ({ ...f, [k]: v })); }
+    function submit(e) {
+      e.preventDefault();
+      const subj = `${t.prefix}${t.subjects[form.subject] || 'Contact'} — ${form.name}`;
+      const body = `${form.message}\n\n—\n${form.name}\n${form.email}`;
+      window.location.href = `mailto:jeanmarc.dev18@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+      setSent(true);
+    }
+
+    return (
+      <window.PFLayout current="contact">
+        <style>{`
+          .ct-hero { padding: 80px 56px 32px; }
+          .ct-h1 { font-size: clamp(56px, 9vw, 144px); line-height: 0.92; letter-spacing: -0.045em; font-weight: 500; margin: 0; }
+          .ct-hero p { font-size: 17px; color: var(--muted); max-width: 580px; line-height: 1.6; margin: 32px 0 0; }
+          .ct-main { padding: 48px 56px 80px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; align-items: start; }
+          .ct-form { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 18px; padding: 40px; transition: background-color .25s, border-color .25s; }
+          .ct-form h2 { font-size: 24px; margin: 0 0 6px; font-weight: 500; letter-spacing: -0.02em; }
+          .ct-form .ct-sub { font-size: 14px; color: var(--muted); margin: 0 0 28px; }
+          .ct-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+          .ct-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+          .ct-field label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+          .ct-field input, .ct-field textarea, .ct-field select {
+            background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font: inherit; font-size: 14.5px; color: var(--ink); width: 100%; transition: border-color .15s, background .15s;
+          }
+          .ct-field input::placeholder, .ct-field textarea::placeholder { color: var(--muted); opacity: 0.7; }
+          .ct-field input:focus, .ct-field textarea:focus, .ct-field select:focus { outline: none; border-color: var(--ink); background: var(--bg-alt); }
+          .ct-field textarea { resize: vertical; min-height: 140px; font-family: inherit; }
+          .ct-radios { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+          .ct-radio { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; font-size: 14px; background: var(--bg); transition: all .15s; display: flex; align-items: center; gap: 10px; color: var(--ink); }
+          .ct-radio:hover { border-color: var(--ink); }
+          .ct-radio input { position: absolute; opacity: 0; pointer-events: none; }
+          .ct-radio-dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--line); flex: 0 0 auto; transition: border-color .15s, background .15s; }
+          .ct-radio.is-selected { border-color: var(--ink); background: var(--bg-alt); }
+          .ct-radio.is-selected .ct-radio-dot { border-color: var(--ink); background: var(--ink); box-shadow: inset 0 0 0 3px var(--bg-alt); }
+          .ct-submit { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 28px; }
+          .ct-disclaimer { font-size: 12px; color: var(--muted); line-height: 1.5; max-width: 280px; }
+
+          .ct-side { display: grid; gap: 16px; }
+          .ct-card { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 18px; padding: 28px; transition: background-color .25s, border-color .25s; }
+          .ct-card-dark { background: var(--bg-dark); color: #F4F1EA; border: none; }
+          .ct-card h3 { font-size: 13px; margin: 0 0 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+          .ct-card-dark h3 { color: rgba(255,255,255,0.55); }
+          .ct-card a.email { display: block; font-size: 22px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+          .ct-card-dark a.email { color: #F4F1EA; }
+          .ct-card a.email:hover { color: var(--accent); }
+          .ct-availability { font-size: 14.5px; line-height: 1.6; color: var(--muted); margin: 0; }
+          .ct-card-dark .ct-availability { color: rgba(244,241,234,0.75); }
+          .ct-links { display: flex; flex-wrap: wrap; gap: 8px; }
+          .ct-link-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--ink); font-size: 13px; transition: all .15s; }
+          .ct-link-chip:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+          .ct-success { padding: 100px 56px; text-align: center; }
+          .ct-success h2 { font-size: clamp(40px, 6vw, 64px); margin: 16px 0; line-height: 1; letter-spacing: -0.03em; font-weight: 500; }
+
+          @media (max-width: 980px) {
+            .ct-hero, .ct-main, .ct-success { padding-left: 32px; padding-right: 32px; }
+            .ct-main { grid-template-columns: 1fr; }
+            .ct-form { padding: 32px; }
+          }
+          @media (max-width: 680px) {
+            .ct-hero, .ct-main, .ct-success { padding-left: 20px; padding-right: 20px; }
+            .ct-grid-2, .ct-radios { grid-template-columns: 1fr; }
+            .ct-submit { flex-direction: column; align-items: stretch; }
+            .ct-disclaimer { text-align: center; max-width: 100%; }
+          }
+        `}</style>
+
+        <section className="ct-hero">
+          <div className="pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 20 }}>{t.heroLabel}</div>
+            <h1 className="pf-display ct-h1">{t.heroH1}<span style={{ color: 'var(--accent)' }}>.</span></h1>
+            <p>{t.heroP}</p>
+          </div>
+        </section>
+
+        {!sent ? (
+          <section className="ct-main">
+            <form className="ct-form pf-reveal" onSubmit={submit}>
+              <h2 className="pf-display">{t.formH2}</h2>
+              <p className="ct-sub">{t.formSub}</p>
+
+              <div className="ct-grid-2">
+                <div className="ct-field">
+                  <label htmlFor="ct-name">{t.f_name}</label>
+                  <input id="ct-name" type="text" value={form.name} onChange={(e) => update('name', e.target.value)} required placeholder={t.ph_name} />
+                </div>
+                <div className="ct-field">
+                  <label htmlFor="ct-email">{t.f_email}</label>
+                  <input id="ct-email" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} required placeholder={t.ph_email} />
+                </div>
+              </div>
+
+              <div className="ct-field">
+                <label>{t.f_type}</label>
+                <div className="ct-radios">
+                  {t.radios.map(([k, l]) => (
+                    <label key={k} className={`ct-radio ${form.subject === k ? 'is-selected' : ''}`}>
+                      <input type="radio" name="subject" value={k} checked={form.subject === k} onChange={() => update('subject', k)} />
+                      <span className="ct-radio-dot" />
+                      {l}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="ct-field">
+                <label htmlFor="ct-msg">{t.f_msg}</label>
+                <textarea id="ct-msg" value={form.message} onChange={(e) => update('message', e.target.value)} required placeholder={t.ph_msg} />
+              </div>
+
+              <div className="ct-submit">
+                <p className="ct-disclaimer">{t.disclaimer}</p>
+                <button type="submit" className="pf-btn pf-btn-primary">
+                  {t.send}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 10 L10 4 M5 4 H10 V9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>
+                </button>
+              </div>
+            </form>
+
+            <div className="ct-side">
+              <div className="ct-card ct-card-dark pf-reveal">
+                <h3>{t.sideEmailHead}</h3>
+                <a className="email" href="mailto:jeanmarc.dev18@gmail.com">jeanmarc.dev18@gmail.com</a>
+                <p className="ct-availability" style={{ marginTop: 16 }}>{t.sideEmailP}</p>
+              </div>
+
+              <div className="ct-card pf-reveal">
+                <h3>{t.sideAvailHead}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                  <span className="pf-dot" />
+                  <strong style={{ fontSize: 16, fontWeight: 500 }}>{t.sideAvailStrong}</strong>
+                </div>
+                <p className="ct-availability">
+                  {t.sideAvailP_a}<strong style={{ color: 'var(--ink)', fontWeight: 500 }}>{t.sideAvailP_b}</strong>{t.sideAvailP_c}
+                </p>
+              </div>
+
+              <div className="ct-card pf-reveal">
+                <h3>{t.sideLinksHead}</h3>
+                <div className="ct-links">
+                  <a className="ct-link-chip">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8 17v-7H5.5v7H8zm-1.25-8.1a1.4 1.4 0 1 0 0-2.8 1.4 1.4 0 0 0 0 2.8zM18.5 17v-3.85c0-2.2-1.2-3.25-2.85-3.25-1.35 0-1.95.74-2.3 1.27V10H11v7h2.35v-3.7c0-.74.45-1.45 1.35-1.45.85 0 1.4.65 1.4 1.45V17h2.4z"/></svg>
+                    LinkedIn
+                  </a>
+                  <a className="ct-link-chip">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.59 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.7c-2.78.62-3.37-1.35-3.37-1.35-.45-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.4 9.4 0 0 1 12 7.07c.85 0 1.71.12 2.51.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49C19.14 20.61 22 16.78 22 12.25 22 6.59 17.52 2 12 2z"/></svg>
+                    GitHub
+                  </a>
+                  <a className="ct-link-chip">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.7 0 .5 5.2.5 11.6c0 2 .5 4 1.5 5.8L.4 23.6l6.4-1.7c1.7 1 3.7 1.4 5.7 1.4 6.4 0 11.6-5.2 11.6-11.6 0-3.1-1.2-6-3.4-8.2zm-8.4 17.9c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1c0-5.3 4.3-9.7 9.7-9.7 2.6 0 5 1 6.8 2.8a9.6 9.6 0 0 1 2.8 6.8c0 5.4-4.3 9.7-9.7 9.7zm5.3-7.2c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.4.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.8-.7-1.4-1.7-1.6-1.9-.2-.3 0-.4.1-.5l.4-.5c.1-.1.2-.3.3-.4.1-.2 0-.3 0-.4l-1-2.3c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.1 2.9.1.2 2 3.2 5 4.4l1.6.6c.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.7.2-1.2.2-1.3-.1-.1-.3-.2-.5-.3z"/></svg>
+                    WhatsApp
+                  </a>
+                </div>
+              </div>
+
+              <div className="ct-card pf-reveal">
+                <h3>{t.sideCoordHead}</h3>
+                <div style={{ display: 'grid', gap: 12, fontSize: 14 }}>
+                  <div><div style={{ color: 'var(--muted)', fontSize: 12, marginBottom: 2 }}>{t.coord_loc}</div>{t.coord_loc_v}</div>
+                  <div><div style={{ color: 'var(--muted)', fontSize: 12, marginBottom: 2 }}>{t.coord_lang}</div>{t.coord_lang_v}</div>
+                  <div><div style={{ color: 'var(--muted)', fontSize: 12, marginBottom: 2 }}>{t.coord_st}</div>{t.coord_st_v}</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : (
+          <section className="ct-success pf-reveal">
+            <span className="pf-pill"><span className="pf-dot" /> {t.successPill}</span>
+            <h2 className="pf-display">
+              {t.successH1}<br />
+              <span style={{ color: 'var(--muted)' }}>{t.successH1b}</span>
+            </h2>
+            <p style={{ fontSize: 15, color: 'var(--muted)', marginTop: 24, lineHeight: 1.6 }}>
+              {t.successP_a}<a href="mailto:jeanmarc.dev18@gmail.com" style={{ color: 'var(--ink)', textDecoration: 'underline' }}>jeanmarc.dev18@gmail.com</a>.
+            </p>
+            <button onClick={() => { setSent(false); setForm({ name: '', email: '', subject: 'mission-freelance', message: '' }); }} className="pf-btn pf-btn-ghost" style={{ marginTop: 28 }}>
+              {t.backCta}
+            </button>
+          </section>
+        )}
+      </window.PFLayout>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<PageContact />);
+</script>
+</body>
+</html>

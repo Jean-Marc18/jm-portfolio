@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Services — Koffi N'Guessan Jean-Marc</title>
+<meta name="description" content="Quatre piliers d'intervention front-end : architecture, UI/UX, performance & SEO, intégration produit." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  try { document.documentElement.dataset.theme = localStorage.getItem('pf-theme') || 'light'; document.documentElement.lang = localStorage.getItem('pf-lang') || 'fr'; } catch (e) {}
+</script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Geist", "Plus Jakarta Sans", system-ui, sans-serif; }
+  ::selection { background: var(--ink, #1A1A18); color: var(--bg, #F7F5F0); }
+  html { scroll-behavior: smooth; background: #F7F5F0; }
+  html[data-theme="dark"] { background: #13110E; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="portfolio-data.jsx"></script>
+<script type="text/babel" src="portfolio-layout.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function PageServices() {
+    const [lang] = window.useLang();
+    const S = {
+      fr: {
+        heroLabel: '— Services',
+        heroH1a: 'Quatre piliers,', heroH1b: 'une seule', heroH1c: 'ambition :', heroH1d: 'du', heroH1e: 'front-end', heroH1f: 'qui dure.',
+        heroP: 'Je travaille avec des équipes produit qui veulent construire vite, mais durablement — des startups fintech aux institutions publiques en passant par les agences.',
+        heroCta: 'Démarrer une mission', heroCtaB: 'Voir le process',
+        services: [
+          { title: 'Architecture Frontend',
+            long: 'Je pose les fondations qui permettent à une équipe produit de grossir sans se noyer dans la dette technique. Découpage en couches (domaine, application, infrastructure, UI), monorepo partagé entre plusieurs produits métier, et organisation des features comme des modules autonomes.',
+            tags: ['Clean Architecture', 'Hexagonal', 'Monorepo', 'Feature-component'],
+            deliv: ['Audit de l’existant', 'Plan de migration', 'Mise en place du monorepo', 'Documentation des conventions'] },
+          { title: 'Interfaces UI/UX', featured: true,
+            long: 'Je construis des interfaces qui respectent l’utilisateur : navigation clavier complète, contraste AA minimum, sémantique HTML correcte. Le design system est ancré sur Radix pour les primitives accessibles et Tailwind pour la cohérence visuelle, avec Framer Motion ou GSAP pour les micro-interactions.',
+            tags: ['WCAG AA', 'Design Systems', 'Animation', 'Radix UI'],
+            deliv: ['Design tokens', 'Bibliothèque de composants', 'Audit a11y', 'Micro-interactions'] },
+          { title: 'Performance & SEO',
+            long: 'Un site qui ne charge pas, n’est pas indexé ou ne s’affiche pas correctement sur les réseaux sociaux n’existe pas. J’optimise les Core Web Vitals (LCP, INP, CLS), je structure le rendu (SSR / SSG / ISR), je gère les métadonnées Open Graph et les données structurées schema.org.',
+            tags: ['Core Web Vitals', 'SSR / SSG', 'Open Graph', 'Schema.org'],
+            deliv: ['Audit Lighthouse', 'Optimisation des images', 'Sitemap & robots.txt', 'Open Graph & Twitter Cards'] },
+          { title: 'Intégration produit',
+            long: 'Je sais lire une spec métier dense, dialoguer avec les équipes back-end et produit, et livrer une interface qui tient en production. Mon terrain : la fintech B2B, les workflows réglementés, les tableaux de bord à forte densité d’information.',
+            tags: ['Fintech', 'UMOA', 'B2B', 'Workflows complexes'],
+            deliv: ['Découpage en stories', 'Intégration API', 'États de chargement & erreurs', 'Tests d’acceptation'] },
+        ],
+        delivHead: 'Livrables types',
+        procLabel: '— Process', procH1: 'Du brief au déploiement, en quatre temps.',
+        procP: 'Une approche itérative et transparente. À chaque étape, vous voyez ce qui avance, ce qui bloque, et ce qui arrive. Pas de boîte noire.',
+        procSteps: [
+          ['Discovery', 'Lecture du brief, du domaine métier et des contraintes. Atelier de cadrage, identification des risques, planning macro.'],
+          ['Architecture', 'Choix de la stack, organisation du code (monorepo, features), conventions, premier squelette technique en production.'],
+          ['Build & itère', 'Livraisons hebdomadaires en preview. Demo, feedback, ajustement. Tests d’intégration et audit a11y au fil de l’eau.'],
+          ['Lancement', 'Audit Lighthouse, SEO technique, monitoring en production, documentation et handover à l’équipe interne.'],
+        ],
+        faqLabel: '— Questions fréquentes', faqH1: 'Avant de commencer, voici les questions qu’on me pose le plus.',
+        faqs: [
+          ['Vous travaillez en freelance ou en CDI ?', 'Les deux. Je suis ouvert à des missions freelance (à distance ou sur Abidjan) ainsi qu’à un poste salarié si le projet et l’équipe sont alignés.'],
+          ['Sur quel fuseau êtes-vous ?', 'GMT+0 (Abidjan). Je travaille régulièrement avec des équipes en Europe occidentale (GMT à GMT+2), donc le décalage est minime.'],
+          ['Quelle est votre stack de prédilection ?', 'Next.js + TypeScript + Tailwind, avec Radix UI pour les primitives accessibles, TanStack Query pour la data et Zustand pour le state local. Le tout dans un monorepo si le projet le justifie.'],
+          ['Travaillez-vous le back-end ?', 'Mon cœur de métier est le front-end. Je suis à l’aise avec le BFF (API routes Next.js, NextAuth, intégration de CMS headless comme Sanity), mais je ne fais pas d’infra ou de back-end métier complexe.'],
+          ['Quel est votre TJM ?', 'Variable selon la nature de la mission, la durée et le niveau d’engagement. Le mieux est d’en parler — je vous fais une proposition adaptée sous 48h.'],
+          ['Combien de temps pour démarrer ?', 'En général sous 2 semaines après la signature. Pour les missions courtes (< 1 mois), je peux parfois démarrer plus vite.'],
+        ],
+        ctaLabel: '— Démarrer', ctaH1a: 'Une mission en tête ?', ctaH1b: 'Parlons-en.',
+        ctaDiscuss: 'Démarrer une discussion →', ctaWork: 'Voir mes travaux',
+      },
+      en: {
+        heroLabel: '— Services',
+        heroH1a: 'Four pillars,', heroH1b: 'one', heroH1c: 'ambition:', heroH1d: 'front-end', heroH1e: 'work', heroH1f: 'that lasts.',
+        heroP: 'I work with product teams who want to ship fast and sustainably — from fintech startups to public institutions, by way of agencies.',
+        heroCta: 'Start a mission', heroCtaB: 'See the process',
+        services: [
+          { title: 'Frontend Architecture',
+            long: 'I lay the foundations that let a product team grow without drowning in technical debt. Layered architecture (domain, application, infrastructure, UI), monorepo shared across multiple business products, and features organised as autonomous modules.',
+            tags: ['Clean Architecture', 'Hexagonal', 'Monorepo', 'Feature-component'],
+            deliv: ['Audit of existing code', 'Migration plan', 'Monorepo setup', 'Conventions documentation'] },
+          { title: 'UI / UX Interfaces', featured: true,
+            long: 'I build interfaces that respect the user: full keyboard navigation, AA contrast minimum, correct HTML semantics. The design system rests on Radix for accessible primitives and Tailwind for visual consistency, with Framer Motion or GSAP for micro-interactions.',
+            tags: ['WCAG AA', 'Design Systems', 'Animation', 'Radix UI'],
+            deliv: ['Design tokens', 'Component library', 'A11y audit', 'Micro-interactions'] },
+          { title: 'Performance & SEO',
+            long: 'A site that won’t load, isn’t indexed, or doesn’t render correctly on social media might as well not exist. I optimise Core Web Vitals (LCP, INP, CLS), structure rendering (SSR / SSG / ISR), and handle Open Graph metadata and schema.org structured data.',
+            tags: ['Core Web Vitals', 'SSR / SSG', 'Open Graph', 'Schema.org'],
+            deliv: ['Lighthouse audit', 'Image optimisation', 'Sitemap & robots.txt', 'Open Graph & Twitter Cards'] },
+          { title: 'Product integration',
+            long: 'I can read a dense business spec, dialogue with back-end and product teams, and ship an interface that holds in production. My ground: B2B fintech, regulated workflows, information-dense dashboards.',
+            tags: ['Fintech', 'UMOA', 'B2B', 'Complex workflows'],
+            deliv: ['Story breakdown', 'API integration', 'Loading & error states', 'Acceptance tests'] },
+        ],
+        delivHead: 'Typical deliverables',
+        procLabel: '— Process', procH1: 'From brief to deployment, in four phases.',
+        procP: 'An iterative, transparent approach. At each stage you see what’s moving, what’s blocked, and what’s coming. No black box.',
+        procSteps: [
+          ['Discovery', 'Reading the brief, the business domain and the constraints. Framing workshop, risk identification, macro planning.'],
+          ['Architecture', 'Stack choice, code organisation (monorepo, features), conventions, first technical skeleton in production.'],
+          ['Build & iterate', 'Weekly preview deploys. Demo, feedback, adjustment. Integration tests and a11y audit along the way.'],
+          ['Launch', 'Lighthouse audit, technical SEO, production monitoring, documentation and handover to the internal team.'],
+        ],
+        faqLabel: '— Frequently asked', faqH1: 'The questions I get the most, answered upfront.',
+        faqs: [
+          ['Freelance or full-time?', 'Both. I’m open to freelance missions (remote or in Abidjan) as well as a permanent role if the project and team align.'],
+          ['What timezone are you in?', 'GMT+0 (Abidjan). I regularly work with teams in Western Europe (GMT to GMT+2), so the offset is minimal.'],
+          ['What’s your go-to stack?', 'Next.js + TypeScript + Tailwind, with Radix UI for accessible primitives, TanStack Query for data and Zustand for local state. All in a monorepo when the project warrants it.'],
+          ['Do you do back-end?', 'My core is front-end. I’m comfortable with the BFF layer (Next.js API routes, NextAuth, headless CMS like Sanity), but I don’t do infra or complex business back-end work.'],
+          ['What’s your day rate?', 'It varies with the mission, duration and engagement level. Best to talk — I send a tailored proposal within 48h.'],
+          ['How long to start?', 'Usually within 2 weeks of signing. For shorter missions (< 1 month), I can sometimes start sooner.'],
+        ],
+        ctaLabel: '— Get started', ctaH1a: 'Mission in mind?', ctaH1b: 'Let’s talk.',
+        ctaDiscuss: 'Start a discussion →', ctaWork: 'See my work',
+      },
+    };
+    const t = S[lang];
+
+    return (
+      <window.PFLayout current="services">
+        <style>{`
+          .sv-hero { padding: 80px 56px 64px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 80px; align-items: end; }
+          .sv-h1 { font-size: clamp(44px, 7vw, 104px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; margin: 0; max-width: 900px; }
+          .sv-services { padding: 40px 56px 80px; display: grid; gap: 24px; }
+          .sv-service { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 18px; padding: 48px; display: grid; grid-template-columns: 80px 1.4fr 1fr; gap: 40px; align-items: start; transition: background-color .25s, border-color .25s; }
+          .sv-service-featured { background: var(--bg-dark); color: #F4F1EA; border: none; }
+          .sv-service-featured .sv-deliv-head { color: rgba(255,255,255,0.55); }
+          .sv-service-featured p { color: rgba(244,241,234,0.7); }
+          .sv-service-featured .sv-num { color: var(--accent); }
+          .sv-num { font-family: inherit; font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+          .sv-service h2 { font-size: clamp(28px, 3vw, 40px); margin: 0; letter-spacing: -0.02em; font-weight: 500; line-height: 1.05; }
+          .sv-service p { font-size: 15px; line-height: 1.65; color: var(--muted); margin: 14px 0 20px; }
+          .sv-deliv-head { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; font-weight: 500; }
+          .sv-deliv { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 14px; line-height: 1.5; }
+          .sv-deliv li { display: flex; gap: 12px; align-items: start; }
+          .sv-deliv li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex: 0 0 auto; }
+
+          .sv-process { padding: 100px 56px; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background-color .25s; }
+          .sv-process-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: end; margin-bottom: 56px; }
+          .sv-process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+          .sv-step { background: var(--bg); border-radius: 14px; padding: 28px; position: relative; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line); }
+          .sv-step-n { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ink); display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 14px; color: var(--ink); }
+          .sv-step h3 { font-size: 18px; margin: 0; letter-spacing: -0.01em; font-weight: 500; }
+          .sv-step p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 6px 0 0; }
+
+          .sv-faq { padding: 80px 56px; }
+          .sv-faq-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+          .sv-faq-list { display: grid; gap: 0; }
+          .sv-faq-item { padding: 24px 0; border-top: 1px solid var(--line); }
+          .sv-faq-item:last-child { border-bottom: 1px solid var(--line); }
+          .sv-faq-q { font-size: 18px; margin: 0; font-weight: 500; letter-spacing: -0.01em; }
+          .sv-faq-a { font-size: 14.5px; color: var(--muted); line-height: 1.6; margin: 10px 0 0; max-width: 640px; }
+
+          .sv-cta { padding: 100px 56px; text-align: center; }
+          .sv-cta h2 { font-size: clamp(40px, 6vw, 80px); margin: 0; line-height: 1; letter-spacing: -0.03em; font-weight: 500; }
+
+          @media (max-width: 980px) {
+            .sv-hero, .sv-services, .sv-process, .sv-faq, .sv-cta { padding-left: 32px; padding-right: 32px; }
+            .sv-hero { grid-template-columns: 1fr; gap: 32px; align-items: start; }
+            .sv-service { grid-template-columns: 60px 1fr; padding: 32px; gap: 24px; }
+            .sv-service > div:last-child { grid-column: 1 / -1; }
+            .sv-process-head { grid-template-columns: 1fr; gap: 24px; }
+            .sv-process-grid { grid-template-columns: 1fr 1fr; }
+            .sv-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+          }
+          @media (max-width: 680px) {
+            .sv-hero, .sv-services, .sv-process, .sv-faq, .sv-cta { padding-left: 20px; padding-right: 20px; }
+            .sv-service { grid-template-columns: 1fr; padding: 24px; }
+            .sv-process-grid { grid-template-columns: 1fr; }
+          }
+        `}</style>
+
+        <section className="sv-hero">
+          <div className="pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 20 }}>{t.heroLabel}</div>
+            <h1 className="pf-display sv-h1">
+              {t.heroH1a}<br />
+              <span style={{ color: 'var(--muted)' }}>{t.heroH1b}</span> {t.heroH1c}<br />
+              {t.heroH1d} <span style={{ fontStyle: 'italic', fontWeight: 300, color: 'var(--accent)' }}>{t.heroH1e}</span> {t.heroH1f}
+            </h1>
+          </div>
+          <div className="pf-reveal" style={{ paddingBottom: 12 }}>
+            <p style={{ fontSize: 16, color: 'var(--muted)', lineHeight: 1.65, margin: 0 }}>{t.heroP}</p>
+            <div style={{ display: 'flex', gap: 10, marginTop: 24, flexWrap: 'wrap' }}>
+              <a href="Contact.html" className="pf-btn pf-btn-primary">{t.heroCta}</a>
+              <a href="#process" className="pf-btn pf-btn-ghost">{t.heroCtaB}</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="sv-services">
+          {t.services.map((s, i) => (
+            <div key={i} className={`sv-service ${s.featured ? 'sv-service-featured' : ''} pf-reveal`}>
+              <div><span className="sv-num">— 0{i + 1}</span></div>
+              <div>
+                <h2 className="pf-display">{s.title}</h2>
+                <p>{s.long}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {s.tags.map((tag) => <span key={tag} className={s.featured ? 'pf-tag pf-tag-dark' : 'pf-tag'}>{tag}</span>)}
+                </div>
+              </div>
+              <div>
+                <div className="sv-deliv-head">{t.delivHead}</div>
+                <ul className="sv-deliv">
+                  {s.deliv.map((d) => <li key={d}>{d}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <section className="sv-process" id="process">
+          <div className="sv-process-head pf-reveal">
+            <div>
+              <div className="pf-label" style={{ marginBottom: 20 }}>{t.procLabel}</div>
+              <h2 className="pf-display" style={{ fontSize: 'clamp(34px, 5vw, 56px)', margin: 0, lineHeight: 1.05 }}>{t.procH1}</h2>
+            </div>
+            <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, margin: 0, maxWidth: 520 }}>{t.procP}</p>
+          </div>
+          <div className="sv-process-grid">
+            {t.procSteps.map(([title, desc], i) => (
+              <div key={i} className="sv-step pf-reveal">
+                <div className="sv-step-n">0{i + 1}</div>
+                <div>
+                  <h3 className="pf-display">{title}</h3>
+                  <p>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="sv-faq">
+          <div className="sv-faq-grid">
+            <div className="pf-reveal">
+              <div className="pf-label" style={{ marginBottom: 20 }}>{t.faqLabel}</div>
+              <h2 className="pf-display" style={{ fontSize: 'clamp(30px, 4vw, 44px)', margin: 0, lineHeight: 1.05 }}>{t.faqH1}</h2>
+            </div>
+            <div className="sv-faq-list pf-reveal">
+              {t.faqs.map(([q, a]) => (
+                <div key={q} className="sv-faq-item">
+                  <h3 className="pf-display sv-faq-q">{q}</h3>
+                  <p className="sv-faq-a">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="sv-cta pf-reveal">
+          <div className="pf-label" style={{ marginBottom: 24 }}>{t.ctaLabel}</div>
+          <h2 className="pf-display">{t.ctaH1a}<br /><span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 300 }}>{t.ctaH1b}</span></h2>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 36, flexWrap: 'wrap' }}>
+            <a href="Contact.html" className="pf-btn pf-btn-primary">{t.ctaDiscuss}</a>
+            <a href="Travaux.html" className="pf-btn pf-btn-ghost">{t.ctaWork}</a>
+          </div>
+        </section>
+      </window.PFLayout>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<PageServices />);
+</script>
+</body>
+</html>

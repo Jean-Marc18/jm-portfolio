@@ -30,7 +30,7 @@ const Hero = () => {
             >
               {t.hero.cv}
             </ButtonLink>
-            <ButtonLink href="#travaux" variant="ghost">
+            <ButtonLink href="/travaux" variant="ghost">
               {t.hero.viewProjects}
             </ButtonLink>
           </div>
@@ -114,7 +114,7 @@ const Hero = () => {
                 </div>
               </div>
               <ArrowLink
-                href="#contact"
+                href="/contact"
                 aria-label={t.banner.contactLabel}
                 size="lg"
                 variant="dark"

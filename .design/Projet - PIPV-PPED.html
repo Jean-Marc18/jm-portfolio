@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PIPV-PPED — Plateforme institutionnelle ivoirienne · Koffi N'Guessan Jean-Marc</title>
+<meta name="description" content="Étude de cas — Plateforme officielle de gestion et de suivi pour une institution publique de Côte d'Ivoire." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script>
+  try { document.documentElement.dataset.theme = localStorage.getItem('pf-theme') || 'light'; document.documentElement.lang = localStorage.getItem('pf-lang') || 'fr'; } catch (e) {}
+</script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Geist", "Plus Jakarta Sans", system-ui, sans-serif; }
+  ::selection { background: var(--ink, #1A1A18); color: var(--bg, #F7F5F0); }
+  html { scroll-behavior: smooth; background: #F7F5F0; }
+  html[data-theme="dark"] { background: #13110E; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="portfolio-data.jsx"></script>
+<script type="text/babel" src="portfolio-layout.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function PagePIPV() {
+    const [lang] = window.useLang();
+    const S = {
+      fr: {
+        back: 'Tous les projets',
+        tag: 'Public Sector', studyTag: 'Cas client / 2025',
+        heroP: 'Plateforme officielle de gestion et de suivi pour une institution publique de Côte d’Ivoire — authentification sécurisée, gestion fine des rôles, upload de documents et tableau de bord administratif.',
+        info: [
+          ['Client', 'Institution publique CI'], ['Rôle', 'Développeur Front-End'],
+          ['Durée', '6 mois'], ['Année', '2025 — En production'],
+        ],
+        coverVer: 'v1.4 · production', coverDeployed: 'Déployé',
+        coverTypeLabel: 'Type', coverTypeValue: 'Plateforme institutionnelle',
+        coverStackLabel: 'Stack principale',
+        ctxLabel: '— Contexte', ctxH1: 'Une institution publique avait besoin d’un guichet numérique.',
+        ctxTags: ['Authentification', 'Rôles & permissions', 'Upload sécurisé', 'Tableau de bord admin'],
+        ctxP1: 'L’institution gérait jusqu’ici ses dossiers et le suivi de ses usagers via des fichiers Excel et des échanges email. Le besoin : une plateforme unique, sécurisée, qui centralise la soumission de dossiers, la gestion des rôles internes et le pilotage administratif.',
+        ctxP2a: 'Le projet a démarré sur une ', ctxP2b: 'spec dense', ctxP2c: ' (workflows métier, niveaux d’habilitation, traçabilité documentaire) et un planning court. L’enjeu était de livrer rapidement un produit en production stable, tout en posant des fondations techniques qui permettent à l’institution d’ajouter des modules dans les mois suivants.',
+        ctxP3a: 'Ma mission s’est concentrée sur le ', ctxP3b: 'front-end de l’application web', ctxP3c: ' : interface administrateur, parcours usager, design system, intégration des API métier et des services tiers (auth, upload, notifications).',
+        appLabel: '— Approche', appH1: 'Quatre décisions structurantes.',
+        appP: 'Sur ce type de projet, ce ne sont pas les composants individuels qui font la différence — c’est la cohérence des décisions techniques prises en amont.',
+        ch: [
+          ['01', 'Découper par feature, pas par technique', 'Plutôt qu’une organisation par dossier (components/, hooks/, lib/), chaque feature métier (dossiers, utilisateurs, audit-log) est autonome et porte sa propre UI, sa logique et son schéma de données.'],
+          ['02', 'Authentification côté serveur', 'NextAuth.js avec sessions côté serveur, gestion fine des rôles via middleware Next.js. Aucun bypass possible côté client.'],
+          ['03', 'Validation Zod partout', 'Schémas Zod partagés entre client (React Hook Form) et serveur (API routes Next.js). Un seul endroit pour définir une règle métier.'],
+          ['04', 'Upload directement vers le stockage', 'UploadThing pour signer les uploads côté serveur et envoyer les fichiers directement depuis le navigateur — sans transiter par notre infrastructure.'],
+        ],
+        mockLabel: '— Écrans clés', mockH1: 'Le produit, à travers ses interfaces.',
+        mockP: 'Captures à intégrer — placeholders pour l’instant. Chaque tuile représente un écran ou un parcours du produit en production.',
+        mocks: [
+          ['Dashboard administrateur', 'Vue d’ensemble des dossiers, alertes, métriques.'],
+          ['Soumission de dossier', 'Formulaire multi-étapes avec upload et validation Zod.'],
+          ['Gestion des rôles', 'Attribution fine des permissions par module métier.'],
+        ],
+        skLabel: '— Stack technique', skH1: 'Ce qui tourne sous le capot.',
+        skP: 'Une stack volontairement focalisée — chaque dépendance a un rôle précis, pas de doublon ni de hype gratuite.',
+        skGroups: [
+          ['Framework & langage', ['Next.js 14', 'React 18', 'TypeScript']],
+          ['UI & styling', ['Tailwind v3', 'Radix UI', 'CSS Modules']],
+          ['State & data', ['TanStack Query', 'React Hook Form', 'Zod']],
+          ['Auth & sécurité', ['NextAuth.js', 'Middleware Next', 'Server Actions']],
+          ['Fichiers & email', ['UploadThing', 'Resend']],
+          ['Qualité & déploiement', ['ESLint', 'GitHub Actions', 'Vercel']],
+        ],
+        resLabel: '— En production', resH1: 'Les chiffres qui comptent.',
+        res: [
+          ['98+', 'Lighthouse Performance sur les écrans clés'],
+          ['AA', 'Conformité WCAG 2.1 sur tous les parcours'],
+          ['0', 'Faille critique remontée à l’audit de mise en production'],
+        ],
+        nextLabel: '— Projet suivant', nextH1: 'TaComFav.',
+        nextProjLabel: 'Agency · 2025', nextH3: 'Site agence de communication',
+        nextP: 'Site vitrine animé pour une agence de communication, intégrant un CMS headless (Sanity) et des animations soignées en GSAP et Framer Motion. Performance, SEO et expérience visuelle au cœur du projet.',
+        nextCta: 'Voir le projet →',
+      },
+      en: {
+        back: 'All projects',
+        tag: 'Public Sector', studyTag: 'Case study / 2025',
+        heroP: 'Official management and tracking platform for an Ivorian public institution — secure auth, fine-grained role management, document uploads and admin dashboard.',
+        info: [
+          ['Client', 'Ivorian public institution'], ['Role', 'Front-End Developer'],
+          ['Duration', '6 months'], ['Year', '2025 — In production'],
+        ],
+        coverVer: 'v1.4 · production', coverDeployed: 'Deployed',
+        coverTypeLabel: 'Type', coverTypeValue: 'Institutional platform',
+        coverStackLabel: 'Main stack',
+        ctxLabel: '— Context', ctxH1: 'A public institution needed a digital front door.',
+        ctxTags: ['Authentication', 'Roles & permissions', 'Secure upload', 'Admin dashboard'],
+        ctxP1: 'The institution was managing its files and user follow-up through Excel and email. The need: a single, secure platform that centralises file submission, internal role management and admin steering.',
+        ctxP2a: 'The project started on a ', ctxP2b: 'dense spec', ctxP2c: ' (business workflows, permission levels, document traceability) and a tight schedule. The challenge: ship a stable production product quickly, while laying technical foundations the institution can extend with new modules in the coming months.',
+        ctxP3a: 'My mission focused on the ', ctxP3b: 'front-end of the web application', ctxP3c: ': admin interface, user journeys, design system, integration of business APIs and third-party services (auth, upload, notifications).',
+        appLabel: '— Approach', appH1: 'Four structuring decisions.',
+        appP: 'On this kind of project, the difference is not the individual components — it’s the coherence of the technical decisions made up front.',
+        ch: [
+          ['01', 'Slice by feature, not by tech', 'Rather than a layout by folder (components/, hooks/, lib/), each business feature (files, users, audit-log) is autonomous and owns its UI, logic and data schema.'],
+          ['02', 'Server-side authentication', 'NextAuth.js with server-side sessions, fine-grained role handling via Next.js middleware. No client-side bypass possible.'],
+          ['03', 'Zod validation everywhere', 'Zod schemas shared between client (React Hook Form) and server (Next.js API routes). One place to define a business rule.'],
+          ['04', 'Upload straight to storage', 'UploadThing to sign uploads on the server and send files straight from the browser — without transiting our infrastructure.'],
+        ],
+        mockLabel: '— Key screens', mockH1: 'The product, through its interfaces.',
+        mockP: 'Captures to integrate — placeholders for now. Each tile represents a screen or a flow from the product in production.',
+        mocks: [
+          ['Admin dashboard', 'Overview of files, alerts, metrics.'],
+          ['File submission', 'Multi-step form with upload and Zod validation.'],
+          ['Role management', 'Fine-grained permission allocation by business module.'],
+        ],
+        skLabel: '— Technical stack', skH1: 'What runs under the hood.',
+        skP: 'A deliberately focused stack — each dependency has a precise role, no duplication or free hype.',
+        skGroups: [
+          ['Framework & language', ['Next.js 14', 'React 18', 'TypeScript']],
+          ['UI & styling', ['Tailwind v3', 'Radix UI', 'CSS Modules']],
+          ['State & data', ['TanStack Query', 'React Hook Form', 'Zod']],
+          ['Auth & security', ['NextAuth.js', 'Middleware Next', 'Server Actions']],
+          ['Files & email', ['UploadThing', 'Resend']],
+          ['Quality & deployment', ['ESLint', 'GitHub Actions', 'Vercel']],
+        ],
+        resLabel: '— In production', resH1: 'The numbers that matter.',
+        res: [
+          ['98+', 'Lighthouse Performance on key screens'],
+          ['AA', 'WCAG 2.1 conformance across all journeys'],
+          ['0', 'Critical issues raised at the go-live audit'],
+        ],
+        nextLabel: '— Next project', nextH1: 'TaComFav.',
+        nextProjLabel: 'Agency · 2025', nextH3: 'Communication agency website',
+        nextP: 'Animated marketing site for a communication agency, with a headless CMS (Sanity) and careful motion in GSAP and Framer Motion. Performance, SEO and visual experience at the core.',
+        nextCta: 'View project →',
+      },
+    };
+    const t = S[lang];
+
+    return (
+      <window.PFLayout current="travaux">
+        <style>{`
+          .pj-back { padding: 24px 56px 0; }
+          .pj-hero { padding: 32px 56px 56px; }
+          .pj-hero-meta { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 24px; }
+          .pj-hero h1 { font-size: clamp(48px, 8vw, 128px); line-height: 0.92; letter-spacing: -0.04em; font-weight: 500; margin: 0; }
+          .pj-hero p { font-size: 18px; color: var(--muted); line-height: 1.55; max-width: 720px; margin: 28px 0 0; }
+          .pj-info { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+          .pj-info-cell { padding-right: 24px; border-right: 1px solid var(--line); }
+          .pj-info-cell:last-child { border-right: none; padding-right: 0; }
+          .pj-info-cell .pf-label { margin-bottom: 6px; display: block; }
+          .pj-info-cell strong { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; display: block; }
+
+          .pj-cover { padding: 0 56px; }
+          .pj-cover-inner { height: 520px; border-radius: 20px; background: linear-gradient(135deg, #F4E1D4 0%, #E8C3A8 60%, #E0AB89 100%); position: relative; overflow: hidden; padding: 48px; display: flex; flex-direction: column; justify-content: space-between; color: var(--on-pastel); }
+          .pj-cover-tag { position: absolute; top: 28px; right: 28px; display: flex; gap: 8px; }
+          .pj-cover-head { display: flex; gap: 16px; }
+          .pj-cover-headline { font-size: clamp(64px, 10vw, 140px); line-height: 0.88; letter-spacing: -0.05em; font-weight: 500; color: var(--on-pastel); margin: 0; }
+          .pj-cover-foot { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+
+          .pj-context { padding: 100px 56px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+          .pj-context h2 { font-size: clamp(32px, 4vw, 48px); margin: 0; line-height: 1.05; letter-spacing: -0.03em; font-weight: 500; }
+          .pj-context p { font-size: 16px; color: var(--muted); line-height: 1.65; margin: 0 0 18px; max-width: 680px; }
+          .pj-context p strong { color: var(--ink); font-weight: 500; }
+          .pj-context .pj-tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+          .pj-challenges { padding: 100px 56px; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background-color .25s; }
+          .pj-challenges-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; margin-bottom: 56px; align-items: end; }
+          .pj-challenges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+          .pj-ch { padding: 32px; background: var(--bg); border-radius: 14px; border: 1px solid var(--line); }
+          .pj-ch-n { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.05em; }
+          .pj-ch h3 { font-size: 22px; margin: 14px 0 12px; letter-spacing: -0.01em; font-weight: 500; line-height: 1.15; }
+          .pj-ch p { font-size: 14.5px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+          .pj-mock { padding: 0 56px 100px; }
+          .pj-mock-band { background: var(--bg-dark); border-radius: 20px; padding: 56px 48px; color: #F4F1EA; }
+          .pj-mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+          .pj-mock-tile { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; aspect-ratio: 16/10; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+          .pj-mock-tile-lg { grid-column: 1 / -1; aspect-ratio: 21/9; }
+          .pj-mock-tile h4 { font-size: 18px; margin: 0; letter-spacing: -0.01em; font-weight: 500; }
+          .pj-mock-tile p { font-size: 13px; color: rgba(244,241,234,0.6); margin: 6px 0 0; max-width: 360px; line-height: 1.55; }
+          .pj-mock-placeholder { font-family: "JetBrains Mono", monospace; font-size: 11px; color: rgba(244,241,234,0.4); align-self: end; }
+          .pj-mock-fakeui { display: flex; gap: 6px; align-items: center; margin-top: auto; }
+          .pj-mock-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; flex: 1; }
+          .pj-mock-bar-fill { height: 6px; background: var(--accent); border-radius: 3px; }
+
+          .pj-stack { padding: 100px 56px; }
+          .pj-stack-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; margin-bottom: 48px; align-items: end; }
+          .pj-stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+          .pj-stack-card { padding: 28px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 14px; transition: background-color .25s, border-color .25s; }
+          .pj-stack-card h4 { font-size: 13px; margin: 0 0 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+          .pj-stack-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 14.5px; color: var(--ink); line-height: 1.5; }
+          .pj-stack-card li { font-family: "JetBrains Mono", monospace; font-size: 13.5px; padding: 6px 10px; background: var(--bg); border-radius: 6px; border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; }
+          .pj-stack-card li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+
+          .pj-results { padding: 100px 56px; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background-color .25s; }
+          .pj-results-head { margin-bottom: 56px; }
+          .pj-results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+          .pj-result { padding: 32px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); }
+          .pj-result strong { display: block; font-size: clamp(40px, 5vw, 64px); font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin-bottom: 14px; }
+          .pj-result span { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+          .pj-next { padding: 100px 56px 64px; }
+          .pj-next h2 { font-size: clamp(36px, 5vw, 64px); margin: 0 0 32px; line-height: 1; letter-spacing: -0.03em; font-weight: 500; }
+          .pj-next-card { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; transition: background-color .25s, border-color .25s; }
+          .pj-next-visual { aspect-ratio: 4/3; background: linear-gradient(135deg, #D6E0EA 0%, #C5D9E8 100%); padding: 32px; display: flex; align-items: end; color: var(--on-pastel); }
+          .pj-next-visual .pj-cover-headline { font-size: clamp(48px, 6vw, 80px); color: var(--on-pastel); }
+          .pj-next-info { padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+          .pj-next-info h3 { font-size: clamp(28px, 3vw, 40px); margin: 0; letter-spacing: -0.02em; font-weight: 500; line-height: 1.05; }
+          .pj-next-info p { font-size: 14.5px; color: var(--muted); line-height: 1.6; margin: 0; }
+
+          @media (max-width: 980px) {
+            .pj-back, .pj-hero, .pj-cover, .pj-context, .pj-challenges, .pj-mock, .pj-stack, .pj-results, .pj-next { padding-left: 32px; padding-right: 32px; }
+            .pj-cover-inner { height: 400px; padding: 32px; }
+            .pj-info { grid-template-columns: 1fr 1fr; gap: 0; }
+            .pj-info-cell { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); }
+            .pj-info-cell:nth-child(odd) { border-right: 1px solid var(--line); padding-right: 16px; padding-left: 0; }
+            .pj-info-cell:nth-child(even) { padding-left: 16px; border-right: none; }
+            .pj-info-cell:nth-last-child(-n+2) { border-bottom: none; }
+            .pj-context, .pj-challenges-head, .pj-stack-head { grid-template-columns: 1fr; gap: 24px; }
+            .pj-challenges-grid, .pj-stack-grid { grid-template-columns: 1fr 1fr; }
+            .pj-results-grid { grid-template-columns: 1fr 1fr; }
+            .pj-next-card { grid-template-columns: 1fr; }
+          }
+          @media (max-width: 680px) {
+            .pj-back, .pj-hero, .pj-cover, .pj-context, .pj-challenges, .pj-mock, .pj-stack, .pj-results, .pj-next { padding-left: 20px; padding-right: 20px; }
+            .pj-cover-inner { height: 320px; padding: 24px; }
+            .pj-challenges-grid, .pj-stack-grid, .pj-results-grid, .pj-mock-grid { grid-template-columns: 1fr; }
+            .pj-mock-band { padding: 32px 24px; }
+            .pj-info { grid-template-columns: 1fr; }
+            .pj-info-cell { border-right: none; border-bottom: 1px solid var(--line); padding: 16px 0; }
+          }
+        `}</style>
+
+        <div className="pj-back">
+          <a href="Travaux.html" className="pf-link" style={{ fontSize: 14, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 4 L4 7 L9 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>
+            {t.back}
+          </a>
+        </div>
+
+        <section className="pj-hero">
+          <div className="pf-reveal">
+            <div className="pj-hero-meta">
+              <span className="pf-pill">{t.tag}</span>
+              <span className="pf-pill">{t.studyTag}</span>
+            </div>
+            <h1 className="pf-display">PIPV-PPED<span style={{ color: 'var(--accent)' }}>.</span></h1>
+            <p>{t.heroP}</p>
+          </div>
+          <div className="pj-info pf-reveal">
+            {t.info.map(([k, v]) => (
+              <div key={k} className="pj-info-cell"><span className="pf-label">{k}</span><strong>{v}</strong></div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pj-cover">
+          <div className="pj-cover-inner pf-reveal">
+            <div className="pj-cover-tag">
+              <span className="pf-pill" style={{ background: 'rgba(255,255,255,0.6)', color: '#1A1A18', borderColor: 'rgba(0,0,0,0.08)', fontSize: 11, whiteSpace: 'nowrap' }}>{t.coverVer}</span>
+            </div>
+            <div className="pj-cover-head">
+              <span className="pf-pill" style={{ background: 'rgba(255,255,255,0.6)', color: '#1A1A18', borderColor: 'rgba(0,0,0,0.08)' }}><span className="pf-dot" /> {t.coverDeployed}</span>
+            </div>
+            <h2 className="pf-display pj-cover-headline">PIPV<br /><span style={{ fontStyle: 'italic', fontWeight: 300 }}>—PPED.</span></h2>
+            <div className="pj-cover-foot">
+              <div>
+                <div className="pf-label" style={{ marginBottom: 6, color: 'rgba(26,26,24,0.55)' }}>{t.coverTypeLabel}</div>
+                <div style={{ fontSize: 16, color: '#1A1A18' }}>{t.coverTypeValue}</div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div className="pf-label" style={{ marginBottom: 6, color: 'rgba(26,26,24,0.55)' }}>{t.coverStackLabel}</div>
+                <div style={{ fontSize: 16, color: '#1A1A18' }}>Next.js 14 · React 18 · NextAuth</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="pj-context">
+          <div className="pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 18 }}>{t.ctxLabel}</div>
+            <h2 className="pf-display">{t.ctxH1}</h2>
+            <div className="pj-tags">
+              {t.ctxTags.map((tg) => <span key={tg} className="pf-tag">{tg}</span>)}
+            </div>
+          </div>
+          <div className="pf-reveal">
+            <p>{t.ctxP1}</p>
+            <p>{t.ctxP2a}<strong>{t.ctxP2b}</strong>{t.ctxP2c}</p>
+            <p>{t.ctxP3a}<strong>{t.ctxP3b}</strong>{t.ctxP3c}</p>
+          </div>
+        </section>
+
+        <section className="pj-challenges">
+          <div className="pj-challenges-head pf-reveal">
+            <div>
+              <div className="pf-label" style={{ marginBottom: 18 }}>{t.appLabel}</div>
+              <h2 className="pf-display" style={{ fontSize: 'clamp(34px, 5vw, 56px)', margin: 0, lineHeight: 1.05, fontWeight: 500, letterSpacing: '-0.03em' }}>{t.appH1}</h2>
+            </div>
+            <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, margin: 0, maxWidth: 480 }}>{t.appP}</p>
+          </div>
+
+          <div className="pj-challenges-grid">
+            {t.ch.map(([n, title, desc]) => (
+              <div key={n} className="pj-ch pf-reveal">
+                <div className="pj-ch-n">— {n}</div>
+                <h3 className="pf-display">{title}</h3>
+                <p>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pj-mock">
+          <div className="pj-mock-band pf-reveal">
+            <div className="pf-label" style={{ color: 'rgba(255,255,255,0.55)', marginBottom: 16 }}>{t.mockLabel}</div>
+            <h2 className="pf-display" style={{ fontSize: 'clamp(28px, 3.5vw, 44px)', margin: 0, letterSpacing: '-0.02em', fontWeight: 500, lineHeight: 1.05 }}>{t.mockH1}</h2>
+            <p style={{ fontSize: 14.5, color: 'rgba(244,241,234,0.6)', marginTop: 14, maxWidth: 560, lineHeight: 1.55 }}>{t.mockP}</p>
+
+            <div className="pj-mock-grid">
+              {t.mocks.map(([ti, d], i) => (
+                <div key={i} className={`pj-mock-tile ${i === 0 ? 'pj-mock-tile-lg' : ''}`}>
+                  <div>
+                    <h4 className="pf-display">{ti}</h4>
+                    <p>{d}</p>
+                  </div>
+                  <div className="pj-mock-fakeui">
+                    <div className="pj-mock-bar"><div className="pj-mock-bar-fill" style={{ width: i === 0 ? '65%' : '40%' }} /></div>
+                    <span className="pj-mock-placeholder">▢ screenshot</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="pj-stack">
+          <div className="pj-stack-head pf-reveal">
+            <div>
+              <div className="pf-label" style={{ marginBottom: 18 }}>{t.skLabel}</div>
+              <h2 className="pf-display" style={{ fontSize: 'clamp(34px, 5vw, 56px)', margin: 0, lineHeight: 1.05 }}>{t.skH1}</h2>
+            </div>
+            <p style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.65, margin: 0, maxWidth: 480 }}>{t.skP}</p>
+          </div>
+
+          <div className="pj-stack-grid">
+            {t.skGroups.map(([cat, items]) => (
+              <div key={cat} className="pj-stack-card pf-reveal">
+                <h4>{cat}</h4>
+                <ul>
+                  {items.map((it) => <li key={it}>{it}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pj-results">
+          <div className="pj-results-head pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 18 }}>{t.resLabel}</div>
+            <h2 className="pf-display" style={{ fontSize: 'clamp(34px, 5vw, 56px)', margin: 0, lineHeight: 1.05 }}>{t.resH1}</h2>
+          </div>
+          <div className="pj-results-grid">
+            {t.res.map(([v, l], i) => (
+              <div key={i} className="pj-result pf-reveal"><strong>{v}</strong><span>{l}</span></div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pj-next">
+          <div className="pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 18 }}>{t.nextLabel}</div>
+            <h2 className="pf-display">{t.nextH1}</h2>
+          </div>
+
+          <a href="Travaux.html" style={{ textDecoration: 'none', color: 'inherit', display: 'block' }} className="pf-reveal">
+            <div className="pj-next-card">
+              <div className="pj-next-visual">
+                <h3 className="pf-display pj-cover-headline">TaCom<br /><span style={{ fontStyle: 'italic', fontWeight: 300 }}>—Fav.</span></h3>
+              </div>
+              <div className="pj-next-info">
+                <span className="pf-pill" style={{ alignSelf: 'start' }}>{t.nextProjLabel}</span>
+                <h3 className="pf-display">{t.nextH3}</h3>
+                <p>{t.nextP}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 4 }}>
+                  {['Next.js 16', 'Sanity', 'GSAP', 'Framer Motion', 'Lenis'].map((s) => <span key={s} className="pf-tag" style={{ fontSize: 11 }}>{s}</span>)}
+                </div>
+                <span className="pf-btn pf-btn-ghost" style={{ alignSelf: 'start', marginTop: 12, fontSize: 13 }}>{t.nextCta}</span>
+              </div>
+            </div>
+          </a>
+        </section>
+      </window.PFLayout>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<PagePIPV />);
+</script>
+</body>
+</html>

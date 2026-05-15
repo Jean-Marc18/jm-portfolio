@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Travaux — Koffi N'Guessan Jean-Marc</title>
+<meta name="description" content="Sélection de projets en production : fintech, agences, e-commerce et secteur public." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script>
+  // Boot theme ASAP to avoid flash
+  try { document.documentElement.dataset.theme = localStorage.getItem('pf-theme') || 'light'; document.documentElement.lang = localStorage.getItem('pf-lang') || 'fr'; } catch (e) {}
+</script>
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { font-family: "Geist", "Plus Jakarta Sans", system-ui, sans-serif; }
+  ::selection { background: var(--ink, #1A1A18); color: var(--bg, #F7F5F0); }
+  html { scroll-behavior: smooth; background: #F7F5F0; }
+  html[data-theme="dark"] { background: #13110E; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="portfolio-data.jsx"></script>
+<script type="text/babel" src="portfolio-layout.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function PageTravaux() {
+    const [lang] = window.useLang();
+    const projects = window.PF_PROJECTS;
+    const S = {
+      fr: {
+        heroLabel: '— Sélection / 03 projets', heroH1a: 'Travaux', heroH1b: 'récents.',
+        heroP: 'Une sélection de projets en production, illustrant mon expertise sur les interfaces web et les solutions digitales — du secteur public à la fintech, en passant par l’agence et l’e-commerce.',
+        m1: 'Projets en production', m2: 'Technologies maîtrisées', m3: 'Expérience fintech', m4: 'Marché financier régional',
+        m3v: '2+ ans',
+        subs: { 'PIPV-PPED': 'Plateforme institutionnelle ivoirienne', 'TaComFav': 'Site agence de communication', 'e-Panacee': 'E-commerce ivoirien' },
+        descs: {
+          'PIPV-PPED': 'Plateforme officielle de gestion et de suivi pour une institution publique de Côte d’Ivoire. Authentification sécurisée, gestion des rôles, upload de documents et tableau de bord administratif.',
+          'TaComFav': 'Site vitrine animé pour une agence de communication, intégrant un CMS headless et des animations soignées. Performance, SEO et expérience visuelle au cœur du projet.',
+          'e-Panacee': 'Plateforme e-commerce complète : catalogue, panier, gestion de commandes, paiement et back-office. Pensée pour la performance mobile et l’accessibilité.',
+        },
+        ctaCase: 'Voir le cas →', ctaVisit: 'Visiter le site →',
+        appLabel: '— Mon approche', appH1: 'Chaque projet suit le même fil rouge.',
+        steps: [
+          ['Comprendre le métier avant de coder', 'Avant la première ligne de code, je m’imprègne du domaine — fintech, e-commerce, institutionnel. Le code suit le besoin, pas l’inverse.'],
+          ['Architecture lisible et testable', 'Clean architecture, organisation feature-component, monorepo si pertinent. L’objectif : qu’un nouveau dev soit productif en 2 jours.'],
+          ['Performance et accessibilité par défaut', 'Core Web Vitals dans le vert, contraste AA, navigation clavier. Ce sont des prérequis, pas des options.'],
+          ['Livrer petit, livrer souvent', 'Découpage en stories courtes, déploiements continus, feedback rapide. Pour itérer avec le métier et corriger tôt.'],
+        ],
+        ctaLabel: '— Prochain projet', ctaH1a: 'On parle de votre', ctaH1b: 'prochain produit',
+        ctaDiscuss: 'Démarrer une discussion →', ctaServices: 'Voir mes services',
+        role: { 'PIPV-PPED': 'Développeur Front-End · 6 mois', 'TaComFav': 'Développeur Front-End · 3 mois', 'e-Panacee': 'Développeur Front-End · 4 mois' },
+      },
+      en: {
+        heroLabel: '— Selection / 03 projects', heroH1a: 'Recent', heroH1b: 'work.',
+        heroP: 'A selection of production projects showing my expertise on web interfaces and digital solutions — from public sector to fintech, agency and e-commerce.',
+        m1: 'Projects in production', m2: 'Technologies mastered', m3: 'Fintech experience', m4: 'Regional financial market',
+        m3v: '2+ years',
+        subs: { 'PIPV-PPED': 'Ivorian institutional platform', 'TaComFav': 'Communication agency website', 'e-Panacee': 'Ivorian e-commerce platform' },
+        descs: {
+          'PIPV-PPED': 'Official management and tracking platform for an Ivorian public institution. Secure auth, role-based access, document uploads and admin dashboard.',
+          'TaComFav': 'Animated marketing site for a communication agency, with headless CMS and refined motion. Performance, SEO and visual experience at the core.',
+          'e-Panacee': 'Full e-commerce platform: catalogue, cart, order management, payment and back-office. Built for mobile performance and accessibility.',
+        },
+        ctaCase: 'View case study →', ctaVisit: 'Visit site →',
+        appLabel: '— My approach', appH1: 'Every project follows the same thread.',
+        steps: [
+          ['Understand the business before coding', 'Before the first line of code, I immerse myself in the domain — fintech, e-commerce, institutional. Code follows the need, not the other way around.'],
+          ['Readable, testable architecture', 'Clean architecture, feature-component layout, monorepo when relevant. The goal: a new dev productive in 2 days.'],
+          ['Performance and accessibility by default', 'Core Web Vitals in the green, AA contrast, keyboard nav. These are prerequisites, not options.'],
+          ['Ship small, ship often', 'Short stories, continuous deploys, fast feedback. Iterate with the business and fix early.'],
+        ],
+        ctaLabel: '— Next project', ctaH1a: 'Let’s talk about your', ctaH1b: 'next product',
+        ctaDiscuss: 'Start a discussion →', ctaServices: 'See my services',
+        role: { 'PIPV-PPED': 'Front-End Developer · 6 months', 'TaComFav': 'Front-End Developer · 3 months', 'e-Panacee': 'Front-End Developer · 4 months' },
+      },
+    };
+    const t = S[lang];
+
+    return (
+      <window.PFLayout current="travaux">
+        <style>{`
+          .tv-hero { padding: 80px 56px 64px; }
+          .tv-h1 { font-size: clamp(48px, 8vw, 120px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500; margin: 0; }
+          .tv-hero-meta { display: flex; gap: 56px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+          .tv-hero-meta .m { display: flex; flex-direction: column; gap: 6px; }
+          .tv-hero-meta .m strong { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; }
+          .tv-hero-meta .m span { font-size: 13px; color: var(--muted); }
+          .tv-list { padding: 40px 56px 80px; }
+          .tv-row { display: grid; grid-template-columns: 1.2fr 1.4fr 1fr; gap: 32px; align-items: center; padding: 32px 0; border-bottom: 1px solid var(--line); transition: padding .2s; }
+          .tv-row:hover { padding-left: 12px; padding-right: 12px; }
+          .tv-row:first-child { border-top: 1px solid var(--line); }
+          .tv-row-visual { height: 200px; border-radius: 12px; position: relative; overflow: hidden; padding: 20px; display: flex; align-items: end; }
+          .tv-cov-1 { background: linear-gradient(135deg, #F4E1D4, #E8C3A8); }
+          .tv-cov-2 { background: linear-gradient(135deg, #D6E0EA, #C5D9E8); }
+          .tv-cov-3 { background: linear-gradient(135deg, #E2E8D6, #C8D4B5); }
+          .tv-cov-text { font-size: clamp(40px, 4vw, 64px); line-height: 0.9; font-weight: 500; letter-spacing: -0.04em; color: var(--on-pastel); }
+          .tv-row-meta { display: flex; flex-direction: column; gap: 12px; }
+          .tv-row-meta h2 { font-size: clamp(28px, 3vw, 40px); margin: 0; letter-spacing: -0.02em; font-weight: 500; line-height: 1.05; }
+          .tv-row-meta p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; max-width: 460px; }
+          .tv-row-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+          .tv-row-cta { display: flex; flex-direction: column; align-items: end; gap: 16px; }
+          .tv-row-cta .tv-year { font-size: 14px; color: var(--muted); }
+          .tv-approche { padding: 80px 56px; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+          .tv-approche-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
+          .tv-cta { padding: 100px 56px; text-align: center; }
+          .tv-cta h2 { font-size: clamp(40px, 6vw, 80px); margin: 0; line-height: 1; letter-spacing: -0.03em; font-weight: 500; }
+          @media (max-width: 980px) {
+            .tv-hero, .tv-list, .tv-approche, .tv-cta { padding-left: 32px; padding-right: 32px; }
+            .tv-row { grid-template-columns: 1fr 1fr; }
+            .tv-row-cta { flex-direction: row; justify-content: space-between; grid-column: 1 / -1; align-items: center; }
+            .tv-approche-grid { grid-template-columns: 1fr; gap: 32px; }
+          }
+          @media (max-width: 680px) {
+            .tv-hero, .tv-list, .tv-approche, .tv-cta { padding-left: 20px; padding-right: 20px; }
+            .tv-row { grid-template-columns: 1fr; padding: 24px 0; }
+            .tv-row-visual { height: 180px; }
+            .tv-hero-meta { gap: 32px; }
+          }
+        `}</style>
+
+        <section className="tv-hero">
+          <div className="pf-reveal">
+            <div className="pf-label" style={{ marginBottom: 20 }}>{t.heroLabel}</div>
+            <h1 className="pf-display tv-h1">{t.heroH1a}<br /><span style={{ color: 'var(--muted)' }}>{t.heroH1b}</span></h1>
+            <p style={{ fontSize: 17, color: 'var(--muted)', maxWidth: 560, lineHeight: 1.6, marginTop: 32 }}>{t.heroP}</p>
+          </div>
+          <div className="tv-hero-meta pf-reveal">
+            <div className="m"><strong>03</strong><span>{t.m1}</span></div>
+            <div className="m"><strong>13+</strong><span>{t.m2}</span></div>
+            <div className="m"><strong>{t.m3v}</strong><span>{t.m3}</span></div>
+            <div className="m"><strong>UMOA</strong><span>{t.m4}</span></div>
+          </div>
+        </section>
+
+        <section className="tv-list">
+          {projects.map((p, i) => (
+            <a key={p.slug} href={p.href} className="tv-row pf-reveal" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className={`tv-row-visual tv-cov-${i + 1}`}>
+                <div className="pf-display tv-cov-text">{p.name.split('-')[0]}</div>
+                <span className="pf-pill" style={{ position: 'absolute', top: 16, left: 16, background: 'rgba(255,255,255,0.6)', color: 'var(--on-pastel)', borderColor: 'rgba(0,0,0,0.08)', fontSize: 11 }}>{p.tag}</span>
+              </div>
+              <div className="tv-row-meta">
+                <div className="pf-label">{t.role[p.name]}</div>
+                <h2 className="pf-display">{p.name}</h2>
+                <p>{t.descs[p.name]}</p>
+                <div className="tv-row-stack">
+                  {p.stack.slice(0, 6).map((s) => <span key={s} className="pf-tag" style={{ fontSize: 11 }}>{s}</span>)}
+                  {p.stack.length > 6 && <span className="pf-tag" style={{ fontSize: 11 }}>+{p.stack.length - 6}</span>}
+                </div>
+              </div>
+              <div className="tv-row-cta">
+                <span className="tv-year">{p.year}</span>
+                <span className="pf-btn pf-btn-ghost" style={{ fontSize: 13 }}>{i === 0 ? t.ctaCase : t.ctaVisit}</span>
+              </div>
+            </a>
+          ))}
+        </section>
+
+        <section className="tv-approche">
+          <div className="tv-approche-grid pf-reveal">
+            <div>
+              <div className="pf-label" style={{ marginBottom: 20 }}>{t.appLabel}</div>
+              <h2 className="pf-display" style={{ fontSize: 'clamp(30px, 4vw, 48px)', margin: 0, lineHeight: 1.05 }}>{t.appH1}</h2>
+            </div>
+            <div style={{ display: 'grid', gap: 24 }}>
+              {t.steps.map(([title, desc], i) => (
+                <div key={i} style={{ display: 'grid', gridTemplateColumns: '40px 1fr', gap: 20, paddingTop: 16, borderTop: '1px solid var(--line)' }}>
+                  <div className="pf-label">0{i + 1}</div>
+                  <div>
+                    <h3 className="pf-display" style={{ fontSize: 20, margin: 0 }}>{title}</h3>
+                    <p style={{ fontSize: 14.5, color: 'var(--muted)', lineHeight: 1.6, margin: '6px 0 0' }}>{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="tv-cta pf-reveal">
+          <div className="pf-label" style={{ marginBottom: 24 }}>{t.ctaLabel}</div>
+          <h2 className="pf-display">{t.ctaH1a}<br /><span style={{ color: 'var(--accent)', fontStyle: 'italic', fontWeight: 300 }}>{t.ctaH1b}</span> ?</h2>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: 36, flexWrap: 'wrap' }}>
+            <a href="Contact.html" className="pf-btn pf-btn-primary">{t.ctaDiscuss}</a>
+            <a href="Services.html" className="pf-btn pf-btn-ghost">{t.ctaServices}</a>
+          </div>
+        </section>
+      </window.PFLayout>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<PageTravaux />);
+</script>
+</body>
+</html>

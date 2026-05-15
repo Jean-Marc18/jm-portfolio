@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio Jean-Marc — 3 directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; font-family: "Geist", system-ui, sans-serif; }
+  #root { width: 100vw; height: 100vh; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="direction-a.jsx"></script>
+<script type="text/babel" src="direction-b.jsx"></script>
+<script type="text/babel" src="direction-c.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+  function App() {
+    return (
+      <window.DesignCanvas title="Portfolio Jean-Marc — 3 directions" subtitle="A) Éditorial chaleureux · B) Tech minimal noir · C) Éditorial clair façon Øliv">
+        <window.DCSection id="portfolio" title="Portfolio · 3 directions" subtitle="Cliquer sur ⤢ pour passer en plein écran.">
+          <window.DCPostIt top={-120} left={20} rotate={-3} width={220}>
+            Trois approches sur le même contenu (vrais projets, vraie stack). Compare, prends ce qui marche, on affine.
+          </window.DCPostIt>
+          <window.DCArtboard id="dir-a" label="A · Éditorial chaleureux" width={1440} height={4300}>
+            <window.DirectionA />
+          </window.DCArtboard>
+          <window.DCArtboard id="dir-b" label="B · Tech minimal noir" width={1440} height={4300}>
+            <window.DirectionB />
+          </window.DCArtboard>
+          <window.DCArtboard id="dir-c" label="C · Éditorial clair (Øliv)" width={1440} height={4300}>
+            <window.DirectionC />
+          </window.DCArtboard>
+        </window.DCSection>
+      </window.DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
