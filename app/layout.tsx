@@ -155,7 +155,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning className={`${geist.variable} ${plusJakarta.variable} antialiased`}>
       <head>
         <script
           type="application/ld+json"
@@ -163,7 +163,6 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geist.variable} ${plusJakarta.variable} antialiased`}
         style={{
           fontFamily:
             "var(--font-geist), var(--font-mono), system-ui, sans-serif",
