@@ -2,8 +2,15 @@
 
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/i18n/LanguageContext";
+import type { Locale } from "@/lib/i18n/dictionaries";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  initialLocale,
+  children,
+}: {
+  initialLocale: Locale;
+  children: React.ReactNode;
+}) {
   return (
     <ThemeProvider
       attribute="data-theme"
@@ -11,7 +18,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem={false}
       storageKey="pf-theme"
     >
-      <LanguageProvider>{children}</LanguageProvider>
+      <LanguageProvider initialLocale={initialLocale}>
+        {children}
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

@@ -87,9 +87,7 @@ const About = () => {
                 {t.about.period}
               </div>
               <div>
-                <div
-                  style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}
-                >
+                <div style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}>
                   {t.about.role}{" "}
                   <span style={{ color: "var(--muted)", fontWeight: 400 }}>
                     {t.about.roleAt}
@@ -117,7 +115,9 @@ const About = () => {
                   }}
                 >
                   {t.about.bullets.map((b, j) => (
-                    <li key={j}>· {b}</li>
+                    <li key={j} className="text-pretty list-disc">
+                      {b}
+                    </li>
                   ))}
                 </ul>
               </div>

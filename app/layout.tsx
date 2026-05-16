@@ -1,21 +1,24 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
+import { LOCALE_COOKIE, isLocale } from "@/lib/i18n/config";
+import type { Locale } from "@/lib/i18n/dictionaries";
 
 const geist = Geist({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
+  variable: "--font-geist",
   display: "swap",
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-mono",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -149,26 +152,29 @@ const jsonLd = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const cookieValue = cookieStore.get(LOCALE_COOKIE)?.value;
+  const initialLocale: Locale = isLocale(cookieValue) ? cookieValue : "fr";
+
   return (
-    <html lang="fr" suppressHydrationWarning className={`${geist.variable} ${plusJakarta.variable} antialiased`}>
+    <html
+      lang={initialLocale}
+      className={`${geist.variable} ${plusJakarta.variable} antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body
-        style={{
-          fontFamily:
-            "var(--font-geist), var(--font-mono), system-ui, sans-serif",
-        }}
-      >
-        <Providers>
+      <body className="font-sans">
+        <Providers initialLocale={initialLocale}>
           <Header />
           <main>{children}</main>
           <Footer />
