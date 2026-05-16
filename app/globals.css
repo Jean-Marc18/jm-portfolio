@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Local fonts (signature) ─────────────────────────────── */
 @font-face {
   font-family: "Labil Grotesk";
   font-display: swap;
@@ -9,18 +10,12 @@
   font-weight: 500;
   src: url("/fonts/LabilGrotesk-Medium.woff2") format("woff2");
 }
-
 @font-face {
   font-family: "Labil Grotesk Bold";
   font-display: swap;
   font-style: normal;
   font-weight: 700;
   src: url("/fonts/LabilGrotesk-Bold.woff2") format("woff2");
-}
-
-@theme inline {
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
 }
 
 /* ── Design tokens ───────────────────────────────────────── */
@@ -475,28 +470,42 @@ html[data-theme="dark"] .pf-card:hover {
 
 /* ── Mobile sheet ────────────────────────────────────────── */
 .pf-menu-sheet {
-  position: fixed;
-  inset: 0;
-  background: var(--sheet-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 100;
-  display: flex;
+  position: fixed !important;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background: var(--bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  z-index: 999;
+  display: flex !important;
   flex-direction: column;
-  padding: 20px;
-  gap: 8px;
+  padding: 20px 24px max(24px, env(safe-area-inset-bottom));
+  gap: 32px;
+  overflow-y: auto;
+  animation: pf-sheet-in 0.25s ease-out;
 }
-.pf-menu-sheet > a {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-  color: var(--ink);
-  text-decoration: none;
+@keyframes pf-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
-.pf-menu-sheet .pf-menu-close {
-  align-self: flex-end;
+.pf-menu-sheet .pf-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+.pf-menu-close {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -504,7 +513,80 @@ html[data-theme="dark"] .pf-card:hover {
   color: var(--bg);
   border: none;
   font-size: 22px;
+  line-height: 1;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+.pf-menu-close:hover {
+  transform: rotate(90deg);
+}
+.pf-menu-sheet .pf-menu-nav {
+  display: flex;
+  flex-direction: column;
+}
+.pf-menu-sheet .pf-menu-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  transition: color 0.15s, padding 0.2s;
+  width: 100%;
+}
+.pf-menu-sheet .pf-menu-link:first-child {
+  border-top: 1px solid var(--line);
+}
+.pf-menu-sheet .pf-menu-link:hover,
+.pf-menu-sheet .pf-menu-link:focus-visible {
+  color: var(--accent);
+  padding-left: 8px;
+}
+.pf-menu-sheet .pf-menu-link-arrow {
+  font-size: 18px;
+  color: var(--muted);
+  transition: transform 0.2s, color 0.15s;
+}
+.pf-menu-sheet .pf-menu-link:hover .pf-menu-link-arrow,
+.pf-menu-sheet .pf-menu-link:focus-visible .pf-menu-link-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+.pf-menu-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pf-menu-social {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.pf-menu-social a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.pf-menu-social a:hover {
+  color: var(--ink);
+}
+.pf-menu-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 /* ── Tablet ──────────────────────────────────────────────── */

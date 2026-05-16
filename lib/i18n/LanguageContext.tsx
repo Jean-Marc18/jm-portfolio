@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { dictionaries, type Dictionary, type Locale } from "./dictionaries";
+import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from "./config";
 
 type LanguageContextValue = {
   locale: Locale;
@@ -17,24 +12,18 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-const STORAGE_KEY = "jmk-locale";
+const writeCookie = (locale: Locale) => {
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${LOCALE_COOKIE_MAX_AGE}; SameSite=Lax`;
+};
 
 export const LanguageProvider = ({
+  initialLocale,
   children,
 }: {
+  initialLocale: Locale;
   children: React.ReactNode;
 }) => {
-  const [locale, setLocaleState] = useState<Locale>("fr");
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (stored === "fr" || stored === "en") {
-      setLocaleState(stored);
-    } else if (typeof navigator !== "undefined") {
-      const browser = navigator.language.toLowerCase();
-      if (browser.startsWith("en")) setLocaleState("en");
-    }
-  }, []);
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -42,7 +31,7 @@ export const LanguageProvider = ({
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);
-    window.localStorage.setItem(STORAGE_KEY, l);
+    writeCookie(l);
   };
 
   const value = useMemo(
