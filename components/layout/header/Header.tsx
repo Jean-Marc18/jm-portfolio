@@ -27,70 +27,89 @@ const Header = () => {
     };
   }, [menuOpen]);
 
+  // Close menu on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
       {menuOpen && (
-        <div className="pf-menu-sheet" role="dialog" aria-modal="true">
-          <button
-            type="button"
-            className="pf-menu-close"
-            aria-label="Fermer le menu"
-            onClick={closeMenu}
-          >
-            ×
-          </button>
-          <div
-            style={{ marginTop: 24, display: "flex", flexDirection: "column" }}
-          >
-            <a href="/" onClick={closeMenu}>
+        <div
+          className="pf-menu-sheet"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.nav.menu}
+        >
+          <div className="pf-menu-head">
+            <a className="pf-brand" href="/" onClick={closeMenu}>
+              <Logo size="md" />
+            </a>
+            <button
+              type="button"
+              className="pf-menu-close"
+              aria-label="Fermer le menu"
+              onClick={closeMenu}
+            >
+              ×
+            </button>
+          </div>
+
+          <nav className="pf-menu-nav">
+            <a className="pf-menu-link" href="/" onClick={closeMenu}>
               {t.nav.home}
+              <span className="pf-menu-link-arrow" aria-hidden="true">
+                →
+              </span>
             </a>
             {NAV_ORDER.map((k: RouteKey) => (
-              <a key={k} href={routePaths[k]} onClick={closeMenu}>
-                {t.nav[k]}
-              </a>
-            ))}
-          </div>
-          <ButtonLink
-            href={EMAIL}
-            variant="primary"
-            style={{ marginTop: 32, justifyContent: "center" }}
-          >
-            jeanmarc.dev.18@gmail.com
-          </ButtonLink>
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              marginTop: 24,
-              alignItems: "center",
-            }}
-          >
-            <LanguageSwitch />
-            <ThemeSwitch />
-          </div>
-          <div
-            style={{
-              marginTop: "auto",
-              display: "flex",
-              gap: 18,
-              fontSize: 14,
-              color: "var(--muted)",
-            }}
-          >
-            {SOCIAL.map((s) => (
               <a
-                key={s.href}
-                className="pf-link"
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                key={k}
+                className="pf-menu-link"
+                href={routePaths[k]}
+                onClick={closeMenu}
               >
-                {s.label}
+                {t.nav[k]}
+                <span className="pf-menu-link-arrow" aria-hidden="true">
+                  →
+                </span>
               </a>
             ))}
+          </nav>
+
+          <div className="pf-menu-foot">
+            <ButtonLink
+              href={EMAIL}
+              variant="primary"
+              style={{ justifyContent: "center" }}
+            >
+              jeanmarc.dev.18@gmail.com
+            </ButtonLink>
+
+            <div className="pf-menu-tools">
+              <LanguageSwitch />
+              <ThemeSwitch />
+            </div>
+
+            <div className="pf-menu-social">
+              {SOCIAL.map((s) => (
+                <a
+                  key={s.href}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {s.label} ↗
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}
