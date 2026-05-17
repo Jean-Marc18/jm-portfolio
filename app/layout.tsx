@@ -1,11 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
-import { LOCALE_COOKIE, isLocale } from "@/lib/i18n/config";
+import {
+  LOCALE_COOKIE,
+  detectLocaleFromAcceptLanguage,
+  isLocale,
+} from "@/lib/i18n/config";
 import type { Locale } from "@/lib/i18n/dictionaries";
 import SmoothScroll from "@/components/common/SmoothScroll";
 import RevealObserver from "@/components/common/Reveal";
@@ -161,9 +165,21 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Explicit user choice (cookie) wins. Otherwise, fall back to the
+  // browser's Accept-Language preference so first-time visitors land in
+  // the language they already use.
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(LOCALE_COOKIE)?.value;
-  const initialLocale: Locale = isLocale(cookieValue) ? cookieValue : "fr";
+
+  let initialLocale: Locale;
+  if (isLocale(cookieValue)) {
+    initialLocale = cookieValue;
+  } else {
+    const headerStore = await headers();
+    initialLocale = detectLocaleFromAcceptLanguage(
+      headerStore.get("accept-language")
+    );
+  }
 
   return (
     <html
