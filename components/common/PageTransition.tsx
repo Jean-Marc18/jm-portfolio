@@ -2,8 +2,14 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { gsap, motion, prefersReducedMotion } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  motion,
+  prefersReducedMotion,
+} from "@/lib/gsap";
 import { reserveCover } from "@/lib/animations/cover";
+import { lenisInstance } from "./SmoothScroll";
 
 /**
  * Cover-sweep page transition. On each pathname change, an ink panel
@@ -34,11 +40,26 @@ export const PageTransition = () => {
     // 0.5s in + 0.35s hold + 0.6s out = 1.45s total.
     reserveCover(1.45);
 
+    // Reset the scroll position so the new page starts at the top and
+    // ScrollTrigger reads coherent values (Lenis would otherwise keep
+    // the previous page's scroll, causing triggers to never fire).
+    lenisInstance?.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+
     tlRef.current?.kill();
 
     tlRef.current = gsap.timeline({
       onComplete: () => {
         tlRef.current = null;
+        // The new page has finished laying out under the cover; recompute
+        // every ScrollTrigger's start/end positions against the fresh DOM.
+        // Without this, sections like the stats row never fire because
+        // their triggers were registered while the layout was still in
+        // motion (page transition, Lenis catching up, etc.).
+        ScrollTrigger.refresh();
+        // Belt-and-suspenders: re-refresh after a frame in case Lenis or
+        // the browser are still settling.
+        requestAnimationFrame(() => ScrollTrigger.refresh());
       },
     });
 

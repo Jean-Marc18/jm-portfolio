@@ -295,7 +295,10 @@ html[data-theme="dark"] .pf-card:hover {
 .ho-h1-line {
   overflow: hidden;
   display: block;
-  padding-bottom: 0.05em;
+  padding-top: 0.18em;
+  padding-bottom: 0.18em;
+  margin-top: -0.09em;
+  margin-bottom: -0.09em;
 }
 
 /* ── Reveal animation (driven by GSAP, see Reveal.tsx) ───── */
@@ -1006,28 +1009,6 @@ html[data-theme="dark"] .pf-card:hover {
   font-weight: 500;
   margin: 0;
 }
-.tv-hero-meta {
-  display: flex;
-  gap: 56px;
-  margin-top: 56px;
-  padding-top: 32px;
-  border-top: 1px solid var(--line);
-  flex-wrap: wrap;
-}
-.tv-hero-meta .m {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.tv-hero-meta .m strong {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-}
-.tv-hero-meta .m span {
-  font-size: 13px;
-  color: var(--muted);
-}
 .tv-list {
   padding: 40px 56px 80px;
 }
@@ -1462,8 +1443,30 @@ html[data-theme="dark"] .pf-card:hover {
   justify-content: end;
   color: var(--on-pastel);
 }
+.ap-portrait-photo {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+.ap-portrait::after {
+  /* Soft dark gradient at the bottom so the white label stays readable
+     no matter how bright the photo is. */
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
 .ap-portrait-label {
-  background: rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.78);
   border-radius: 10px;
   padding: 14px 16px;
   backdrop-filter: blur(6px);
@@ -1472,6 +1475,7 @@ html[data-theme="dark"] .pf-card:hover {
   position: absolute;
   top: 20px;
   left: 20px;
+  z-index: 2;
   width: 56px;
   height: 56px;
   border-radius: 50%;

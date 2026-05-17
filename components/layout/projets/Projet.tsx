@@ -1,11 +1,17 @@
 "use client";
 
-import { ButtonLink, Card, Label, Pill, Tag, TagList } from "@/components/ui";
+import { ButtonLink, Card, Label, Pill, TagList } from "@/components/ui";
 import { ArrowUpRightSm } from "@/components/ui/icons";
 import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import {
+  gsap,
+  prefersReducedMotion,
+  useGSAP,
+} from "@/lib/gsap";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 
 const LOCAL_SCREENSHOTS: Record<string, string> = {
   "pipv-pped": "/projects/pipv-pped.png",
@@ -15,9 +21,39 @@ const LOCAL_SCREENSHOTS: Record<string, string> = {
 
 const Projet = () => {
   const { t } = useLanguage();
+  const root = useRef<HTMLElement>(null);
+
+  // Subtle parallax: each cover image drifts vertically against its
+  // overflow-hidden container as the user scrolls past the card.
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const images = gsap.utils.toArray<HTMLElement>(".ho-cover-image");
+      images.forEach((img) => {
+        const cover = img.parentElement;
+        if (!cover) return;
+        gsap.fromTo(
+          img,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: cover,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+    },
+    { scope: root }
+  );
 
   return (
     <section
+      ref={root}
       className="ho-section"
       id="travaux"
       style={{ paddingTop: 24, scrollMarginTop: 96 }}
