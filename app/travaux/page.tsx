@@ -4,6 +4,8 @@ import { ButtonLink, Label, Pill, Tag } from "@/components/ui";
 import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
+import { useStatsCountUp } from "@/lib/animations/useCountUp";
+import { gsap, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -20,15 +22,43 @@ export default function TravauxPage() {
   const projects = t.projects.items;
 
   const heroRef = useRef<HTMLElement>(null);
+  const statsRef = useRef<HTMLElement>(null);
+  const listRef = useRef<HTMLElement>(null);
+
   useSplitIntro(heroRef, {
     titleSelector: "[data-intro-title]",
-    followups: [
-      "[data-intro-label]",
-      "[data-intro-lede]",
-      "[data-intro-meta]",
-    ],
+    followups: ["[data-intro-label]", "[data-intro-lede]"],
     dependencies: [locale],
   });
+
+  useStatsCountUp(statsRef);
+
+  // Vertical parallax on each project row's cover image.
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const images = gsap.utils.toArray<HTMLElement>(".tv-cov-image");
+      images.forEach((img) => {
+        const cover = img.parentElement;
+        if (!cover) return;
+        gsap.fromTo(
+          img,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: cover,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      });
+    },
+    { scope: listRef }
+  );
 
   return (
     <>
@@ -63,15 +93,28 @@ export default function TravauxPage() {
             {tp.heroP}
           </p>
         </div>
-        <div className="tv-hero-meta" data-intro-meta>
-          <div className="m"><strong>03</strong><span>{tp.m1}</span></div>
-          <div className="m"><strong>13+</strong><span>{tp.m2}</span></div>
-          <div className="m"><strong>{tp.m3v}</strong><span>{tp.m3}</span></div>
-          <div className="m"><strong>{tp.m4v}</strong><span>{tp.m4}</span></div>
+      </section>
+
+      <section className="ap-stats" ref={statsRef}>
+        <div className="ap-stat mx-1 pf-reveal">
+          <strong>{tp.m3v}</strong>
+          <span>{tp.m3}</span>
+        </div>
+        <div className="ap-stat mx-1 pf-reveal">
+          <strong>03</strong>
+          <span>{tp.m1}</span>
+        </div>
+        <div className="ap-stat mx-1 pf-reveal">
+          <strong>{tp.m4v}</strong>
+          <span>{tp.m4}</span>
+        </div>
+        <div className="ap-stat mx-1 pf-reveal">
+          <strong>13+</strong>
+          <span>{tp.m2}</span>
         </div>
       </section>
 
-      <section className="tv-list">
+      <section className="tv-list" ref={listRef}>
         {projects.map((p, i) => {
           const caseStudy = PROJECT_PATHS[p.slug];
           const screenshot = LOCAL_SCREENSHOTS[p.slug];

@@ -2,10 +2,35 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/ui";
-import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  motion,
+  prefersReducedMotion,
+  useGSAP,
+} from "@/lib/gsap";
 import { reserveCover } from "@/lib/animations/cover";
 
 const SESSION_KEY = "jmk-preloaded";
+const PRELOADER_DURATION = 2.0;
+
+/**
+ * Reserve the cover slot at module-load time, BEFORE React mounts and
+ * therefore before any hero's `useGSAP` (useLayoutEffect) fires. Without
+ * this, the hero intro would read coverDelay = 0 and start animating
+ * underneath the preloader. Running once per JS chunk load (i.e. per
+ * page load) is exactly what we want.
+ */
+if (typeof window !== "undefined") {
+  const alreadyShown =
+    window.sessionStorage.getItem(SESSION_KEY) === "1";
+  const reduced = window.matchMedia?.(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+  if (!alreadyShown && !reduced) {
+    reserveCover(PRELOADER_DURATION);
+  }
+}
 
 /**
  * Full-screen intro overlay shown once per session.
@@ -38,11 +63,8 @@ export const Preloader = () => {
       return;
     }
 
-    // Tell the rest of the page (hero intros) to wait this long
-    // before starting their own animations — otherwise they play
-    // invisibly behind the preloader.
-    reserveCover(2.0);
-
+    // reserveCover() already ran at module-load (see top of file) so the
+    // hero intros are already waiting for us — nothing to do here.
     setShow(true);
     document.body.style.overflow = "hidden";
     return () => {
@@ -61,6 +83,11 @@ export const Preloader = () => {
           window.sessionStorage.setItem(SESSION_KEY, "1");
           document.body.style.overflow = "";
           setShow(false);
+          // Recompute ScrollTrigger positions now that the preloader is
+          // off-screen and the real layout is settled. Without this,
+          // sections that mounted while the body was scroll-locked have
+          // stale trigger positions.
+          ScrollTrigger.refresh();
         },
       });
 
