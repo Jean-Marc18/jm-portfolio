@@ -506,6 +506,8 @@ html[data-theme="dark"] .pf-card:hover {
 }
 
 /* ── Mobile sheet ────────────────────────────────────────── */
+/* Always rendered, hidden by default — GSAP toggles autoAlpha and
+   yPercent for the enter / exit timeline (see `Header.tsx`). */
 .pf-menu-sheet {
   position: fixed !important;
   top: 0;
@@ -523,17 +525,10 @@ html[data-theme="dark"] .pf-card:hover {
   padding: 20px 24px max(24px, env(safe-area-inset-bottom));
   gap: 32px;
   overflow-y: auto;
-  animation: pf-sheet-in 0.25s ease-out;
-}
-@keyframes pf-sheet-in {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  will-change: transform, opacity;
 }
 .pf-menu-sheet .pf-menu-head {
   display: flex;
