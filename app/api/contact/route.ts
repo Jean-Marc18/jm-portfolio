@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { ContactEmail } from "@/emails/ContactEmail";
 
 // Recipient address — where contact form emails land. Keep in sync with
 // the address the user signed up to Resend with (only verified addresses
@@ -27,14 +28,6 @@ const MAX_MESSAGE = 4000;
 
 const isEmail = (value: string) =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
-const escapeHtml = (s: string) =>
-  s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
 
 const SUBJECT_LABELS: Record<string, string> = {
   "mission-freelance": "Mission freelance",
@@ -100,21 +93,7 @@ export async function POST(request: Request) {
   const subjectLabel = SUBJECT_LABELS[subject] ?? "Contact";
   const mailSubject = `[Portfolio] ${subjectLabel} — ${name}`;
 
-  const html = `
-    <div style="font-family:system-ui,sans-serif;line-height:1.5;color:#1a1a18;">
-      <p style="font-size:13px;color:#6b6961;margin:0 0 16px;">
-        Nouveau message depuis le portfolio
-      </p>
-      <table style="border-collapse:collapse;font-size:14px;">
-        <tr><td style="padding:4px 12px 4px 0;color:#6b6961;">Nom</td><td>${escapeHtml(name)}</td></tr>
-        <tr><td style="padding:4px 12px 4px 0;color:#6b6961;">Email</td><td><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></td></tr>
-        <tr><td style="padding:4px 12px 4px 0;color:#6b6961;">Type</td><td>${escapeHtml(subjectLabel)}</td></tr>
-      </table>
-      <p style="margin:24px 0 8px;color:#6b6961;font-size:13px;">Message :</p>
-      <pre style="white-space:pre-wrap;font-family:inherit;font-size:15px;background:#f7f5f0;border-radius:8px;padding:16px;margin:0;">${escapeHtml(message)}</pre>
-    </div>
-  `;
-
+  // Plain-text fallback for clients that block HTML.
   const text = [
     `Nom: ${name}`,
     `Email: ${email}`,
@@ -131,7 +110,7 @@ export async function POST(request: Request) {
       to: TO_ADDRESS,
       replyTo: email,
       subject: mailSubject,
-      html,
+      react: ContactEmail({ name, email, subjectLabel, message }),
       text,
     });
 
