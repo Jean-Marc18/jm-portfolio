@@ -284,7 +284,7 @@ html[data-theme="dark"] .pf-card:hover {
   position: fixed;
   inset: 0;
   z-index: 9998;
-  background: var(--bg);
+  background: #1a1a18;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

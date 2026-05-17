@@ -177,7 +177,7 @@ export default async function RootLayout({
   } else {
     const headerStore = await headers();
     initialLocale = detectLocaleFromAcceptLanguage(
-      headerStore.get("accept-language")
+      headerStore.get("accept-language"),
     );
   }
 
@@ -196,7 +196,7 @@ export default async function RootLayout({
       <body className="font-sans">
         <Providers initialLocale={initialLocale}>
           <Preloader />
-          <PageTransition />
+          {/* <PageTransition /> */}
           <SmoothScroll />
           <RevealObserver />
           <Header />
