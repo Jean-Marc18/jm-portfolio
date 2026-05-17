@@ -187,6 +187,7 @@ export default async function RootLayout({
       lang={initialLocale}
       className={`${geist.variable} ${plusJakarta.variable} antialiased`}
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
     >
       <head>
         <script
