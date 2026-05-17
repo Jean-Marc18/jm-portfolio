@@ -4,7 +4,7 @@ import { ArrowLink, ButtonLink, Label, Pill } from "@/components/ui";
 import { Download } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 
 const Hero = () => {
   const { t, locale } = useLanguage();
@@ -30,10 +30,20 @@ const Hero = () => {
             data-intro-title
             style={{ overflow: "hidden" }}
           >
-            {t.hero.h1l1} <br />
-            {t.hero.h1l2}
-            <br />
-            <span className="ho-h1-muted">{t.hero.h1l3}</span>
+            {t.hero.h1Lines.map((line, i, arr) => {
+              const isLast = i === arr.length - 1;
+              const isFirst = i === 0;
+              return (
+                <Fragment key={i}>
+                  {!isFirst && <br />}
+                  {isLast ? (
+                    <span className="ho-h1-muted">{line}</span>
+                  ) : (
+                    line
+                  )}
+                </Fragment>
+              );
+            })}
           </h1>
         </div>
         <div style={{ paddingBottom: 14 }}>
