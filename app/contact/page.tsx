@@ -110,20 +110,55 @@ export default function ContactPage() {
     { scope: bodyRef, dependencies: [sent] },
   );
 
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = `${cp.prefix}${cp.subjects[form.subject] || "Contact"} — ${form.name}`;
-    const body = `${form.message}\n\n—\n${form.name}\n${form.email}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+
+    // Honeypot: read the hidden field directly from the form, never
+    // store it in React state so bots are more likely to fill it.
+    const formEl = e.currentTarget;
+    const honeypot =
+      (formEl.elements.namedItem("website") as HTMLInputElement | null)
+        ?.value ?? "";
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, website: honeypot }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error ?? "Network error");
+      }
+      setSent(true);
+    } catch (err) {
+      console.error("[contact] submit failed", err);
+      setError(
+        locale === "en"
+          ? "Sending failed. Please email me directly at "
+          : "Envoi impossible. Écris-moi directement à "
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const reset = () => {
     setSent(false);
+    setError(null);
     setForm({ name: "", email: "", subject: "mission-freelance", message: "" });
   };
 
@@ -214,16 +249,64 @@ export default function ContactPage() {
               />
             </div>
 
+            {/* Honeypot — hidden from real users + screen-readers, bots
+                tend to fill any field they find. Server drops any
+                submission where this is non-empty. */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: "-9999px",
+                width: 1,
+                height: 1,
+                opacity: 0,
+                pointerEvents: "none",
+              }}
+            />
+
             <div className="ct-submit">
               <p className="ct-disclaimer">{cp.disclaimer}</p>
               <Button
                 type="submit"
                 variant="primary"
                 trailing={<ArrowUpRight />}
+                disabled={submitting}
+                aria-busy={submitting}
               >
-                {cp.send}
+                {submitting
+                  ? locale === "en"
+                    ? "Sending…"
+                    : "Envoi en cours…"
+                  : cp.send}
               </Button>
             </div>
+
+            {error && (
+              <p
+                role="alert"
+                style={{
+                  marginTop: 16,
+                  fontSize: 14,
+                  color: "var(--accent)",
+                }}
+              >
+                {error}
+                <a
+                  href={`mailto:${EMAIL}`}
+                  style={{
+                    color: "var(--ink)",
+                    textDecoration: "underline",
+                  }}
+                >
+                  {EMAIL}
+                </a>
+                .
+              </p>
+            )}
           </form>
 
           <div className="ct-side">
