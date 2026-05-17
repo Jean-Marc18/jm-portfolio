@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Jean-Marc Koffi — Portfolio
 
-## Getting Started
+Portfolio personnel présentant services, projets et compétences en développement front-end.
 
-First, run the development server:
+**Live**: [jmk-portfolio.vercel.app](https://jmk-portfolio.vercel.app)
+
+![Portfolio thumbnail](./public/thmubnail.png)
+
+## Caractéristiques
+
+- **Bilingue** : Français/Anglais avec détection automatique via header `Accept-Language`
+- **Dark mode** : Basculement automatique et manuel
+- **Animations fluides** : GSAP, Framer Motion, Lenis (smooth scroll)
+- **SEO optimisé** : Métadonnées, schema.org, sitemap, robots.txt
+- **Analytics** : Vercel Analytics pour suivi des performances
+- **Responsive** : Mobile-first avec Tailwind CSS
+- **Accessibilité** : WCAG compliant
+
+## Sections
+
+- **Hero** : Présentation personnelle
+- **Stack** : Technologies maîtrisées
+- **Services** : Services proposés
+- **Projets** : Portfolio de travaux
+- **À propos** : Parcours et background
+- **Contact** : Formulaire de contact
+
+## Tech Stack
+
+| Catégorie  | Technologies                        |
+| ---------- | ----------------------------------- |
+| Framework  | Next.js 14, React 19                |
+| Langage    | TypeScript                          |
+| Styles     | Tailwind CSS, PostCSS               |
+| Animations | GSAP, Framer Motion, Lenis          |
+| UI         | Radix UI, Lucide React, React Icons |
+| Thème      | next-themes                         |
+| Analytics  | Vercel Analytics                    |
+| Hosting    | Vercel                              |
+
+## Installation
 
 ```bash
+# Cloner le repo
+git clone https://github.com/Jean-Marc18/jm-portfolio.git
+cd jm-portfolio
+
+# Installer les dépendances
+npm install
+
+# Lancer le dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build de production
+npm run build
+npm start
+
+# Linter
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Accès: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Structure du projet
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+.
+├── app/                    # Routes et layouts Next.js
+│   ├── (i18n)/            # Routes i18n
+│   ├── layout.tsx         # Layout racine
+│   ├── page.tsx           # Accueil
+│   └── ...pages           # Projets, services, contact, etc.
+├── components/            # Composants réutilisables
+│   ├── layout/            # Sections principales (Hero, Header, Footer)
+│   ├── common/            # Animations, observateurs
+│   └── ui/                # Composants UI (boutons, cartes, etc.)
+├── lib/                   # Utilitaires
+│   └── i18n/             # Configuration i18n et dictionnaires
+├── constants/             # Configurations globales
+├── public/                # Ressources statiques
+├── tailwind.config.ts     # Configuration Tailwind
+└── next.config.mjs        # Configuration Next.js
+```
 
-## Learn More
+## Configuration i18n
 
-To learn more about Next.js, take a look at the following resources:
+Langues supportées: `fr`, `en` (défaut: `fr`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+La locale est détectée par priorité:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Cookie `jmk-locale` (préférence utilisateur)
+2. Header HTTP `Accept-Language`
+3. Locale par défaut (`fr`)
 
-## Deploy on Vercel
+## Performance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Core Web Vitals** : LCP, FID, CLS optimisés
+- **Images** : Optimisation Vercel
+- **Font** : Google Fonts avec `swap` et subsets
+- **Smooth scroll** : Lenis pour expérience fluide
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Accessibilité
+
+- WCAG 2.1 AA compliant
+- Gestion du focus keyboard
+- Contrast suffisant (light/dark)
+- ARIA labels où nécessaire
+- Schema.org structured data
+
+## Licence
+
+Droits d'auteur © 2025 Jean-Marc Koffi. Tous droits réservés.
+
+## Contact
+
+- 📧 Email: [jeanmarc.dev.18@gmail.com](mailto:jeanmarc.dev.18@gmail.com)
+- 🔗 LinkedIn: [jean-marc-koffi](https://www.linkedin.com/in/jean-marc-koffi/)
+- 💻 GitHub: [@Jean-Marc18](https://github.com/Jean-Marc18)
