@@ -260,23 +260,57 @@ html[data-theme="dark"] .pf-card:hover {
   border-color: var(--ink);
 }
 
-/* ── Reveal animation ────────────────────────────────────── */
+/* ── Preloader (first session visit) ─────────────────────── */
+.jm-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+.jm-preloader-logo {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Page transition overlay (cover sweep) ───────────────── */
+.jm-page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #1a1a18;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* ── SplitText line wrapper (used by Hero intro) ─────────── */
+.ho-h1-line {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.05em;
+}
+
+/* ── Reveal animation (driven by GSAP, see Reveal.tsx) ───── */
 .pf-reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  transform: translateY(24px);
+  will-change: opacity, transform;
 }
 .pf-reveal.pf-in {
-  opacity: 1;
-  transform: none;
+  /* GSAP sets the final state — no CSS transition to avoid double-anim */
 }
 @media (prefers-reduced-motion: reduce) {
   .pf-reveal {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
   }
 }
 
@@ -519,7 +553,10 @@ html[data-theme="dark"] .pf-card:hover {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  transition: background-color 0.15s, color 0.15s, transform 0.15s;
+  transition:
+    background-color 0.15s,
+    color 0.15s,
+    transform 0.15s;
 }
 .pf-menu-close:hover {
   transform: rotate(90deg);
@@ -540,7 +577,9 @@ html[data-theme="dark"] .pf-card:hover {
   font-size: 30px;
   font-weight: 500;
   letter-spacing: -0.02em;
-  transition: color 0.15s, padding 0.2s;
+  transition:
+    color 0.15s,
+    padding 0.2s;
   width: 100%;
 }
 .pf-menu-sheet .pf-menu-link:first-child {
@@ -554,7 +593,9 @@ html[data-theme="dark"] .pf-card:hover {
 .pf-menu-sheet .pf-menu-link-arrow {
   font-size: 18px;
   color: var(--muted);
-  transition: transform 0.2s, color 0.15s;
+  transition:
+    transform 0.2s,
+    color 0.15s;
 }
 .pf-menu-sheet .pf-menu-link:hover .pf-menu-link-arrow,
 .pf-menu-sheet .pf-menu-link:focus-visible .pf-menu-link-arrow {

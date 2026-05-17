@@ -13,9 +13,13 @@ export const dictionaries = {
       emailCta: "Me contacter",
     },
     hero: {
-      h1l1: "Concevoir des expériences",
-      h1l2: "front-end qui évoluent",
-      h1l3: "avec votre produit.",
+      // Array of lines; the LAST one is rendered in the muted accent color.
+      h1Lines: [
+        "Concevoir le",
+        "front-end",
+        "qui fait grandir",
+        "votre produit.",
+      ],
       lede: "Développeur front-end basé à Abidjan. Je conçois des interfaces performantes et accessibles, sur des architectures modernes — pour des produits qui doivent durer, tous secteurs confondus.",
       cv: "Télécharger mon CV",
       viewProjects: "Voir les projets",
@@ -619,9 +623,12 @@ export const dictionaries = {
       emailCta: "Get in touch",
     },
     hero: {
-      h1l1: "Crafting Front-End",
-      h1l2: "Experiences That",
-      h1l3: "Scale With Your Product.",
+      // Array of lines; the LAST one is rendered in the muted accent color.
+      h1Lines: [
+        "Crafting Front-End",
+        "Experiences That",
+        "Scale With Your Product.",
+      ],
       lede: "Front-end developer based in Abidjan. I build performant, accessible interfaces rooted in modern architectures — for products that need to scale, across every industry.",
       cv: "Download my CV",
       viewProjects: "View projects",

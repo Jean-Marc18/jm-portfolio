@@ -1,21 +1,41 @@
 "use client";
 
-import RevealObserver from "@/components/common/Reveal";
 import { ButtonLink, Label, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
+import { useRef } from "react";
 
 export default function ServicesPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const sp = t.servicesPage;
+
+  const heroRef = useRef<HTMLElement>(null);
+  useSplitIntro(heroRef, {
+    titleSelector: "[data-intro-title]",
+    followups: [
+      "[data-intro-label]",
+      "[data-intro-lede]",
+      "[data-intro-actions]",
+    ],
+    dependencies: [locale],
+  });
 
   return (
     <>
-      <RevealObserver />
-
-      <section className="sv-hero">
-        <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 20 }}>{sp.heroLabel}</Label>
-          <h1 className="pf-display sv-h1">
+      <section className="sv-hero" ref={heroRef}>
+        <div>
+          <Label
+            style={{ display: "block", marginBottom: 20 }}
+            data-intro-label
+          >
+            {sp.heroLabel}
+          </Label>
+          <h1
+            key={locale}
+            className="pf-display sv-h1"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {sp.heroH1a}
             <br />
             <span style={{ color: "var(--muted)" }}>{sp.heroH1b}</span>{" "}
@@ -34,8 +54,9 @@ export default function ServicesPage() {
             {sp.heroH1f}
           </h1>
         </div>
-        <div className="pf-reveal" style={{ paddingBottom: 12 }}>
+        <div style={{ paddingBottom: 12 }}>
           <p
+            data-intro-lede
             style={{
               fontSize: 16,
               color: "var(--muted)",
@@ -45,7 +66,10 @@ export default function ServicesPage() {
           >
             {sp.heroP}
           </p>
-          <div style={{ display: "flex", gap: 10, marginTop: 24, flexWrap: "wrap" }}>
+          <div
+            data-intro-actions
+            style={{ display: "flex", gap: 10, marginTop: 24, flexWrap: "wrap" }}
+          >
             <ButtonLink href="/contact" variant="primary">{sp.heroCta}</ButtonLink>
             <ButtonLink href="#process" variant="ghost">{sp.heroCtaB}</ButtonLink>
           </div>

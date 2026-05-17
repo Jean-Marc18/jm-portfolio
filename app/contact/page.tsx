@@ -1,10 +1,10 @@
 "use client";
 
-import RevealObserver from "@/components/common/Reveal";
 import { Button, Label, Pill, StatusDot } from "@/components/ui";
 import { ArrowUpRight } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { useState, type FormEvent } from "react";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
+import { useRef, useState, type FormEvent } from "react";
 
 const EMAIL = "jeanmarc.dev.18@gmail.com";
 
@@ -40,7 +40,7 @@ const SOCIAL_LINKS: { label: keyof typeof SOCIAL_ICONS; href: string }[] = [
 ];
 
 export default function ContactPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const cp = t.contactPage;
   const [form, setForm] = useState<FormState>({
     name: "",
@@ -49,6 +49,13 @@ export default function ContactPage() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+
+  const heroRef = useRef<HTMLElement>(null);
+  useSplitIntro(heroRef, {
+    titleSelector: "[data-intro-title]",
+    followups: ["[data-intro-label]", "[data-intro-lede]"],
+    dependencies: [locale],
+  });
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -69,16 +76,24 @@ export default function ContactPage() {
 
   return (
     <>
-      <RevealObserver />
-
-      <section className="ct-hero">
-        <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 20 }}>{cp.heroLabel}</Label>
-          <h1 className="pf-display ct-h1">
+      <section className="ct-hero" ref={heroRef}>
+        <div>
+          <Label
+            style={{ display: "block", marginBottom: 20 }}
+            data-intro-label
+          >
+            {cp.heroLabel}
+          </Label>
+          <h1
+            key={locale}
+            className="pf-display ct-h1"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {cp.heroH1}
             <span style={{ color: "var(--accent)" }}>.</span>
           </h1>
-          <p>{cp.heroP}</p>
+          <p data-intro-lede>{cp.heroP}</p>
         </div>
       </section>
 
