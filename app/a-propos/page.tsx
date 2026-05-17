@@ -1,23 +1,41 @@
 "use client";
 
-import RevealObserver from "@/components/common/Reveal";
 import { ButtonLink, Label, Pill, StatusDot, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
+import { useStatsCountUp } from "@/lib/animations/useCountUp";
+import { useRef } from "react";
 
 export default function AboutPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const ap = t.aboutPage;
+
+  const heroRef = useRef<HTMLElement>(null);
+  const statsRef = useRef<HTMLElement>(null);
+
+  useSplitIntro(heroRef, {
+    titleSelector: "[data-intro-title]",
+    followups: ["[data-intro-label]", "[data-intro-portrait]"],
+    dependencies: [locale],
+  });
+
+  useStatsCountUp(statsRef);
 
   return (
     <>
-      <RevealObserver />
-
-      <section className="ap-hero">
-        <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 20 }}>
+      <section className="ap-hero" ref={heroRef}>
+        <div>
+          <Label
+            style={{ display: "block", marginBottom: 20 }}
+            data-intro-label
+          >
             {ap.heroLabel}
           </Label>
-          <h1 className="pf-display ap-h1">
+          <h1
+            className="pf-display ap-h1"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {ap.heroH1a}
             <br />
             <span style={{ color: "var(--muted)" }}>{ap.heroH1b}</span>
@@ -34,7 +52,7 @@ export default function AboutPage() {
             .
           </h1>
         </div>
-        <div className="ap-portrait pf-reveal border">
+        <div className="ap-portrait border" data-intro-portrait>
           <div className="ap-portrait-mono font-labil">JM</div>
           <div className="ap-portrait-label">
             <div
@@ -76,7 +94,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="ap-stats pf-reveal">
+      <section className="ap-stats pf-reveal" ref={statsRef}>
         {ap.stats.map(([v, l]) => (
           <div key={l} className="ap-stat mx-1">
             <strong>{v}</strong>

@@ -7,6 +7,9 @@ import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/footer/Footer";
 import { LOCALE_COOKIE, isLocale } from "@/lib/i18n/config";
 import type { Locale } from "@/lib/i18n/dictionaries";
+import SmoothScroll from "@/components/common/SmoothScroll";
+import RevealObserver from "@/components/common/Reveal";
+import PageTransition from "@/components/common/PageTransition";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -175,8 +178,12 @@ export default async function RootLayout({
       </head>
       <body className="font-sans">
         <Providers initialLocale={initialLocale}>
+          <SmoothScroll />
+          <RevealObserver />
           <Header />
-          <main>{children}</main>
+          <main>
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </Providers>
       </body>

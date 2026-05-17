@@ -3,15 +3,32 @@
 import { ArrowLink, ButtonLink, Label, Pill } from "@/components/ui";
 import { Download } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
+import { useRef } from "react";
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const root = useRef<HTMLElement>(null);
+
+  useSplitIntro(root, {
+    titleSelector: "[data-intro-title]",
+    followups: [
+      "[data-intro-lede]",
+      "[data-intro-actions]",
+      "[data-intro-banner]",
+    ],
+    dependencies: [locale],
+  });
 
   return (
-    <section className="ho-section-hero">
-      <div className="ho-grid-hero pf-reveal">
+    <section className="ho-section-hero" ref={root}>
+      <div className="ho-grid-hero">
         <div className="text-balance">
-          <h1 className="pf-display text-[5rem] leading-[1.05]">
+          <h1
+            className="pf-display text-[5rem] leading-[1.05]"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {t.hero.h1l1} <br />
             {t.hero.h1l2}
             <br />
@@ -19,8 +36,10 @@ const Hero = () => {
           </h1>
         </div>
         <div style={{ paddingBottom: 14 }}>
-          <p className="ho-lede">{t.hero.lede}</p>
-          <div className="ho-hero-actions">
+          <p className="ho-lede" data-intro-lede>
+            {t.hero.lede}
+          </p>
+          <div className="ho-hero-actions" data-intro-actions>
             <ButtonLink
               href="/cv-jean-marc-koffi.pdf"
               download
@@ -36,7 +55,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="ho-banner pf-reveal">
+      <div className="ho-banner" data-intro-banner>
         <div className="ho-banner-inner">
           <div className="ho-banner-top">
             <div style={{ display: "grid", gap: 8 }}>

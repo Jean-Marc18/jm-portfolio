@@ -1,13 +1,13 @@
 "use client";
 
-import RevealObserver from "@/components/common/Reveal";
 import { Card, Label, Pill, StatusDot, Tag } from "@/components/ui";
 import { ArrowUpRight } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { use } from "react";
+import { use, useRef } from "react";
 
 type CaseStudy =
   Dictionary["projectPage"]["cases"][keyof Dictionary["projectPage"]["cases"]];
@@ -41,11 +41,18 @@ export default function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const cases = t.projectPage.cases as Record<string, CaseStudy | undefined>;
   const study = cases[slug];
   const project = t.projects.items.find((p) => p.slug === slug);
+
+  const heroRef = useRef<HTMLElement>(null);
+  useSplitIntro(heroRef, {
+    titleSelector: "[data-intro-title]",
+    followups: ["[data-intro-meta]", "[data-intro-lede]", "[data-intro-info]"],
+    dependencies: [locale, slug],
+  });
 
   if (!study || !project) {
     notFound();
@@ -55,8 +62,6 @@ export default function ProjectPage({
 
   return (
     <>
-      <RevealObserver />
-
       <div className="pj-back">
         <Link
           href="/travaux"
@@ -73,19 +78,23 @@ export default function ProjectPage({
         </Link>
       </div>
 
-      <section className="pj-hero">
-        <div className="pf-reveal">
-          <div className="pj-hero-meta">
+      <section className="pj-hero" ref={heroRef}>
+        <div>
+          <div className="pj-hero-meta" data-intro-meta>
             <Pill>{study.tag}</Pill>
             <Pill>{study.studyTag}</Pill>
           </div>
-          <h1 className="pf-display">
+          <h1
+            className="pf-display"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {project.name}
             <span style={{ color: "var(--accent)" }}>.</span>
           </h1>
-          <p>{study.heroP}</p>
+          <p data-intro-lede>{study.heroP}</p>
         </div>
-        <div className="pj-info pf-reveal">
+        <div className="pj-info" data-intro-info>
           {study.info.map(([k, v]) => (
             <div key={k} className="pj-info-cell px-1">
               <Label>{k}</Label>

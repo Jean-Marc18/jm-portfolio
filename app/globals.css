@@ -260,23 +260,26 @@ html[data-theme="dark"] .pf-card:hover {
   border-color: var(--ink);
 }
 
-/* ── Reveal animation ────────────────────────────────────── */
+/* ── SplitText line wrapper (used by Hero intro) ─────────── */
+.ho-h1-line {
+  overflow: hidden;
+  display: block;
+  padding-bottom: 0.05em;
+}
+
+/* ── Reveal animation (driven by GSAP, see Reveal.tsx) ───── */
 .pf-reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  transform: translateY(24px);
+  will-change: opacity, transform;
 }
 .pf-reveal.pf-in {
-  opacity: 1;
-  transform: none;
+  /* GSAP sets the final state — no CSS transition to avoid double-anim */
 }
 @media (prefers-reduced-motion: reduce) {
   .pf-reveal {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
   }
 }
 

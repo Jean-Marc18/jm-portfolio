@@ -1,11 +1,12 @@
 "use client";
 
-import RevealObserver from "@/components/common/Reveal";
 import { ButtonLink, Label, Pill, Tag } from "@/components/ui";
 import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import Image from "next/image";
 import Link from "next/link";
+import { useRef } from "react";
 
 const LOCAL_SCREENSHOTS: Record<string, string> = {
   "pipv-pped": "/projects/pipv-pped.png",
@@ -14,23 +15,42 @@ const LOCAL_SCREENSHOTS: Record<string, string> = {
 };
 
 export default function TravauxPage() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const tp = t.travauxPage;
   const projects = t.projects.items;
 
+  const heroRef = useRef<HTMLElement>(null);
+  useSplitIntro(heroRef, {
+    titleSelector: "[data-intro-title]",
+    followups: [
+      "[data-intro-label]",
+      "[data-intro-lede]",
+      "[data-intro-meta]",
+    ],
+    dependencies: [locale],
+  });
+
   return (
     <>
-      <RevealObserver />
-
-      <section className="tv-hero">
-        <div className="pf-reveal">
-          <Label style={{ display: "block", marginBottom: 20 }}>{tp.heroLabel}</Label>
-          <h1 className="pf-display tv-h1">
+      <section className="tv-hero" ref={heroRef}>
+        <div>
+          <Label
+            style={{ display: "block", marginBottom: 20 }}
+            data-intro-label
+          >
+            {tp.heroLabel}
+          </Label>
+          <h1
+            className="pf-display tv-h1"
+            data-intro-title
+            style={{ overflow: "hidden" }}
+          >
             {tp.heroH1a}
             <br />
             <span style={{ color: "var(--muted)" }}>{tp.heroH1b}</span>
           </h1>
           <p
+            data-intro-lede
             style={{
               fontSize: 17,
               color: "var(--muted)",
@@ -42,7 +62,7 @@ export default function TravauxPage() {
             {tp.heroP}
           </p>
         </div>
-        <div className="tv-hero-meta pf-reveal">
+        <div className="tv-hero-meta" data-intro-meta>
           <div className="m"><strong>03</strong><span>{tp.m1}</span></div>
           <div className="m"><strong>13+</strong><span>{tp.m2}</span></div>
           <div className="m"><strong>{tp.m3v}</strong><span>{tp.m3}</span></div>

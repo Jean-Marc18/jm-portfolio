@@ -63,12 +63,6 @@ const Header = () => {
           </div>
 
           <nav className="pf-menu-nav">
-            <a className="pf-menu-link" href="/" onClick={closeMenu}>
-              {t.nav.home}
-              <span className="pf-menu-link-arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
             {NAV_ORDER.map((k: RouteKey) => (
               <a
                 key={k}
