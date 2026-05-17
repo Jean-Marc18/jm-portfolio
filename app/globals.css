@@ -680,7 +680,7 @@ html[data-theme="dark"] .pf-card:hover {
 
 /* ── Home page sections ──────────────────────────────────── */
 .ho-section-hero {
-  padding: 56px 56px 88px;
+  padding: 10px 56px 88px;
 }
 .ho-section {
   padding: 80px 56px;
