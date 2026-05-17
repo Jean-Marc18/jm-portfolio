@@ -198,7 +198,7 @@ export default async function RootLayout({
       <body className="font-sans">
         <Providers initialLocale={initialLocale}>
           <Preloader />
-          <PageTransition />
+          //<PageTransition />
           <SmoothScroll />
           <RevealObserver />
           <Header />
