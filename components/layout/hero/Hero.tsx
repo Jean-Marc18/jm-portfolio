@@ -25,6 +25,7 @@ const Hero = () => {
       <div className="ho-grid-hero">
         <div className="text-balance">
           <h1
+            key={locale}
             className="pf-display text-[5rem] leading-[1.05]"
             data-intro-title
             style={{ overflow: "hidden" }}

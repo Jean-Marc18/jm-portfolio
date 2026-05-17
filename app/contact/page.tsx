@@ -85,6 +85,7 @@ export default function ContactPage() {
             {cp.heroLabel}
           </Label>
           <h1
+            key={locale}
             className="pf-display ct-h1"
             data-intro-title
             style={{ overflow: "hidden" }}

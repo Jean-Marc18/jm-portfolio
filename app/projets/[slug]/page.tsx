@@ -85,6 +85,7 @@ export default function ProjectPage({
             <Pill>{study.studyTag}</Pill>
           </div>
           <h1
+            key={`${locale}-${slug}`}
             className="pf-display"
             data-intro-title
             style={{ overflow: "hidden" }}

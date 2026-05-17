@@ -41,6 +41,7 @@ export default function TravauxPage() {
             {tp.heroLabel}
           </Label>
           <h1
+            key={locale}
             className="pf-display tv-h1"
             data-intro-title
             style={{ overflow: "hidden" }}

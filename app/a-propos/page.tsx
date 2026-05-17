@@ -32,6 +32,7 @@ export default function AboutPage() {
             {ap.heroLabel}
           </Label>
           <h1
+            key={locale}
             className="pf-display ap-h1"
             data-intro-title
             style={{ overflow: "hidden" }}

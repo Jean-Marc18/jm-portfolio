@@ -31,6 +31,7 @@ export default function ServicesPage() {
             {sp.heroLabel}
           </Label>
           <h1
+            key={locale}
             className="pf-display sv-h1"
             data-intro-title
             style={{ overflow: "hidden" }}
