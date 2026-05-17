@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/ui";
 import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { reserveCover } from "@/lib/animations/cover";
 
 const SESSION_KEY = "jmk-preloaded";
 
@@ -36,6 +37,11 @@ export const Preloader = () => {
       window.sessionStorage.setItem(SESSION_KEY, "1");
       return;
     }
+
+    // Tell the rest of the page (hero intros) to wait this long
+    // before starting their own animations — otherwise they play
+    // invisibly behind the preloader.
+    reserveCover(2.0);
 
     setShow(true);
     document.body.style.overflow = "hidden";

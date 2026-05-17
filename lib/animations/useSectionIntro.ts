@@ -2,6 +2,7 @@
 
 import { type RefObject } from "react";
 import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
+import { getCoverRemainingDelay } from "./cover";
 
 export type SectionIntroOptions = {
   /** Ordered list of selectors inside the scope to stagger in. */
@@ -45,13 +46,14 @@ export const useSectionIntro = (
       if (targets.length === 0) return;
 
       gsap.set(targets, { autoAlpha: 0, y: fromY });
+      const coverDelay = getCoverRemainingDelay();
       gsap.to(targets, {
         autoAlpha: 1,
         y: 0,
         duration: motion.duration.base,
         ease: motion.ease.out,
         stagger,
-        delay,
+        delay: coverDelay > 0 ? coverDelay : delay,
         overwrite: "auto",
       });
     },

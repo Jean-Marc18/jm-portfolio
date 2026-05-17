@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import {
   forwardRef,
   type AnchorHTMLAttributes,
@@ -72,16 +73,51 @@ export const ArrowButton = forwardRef<HTMLButtonElement, ArrowButtonProps>(
 
 export type ArrowLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & CommonProps;
 
+const isInternal = (href: string | undefined): href is string =>
+  typeof href === "string" && href.startsWith("/") && !href.startsWith("//");
+
 export const ArrowLink = forwardRef<HTMLAnchorElement, ArrowLinkProps>(
   function ArrowLink(
-    { variant = "default", size = "md", icon, className, style, children, ...rest },
+    {
+      variant = "default",
+      size = "md",
+      icon,
+      className,
+      style,
+      children,
+      href,
+      ...rest
+    },
     ref
   ) {
+    const classes = cn("pf-arrow", className);
+    const composedStyle = {
+      ...SIZE_STYLE[size],
+      ...VARIANT_STYLE[variant],
+      ...style,
+    };
+
+    if (isInternal(href)) {
+      return (
+        <Link
+          ref={ref}
+          href={href}
+          className={classes}
+          style={composedStyle}
+          {...rest}
+        >
+          {icon ?? renderIcon(size)}
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <a
         ref={ref}
-        className={cn("pf-arrow", className)}
-        style={{ ...SIZE_STYLE[size], ...VARIANT_STYLE[variant], ...style }}
+        href={href}
+        className={classes}
+        style={composedStyle}
         {...rest}
       >
         {icon ?? renderIcon(size)}

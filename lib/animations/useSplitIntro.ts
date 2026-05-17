@@ -8,6 +8,7 @@ import {
   prefersReducedMotion,
   useGSAP,
 } from "@/lib/gsap";
+import { getCoverRemainingDelay } from "./cover";
 
 export type SplitIntroOptions = {
   /** Selector of the heading to split into lines (e.g. `[data-intro-title]`). */
@@ -76,7 +77,13 @@ export const useSplitIntro = (
       gsap.set(split.lines, { yPercent: 110, opacity: 0 });
       gsap.set(followupEls, { autoAlpha: 0, y: fromY });
 
-      const tl = gsap.timeline({ delay });
+      // If a cover (preloader or page transition) is still on screen,
+      // wait for it to finish before starting the intro — otherwise the
+      // animation plays behind it and the user never sees it.
+      const coverDelay = getCoverRemainingDelay();
+      const effectiveDelay = coverDelay > 0 ? coverDelay : delay;
+
+      const tl = gsap.timeline({ delay: effectiveDelay });
 
       tl.to(split.lines, {
         yPercent: 0,

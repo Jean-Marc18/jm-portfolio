@@ -7,6 +7,7 @@ import {
   motion,
   prefersReducedMotion,
 } from "@/lib/gsap";
+import { getCoverRemainingDelay } from "@/lib/animations/cover";
 
 const INIT_ATTR = "data-pf-reveal-init";
 const TRACKED_ATTR = "data-pf-reveal-tracked";
@@ -36,12 +37,16 @@ export const RevealObserver = () => {
         return;
       }
 
+      // If a cover (preloader or page transition) is still in place,
+      // delay the reveal so it doesn't burn under the overlay.
+      const coverDelay = getCoverRemainingDelay();
       gsap.to(els, {
         autoAlpha: 1,
         y: 0,
         duration: motion.duration.base,
         ease: motion.ease.out,
         stagger: 0.08,
+        delay: coverDelay,
         overwrite: "auto",
       });
     };

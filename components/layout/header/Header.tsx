@@ -6,6 +6,7 @@ import { ButtonLink, Logo, Pill, StatusDot } from "@/components/ui";
 import { Menu } from "@/components/ui/icons";
 import { NAV_ORDER, routePaths, type RouteKey } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const EMAIL = "mailto:jeanmarc.dev.18@gmail.com";
@@ -49,9 +50,9 @@ const Header = () => {
           aria-label={t.nav.menu}
         >
           <div className="pf-menu-head">
-            <a className="pf-brand" href="/" onClick={closeMenu}>
+            <Link className="pf-brand" href="/" onClick={closeMenu}>
               <Logo size="md" />
-            </a>
+            </Link>
             <button
               type="button"
               className="pf-menu-close"
@@ -64,7 +65,7 @@ const Header = () => {
 
           <nav className="pf-menu-nav">
             {NAV_ORDER.map((k: RouteKey) => (
-              <a
+              <Link
                 key={k}
                 className="pf-menu-link"
                 href={routePaths[k]}
@@ -74,7 +75,7 @@ const Header = () => {
                 <span className="pf-menu-link-arrow" aria-hidden="true">
                   →
                 </span>
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -110,7 +111,7 @@ const Header = () => {
 
       <nav className="pf-nav backdrop-blur-sm">
         <div className="pf-nav-inner">
-          <a className="pf-brand" href="/">
+          <Link className="pf-brand" href="/">
             <Logo size="md" />
             <Pill
               leading={<StatusDot />}
@@ -118,12 +119,12 @@ const Header = () => {
             >
               {t.nav.available}
             </Pill>
-          </a>
+          </Link>
           <div className="pf-navlinks">
             {NAV_ORDER.map((k: RouteKey) => (
-              <a key={k} className="pf-link" href={routePaths[k]}>
+              <Link key={k} className="pf-link" href={routePaths[k]}>
                 {t.nav[k]}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="pf-nav-right">
