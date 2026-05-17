@@ -26,7 +26,7 @@ const Hero = () => {
         <div className="text-balance">
           <h1
             key={locale}
-            className="pf-display text-[5rem] leading-[1.05]"
+            className="pf-display ho-h1"
             data-intro-title
             style={{ overflow: "hidden" }}
           >

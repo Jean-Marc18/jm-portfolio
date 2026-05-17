@@ -260,6 +260,37 @@ html[data-theme="dark"] .pf-card:hover {
   border-color: var(--ink);
 }
 
+/* ── Preloader (first session visit) ─────────────────────── */
+.jm-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+.jm-preloader-logo {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Page transition overlay (cover sweep) ───────────────── */
+.jm-page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: var(--ink);
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
 /* ── SplitText line wrapper (used by Hero intro) ─────────── */
 .ho-h1-line {
   overflow: hidden;
