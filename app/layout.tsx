@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import { cookies, headers } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "./providers";
 import Header from "@/components/layout/header/Header";
@@ -200,7 +201,10 @@ export default async function RootLayout({
           <SmoothScroll />
           <RevealObserver />
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+            <Analytics />
+          </main>
           <Footer />
         </Providers>
       </body>
