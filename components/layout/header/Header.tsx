@@ -23,6 +23,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const isFirstRun = useRef(true);
 
   // Body scroll lock + restore on unmount.
   useEffect(() => {
@@ -42,82 +43,73 @@ const Header = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
-  // Enter / exit timeline driven by `menuOpen`. The sheet stays mounted
-  // so the exit can play before it disappears.
+  // Build a paused master timeline once, then play/reverse on menuOpen change.
   useGSAP(
     () => {
       const sheet = sheetRef.current;
       if (!sheet) return;
-      if (prefersReducedMotion()) {
-        gsap.set(sheet, {
-          autoAlpha: menuOpen ? 1 : 0,
-          yPercent: 0,
-        });
-        return;
-      }
-
-      // Cancel any in-flight animation so spam-clicks don't accumulate.
-      tlRef.current?.kill();
 
       const head = sheet.querySelector(".pf-menu-head");
       const links = sheet.querySelectorAll(".pf-menu-link");
       const foot = sheet.querySelectorAll(".pf-menu-foot > *");
       const innerEls = [head, ...links, ...foot].filter(Boolean);
 
-      if (menuOpen) {
-        // ── ENTER ─────────────────────────────────────────────
-        gsap.set(sheet, { autoAlpha: 1 });
+      gsap.set(sheet, { yPercent: -100, autoAlpha: 0 });
+      gsap.set(innerEls, { y: 28, autoAlpha: 0 });
+
+      if (prefersReducedMotion()) {
         tlRef.current = gsap
-          .timeline()
-          .fromTo(
-            sheet,
-            { yPercent: -100 },
-            {
-              yPercent: 0,
-              duration: 0.5,
-              ease: "power3.out",
-            }
-          )
-          .fromTo(
-            innerEls,
-            { y: 28, autoAlpha: 0 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: 0.45,
-              ease: motion.ease.out,
-              stagger: 0.05,
-            },
-            "-=0.25"
-          );
-      } else {
-        // ── EXIT ──────────────────────────────────────────────
-        tlRef.current = gsap.timeline({
-          onComplete: () => {
-            gsap.set(sheet, { autoAlpha: 0 });
-          },
-        });
-        tlRef.current
-          .to(innerEls, {
-            y: -16,
-            autoAlpha: 0,
-            duration: 0.2,
-            ease: "power2.in",
-            stagger: { each: 0.02, from: "end" },
-          })
-          .to(
-            sheet,
-            {
-              yPercent: -100,
-              duration: 0.4,
-              ease: "power3.in",
-            },
-            "-=0.05"
-          );
+          .timeline({ paused: true })
+          .to([sheet, ...innerEls], {
+            autoAlpha: 1,
+            yPercent: 0,
+            y: 0,
+            duration: 0.01,
+          });
+        return;
       }
+
+      tlRef.current = gsap
+        .timeline({ paused: true })
+        .to(sheet, {
+          autoAlpha: 1,
+          yPercent: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .to(
+          innerEls,
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.45,
+            ease: motion.ease.out,
+            stagger: 0.05,
+          },
+          "-=0.25",
+        );
     },
-    { dependencies: [menuOpen], scope: sheetRef }
+    { scope: sheetRef },
   );
+
+  // Drive the timeline from React state.
+  useEffect(() => {
+    const tl = tlRef.current;
+    if (!tl) return;
+    // Skip the first run: the timeline is already paused at time 0 (closed state).
+    // Calling reverse() here would put it in a "reversed/completed" state that
+    // breaks the subsequent play().
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (menuOpen) {
+      tl.timeScale(1).play();
+    } else {
+      tl.timeScale(1.4).reverse();
+    }
+  }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -131,7 +123,7 @@ const Header = () => {
         aria-hidden={!menuOpen}
         aria-label={t.nav.menu}
         // `inert` removes the subtree from focus / a11y tree when closed.
-        {...(!menuOpen ? { inert: "" as unknown as boolean } : {})}
+        inert={!menuOpen}
       >
         <div className="pf-menu-head">
           <Link className="pf-brand" href="/" onClick={closeMenu}>
