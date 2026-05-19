@@ -25,7 +25,6 @@ const Header = () => {
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const isFirstRun = useRef(true);
 
-  // Body scroll lock + restore on unmount.
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -33,7 +32,6 @@ const Header = () => {
     };
   }, [menuOpen]);
 
-  // Close menu on Escape.
   useEffect(() => {
     if (!menuOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -43,7 +41,8 @@ const Header = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
-  // Build a paused master timeline once, then play/reverse on menuOpen change.
+  // Build the timeline once paused, then play/reverse on toggle —
+  // avoids GSAP's revert lifecycle racing with React re-renders.
   useGSAP(
     () => {
       const sheet = sheetRef.current;
@@ -93,13 +92,12 @@ const Header = () => {
     { scope: sheetRef },
   );
 
-  // Drive the timeline from React state.
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
-    // Skip the first run: the timeline is already paused at time 0 (closed state).
-    // Calling reverse() here would put it in a "reversed/completed" state that
-    // breaks the subsequent play().
+    // The timeline is already paused at time 0 (closed) on first render.
+    // Calling reverse() here would leave it in a completed/reversed state
+    // and break the subsequent play().
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
@@ -123,7 +121,6 @@ const Header = () => {
         aria-modal="true"
         aria-hidden={!menuOpen}
         aria-label={t.nav.menu}
-        // `inert` removes the subtree from focus / a11y tree when closed.
         inert={!menuOpen}
       >
         <div className="pf-menu-head">
@@ -213,7 +210,6 @@ const Header = () => {
             ))}
           </nav>
           <div className="pf-nav-right">
-            {/* Hidden on mobile — the menu sheet has its own copy. */}
             <div className="pf-nav-tools-desktop">
               <LanguageSwitch />
               <ThemeSwitch />

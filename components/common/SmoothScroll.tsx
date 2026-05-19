@@ -4,19 +4,10 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
-/**
- * Module-level Lenis instance reference, so other client components
- * (e.g. PageTransition) can call `lenisInstance?.scrollTo(0, …)` when a
- * route changes — Lenis would otherwise keep its previous scroll value,
- * confusing ScrollTrigger which reads from it on every scroll event.
- */
+// Exposed so route changes can reset Lenis' scroll position —
+// otherwise ScrollTrigger reads stale values after navigation.
 export let lenisInstance: Lenis | null = null;
 
-/**
- * Drives smooth scrolling via Lenis, synced to GSAP's ticker so that
- * ScrollTrigger reads the right scroll position. Disabled when the user has
- * `prefers-reduced-motion`.
- */
 export const SmoothScroll = () => {
   useEffect(() => {
     if (prefersReducedMotion()) return;

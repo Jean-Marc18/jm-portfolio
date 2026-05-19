@@ -2,14 +2,8 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { ContactEmail } from "@/emails/ContactEmail";
 
-// Recipient address — where contact form emails land. Keep in sync with
-// the address the user signed up to Resend with (only verified addresses
-// can receive while no domain is set up).
+// Must be a verified Resend address (no custom domain set up yet).
 const TO_ADDRESS = "jeanmarc.dev.18@gmail.com";
-
-// Free Resend tier without a custom domain only allows the sandbox
-// sender. Once a domain is verified you can swap this for
-// `Portfolio <hello@yourdomain.com>`.
 const FROM_ADDRESS = "Portfolio <onboarding@resend.dev>";
 
 type ContactBody = {
@@ -17,8 +11,7 @@ type ContactBody = {
   email?: string;
   subject?: string;
   message?: string;
-  // Honeypot: any value here = bot, silently drop.
-  website?: string;
+  website?: string; // honeypot
 };
 
 const MAX_NAME = 120;
@@ -55,7 +48,6 @@ export async function POST(request: Request) {
     );
   }
 
-  // Honeypot — if a bot filled `website`, accept silently and bail.
   if (body.website && body.website.trim().length > 0) {
     return NextResponse.json({ ok: true });
   }
@@ -93,7 +85,6 @@ export async function POST(request: Request) {
   const subjectLabel = SUBJECT_LABELS[subject] ?? "Contact";
   const mailSubject = `[Portfolio] ${subjectLabel} — ${name}`;
 
-  // Plain-text fallback for clients that block HTML.
   const text = [
     `Nom: ${name}`,
     `Email: ${email}`,

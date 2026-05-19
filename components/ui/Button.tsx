@@ -18,9 +18,7 @@ const VARIANT_CLASS: Record<ButtonVariant, string> = {
 
 type CommonProps = {
   variant?: ButtonVariant;
-  /** Content rendered after the children (typically an icon). */
   trailing?: ReactNode;
-  /** Content rendered before the children. */
   leading?: ReactNode;
 };
 
@@ -46,8 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 export type ButtonLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> &
   CommonProps;
 
-/** True for in-app navigation (`/...`). Mailto, tel, http(s), and `//`
- * (protocol-relative) are treated as external and rendered as plain anchors. */
+// Mailto, tel, http(s), and protocol-relative URLs are external.
 const isInternal = (href: string | undefined): href is string =>
   typeof href === "string" && href.startsWith("/") && !href.startsWith("//");
 

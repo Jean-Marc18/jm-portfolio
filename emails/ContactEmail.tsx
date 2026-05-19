@@ -19,20 +19,9 @@ export type ContactEmailProps = {
   message: string;
 };
 
-// Centralised font stack — repeated inline on every block to survive
-// Outlook (which strips a lot of CSS but respects inline `font-family`).
+// Inlined on every block — Outlook strips most CSS but keeps inline font-family.
 const FONT_STACK = 'Geist, "Helvetica Neue", Helvetica, Arial, sans-serif';
 
-/**
- * Email envoyé à chaque soumission du formulaire de contact du portfolio.
- * Rendu via Resend (`react:` field).
- *
- * Design aligné avec les tokens du site :
- *  • cream `#f7f5f0` (bg) / ink `#1a1a18` (texte) / muted `#6b6961`
- *  • accent orange `#ff5a1f` (logo + traits ponctuels)
- *  • typo Geist via Google Fonts (Outlook tombera sur Helvetica via les
- *    fallbacks inline).
- */
 export const ContactEmail = ({
   name,
   email,
@@ -46,8 +35,6 @@ export const ContactEmail = ({
     <Html lang="fr">
       <Head>
         <meta name="color-scheme" content="light only" />
-        {/* @import is more reliable than Resend's <Font> for keeping a
-            single canonical URL — Google Fonts maintains this endpoint. */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -97,7 +84,6 @@ export const ContactEmail = ({
             className="mx-auto max-w-xl overflow-hidden rounded-sm border border-line bg-bgAlt"
             style={{ fontFamily: FONT_STACK }}
           >
-            {/* ── Header band ───────────────────────────────── */}
             <Section className="bg-ink px-10 py-8">
               <table
                 width="100%"
@@ -140,7 +126,6 @@ export const ContactEmail = ({
               </table>
             </Section>
 
-            {/* ── Sender info ───────────────────────────────── */}
             <Section className="px-10 pb-2 pt-9">
               <Text
                 className="m-0 mb-4 text-[11px] uppercase text-muted"
@@ -187,7 +172,6 @@ export const ContactEmail = ({
 
             <Hr className="mx-10 my-6 border-line" />
 
-            {/* ── Message body ──────────────────────────────── */}
             <Section className="px-10">
               <Text
                 className="m-0 mb-3 text-[11px] uppercase text-muted"
@@ -215,7 +199,6 @@ export const ContactEmail = ({
               </Section>
             </Section>
 
-            {/* ── CTA ───────────────────────────────────────── */}
             <Section className="px-10 py-10 text-center">
               <Link
                 href={`mailto:${email}`}
@@ -235,7 +218,6 @@ export const ContactEmail = ({
               </Link>
             </Section>
 
-            {/* ── Footer ────────────────────────────────────── */}
             <Section className="border-t border-line bg-bg px-10 py-6">
               <Text
                 className="m-0 text-center text-[11px] text-muted"
@@ -258,16 +240,6 @@ export const ContactEmail = ({
   );
 };
 
-/**
- * Inline JMK logo SVG, same paths as `components/ui/Logo.tsx`.
- *
- * Inline SVG is supported by Apple Mail, Gmail (web + native), Yahoo,
- * iOS Mail, modern Outlook (Outlook.com, Outlook for Mac, mobile).
- * Outlook for Windows desktop (Word renderer) may show nothing — the
- * `aria-label` ensures the email still reads "JMK Portfolio".
- *
- * Fill is `currentColor` so the parent `color` decides the tint.
- */
 const BrandMark = () => (
   <div
     role="img"
@@ -342,7 +314,6 @@ const InfoRow = ({
   </table>
 );
 
-// Default export for `react-email dev` preview discovery.
 ContactEmail.PreviewProps = {
   name: "Aïcha Konaté",
   email: "aicha@entreprise.ci",
