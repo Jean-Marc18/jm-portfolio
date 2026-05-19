@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     template: "%s | Jean-Marc Koffi",
   },
   description:
-    "Développeur front-end basé à Abidjan. Interfaces performantes, accessibles et optimisées SEO. Architectures modernes (clean, hexagonale, feature-component) — pour des produits qui doivent durer, tous secteurs confondus.",
+    "Développeur front-end à Abidjan. Interfaces performantes, accessibles, optimisées SEO. Architectures modernes — pour des produits qui durent.",
   keywords: [
     "Jean-Marc Koffi",
     "Jean-Marc Koffi",
@@ -158,6 +158,15 @@ const jsonLd = {
       inLanguage: ["fr", "en"],
       author: { "@id": `${SITE_URL}#person` },
     },
+    {
+      "@type": "ProfilePage",
+      "@id": `${SITE_URL}#webpage`,
+      url: SITE_URL,
+      name: "Jean-Marc Koffi — Développeur Front-End",
+      inLanguage: ["fr", "en"],
+      isPartOf: { "@id": `${SITE_URL}#website` },
+      mainEntity: { "@id": `${SITE_URL}#person` },
+    },
   ],
 };
 
@@ -190,19 +199,41 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <head>
+        {/* Runs synchronously BEFORE hydration. Adds `jmk-preloaded` to
+            <html> when the user has already seen the preloader this
+            session (or prefers reduced motion), so CSS can hide the
+            overlay instantly — no first-paint flash of the hero before
+            the cover mounts. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('jmk-preloaded') === '1' ||
+                    matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                  document.documentElement.classList.add('jmk-preloaded');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="font-sans">
+        <a href="#main-content" className="pf-skip-link">
+          {initialLocale === "en"
+            ? "Skip to main content"
+            : "Aller au contenu principal"}
+        </a>
         <Providers initialLocale={initialLocale}>
           <Preloader />
           {/* <PageTransition /> */}
           <SmoothScroll />
           <RevealObserver />
           <Header />
-          <main>
+          <main id="main-content">
             {children}
             <Analytics />
           </main>

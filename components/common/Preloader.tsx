@@ -6,7 +6,6 @@ import {
   gsap,
   ScrollTrigger,
   motion,
-  prefersReducedMotion,
   useGSAP,
 } from "@/lib/gsap";
 import { reserveCover } from "@/lib/animations/cover";
@@ -35,38 +34,27 @@ if (typeof window !== "undefined") {
 /**
  * Full-screen intro overlay shown once per session.
  *
- * Sequence:
- *  1. Logo fades + scales in.
- *  2. Brief hold.
- *  3. Logo fades out as the overlay slides up off-screen.
- *  4. Component unmounts and the page is interactive.
+ * The overlay div is ALWAYS rendered (server + client) so it covers the
+ * page from the very first paint, before React hydrates. The inline
+ * script in <head> adds `html.jmk-preloaded` when the user has already
+ * seen it this session (or prefers reduced motion) — CSS then hides the
+ * overlay instantly, no flash of the hero text underneath.
  *
- * Skipped automatically when the user already saw it this session, or when
- * they prefer reduced motion.
+ * On first visit, this component runs the entrance/exit animation and
+ * sets the session flag + html class so reloads skip the overlay.
  */
 export const Preloader = () => {
   const root = useRef<HTMLDivElement>(null);
-  // Compute visibility eagerly so SSR renders consistently with the client.
-  // We use sessionStorage so the preloader only plays once per browser tab.
-  const [show, setShow] = useState<boolean | null>(null);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
 
-  // Decide on mount whether to show. Lock body scroll while it's visible.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const alreadyShown =
-      window.sessionStorage.getItem(SESSION_KEY) === "1";
-    const reduced = prefersReducedMotion();
-
-    if (alreadyShown || reduced) {
-      setShow(false);
-      window.sessionStorage.setItem(SESSION_KEY, "1");
+    // If the inline head script already marked the html as "preloaded",
+    // the CSS hides our overlay — nothing to do.
+    if (document.documentElement.classList.contains("jmk-preloaded")) {
       return;
     }
-
-    // reserveCover() already ran at module-load (see top of file) so the
-    // hero intros are already waiting for us — nothing to do here.
-    setShow(true);
     document.body.style.overflow = "hidden";
+    setShouldAnimate(true);
     return () => {
       document.body.style.overflow = "";
     };
@@ -74,19 +62,17 @@ export const Preloader = () => {
 
   useGSAP(
     () => {
-      if (show !== true) return;
+      if (!shouldAnimate) return;
       const el = root.current;
       if (!el) return;
 
       const tl = gsap.timeline({
         onComplete: () => {
           window.sessionStorage.setItem(SESSION_KEY, "1");
+          document.documentElement.classList.add("jmk-preloaded");
           document.body.style.overflow = "";
-          setShow(false);
           // Recompute ScrollTrigger positions now that the preloader is
-          // off-screen and the real layout is settled. Without this,
-          // sections that mounted while the body was scroll-locked have
-          // stale trigger positions.
+          // off-screen and the real layout is settled.
           ScrollTrigger.refresh();
         },
       });
@@ -120,10 +106,8 @@ export const Preloader = () => {
           "-=0.15"
         );
     },
-    { scope: root, dependencies: [show] }
+    { scope: root, dependencies: [shouldAnimate] }
   );
-
-  if (show !== true) return null;
 
   return (
     <div ref={root} className="jm-preloader" aria-hidden="true">
