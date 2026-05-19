@@ -117,6 +117,7 @@ const Header = () => {
     <>
       <div
         ref={sheetRef}
+        id="mobile-menu-sheet"
         className="pf-menu-sheet"
         role="dialog"
         aria-modal="true"
@@ -126,7 +127,12 @@ const Header = () => {
         inert={!menuOpen}
       >
         <div className="pf-menu-head">
-          <Link className="pf-brand" href="/" onClick={closeMenu}>
+          <Link
+            className="pf-brand"
+            href="/"
+            onClick={closeMenu}
+            aria-label={`Jean-Marc Koffi — ${t.nav.home}`}
+          >
             <Logo size="md" />
           </Link>
           <button
@@ -184,9 +190,13 @@ const Header = () => {
         </div>
       </div>
 
-      <nav className="pf-nav backdrop-blur-sm">
+      <header className="pf-nav backdrop-blur-sm">
         <div className="pf-nav-inner">
-          <Link className="pf-brand" href="/">
+          <Link
+            className="pf-brand"
+            href="/"
+            aria-label={`Jean-Marc Koffi — ${t.nav.home}`}
+          >
             <Logo size="md" />
             <Pill
               leading={<StatusDot />}
@@ -195,16 +205,19 @@ const Header = () => {
               {t.nav.available}
             </Pill>
           </Link>
-          <div className="pf-navlinks">
+          <nav className="pf-navlinks" aria-label={t.nav.menu}>
             {NAV_ORDER.map((k: RouteKey) => (
               <Link key={k} className="pf-link" href={routePaths[k]}>
                 {t.nav[k]}
               </Link>
             ))}
-          </div>
+          </nav>
           <div className="pf-nav-right">
-            <LanguageSwitch />
-            <ThemeSwitch />
+            {/* Hidden on mobile — the menu sheet has its own copy. */}
+            <div className="pf-nav-tools-desktop">
+              <LanguageSwitch />
+              <ThemeSwitch />
+            </div>
             <ButtonLink
               href={EMAIL}
               variant="ghost"
@@ -216,7 +229,9 @@ const Header = () => {
             <button
               type="button"
               className="pf-menubtn"
-              aria-label="Ouvrir le menu"
+              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu-sheet"
               onClick={() => setMenuOpen(true)}
             >
               <Menu />
@@ -224,7 +239,7 @@ const Header = () => {
             </button>
           </div>
         </div>
-      </nav>
+      </header>
     </>
   );
 };
