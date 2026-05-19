@@ -43,7 +43,6 @@ export const metadata: Metadata = {
     "Développeur front-end à Abidjan. Interfaces performantes, accessibles, optimisées SEO. Architectures modernes — pour des produits qui durent.",
   keywords: [
     "Jean-Marc Koffi",
-    "Jean-Marc Koffi",
     "développeur front-end",
     "frontend developer",
     "Next.js",
@@ -175,9 +174,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Explicit user choice (cookie) wins. Otherwise, fall back to the
-  // browser's Accept-Language preference so first-time visitors land in
-  // the language they already use.
   const cookieStore = await cookies();
   const cookieValue = cookieStore.get(LOCALE_COOKIE)?.value;
 
@@ -199,11 +195,8 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <head>
-        {/* Runs synchronously BEFORE hydration. Adds `jmk-preloaded` to
-            <html> when the user has already seen the preloader this
-            session (or prefers reduced motion), so CSS can hide the
-            overlay instantly — no first-paint flash of the hero before
-            the cover mounts. */}
+        {/* Runs before hydration: marks <html> so CSS can hide the
+            preloader instantly on return visits — no hero flash. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -11,33 +11,14 @@ import {
 import { getCoverRemainingDelay } from "./cover";
 
 export type SplitIntroOptions = {
-  /** Selector of the heading to split into lines (e.g. `[data-intro-title]`). */
   titleSelector: string;
-  /**
-   * Selectors for elements that fade-up after the title lines have started
-   * revealing. Order matters — they stagger in that order.
-   */
   followups?: string[];
-  /** Initial Y offset for followups in px (default 24). */
   fromY?: number;
-  /** Stagger between followup elements in seconds (default 0.1). */
   followupStagger?: number;
-  /** Delay before the title timeline starts (default 0.1). */
   delay?: number;
-  /** Dependencies that should reset & replay the intro (e.g. locale, slug). */
   dependencies?: unknown[];
 };
 
-/**
- * Hero entry timeline used across pages:
- * 1. Splits the title into lines and reveals them with a yPercent clip mask
- *    (the parent `<h1>` carries `overflow: hidden` per line via the
- *    `ho-h1-line` linesClass — see globals.css).
- * 2. Followup elements fade + slide up, slightly overlapping the title tail.
- *
- * Respects `prefers-reduced-motion`, reverts SplitText cleanly when the
- * locale changes (so React can re-render without DOM conflicts).
- */
 export const useSplitIntro = (
   scope: RefObject<HTMLElement | null>,
   options: SplitIntroOptions
@@ -63,7 +44,6 @@ export const useSplitIntro = (
         .map((s) => root.querySelector<HTMLElement>(s))
         .filter((el): el is HTMLElement => el !== null);
 
-      // Reduced motion: just show everything in place.
       if (prefersReducedMotion()) {
         gsap.set([titleEl, ...followupEls], { autoAlpha: 1, y: 0 });
         return;
@@ -77,9 +57,8 @@ export const useSplitIntro = (
       gsap.set(split.lines, { yPercent: 110, opacity: 0 });
       gsap.set(followupEls, { autoAlpha: 0, y: fromY });
 
-      // If a cover (preloader or page transition) is still on screen,
-      // wait for it to finish before starting the intro — otherwise the
-      // animation plays behind it and the user never sees it.
+      // Wait for an active cover (preloader / page transition) to clear
+      // before playing — otherwise the intro animates behind it.
       const coverDelay = getCoverRemainingDelay();
       const effectiveDelay = coverDelay > 0 ? coverDelay : delay;
 

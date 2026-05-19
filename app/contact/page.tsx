@@ -8,8 +8,7 @@ import { getCoverRemainingDelay } from "@/lib/animations/cover";
 import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import { useRef, useState, type FormEvent } from "react";
 
-// Time the hero's SplitText intro takes to fully unfold once the cover
-// is gone. Keep aligned with `useSplitIntro` (lines + followups).
+// Aligned with `useSplitIntro` total duration (lines + followups).
 const HERO_INTRO_SEC = 1.6;
 
 const EMAIL = "jeanmarc.dev.18@gmail.com";
@@ -83,10 +82,8 @@ export default function ContactPage() {
     dependencies: [locale],
   });
 
-  // Sequence the page-body (form + side cards) AFTER the hero intro
-  // finishes. The contact page is short enough that the body is in
-  // the initial viewport, so without this they would animate in
-  // parallel with — and finish before — the hero title.
+  // Body reveals after the hero finishes — the contact page is short
+  // enough that the form sits in the initial viewport.
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
@@ -123,8 +120,7 @@ export default function ContactPage() {
     setSubmitting(true);
     setError(null);
 
-    // Honeypot: read the hidden field directly from the form, never
-    // store it in React state so bots are more likely to fill it.
+    // Honeypot: read directly from the form (not React state) so bots fill it.
     const formEl = e.currentTarget;
     const honeypot =
       (formEl.elements.namedItem("website") as HTMLInputElement | null)

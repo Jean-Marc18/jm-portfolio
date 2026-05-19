@@ -13,13 +13,9 @@ import { reserveCover } from "@/lib/animations/cover";
 const SESSION_KEY = "jmk-preloaded";
 const PRELOADER_DURATION = 2.0;
 
-/**
- * Reserve the cover slot at module-load time, BEFORE React mounts and
- * therefore before any hero's `useGSAP` (useLayoutEffect) fires. Without
- * this, the hero intro would read coverDelay = 0 and start animating
- * underneath the preloader. Running once per JS chunk load (i.e. per
- * page load) is exactly what we want.
- */
+// Reserve the cover at module-load — before React mounts and before any
+// hero's useGSAP fires. Otherwise heroes read coverDelay = 0 and animate
+// under the preloader.
 if (typeof window !== "undefined") {
   const alreadyShown =
     window.sessionStorage.getItem(SESSION_KEY) === "1";
@@ -31,25 +27,14 @@ if (typeof window !== "undefined") {
   }
 }
 
-/**
- * Full-screen intro overlay shown once per session.
- *
- * The overlay div is ALWAYS rendered (server + client) so it covers the
- * page from the very first paint, before React hydrates. The inline
- * script in <head> adds `html.jmk-preloaded` when the user has already
- * seen it this session (or prefers reduced motion) — CSS then hides the
- * overlay instantly, no flash of the hero text underneath.
- *
- * On first visit, this component runs the entrance/exit animation and
- * sets the session flag + html class so reloads skip the overlay.
- */
+// Always renders the overlay so SSR ships it. The inline <head> script
+// in layout.tsx adds `html.jmk-preloaded` on return visits, and CSS
+// hides this overlay instantly — no hero flash before mount.
 export const Preloader = () => {
   const root = useRef<HTMLDivElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
-    // If the inline head script already marked the html as "preloaded",
-    // the CSS hides our overlay — nothing to do.
     if (document.documentElement.classList.contains("jmk-preloaded")) {
       return;
     }
@@ -71,8 +56,6 @@ export const Preloader = () => {
           window.sessionStorage.setItem(SESSION_KEY, "1");
           document.documentElement.classList.add("jmk-preloaded");
           document.body.style.overflow = "";
-          // Recompute ScrollTrigger positions now that the preloader is
-          // off-screen and the real layout is settled.
           ScrollTrigger.refresh();
         },
       });
@@ -89,20 +72,12 @@ export const Preloader = () => {
       )
         .to(
           "[data-preload-logo]",
-          {
-            autoAlpha: 0,
-            duration: 0.35,
-            ease: "power2.in",
-          },
+          { autoAlpha: 0, duration: 0.35, ease: "power2.in" },
           "+=0.4"
         )
         .to(
           el,
-          {
-            yPercent: -100,
-            duration: 0.7,
-            ease: "power3.inOut",
-          },
+          { yPercent: -100, duration: 0.7, ease: "power3.inOut" },
           "-=0.15"
         );
     },

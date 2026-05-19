@@ -12,16 +12,6 @@ import { getCoverRemainingDelay } from "@/lib/animations/cover";
 const INIT_ATTR = "data-pf-reveal-init";
 const TRACKED_ATTR = "data-pf-reveal-tracked";
 
-/**
- * Animates every `.pf-reveal` element on entry using GSAP's
- * `ScrollTrigger.batch` — the idiomatic GSAP alternative to
- * IntersectionObserver. Elements that enter the viewport in the same RAF
- * tick are animated together with a coordinated stagger, which looks more
- * intentional than independent per-element fades.
- *
- * A MutationObserver picks up `.pf-reveal` nodes added after the initial
- * scan (e.g. by client-only sections) and batches them too.
- */
 export const RevealObserver = () => {
   useEffect(() => {
     if (document.documentElement.getAttribute(INIT_ATTR) === "1") return;
@@ -37,8 +27,6 @@ export const RevealObserver = () => {
         return;
       }
 
-      // If a cover (preloader or page transition) is still in place,
-      // delay the reveal so it doesn't burn under the overlay.
       const coverDelay = getCoverRemainingDelay();
       gsap.to(els, {
         autoAlpha: 1,
@@ -70,8 +58,7 @@ export const RevealObserver = () => {
 
     trackFreshTargets();
 
-    // Pick up reveal elements appended after the initial paint
-    // (page transitions, locale switch re-renders, etc.).
+    // Catch reveal nodes appended after first paint (route changes, locale switch).
     const mo = new MutationObserver(trackFreshTargets);
     mo.observe(document.body, { childList: true, subtree: true });
 

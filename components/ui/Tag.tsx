@@ -30,13 +30,9 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
 export type TagListProps = HTMLAttributes<HTMLUListElement> & {
   items: string[];
   variant?: TagVariant;
-  /** Maximum number of tags to render; rest are hidden. */
   max?: number;
 };
 
-/**
- * Renders an inline list of tags. Use for "stack" chip rows.
- */
 export const TagList = ({
   items,
   variant = "default",
