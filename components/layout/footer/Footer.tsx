@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
 
         <div className="pf-footer-col">
-          <h4>{t.footer.elsewhere}</h4>
+          <h3>{t.footer.elsewhere}</h3>
           <ul>
             {SOCIAL_LINKS.map((s) => (
               <li key={s.href}>

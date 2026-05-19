@@ -278,6 +278,13 @@ html[data-theme="dark"] .pf-card:hover {
   align-items: center;
   justify-content: center;
 }
+/* When the inline script in <head> determines the preloader should be
+   skipped (already shown this session, or prefers-reduced-motion), it
+   adds this class to <html> BEFORE hydration — so the overlay never
+   appears, no flash. */
+html.jmk-preloaded .jm-preloader {
+  display: none;
+}
 
 /* ── Page transition overlay (cover sweep) ───────────────── */
 .jm-page-transition {
@@ -325,6 +332,31 @@ html[data-theme="dark"] .pf-card:hover {
   background: var(--bg-alt);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+/* ── Skip link (a11y) ────────────────────────────────────── */
+/* Visually hidden until focused via Tab — lets keyboard / screen
+   reader users jump past the header straight to the main content. */
+.pf-skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  padding: 10px 16px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease-out;
+}
+.pf-skip-link:focus,
+.pf-skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ── Nav ─────────────────────────────────────────────────── */
@@ -377,6 +409,11 @@ html[data-theme="dark"] .pf-card:hover {
   align-items: center;
   gap: 28px;
   font-size: 14px;
+}
+.pf-nav-tools-desktop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .pf-nav-right {
   display: flex;
@@ -481,7 +518,7 @@ html[data-theme="dark"] .pf-card:hover {
   gap: 24px;
   flex-wrap: wrap;
 }
-.pf-footer-col h4 {
+.pf-footer-col h3 {
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -666,6 +703,11 @@ html[data-theme="dark"] .pf-card:hover {
     display: none;
   }
   .pf-nav-cta {
+    display: none;
+  }
+  /* The mobile sheet provides its own copy of these tools — hide the
+     desktop versions to avoid duplicate controls in the a11y tree. */
+  .pf-nav-tools-desktop {
     display: none;
   }
   .pf-menubtn {
