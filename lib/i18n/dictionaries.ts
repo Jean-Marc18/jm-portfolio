@@ -738,6 +738,8 @@ export const dictionaries = {
           ],
         },
         {
+          slug: "pipv-pped",
+          name: "PIPV-PPED",
           shortName: "PIPV",
           tag: "Public Sector",
           year: "2025",
@@ -1279,3 +1281,6 @@ export const dictionaries = {
 };
 
 export type Dictionary = (typeof dictionaries)["fr"];
+
+/** Ensures every locale matches the FR dictionary shape at compile time. */
+export const localizedDictionaries: Record<Locale, Dictionary> = dictionaries;
