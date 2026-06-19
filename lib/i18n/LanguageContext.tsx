@@ -1,7 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { dictionaries, type Dictionary, type Locale } from "./dictionaries";
+import {
+  localizedDictionaries,
+  type Dictionary,
+  type Locale,
+} from "./dictionaries";
 import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE } from "./config";
 
 type LanguageContextValue = {
@@ -35,7 +39,11 @@ export const LanguageProvider = ({
   };
 
   const value = useMemo(
-    () => ({ locale, setLocale, t: dictionaries[locale] }),
+    (): LanguageContextValue => ({
+      locale,
+      setLocale,
+      t: localizedDictionaries[locale],
+    }),
     [locale]
   );
 

@@ -18,5 +18,5 @@ export const NAV_ORDER: RouteKey[] = [
 ];
 
 export const PROJECT_PATHS: Record<string, string> = {
-  "pipv-pped": "/projets/pipv-pped",
+  ciblea: "/projets/ciblea",
 };

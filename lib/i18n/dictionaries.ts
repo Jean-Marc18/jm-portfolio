@@ -78,6 +78,28 @@ export const dictionaries = {
       visitSite: "Visiter le site",
       items: [
         {
+          slug: "ciblea",
+          name: "Ciblea",
+          shortName: "Ciblea",
+          tag: "AI · SaaS",
+          year: "2025",
+          sub: "IA de candidatures optimisées",
+          description:
+            "Plateforme SaaS pour l'emploi en Afrique francophone. Pipeline de 6 agents IA (Claude + Gemini) qui génère CV et lettre de motivation ciblés en moins de 60 secondes, avec garde-fou anti-hallucination.",
+          url: "https://ciblea.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Supabase",
+            "Inngest",
+            "Claude Sonnet 4.6",
+            "Gemini 2.5 Flash",
+            "React-PDF",
+            "TypeScript",
+          ],
+        },
+        {
           slug: "pipv-pped",
           name: "PIPV-PPED",
           shortName: "PIPV",
@@ -97,28 +119,6 @@ export const dictionaries = {
             "UploadThing",
             "React Hook Form",
             "Zod",
-          ],
-        },
-        {
-          slug: "tacomfav",
-          name: "TaComFav",
-          shortName: "TaComFav",
-          tag: "Agency",
-          year: "2025",
-          sub: "Site agence de communication",
-          description:
-            "Site vitrine animé pour une agence de communication, intégrant un CMS headless et des animations soignées. Performance, SEO et expérience visuelle au cœur du projet.",
-          url: "https://tacomfav.com",
-          stack: [
-            "Next.js 16",
-            "React 19",
-            "Tailwind v4",
-            "Sanity",
-            "GSAP",
-            "Framer Motion",
-            "Lenis",
-            "Resend",
-            "TypeScript",
           ],
         },
         {
@@ -185,17 +185,17 @@ export const dictionaries = {
       built: "Construit avec Next.js · Conçu à Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Sélection / 03 projets",
+      heroLabel: "— Sélection / 04 projets",
       heroH1a: "Travaux",
       heroH1b: "récents.",
       heroP:
-        "Une sélection de projets en production, sur des secteurs variés — public, e-commerce, agence créative. Chacun illustre une facette différente du front-end moderne.",
+        "Une sélection de projets en production, sur des secteurs variés — IA, public, e-commerce, agence créative. Chacun illustre une facette différente du front-end moderne.",
       m1: "Projets en production",
       m2: "Technologies maîtrisées",
       m3: "Expérience pro",
       m4: "Secteurs explorés",
       m3v: "2+ ans",
-      m4v: "3",
+      m4v: "4",
       ctaCase: "Voir le cas →",
       ctaVisit: "Visiter le site →",
       appLabel: "— Mon approche",
@@ -224,6 +224,7 @@ export const dictionaries = {
       ctaDiscuss: "Démarrer une discussion →",
       ctaServices: "Voir mes services",
       roleByName: {
+        Ciblea: "Développeur Fullstack · Créateur",
         "PIPV-PPED": "Développeur Front-End · 6 mois",
         TaComFav: "Développeur Front-End · 3 mois",
         "e-Panacee": "Développeur Front-End · 4 mois",
@@ -368,7 +369,7 @@ export const dictionaries = {
       stats: [
         ["2+", "années en production"],
         ["5+", "projets en production"],
-        ["3", "secteurs (institutionnel, e-commerce, agence)"],
+        ["4", "secteurs (IA, institutionnel, e-commerce, agence)"],
         ["13+", "technologies maîtrisées"],
       ] as [string, string][],
       parLabel: "— Parcours",
@@ -500,112 +501,140 @@ export const dictionaries = {
     projectPage: {
       back: "Tous les projets",
       cases: {
-        "pipv-pped": {
-          tag: "Public Sector",
-          studyTag: "Cas client / 2025",
+        ciblea: {
+          tag: "AI · SaaS",
+          studyTag: "Projet personnel / 2025",
           heroP:
-            "Plateforme officielle de gestion et de suivi pour une institution publique de Côte d'Ivoire — authentification sécurisée, gestion fine des rôles, upload de documents et tableau de bord administratif.",
+            "Plateforme SaaS d'optimisation de candidatures par intelligence artificielle, pensée pour le marché africain francophone. Un pipeline de 6 agents IA génère CV et lettre de motivation sur mesure en 60 secondes.",
           info: [
-            ["Client", "Institution publique CI"],
-            ["Rôle", "Développeur Front-End"],
-            ["Durée", "6 mois"],
+            ["Client", "Projet personnel"],
+            ["Rôle", "Développeur Fullstack"],
+            ["Durée", "1 mois (MVP)"],
             ["Année", "2025 — En production"],
           ] as [string, string][],
-          coverVer: "v1.4 · production",
+          coverVer: "v1.0 · production",
           coverDeployed: "Déployé",
           coverTypeLabel: "Type",
-          coverTypeValue: "Plateforme institutionnelle",
+          coverTypeValue: "Plateforme SaaS IA",
           coverStackLabel: "Stack principale",
-          coverStackValue: "Next.js 14 · React 18 · NextAuth",
+          coverStackValue: "Next.js 16 · Supabase · Inngest",
           ctxLabel: "— Contexte",
           ctxH1:
-            "Une institution publique avait besoin d'un guichet numérique.",
+            "L'IA générative pour aider les candidats à mieux se vendre.",
           ctxTags: [
-            "Authentification",
-            "Rôles & permissions",
-            "Upload sécurisé",
-            "Tableau de bord admin",
+            "Agents IA",
+            "SaaS B2C",
+            "Génération PDF",
+            "Orchestration",
           ],
           ctxP1:
-            "L'institution gérait jusqu'ici ses dossiers et le suivi de ses usagers via des fichiers Excel et des échanges email. Le besoin : une plateforme unique, sécurisée, qui centralise la soumission de dossiers, la gestion des rôles internes et le pilotage administratif.",
-          ctxP2a: "Le projet a démarré sur une ",
-          ctxP2b: "spec dense",
+            "En Afrique francophone, de nombreux talents sont écartés car leurs candidatures ne sont pas assez ciblées ou ne passent pas les filtres ATS.",
+          ctxP2a: "Ciblea résout ce problème : l'utilisateur renseigne son profil, colle une offre, et obtient un ",
+          ctxP2b: "CV et une lettre sur-mesure",
           ctxP2c:
-            " (workflows métier, niveaux d'habilitation, traçabilité documentaire) et un planning court. L'enjeu était de livrer rapidement un produit en production stable, tout en posant des fondations techniques qui permettent à l'institution d'ajouter des modules dans les mois suivants.",
-          ctxP3a: "Ma mission s'est concentrée sur le ",
-          ctxP3b: "front-end de l'application web",
+            " en moins de 60 secondes. Le garde-fou central : l'IA ne peut jamais inventer d'information absente du profil.",
+          ctxP3a: "Conçu avec une approche ",
+          ctxP3b: "Mobile-first et Freemium",
           ctxP3c:
-            " : interface administrateur, parcours usager, design system, intégration des API métier et des services tiers (auth, upload, notifications).",
-          appLabel: "— Approche",
-          appH1: "Quatre décisions structurantes.",
-          appP: "Sur ce type de projet, ce ne sont pas les composants individuels qui font la différence — c'est la cohérence des décisions techniques prises en amont.",
+            ", ce produit SaaS orchestre 6 agents IA via Inngest et gère les paiements via GeniusPay (XOF).",
+          appLabel: "— L'architecture IA",
+          appH1: "Un pipeline de 6 agents stricts.",
+          appP: "Pour éviter les hallucinations typiques des LLMs, le processus est segmenté : le plan de rédaction est le seul canal d'adaptation. Les rédacteurs ne voient jamais l'offre brute.",
           ch: [
             [
               "01",
-              "Découper par feature, pas par technique",
-              "Plutôt qu'une organisation par dossier (components/, hooks/, lib/), chaque feature métier (dossiers, utilisateurs, audit-log) est autonome et porte sa propre UI, sa logique et son schéma de données.",
+              "Orchestration Inngest",
+              "Le pipeline (Analyste, Auditeur, Stratège, Rédacteurs, Vérificateur) tourne en background avec des retries automatiques, garantissant que l'utilisateur reçoit toujours son PDF.",
             ],
             [
               "02",
-              "Authentification côté serveur",
-              "NextAuth.js avec sessions côté serveur, gestion fine des rôles via middleware Next.js. Aucun bypass possible côté client.",
+              "Modèles spécialisés",
+              "Gemini 2.5 Flash excelle pour l'extraction rapide du profil. Claude Sonnet 4.6 s'occupe de la rédaction stratégique et de la vérification stricte anti-hallucination.",
             ],
             [
               "03",
-              "Validation Zod partout",
-              "Schémas Zod partagés entre client (React Hook Form) et serveur (API routes Next.js). Un seul endroit pour définir une règle métier.",
+              "Rendus PDF au pixel près",
+              "Les 3 templates (Classique, Moderne, Élégant) sont générés côté serveur via React-PDF, avec les polices Geist & Inter embarquées pour un rendu identique sur tous les appareils.",
             ],
             [
               "04",
-              "Upload directement vers le stockage",
-              "UploadThing pour signer les uploads côté serveur et envoyer les fichiers directement depuis le navigateur — sans transiter par notre infrastructure.",
+              "Paiement & Sécurité",
+              "Intégration de GeniusPay pour le marché local (XOF) avec vérification HMAC des webhooks, couplé à Supabase Auth et Row Level Security (RLS) pour protéger les données.",
             ],
           ] as [string, string, string][],
-          mockLabel: "— Écrans clés",
-          mockH1: "Le produit, à travers ses interfaces.",
+          mockLabel: "— Fonctionnalités",
+          mockH1: "De l'offre au PDF en 60s.",
           mockP:
-            "Captures à intégrer — placeholders pour l'instant. Chaque tuile représente un écran ou un parcours du produit en production.",
+            "Une expérience fluide avec un suivi en temps réel de la progression des agents IA.",
           mocks: [
             [
-              "Dashboard administrateur",
-              "Vue d'ensemble des dossiers, alertes, métriques.",
+              "Dashboard Utilisateur",
+              "Suivi des candidatures générées, gestion des crédits IA restants et téléchargement direct des PDF.",
+              "/projects/ciblea/page-candidatures.png"
             ],
             [
-              "Soumission de dossier",
-              "Formulaire multi-étapes avec upload et validation Zod.",
+              "Génération en temps réel",
+              "Le pipeline de 6 agents s'anime étape par étape pour rassurer l'utilisateur pendant le traitement IA.",
+              "/projects/ciblea/progess.png"
             ],
             [
-              "Gestion des rôles",
-              "Attribution fine des permissions par module métier.",
+              "Profil candidat",
+              "Centralisation des expériences, formations et compétences. La source de vérité pour l'IA, garantissant l'absence d'hallucinations.",
+              "/projects/ciblea/profil.png"
             ],
-          ] as [string, string][],
+            [
+              "Onboarding fluide",
+              "Un accompagnement pas à pas pour la première candidature afin d'éduquer l'utilisateur au fonctionnement du produit.",
+              "/projects/ciblea/candidatures-onboarding.png"
+            ],
+            [
+              "Authentification sécurisée",
+              "Inscription et connexion avec Supabase Auth, intégrant des règles strictes de sécurité (RLS).",
+              "/projects/ciblea/register.png"
+            ],
+            [
+              "Template Classique",
+              "Modèle gratuit, épuré et optimisé pour passer les filtres automatiques (ATS).",
+              "/projects/ciblea/CV_Ciblea_classique.jpg"
+            ],
+            [
+              "Template Moderne",
+              "Modèle Premium avec une touche de couleur et une structure dynamique.",
+              "/projects/ciblea/CV_Ciblea_moderne.jpg"
+            ],
+            [
+              "Template Élégant",
+              "Modèle Premium professionnel, mis en page avec soin pour les candidatures de haut niveau.",
+              "/projects/ciblea/CV_Ciblea_elegant.jpg"
+            ],
+          ] as [string, string, string][],
           skLabel: "— Stack technique",
           skH1: "Ce qui tourne sous le capot.",
-          skP: "Une stack volontairement focalisée — chaque dépendance a un rôle précis, pas de doublon ni de hype gratuite.",
+          skP: "Une architecture moderne taillée pour la rapidité d'exécution et la résilience face aux API externes.",
           skGroups: [
-            ["Framework & langage", ["Next.js 14", "React 18", "TypeScript"]],
-            ["UI & styling", ["Tailwind v3", "Radix UI", "CSS Modules"]],
-            ["State & data", ["TanStack Query", "React Hook Form", "Zod"]],
+            ["Framework & langage", ["Next.js 16", "React 19", "TypeScript"]],
+            ["UI & styling", ["Tailwind v4", "Radix UI", "Framer Motion"]],
+            ["Orchestration & IA", ["Inngest", "Claude Sonnet", "Gemini Flash"]],
             [
-              "Auth & sécurité",
-              ["NextAuth.js", "Middleware Next", "Server Actions"],
+              "Backend & Auth",
+              ["Supabase", "Row Level Security (RLS)"],
             ],
-            ["Fichiers & email", ["UploadThing", "Resend"]],
-            ["Qualité & déploiement", ["ESLint", "GitHub Actions", "Vercel"]],
+            ["Documents", ["React-PDF", "Zod"]],
+            ["Déploiement", ["Vercel"]],
           ] as [string, string[]][],
           resLabel: "— En production",
-          resH1: "Les chiffres qui comptent.",
+          resH1: "Les résultats.",
           res: [
-            ["98+", "Lighthouse Performance sur les écrans clés"],
-            ["AA", "Conformité WCAG 2.1 sur tous les parcours"],
-            ["0", "Faille critique remontée à l'audit de mise en production"],
+            ["60s", "Temps moyen pour générer un CV et une Lettre"],
+            ["100%", "Succès des tâches background via Inngest"],
+            ["B2C", "Premiers utilisateurs actifs et retours positifs"],
           ] as [string, string][],
           nextLabel: "— Projet suivant",
           nextH1: "TaComFav.",
           nextProjLabel: "Agency · 2025",
           nextH3: "Site agence de communication",
           nextP:
-            "Site vitrine animé pour une agence de communication, intégrant un CMS headless (Sanity) et des animations soignées en GSAP et Framer Motion. Performance, SEO et expérience visuelle au cœur du projet.",
+            "Site vitrine animé pour une agence de communication, intégrant un CMS headless (Sanity) et des animations soignées en GSAP et Framer Motion.",
           nextCta: "Voir le projet →",
         },
       },
@@ -687,6 +716,28 @@ export const dictionaries = {
       visitSite: "Visit site",
       items: [
         {
+          slug: "ciblea",
+          name: "Ciblea",
+          shortName: "Ciblea",
+          tag: "AI · SaaS",
+          year: "2025",
+          sub: "AI-powered job application optimizer",
+          description:
+            "SaaS platform for the francophone African job market. A 6-agent AI pipeline (Claude + Gemini) generates targeted CVs and cover letters in under 60 seconds, with anti-hallucination safeguards.",
+          url: "https://ciblea.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Supabase",
+            "Inngest",
+            "Claude Sonnet 4.6",
+            "Gemini 2.5 Flash",
+            "React-PDF",
+            "TypeScript",
+          ],
+        },
+        {
           slug: "pipv-pped",
           name: "PIPV-PPED",
           shortName: "PIPV",
@@ -706,28 +757,6 @@ export const dictionaries = {
             "UploadThing",
             "React Hook Form",
             "Zod",
-          ],
-        },
-        {
-          slug: "tacomfav",
-          name: "TaComFav",
-          shortName: "TaComFav",
-          tag: "Agency",
-          year: "2025",
-          sub: "Communication agency website",
-          description:
-            "Animated marketing site for a communication agency, with headless CMS and refined motion. Performance, SEO and visual experience at the core.",
-          url: "https://tacomfav.com",
-          stack: [
-            "Next.js 16",
-            "React 19",
-            "Tailwind v4",
-            "Sanity",
-            "GSAP",
-            "Framer Motion",
-            "Lenis",
-            "Resend",
-            "TypeScript",
           ],
         },
         {
@@ -794,17 +823,17 @@ export const dictionaries = {
       built: "Built with Next.js · Designed in Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Selection / 03 projects",
+      heroLabel: "— Selection / 04 projects",
       heroH1a: "Recent",
       heroH1b: "work.",
       heroP:
-        "A selection of production projects across diverse sectors — public, e-commerce, creative agency. Each illustrates a different facet of modern front-end work.",
+        "A selection of production projects across diverse sectors — AI, public, e-commerce, creative agency. Each illustrates a different facet of modern front-end work.",
       m1: "Projects in production",
       m2: "Technologies mastered",
       m3: "Professional experience",
       m4: "Sectors explored",
       m3v: "2+ years",
-      m4v: "3",
+      m4v: "4",
       ctaCase: "View case study →",
       ctaVisit: "Visit site →",
       appLabel: "— My approach",
@@ -833,6 +862,7 @@ export const dictionaries = {
       ctaDiscuss: "Start a discussion →",
       ctaServices: "See my services",
       roleByName: {
+        Ciblea: "Fullstack Developer · Creator",
         "PIPV-PPED": "Front-End Developer · 6 months",
         TaComFav: "Front-End Developer · 3 months",
         "e-Panacee": "Front-End Developer · 4 months",
@@ -976,8 +1006,8 @@ export const dictionaries = {
       p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, the Ivorian equivalent of the French Caisse des dépôts) and a Custody Control application for the regional UMOA market. On the side, I led freelance missions for e-commerce, agency and institutional clients. Today, I'm looking for a new team to join — whatever the industry, as long as the product has real front-end engineering demands.",
       stats: [
         ["2+", "years in production"],
-        ["03", "projects in production"],
-        ["3", "sectors (institutional, e-commerce, agency)"],
+        ["04", "projects in production"],
+        ["4", "sectors (AI, institutional, e-commerce, agency)"],
         ["13+", "technologies mastered"],
       ] as [string, string][],
       parLabel: "— Career",
@@ -1109,108 +1139,140 @@ export const dictionaries = {
     projectPage: {
       back: "All projects",
       cases: {
-        "pipv-pped": {
-          tag: "Public Sector",
-          studyTag: "Case study / 2025",
+        ciblea: {
+          tag: "AI · SaaS",
+          studyTag: "Personal Project / 2025",
           heroP:
-            "Official management and tracking platform for an Ivorian public institution — secure auth, fine-grained role management, document uploads and admin dashboard.",
+            "SaaS platform optimizing job applications with artificial intelligence, designed for the francophone African market. A pipeline of 6 AI agents generates custom resumes and cover letters in 60 seconds.",
           info: [
-            ["Client", "Ivorian public institution"],
-            ["Role", "Front-End Developer"],
-            ["Duration", "6 months"],
+            ["Client", "Personal Project"],
+            ["Role", "Fullstack Developer"],
+            ["Duration", "1 month (MVP)"],
             ["Year", "2025 — In production"],
           ] as [string, string][],
-          coverVer: "v1.4 · production",
+          coverVer: "v1.0 · production",
           coverDeployed: "Deployed",
           coverTypeLabel: "Type",
-          coverTypeValue: "Institutional platform",
+          coverTypeValue: "AI SaaS Platform",
           coverStackLabel: "Main stack",
-          coverStackValue: "Next.js 14 · React 18 · NextAuth",
+          coverStackValue: "Next.js 16 · Supabase · Inngest",
           ctxLabel: "— Context",
-          ctxH1: "A public institution needed a digital front door.",
+          ctxH1:
+            "Generative AI to help candidates sell themselves better.",
           ctxTags: [
-            "Authentication",
-            "Roles & permissions",
-            "Secure upload",
-            "Admin dashboard",
+            "AI Agents",
+            "B2C SaaS",
+            "PDF Generation",
+            "Orchestration",
           ],
           ctxP1:
-            "The institution was managing its files and user follow-up through Excel and email. The need: a single, secure platform that centralises file submission, internal role management and admin steering.",
-          ctxP2a: "The project started on a ",
-          ctxP2b: "dense spec",
+            "In Francophone Africa, many talented individuals are overlooked because their applications are not targeted enough or fail to pass ATS filters.",
+          ctxP2a: "Ciblea solves this: users fill in their profile once, paste a job offer, and get a ",
+          ctxP2b: "tailored resume and cover letter",
           ctxP2c:
-            " (business workflows, permission levels, document traceability) and a tight schedule. The challenge: ship a stable production product quickly, while laying technical foundations the institution can extend with new modules in the coming months.",
-          ctxP3a: "My mission focused on the ",
-          ctxP3b: "front-end of the web application",
+            " in under 60 seconds. The core safeguard: the AI can never invent information absent from the profile.",
+          ctxP3a: "Built with a ",
+          ctxP3b: "Mobile-first and Freemium approach",
           ctxP3c:
-            ": admin interface, user journeys, design system, integration of business APIs and third-party services (auth, upload, notifications).",
-          appLabel: "— Approach",
-          appH1: "Four structuring decisions.",
-          appP: "On this kind of project, the difference is not the individual components — it's the coherence of the technical decisions made up front.",
+            ", this SaaS product orchestrates 6 AI agents via Inngest and handles payments via GeniusPay (XOF).",
+          appLabel: "— AI Architecture",
+          appH1: "A strict 6-agent pipeline.",
+          appP: "To avoid typical LLM hallucinations, the process is segmented: the drafting plan is the only channel for adaptation. Writers never see the raw job offer.",
           ch: [
             [
               "01",
-              "Slice by feature, not by tech",
-              "Rather than a layout by folder (components/, hooks/, lib/), each business feature (files, users, audit-log) is autonomous and owns its UI, logic and data schema.",
+              "Inngest Orchestration",
+              "The pipeline (Analyst, Auditor, Strategist, Writers, Verifier) runs in the background with automatic retries, ensuring users always receive their PDF.",
             ],
             [
               "02",
-              "Server-side authentication",
-              "NextAuth.js with server-side sessions, fine-grained role handling via Next.js middleware. No client-side bypass possible.",
+              "Specialized Models",
+              "Gemini 2.5 Flash excels at fast profile extraction. Claude Sonnet 4.6 handles strategic writing and strict anti-hallucination verification.",
             ],
             [
               "03",
-              "Zod validation everywhere",
-              "Zod schemas shared between client (React Hook Form) and server (Next.js API routes). One place to define a business rule.",
+              "Pixel-perfect PDF Rendering",
+              "The 3 templates (Classic, Modern, Elegant) are generated server-side using React-PDF, with embedded Geist & Inter fonts for identical rendering across all devices.",
             ],
             [
               "04",
-              "Upload straight to storage",
-              "UploadThing to sign uploads on the server and send files straight from the browser — without transiting our infrastructure.",
+              "Payment & Security",
+              "GeniusPay integration for the local market (XOF) with HMAC webhook verification, coupled with Supabase Auth and Row Level Security (RLS) to protect data.",
             ],
           ] as [string, string, string][],
-          mockLabel: "— Key screens",
-          mockH1: "The product, through its interfaces.",
+          mockLabel: "— Features",
+          mockH1: "From job offer to PDF in 60s.",
           mockP:
-            "Captures to integrate — placeholders for now. Each tile represents a screen or a flow from the product in production.",
+            "A seamless experience with real-time tracking of the AI agents' progress.",
           mocks: [
-            ["Admin dashboard", "Overview of files, alerts, metrics."],
             [
-              "File submission",
-              "Multi-step form with upload and Zod validation.",
+              "User Dashboard",
+              "Tracking generated applications, managing remaining AI credits, and downloading PDFs.",
+              "/projects/ciblea/page-candidatures.png"
             ],
             [
-              "Role management",
-              "Fine-grained permission allocation by business module.",
+              "Real-time Generation",
+              "The 6-agent pipeline animates step-by-step to reassure the user during AI processing.",
+              "/projects/ciblea/progess.png"
             ],
-          ] as [string, string][],
+            [
+              "Candidate Profile",
+              "Centralization of experiences, education, and skills. The single source of truth for the AI, guaranteeing zero hallucinations.",
+              "/projects/ciblea/profil.png"
+            ],
+            [
+              "Seamless Onboarding",
+              "Step-by-step guidance for the first application to educate the user on how the product works.",
+              "/projects/ciblea/candidatures-onboarding.png"
+            ],
+            [
+              "Secure Authentication",
+              "Sign up and login with Supabase Auth, integrating strict security rules (RLS).",
+              "/projects/ciblea/register.png"
+            ],
+            [
+              "Classic Template",
+              "Free, clean template optimized to pass automated ATS filters.",
+              "/projects/ciblea/CV_Ciblea_classique.jpg"
+            ],
+            [
+              "Modern Template",
+              "Premium template with a touch of color and dynamic structure.",
+              "/projects/ciblea/CV_Ciblea_moderne.jpg"
+            ],
+            [
+              "Elegant Template",
+              "Premium professional template, carefully laid out for high-level applications.",
+              "/projects/ciblea/CV_Ciblea_elegant.jpg"
+            ],
+          ] as [string, string, string][],
           skLabel: "— Technical stack",
           skH1: "What runs under the hood.",
-          skP: "A deliberately focused stack — each dependency has a precise role, no duplication or free hype.",
+          skP: "A modern architecture tailored for execution speed and resilience against external APIs.",
           skGroups: [
-            ["Framework & language", ["Next.js 14", "React 18", "TypeScript"]],
-            ["UI & styling", ["Tailwind v3", "Radix UI", "CSS Modules"]],
-            ["State & data", ["TanStack Query", "React Hook Form", "Zod"]],
+            ["Framework & language", ["Next.js 16", "React 19", "TypeScript"]],
+            ["UI & styling", ["Tailwind v4", "Radix UI", "Framer Motion"]],
+            ["Orchestration & AI", ["Inngest", "Claude Sonnet", "Gemini Flash"]],
             [
-              "Auth & security",
-              ["NextAuth.js", "Middleware Next", "Server Actions"],
+              "Backend & Auth",
+              ["Supabase", "Row Level Security (RLS)"],
             ],
-            ["Files & email", ["UploadThing", "Resend"]],
-            ["Quality & deployment", ["ESLint", "GitHub Actions", "Vercel"]],
+            ["Documents", ["React-PDF", "Zod"]],
+            ["Deployment", ["Vercel"]],
           ] as [string, string[]][],
           resLabel: "— In production",
-          resH1: "The numbers that matter.",
+          resH1: "The results.",
           res: [
-            ["98+", "Lighthouse Performance on key screens"],
-            ["AA", "WCAG 2.1 conformance across all journeys"],
-            ["0", "Critical issues raised at the go-live audit"],
+            ["60s", "Average time to generate a CV and Cover Letter"],
+            ["100%", "Success rate of background tasks via Inngest"],
+            ["B2C", "First active users and positive feedback"],
           ] as [string, string][],
           nextLabel: "— Next project",
           nextH1: "TaComFav.",
           nextProjLabel: "Agency · 2025",
           nextH3: "Communication agency website",
           nextP:
-            "Animated marketing site for a communication agency, with a headless CMS (Sanity) and careful motion in GSAP and Framer Motion. Performance, SEO and visual experience at the core.",
+            "Animated marketing site for a communication agency, with a headless CMS (Sanity) and careful motion in GSAP and Framer Motion.",
           nextCta: "View project →",
         },
       },
@@ -1219,3 +1281,6 @@ export const dictionaries = {
 };
 
 export type Dictionary = (typeof dictionaries)["fr"];
+
+/** Ensures every locale matches the FR dictionary shape at compile time. */
+export const localizedDictionaries: Record<Locale, Dictionary> = dictionaries;

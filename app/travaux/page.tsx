@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRef } from "react";
 
 const LOCAL_SCREENSHOTS: Record<string, string> = {
+  ciblea: "/projects/ciblea/hero.png",
   "pipv-pped": "/projects/pipv-pped.png",
   tacomfav: "/projects/tacomfav.png",
   "e-panacee": "/projects/e-panacee.png",
@@ -101,7 +102,7 @@ export default function TravauxPage() {
           <span>{tp.m3}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>03</strong>
+          <strong>04</strong>
           <span>{tp.m1}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
