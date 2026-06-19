@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useRef } from "react";
 
 const LOCAL_SCREENSHOTS: Record<string, string> = {
+  ciblea: "/projects/ciblea/hero.png",
   "pipv-pped": "/projects/pipv-pped.png",
   tacomfav: "/projects/tacomfav.png",
   "e-panacee": "/projects/e-panacee.png",
@@ -102,7 +103,7 @@ const Projet = () => {
               };
           return (
             <Link
-              key={p.slug}
+              key={p.slug + i}
               {...linkProps}
               style={{ textDecoration: "none", color: "inherit" }}
               aria-label={`${t.projects.visitSite} — ${p.name}`}

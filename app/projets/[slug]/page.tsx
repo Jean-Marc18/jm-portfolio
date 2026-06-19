@@ -7,13 +7,14 @@ import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { use, useRef } from "react";
 
 type CaseStudy =
   Dictionary["projectPage"]["cases"][keyof Dictionary["projectPage"]["cases"]];
 
 const COVER_HEADLINE: Record<string, [string, string]> = {
-  "pipv-pped": ["PIPV", "—PPED."],
+  ciblea: ["Ciblea", "—IA."],
   tacomfav: ["TaCom", "—Fav."],
   "e-panacee": ["e-", "Panacee."],
 };
@@ -94,6 +95,19 @@ export default function ProjectPage({
             <span style={{ color: "var(--accent)" }}>.</span>
           </h1>
           <p data-intro-lede>{study.heroP}</p>
+          {project.url && (
+            <div data-intro-lede style={{ marginTop: 24 }}>
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noreferrer"
+                className="pf-btn pf-btn-primary"
+                style={{ display: "inline-flex", alignItems: "center", gap: 8, textDecoration: "none" }}
+              >
+                {t.projects.visitSite} <ArrowUpRight />
+              </a>
+            </div>
+          )}
         </div>
         <div className="pj-info" data-intro-info>
           {study.info.map(([k, v]) => (
@@ -191,6 +205,72 @@ export default function ProjectPage({
         </div>
       </section>
 
+      <section className="pj-mock">
+        <div className="pj-mock-band pf-reveal">
+          <Label
+            style={{
+              display: "block",
+              color: "rgba(255,255,255,0.55)",
+              marginBottom: 16,
+            }}
+          >
+            {study.mockLabel}
+          </Label>
+          <h2
+            className="pf-display"
+            style={{
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              margin: 0,
+              letterSpacing: "-0.02em",
+              fontWeight: 500,
+              lineHeight: 1.05,
+            }}
+          >
+            {study.mockH1}
+          </h2>
+          <p
+            style={{
+              fontSize: 14.5,
+              color: "rgba(244,241,234,0.6)",
+              marginTop: 14,
+              maxWidth: 560,
+              lineHeight: 1.55,
+            }}
+          >
+            {study.mockP}
+          </p>
+
+          <div className="pj-mock-grid">
+            {(study.mocks as [string, string, string?][]).map(([title, desc, img], i) => {
+              const isLg = i === 0;
+              const isSm = title.toLowerCase().includes("template");
+              
+              let tileClass = "pj-mock-tile";
+              if (isLg) tileClass += " pj-mock-tile-lg";
+              else if (isSm) tileClass += " pj-mock-tile-sm";
+
+              return (
+                <div key={title} className={tileClass}>
+                  <div className="pj-mock-text">
+                    <h4 className="pf-display">{title}</h4>
+                    <p>{desc}</p>
+                  </div>
+                  {img ? (
+                    <div className="pj-mock-img-wrapper">
+                      <img src={img} alt={title} />
+                    </div>
+                  ) : (
+                    <div className="pj-mock-img-wrapper">
+                      <span className="pj-mock-placeholder">▢ screenshot</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="pj-challenges">
         <div className="pj-challenges-head pf-reveal">
           <div>
@@ -231,66 +311,6 @@ export default function ProjectPage({
           ))}
         </div>
       </section>
-
-      {/* <section className="pj-mock">
-        <div className="pj-mock-band pf-reveal">
-          <Label
-            style={{
-              display: "block",
-              color: "rgba(255,255,255,0.55)",
-              marginBottom: 16,
-            }}
-          >
-            {study.mockLabel}
-          </Label>
-          <h2
-            className="pf-display"
-            style={{
-              fontSize: "clamp(28px, 3.5vw, 44px)",
-              margin: 0,
-              letterSpacing: "-0.02em",
-              fontWeight: 500,
-              lineHeight: 1.05,
-            }}
-          >
-            {study.mockH1}
-          </h2>
-          <p
-            style={{
-              fontSize: 14.5,
-              color: "rgba(244,241,234,0.6)",
-              marginTop: 14,
-              maxWidth: 560,
-              lineHeight: 1.55,
-            }}
-          >
-            {study.mockP}
-          </p>
-
-          <div className="pj-mock-grid">
-            {study.mocks.map(([title, desc], i) => (
-              <div
-                key={title}
-                className={`pj-mock-tile ${i === 0 ? "pj-mock-tile-lg" : ""}`}
-              >
-                <div>
-                  <h4 className="pf-display">{title}</h4>
-                  <p>{desc}</p>
-                </div>
-                <div className="pj-mock-fakeui">
-                  <div className="pj-mock-bar">
-                    <div
-                      className="pj-mock-bar-fill"
-                      style={{ width: i === 0 ? "65%" : "40%" }}
-                    />
-                  </div>
-                  <span className="pj-mock-placeholder">▢ screenshot</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       <section className="pj-stack">
         <div className="pj-stack-head pf-reveal">
