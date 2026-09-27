@@ -2493,6 +2493,18 @@ html.jmk-preloaded .jm-preloader {
   align-items: end;
   color: var(--on-pastel);
 }
+.pj-next-visual {
+  position: relative;
+  overflow: hidden;
+}
+.pj-next-image {
+  object-fit: cover;
+  object-position: left top;
+  transition: transform 0.6s var(--ease-out, ease);
+}
+.pj-next-card:hover .pj-next-image {
+  transform: scale(1.03);
+}
 .pj-next-visual .pj-cover-headline {
   font-size: clamp(48px, 6vw, 80px);
   color: var(--on-pastel);
