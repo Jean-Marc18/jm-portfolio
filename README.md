@@ -1,4 +1,4 @@
-# Jean-Marc Koffi — Portfolio
+# Jean-Marc Koffi · Portfolio
 
 Portfolio personnel présentant services, projets et compétences en développement front-end.
 
@@ -18,12 +18,12 @@ Portfolio personnel présentant services, projets et compétences en développem
 
 ## Sections
 
-- **Hero** — accroche + CV téléchargeable
-- **Stack** — technologies maîtrisées
-- **Services** — offre détaillée
-- **Projets** — case studies avec covers parallax
-- **À propos** — parcours et méthode
-- **Contact** — formulaire Resend + liens directs
+- **Hero** : accroche + CV téléchargeable
+- **Stack** : technologies maîtrisées
+- **Services** : offre détaillée
+- **Projets** : case studies avec covers parallax
+- **À propos** : parcours et méthode
+- **Contact** : formulaire Resend + liens directs
 
 ## Tech Stack
 
@@ -108,17 +108,17 @@ La locale détectée est passée en prop à un `LanguageProvider` client, ce qui
 
 Quelques choix qui sortent du template Next.js générique :
 
-- **Cover coordinator** ([lib/animations/cover.ts](./lib/animations/cover.ts)) — un module-level store qui permet au Preloader de "réserver" un délai *avant le mount React*, pour que les intros SplitText des heros attendent que l'overlay soit dégagé. Sans ça, les animations partent sous le preloader et l'utilisateur ne les voit pas.
+- **Cover coordinator** ([lib/animations/cover.ts](./lib/animations/cover.ts)) : un module-level store qui permet au Preloader de "réserver" un délai *avant le mount React*, pour que les intros SplitText des heros attendent que l'overlay soit dégagé. Sans ça, les animations partent sous le preloader et l'utilisateur ne les voit pas.
 
-- **Preloader sans flash** ([app/layout.tsx](./app/layout.tsx)) — un script inline dans `<head>` lit `sessionStorage` *avant* l'hydration et ajoute une classe sur `<html>` ; le CSS cache alors l'overlay instantanément pour les visites suivantes. Pattern inspiré de `next-themes`, évite l'effet "hero visible puis preloader par-dessus".
+- **Preloader sans flash** ([app/layout.tsx](./app/layout.tsx)) : un script inline dans `<head>` lit `sessionStorage` *avant* l'hydration et ajoute une classe sur `<html>` ; le CSS cache alors l'overlay instantanément pour les visites suivantes. Pattern inspiré de `next-themes`, évite l'effet "hero visible puis preloader par-dessus".
 
-- **i18n SSR-compatible** ([app/layout.tsx](./app/layout.tsx)) — le layout est `async`, lit cookies + `Accept-Language` côté serveur et passe la locale au provider client en prop. Aucun localStorage côté client, aucun mismatch.
+- **i18n SSR-compatible** ([app/layout.tsx](./app/layout.tsx)) : le layout est `async`, lit cookies + `Accept-Language` côté serveur et passe la locale au provider client en prop. Aucun localStorage côté client, aucun mismatch.
 
-- **GSAP + Strict Mode** ([components/layout/header/Header.tsx](./components/layout/header/Header.tsx)) — la timeline du menu mobile est construite **une seule fois** en `paused: true` via `useGSAP`, puis pilotée par `play()` / `reverse()`. Évite les courses avec le revert de `useGSAP` lors des re-renders.
+- **GSAP + Strict Mode** ([components/layout/header/Header.tsx](./components/layout/header/Header.tsx)) : la timeline du menu mobile est construite **une seule fois** en `paused: true` via `useGSAP`, puis pilotée par `play()` / `reverse()`. Évite les courses avec le revert de `useGSAP` lors des re-renders.
 
-- **Skip link a11y** ([app/layout.tsx](./app/layout.tsx), [app/globals.css](./app/globals.css)) — caché visuellement, visible au `Tab`, saute directement à `<main id="main-content">`.
+- **Skip link a11y** ([app/layout.tsx](./app/layout.tsx), [app/globals.css](./app/globals.css)) : caché visuellement, visible au `Tab`, saute directement à `<main id="main-content">`.
 
-- **Email template aligné design system** ([emails/ContactEmail.tsx](./emails/ContactEmail.tsx)) — couleurs et typo du site (Geist via `@import` + fallbacks inline pour Outlook), SVG logo inline pour la compatibilité maximale (Apple Mail, Gmail, Outlook web).
+- **Email template aligné design system** ([emails/ContactEmail.tsx](./emails/ContactEmail.tsx)) : couleurs et typo du site (Geist via `@import` + fallbacks inline pour Outlook), SVG logo inline pour la compatibilité maximale (Apple Mail, Gmail, Outlook web).
 
 ## Performance
 

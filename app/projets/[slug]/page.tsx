@@ -14,8 +14,8 @@ type CaseStudy =
   Dictionary["projectPage"]["cases"][keyof Dictionary["projectPage"]["cases"]];
 
 const COVER_HEADLINE: Record<string, [string, string]> = {
-  ciblea: ["Ciblea", "—IA."],
-  tacomfav: ["TaCom", "—Fav."],
+  ciblea: ["Ciblea", "IA."],
+  tacomfav: ["TaCom", "Fav."],
   "e-panacee": ["e-", "Panacee."],
 };
 
@@ -304,7 +304,7 @@ export default function ProjectPage({
         <div className="pj-challenges-grid">
           {study.ch.map(([n, title, desc]) => (
             <div key={n} className="pj-ch pf-reveal">
-              <div className="pj-ch-n">— {n}</div>
+              <div className="pj-ch-n">{n}</div>
               <h3 className="pf-display">{title}</h3>
               <p>{desc}</p>
             </div>
@@ -401,7 +401,7 @@ export default function ProjectPage({
                 TaCom
                 <br />
                 <span style={{ fontStyle: "italic", fontWeight: 300 }}>
-                  —Fav.
+                  Fav.
                 </span>
               </h3>
             </div>

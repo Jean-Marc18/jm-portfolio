@@ -108,14 +108,14 @@ const Projet = () => {
               key={p.slug + i}
               {...linkProps}
               style={{ textDecoration: "none", color: "inherit" }}
-              aria-label={`${t.projects.visitSite} — ${p.name}`}
+              aria-label={`${t.projects.visitSite}, ${p.name}`}
             >
               <Card className="pf-reveal" style={{ overflow: "hidden" }}>
                 <div className={`ho-cover ho-cover-${i + 1}`}>
                   {screenshot ? (
                     <Image
                       src={screenshot}
-                      alt={`${p.name} — ${p.sub}`}
+                      alt={`${p.name}, ${p.sub}`}
                       fill
                       sizes="(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw"
                       className="ho-cover-image"

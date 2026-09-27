@@ -13,7 +13,7 @@ import { reserveCover } from "@/lib/animations/cover";
 const SESSION_KEY = "jmk-preloaded";
 const PRELOADER_DURATION = 2.0;
 
-// Reserve the cover at module-load — before React mounts and before any
+// Reserve the cover at module-load, before React mounts and before any
 // hero's useGSAP fires. Otherwise heroes read coverDelay = 0 and animate
 // under the preloader.
 if (typeof window !== "undefined") {
@@ -29,7 +29,7 @@ if (typeof window !== "undefined") {
 
 // Always renders the overlay so SSR ships it. The inline <head> script
 // in layout.tsx adds `html.jmk-preloaded` on return visits, and CSS
-// hides this overlay instantly — no hero flash before mount.
+// hides this overlay instantly: no hero flash before mount.
 export const Preloader = () => {
   const root = useRef<HTMLDivElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);

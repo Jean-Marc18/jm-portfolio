@@ -139,7 +139,7 @@ export default function TravauxPage() {
                 {screenshot ? (
                   <Image
                     src={screenshot}
-                    alt={`${p.name} — ${p.sub}`}
+                    alt={`${p.name}, ${p.sub}`}
                     fill
                     sizes="(max-width: 980px) 50vw, 33vw"
                     className="tv-cov-image"

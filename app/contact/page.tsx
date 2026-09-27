@@ -82,7 +82,7 @@ export default function ContactPage() {
     dependencies: [locale],
   });
 
-  // Body reveals after the hero finishes — the contact page is short
+  // Body reveals after the hero finishes: the contact page is short
   // enough that the form sits in the initial viewport.
   useGSAP(
     () => {
@@ -245,7 +245,7 @@ export default function ContactPage() {
               />
             </div>
 
-            {/* Honeypot — hidden from real users + screen-readers, bots
+            {/* Honeypot: hidden from real users + screen-readers, bots
                 tend to fill any field they find. Server drops any
                 submission where this is non-empty. */}
             <input

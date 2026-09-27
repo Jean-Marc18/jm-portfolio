@@ -136,7 +136,7 @@ export default function AboutPage() {
 
         <div className="ap-exp-row pf-reveal">
           <div className="ap-exp-meta">
-            <Label>2024 — 26</Label>
+            <Label>2024-26</Label>
             <strong className="pf-display">{ap.expRole}</strong>
             <span>Inexa · {ap.expCtx}</span>
             <div

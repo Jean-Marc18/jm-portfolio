@@ -36,11 +36,11 @@ const SITE_URL = "https://jmk-portfolio.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Jean-Marc Koffi — Développeur Front-End",
+    default: "Jean-Marc Koffi · Développeur Front-End",
     template: "%s | Jean-Marc Koffi",
   },
   description:
-    "Développeur front-end à Abidjan. Interfaces performantes, accessibles, optimisées SEO. Architectures modernes — pour des produits qui durent.",
+    "Développeur front-end à Abidjan. Interfaces performantes, accessibles, optimisées SEO. Architectures modernes, pour des produits qui durent.",
   keywords: [
     "Jean-Marc Koffi",
     "développeur front-end",
@@ -69,22 +69,22 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     alternateLocale: ["en_US"],
     url: SITE_URL,
-    title: "Jean-Marc Koffi — Développeur Front-End",
+    title: "Jean-Marc Koffi · Développeur Front-End",
     description:
-      "Interfaces performantes et accessibles, architectures modernes — fintech, agences, institutions.",
-    siteName: "Jean-Marc Koffi — Portfolio",
+      "Interfaces performantes et accessibles, architectures modernes : fintech, agences, institutions.",
+    siteName: "Jean-Marc Koffi · Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Jean-Marc Koffi — Portfolio",
+        alt: "Jean-Marc Koffi · Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jean-Marc Koffi — Développeur Front-End",
+    title: "Jean-Marc Koffi · Développeur Front-End",
     description:
       "Interfaces performantes et accessibles, architectures modernes.",
     images: ["/og-image.png"],
@@ -153,7 +153,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${SITE_URL}#website`,
       url: SITE_URL,
-      name: "Jean-Marc Koffi — Portfolio",
+      name: "Jean-Marc Koffi · Portfolio",
       inLanguage: ["fr", "en"],
       author: { "@id": `${SITE_URL}#person` },
     },
@@ -161,7 +161,7 @@ const jsonLd = {
       "@type": "ProfilePage",
       "@id": `${SITE_URL}#webpage`,
       url: SITE_URL,
-      name: "Jean-Marc Koffi — Développeur Front-End",
+      name: "Jean-Marc Koffi · Développeur Front-End",
       inLanguage: ["fr", "en"],
       isPartOf: { "@id": `${SITE_URL}#website` },
       mainEntity: { "@id": `${SITE_URL}#person` },
@@ -196,7 +196,7 @@ export default async function RootLayout({
     >
       <head>
         {/* Runs before hydration: marks <html> so CSS can hide the
-            preloader instantly on return visits — no hero flash. */}
+            preloader instantly on return visits: no hero flash. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -20,15 +20,15 @@ export const dictionaries = {
         "qui fait grandir",
         "votre produit.",
       ],
-      lede: "Développeur front-end basé à Abidjan. Je conçois des interfaces performantes et accessibles, sur des architectures modernes — pour des produits qui doivent durer, tous secteurs confondus.",
+      lede: "Développeur front-end basé à Abidjan. Je conçois des interfaces performantes et accessibles, sur des architectures modernes, pour des produits qui doivent durer, tous secteurs confondus.",
       cv: "Télécharger mon CV",
       viewProjects: "Voir les projets",
     },
     banner: {
       label: "Dernier poste",
       company: "Inexa",
-      suffix: "— Fintech",
-      dates: "2024 — 2026",
+      suffix: "· Fintech",
+      dates: "2024-2026",
       ctx: "Extranet CDC-CI · Marché UMOA · Abidjan",
       location: "Côte d'Ivoire · GMT+0",
       years: "2+ ans à construire\ndes produits web en production",
@@ -38,7 +38,7 @@ export const dictionaries = {
     },
     toolkit: "Ma stack",
     services: {
-      label: "— Services",
+      label: "Services",
       h1a: "Un regard ciblé sur",
       h1b: "ce que je fais, et comment je livre.",
       intro:
@@ -70,7 +70,7 @@ export const dictionaries = {
       ],
     },
     work: {
-      label: "— Sélection",
+      label: "Sélection",
       h1: "Projets récents.",
       all: "Tous les projets →",
     },
@@ -187,7 +187,7 @@ export const dictionaries = {
       ],
     },
     about: {
-      label: "— À propos",
+      label: "À propos",
       h1: "Transformer des produits complexes en expériences fluides.",
       cta: "Discutons",
       p1: "Salut, je suis Jean-Marc, développeur front-end avec 2+ ans d'expérience à construire des applications web en production. Je travaille principalement sur l'écosystème React / Next.js en TypeScript, et je tiens à la clean architecture, à l'accessibilité, et à du code que d'autres devs peuvent reprendre et faire évoluer.",
@@ -199,39 +199,39 @@ export const dictionaries = {
       p2f: "feature-component",
       p2g: ".",
       expLabel: "Expérience",
-      period: "2024 — 26",
+      period: "2024-26",
       role: "Développeur Front-End",
-      roleAt: "— Inexa",
+      roleAt: "chez Inexa",
       roleCtx: "Fintech · Abidjan · CDC-CI / Marché UMOA",
       bullets: [
         "Développement de front-ends pour des applications institutionnelles et B2B, dont l'extranet CDC-CI et une application de Contrôle Dépositaire pour le marché financier UMOA.",
         "Mise en place d'un monorepo Next.js partagé entre plusieurs produits métier.",
         "Application de la clean architecture (hexagonale) et d'une organisation feature-component sur l'ensemble des projets.",
-        "Travail en Scrum (sprints, dailys, code reviews) — interventions ponctuelles sur des projets Angular existants.",
+        "Travail en Scrum (sprints, dailys, code reviews), avec des interventions ponctuelles sur des projets Angular existants.",
       ],
     },
     contact: {
-      label: "— Contact",
+      label: "Contact",
       h1a: "Construisons",
       h1b: "votre prochain produit",
       h1c: "ensemble.",
       intro:
-        "Une opportunité freelance ou un poste à pourvoir ? Parlons-en — je réponds sous 24h en semaine.",
+        "Une opportunité freelance ou un poste à pourvoir ? Parlons-en : je réponds sous 24h en semaine.",
       cta: "Réserver un appel",
       status: "Disponible",
     },
     footer: {
       tag: "Développeur front-end · Abidjan, Côte d'Ivoire. Disponible pour des missions freelance ou un poste.",
       elsewhere: "Ailleurs",
-      rights: "© 2026 Jean-Marc Koffi — Tous droits réservés",
+      rights: "© 2026 Jean-Marc Koffi · Tous droits réservés",
       built: "Construit avec Next.js · Conçu à Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Sélection / 06 projets",
+      heroLabel: "Sélection / 06 projets",
       heroH1a: "Travaux",
       heroH1b: "récents.",
       heroP:
-        "Une sélection de projets en production, sur des secteurs variés — IA, public, e-commerce, agence créative. Chacun illustre une facette différente du front-end moderne.",
+        "Une sélection de projets en production, sur des secteurs variés : IA, public, e-commerce, agence créative. Chacun illustre une facette différente du front-end moderne.",
       m1: "Projets en production",
       m2: "Technologies maîtrisées",
       m3: "Expérience pro",
@@ -240,12 +240,12 @@ export const dictionaries = {
       m4v: "4",
       ctaCase: "Voir le cas →",
       ctaVisit: "Visiter le site →",
-      appLabel: "— Mon approche",
+      appLabel: "Mon approche",
       appH1: "Chaque projet suit le même fil rouge.",
       steps: [
         [
           "Comprendre le métier avant de coder",
-          "Avant la première ligne de code, je m'imprègne du domaine — fintech, e-commerce, institutionnel. Le code suit le besoin, pas l'inverse.",
+          "Avant la première ligne de code, je m'imprègne du domaine : fintech, e-commerce, institutionnel. Le code suit le besoin, pas l'inverse.",
         ],
         [
           "Architecture lisible et testable",
@@ -260,7 +260,7 @@ export const dictionaries = {
           "Découpage en stories courtes, déploiements continus, feedback rapide. Pour itérer avec le métier et corriger tôt.",
         ],
       ] as [string, string][],
-      ctaLabel: "— Prochain projet",
+      ctaLabel: "Prochain projet",
       ctaH1a: "On parle de votre",
       ctaH1b: "prochain produit",
       ctaDiscuss: "Démarrer une discussion →",
@@ -275,7 +275,7 @@ export const dictionaries = {
       } as Record<string, string>,
     },
     servicesPage: {
-      heroLabel: "— Services",
+      heroLabel: "Services",
       heroH1a: "Quatre piliers,",
       heroH1b: "une seule",
       heroH1c: "ambition :",
@@ -283,7 +283,7 @@ export const dictionaries = {
       heroH1e: "front-end",
       heroH1f: "qui dure.",
       heroP:
-        "Je travaille avec des équipes produit qui veulent construire vite, mais durablement — de la startup à l'institution publique, en passant par les agences créatives et les e-commerces. Le secteur compte moins que la rigueur du produit.",
+        "Je travaille avec des équipes produit qui veulent construire vite, mais durablement, de la startup à l'institution publique, en passant par les agences créatives et les e-commerces. Le secteur compte moins que la rigueur du produit.",
       heroCta: "Démarrer une mission",
       heroCtaB: "Voir le process",
       services: [
@@ -328,7 +328,7 @@ export const dictionaries = {
         },
         {
           title: "Intégration produit",
-          long: "Mon terrain de prédilection : les workflows complexes à forte densité d'information — qu'ils soient en fintech, dans la santé, l'éducation, le B2B SaaS ou les outils internes. Plus c'est dense, plus j'aime.",
+          long: "Mon terrain de prédilection : les workflows complexes à forte densité d'information, qu'ils soient en fintech, dans la santé, l'éducation, le B2B SaaS ou les outils internes. Plus c'est dense, plus j'aime.",
           tags: ["B2B", "SaaS", "Workflows complexes", "Données denses"],
           deliv: [
             "Découpage en stories",
@@ -339,7 +339,7 @@ export const dictionaries = {
         },
       ],
       delivHead: "Livrables types",
-      procLabel: "— Process",
+      procLabel: "Process",
       procH1: "Du brief au déploiement, en quatre temps.",
       procP:
         "Une approche itérative et transparente. À chaque étape, vous voyez ce qui avance, ce qui bloque, et ce qui arrive. Pas de boîte noire.",
@@ -361,7 +361,7 @@ export const dictionaries = {
           "Audit Lighthouse, SEO technique, monitoring en production, documentation et handover à l'équipe interne.",
         ],
       ] as [string, string][],
-      faqLabel: "— Questions fréquentes",
+      faqLabel: "Questions fréquentes",
       faqH1: "Avant de commencer, voici les questions qu'on me pose le plus.",
       faqs: [
         [
@@ -382,43 +382,43 @@ export const dictionaries = {
         ],
         [
           "Quel est votre TJM ?",
-          "Variable selon la nature de la mission, la durée et le niveau d'engagement. Le mieux est d'en parler — je vous fais une proposition adaptée sous 48h.",
+          "Variable selon la nature de la mission, la durée et le niveau d'engagement. Le mieux est d'en parler : je vous fais une proposition adaptée sous 48h.",
         ],
         [
           "Combien de temps pour démarrer ?",
           "Immédiatement pour des missions courtes (< 1 mois), sous 2 semaines après la signature pour des missions longues.",
         ],
       ] as [string, string][],
-      ctaLabel: "— Démarrer",
+      ctaLabel: "Démarrer",
       ctaH1a: "Une mission en tête ?",
       ctaH1b: "Parlons-en.",
       ctaDiscuss: "Démarrer une discussion →",
       ctaWork: "Voir mes travaux",
     },
     aboutPage: {
-      heroLabel: "— À propos",
+      heroLabel: "À propos",
       heroH1a: "Front-end",
       heroH1b: "basé à",
       heroH1c: "Abidjan",
       portraitRole: "Développeur Front-End · 2+ ans",
       bioLabel: "Bio",
       avail: "Disponible · Immédiatement",
-      p1: "Bonjour, je suis Jean-Marc, développeur front-end avec plus de 2 ans d'expérience à construire des applications web en production. J'ai notamment travaillé dans le secteur financier — mais je suis bien plus intéressé par la qualité d'un produit que par son secteur.",
-      p2: "Je conçois des interfaces performantes, accessibles et optimisées SEO, en m'appuyant sur des architectures modernes — clean architecture, hexagonale, feature-component. Mon objectif : transformer des produits complexes en expériences utilisateur fluides et durables.",
+      p1: "Bonjour, je suis Jean-Marc, développeur front-end avec plus de 2 ans d'expérience à construire des applications web en production. J'ai notamment travaillé dans le secteur financier, mais je suis bien plus intéressé par la qualité d'un produit que par son secteur.",
+      p2: "Je conçois des interfaces performantes, accessibles et optimisées SEO, en m'appuyant sur des architectures modernes : clean architecture, hexagonale, feature-component. Mon objectif : transformer des produits complexes en expériences utilisateur fluides et durables.",
       p3a: "J'ai récemment passé 2 ans chez ",
       p3inexa: "Inexa",
-      p3b: ", où j'ai contribué à plusieurs produits du secteur financier — notamment l'extranet de la ",
+      p3b: ", où j'ai contribué à plusieurs produits du secteur financier, notamment l'extranet de la ",
       p3cdc: "CDC-CI",
-      p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, équivalent ivoirien de la Caisse des dépôts française) et une application de Contrôle Dépositaire pour le marché régional UMOA. En parallèle, j'ai mené des missions freelance pour des clients en e-commerce, agence et institutionnel. Aujourd'hui, je cherche une nouvelle équipe à rejoindre — quel que soit le secteur, du moment que le produit a une vraie exigence d'ingénierie front.",
+      p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, équivalent ivoirien de la Caisse des dépôts française) et une application de Contrôle Dépositaire pour le marché régional UMOA. En parallèle, j'ai mené des missions freelance pour des clients en e-commerce, agence et institutionnel. Aujourd'hui, je cherche une nouvelle équipe à rejoindre, quel que soit le secteur, du moment que le produit a une vraie exigence d'ingénierie front.",
       stats: [
         ["2+", "années en production"],
         ["06", "projets en production"],
         ["4", "secteurs (IA, institutionnel, e-commerce, agence)"],
         ["13+", "technologies maîtrisées"],
       ] as [string, string][],
-      parLabel: "— Parcours",
+      parLabel: "Parcours",
       parH1: "Expérience professionnelle.",
-      parP: "Une expérience significative à construire des applications web exigeantes — du secteur public à l'e-commerce, en passant par les agences et la fintech.",
+      parP: "Une expérience significative à construire des applications web exigeantes, du secteur public à l'e-commerce, en passant par les agences et la fintech.",
       expRole: "Développeur Front-End",
       expCtx: "Fintech · Abidjan · CDC-CI / Marché UMOA",
       bullets: [
@@ -427,7 +427,7 @@ export const dictionaries = {
         "Mise en place d'un monorepo Next.js partagé entre plusieurs produits métier.",
         "Application de la clean architecture / hexagonale et d'une organisation feature-component.",
       ],
-      skLabel: "— Stack technique",
+      skLabel: "Stack technique",
       skH1: "Ce que j'utilise au quotidien.",
       skP: "Une stack que j'ai consolidée autour de Next.js et de l'écosystème React moderne. Mise à jour régulière, choix justifiés, pas de hype gratuite.",
       skillsLocal: {
@@ -461,7 +461,7 @@ export const dictionaries = {
         ],
         Outils: ["Git", "GitHub Actions", "Vercel", "Figma", "pnpm"],
       } as Record<string, string[]>,
-      valLabel: "— Valeurs",
+      valLabel: "Valeurs",
       valH1: "Ce qui guide mon travail.",
       values: [
         [
@@ -472,15 +472,15 @@ export const dictionaries = {
         [
           "02",
           "Accessibilité par défaut",
-          "WCAG AA est un plancher, pas un plafond. Contraste, navigation clavier, sémantique HTML — ce sont des prérequis, pas des options.",
+          "WCAG AA est un plancher, pas un plafond. Contraste, navigation clavier, sémantique HTML : ce sont des prérequis, pas des options.",
         ],
         [
           "03",
           "Le métier d'abord",
-          "Avant la stack, le besoin. Je passe du temps à comprendre le domaine — fintech, e-commerce, institutionnel — avant de coder.",
+          "Avant la stack, le besoin. Je passe du temps à comprendre le domaine (fintech, e-commerce, institutionnel) avant de coder.",
         ],
       ] as [string, string, string][],
-      ctaLabel: "— Travaillons ensemble",
+      ctaLabel: "Travaillons ensemble",
       ctaH1a: "Une équipe à renforcer",
       ctaH1b: "ou un projet à",
       ctaH1c: "lancer",
@@ -488,7 +488,7 @@ export const dictionaries = {
       ctaCv: "Télécharger mon CV ↓",
     },
     contactPage: {
-      heroLabel: "— Contact",
+      heroLabel: "Contact",
       heroH1: "Discutons",
       heroP:
         "Mission freelance, poste à pourvoir, ou simple discussion sur un projet en cours de réflexion : je réponds sous 24h en semaine. La meilleure entrée en matière reste un email un peu détaillé.",
@@ -509,11 +509,11 @@ export const dictionaries = {
       phMsg:
         "Contexte, objectifs, stack envisagée, timing souhaité, budget approximatif si possible…",
       disclaimer:
-        "Vos informations restent privées. Aucun email marketing — je vous réponds personnellement.",
+        "Vos informations restent privées. Aucun email marketing : je vous réponds personnellement.",
       send: "Envoyer le message",
       sideEmailHead: "Email direct",
       sideEmailP:
-        "Le plus rapide. Soyez précis sur le contexte et le timing — ça aide à vous répondre vite et bien.",
+        "Le plus rapide. Soyez précis sur le contexte et le timing, ça aide à vous répondre vite et bien.",
       sideAvailHead: "Disponibilité",
       sideAvailStrong: "Ouvert aux discussions",
       sideAvailP_a: "Disponible ",
@@ -554,7 +554,7 @@ export const dictionaries = {
             ["Client", "Projet personnel"],
             ["Rôle", "Développeur Fullstack"],
             ["Durée", "1 mois (MVP)"],
-            ["Année", "2025 — En production"],
+            ["Année", "2025 · En production"],
           ] as [string, string][],
           coverVer: "v1.0 · production",
           coverDeployed: "Déployé",
@@ -562,7 +562,7 @@ export const dictionaries = {
           coverTypeValue: "Plateforme SaaS IA",
           coverStackLabel: "Stack principale",
           coverStackValue: "Next.js 16 · Supabase · Inngest",
-          ctxLabel: "— Contexte",
+          ctxLabel: "Contexte",
           ctxH1:
             "L'IA générative pour aider les candidats à mieux se vendre.",
           ctxTags: [
@@ -581,7 +581,7 @@ export const dictionaries = {
           ctxP3b: "Mobile-first et Freemium",
           ctxP3c:
             ", ce produit SaaS orchestre 6 agents IA via Inngest et gère les paiements via GeniusPay (XOF).",
-          appLabel: "— L'architecture IA",
+          appLabel: "L'architecture IA",
           appH1: "Un pipeline de 6 agents stricts.",
           appP: "Pour éviter les hallucinations typiques des LLMs, le processus est segmenté : le plan de rédaction est le seul canal d'adaptation. Les rédacteurs ne voient jamais l'offre brute.",
           ch: [
@@ -606,7 +606,7 @@ export const dictionaries = {
               "Intégration de GeniusPay pour le marché local (XOF) avec vérification HMAC des webhooks, couplé à Supabase Auth et Row Level Security (RLS) pour protéger les données.",
             ],
           ] as [string, string, string][],
-          mockLabel: "— Fonctionnalités",
+          mockLabel: "Fonctionnalités",
           mockH1: "De l'offre au PDF en 60s.",
           mockP:
             "Une expérience fluide avec un suivi en temps réel de la progression des agents IA.",
@@ -652,7 +652,7 @@ export const dictionaries = {
               "/projects/ciblea/CV_Ciblea_elegant.jpg"
             ],
           ] as [string, string, string][],
-          skLabel: "— Stack technique",
+          skLabel: "Stack technique",
           skH1: "Ce qui tourne sous le capot.",
           skP: "Une architecture moderne taillée pour la rapidité d'exécution et la résilience face aux API externes.",
           skGroups: [
@@ -666,14 +666,14 @@ export const dictionaries = {
             ["Documents", ["React-PDF", "Zod"]],
             ["Déploiement", ["Vercel"]],
           ] as [string, string[]][],
-          resLabel: "— En production",
+          resLabel: "En production",
           resH1: "Les résultats.",
           res: [
             ["60s", "Temps moyen pour générer un CV et une Lettre"],
             ["100%", "Succès des tâches background via Inngest"],
             ["B2C", "Premiers utilisateurs actifs et retours positifs"],
           ] as [string, string][],
-          nextLabel: "— Projet suivant",
+          nextLabel: "Projet suivant",
           nextH1: "TaComFav.",
           nextProjLabel: "Agency · 2025",
           nextH3: "Site agence de communication",
@@ -702,15 +702,15 @@ export const dictionaries = {
         "Experiences That",
         "Scale With Your Product.",
       ],
-      lede: "Front-end developer based in Abidjan. I build performant, accessible interfaces rooted in modern architectures — for products that need to scale, across every industry.",
+      lede: "Front-end developer based in Abidjan. I build performant, accessible interfaces rooted in modern architectures, for products that need to scale, across every industry.",
       cv: "Download my CV",
       viewProjects: "View projects",
     },
     banner: {
       label: "Latest role",
       company: "Inexa",
-      suffix: "— Fintech",
-      dates: "2024 — 2026",
+      suffix: "· Fintech",
+      dates: "2024-2026",
       ctx: "CDC-CI Extranet · UMOA market · Abidjan",
       location: "Ivory Coast · GMT+0",
       years: "2+ years building\nproduction web products",
@@ -720,11 +720,11 @@ export const dictionaries = {
     },
     toolkit: "My toolkit",
     services: {
-      label: "— Services",
+      label: "Services",
       h1a: "A focused look at",
       h1b: "what I do, and how I deliver.",
       intro:
-        "Four areas of focus, built for product teams who want to ship fast and sustainably — from wireframe to production, including the architecture in between.",
+        "Four areas of focus, built for product teams who want to ship fast and sustainably, from wireframe to production, including the architecture in between.",
       process: "See my process",
       items: [
         {
@@ -741,7 +741,7 @@ export const dictionaries = {
         },
         {
           title: "Performance & SEO",
-          desc: "Core Web Vitals optimisation, SSR / SSG rendering with Next.js, structured metadata and Open Graph — for fast, indexable, well-ranked sites.",
+          desc: "Core Web Vitals optimisation, SSR / SSG rendering with Next.js, structured metadata and Open Graph, for fast, indexable, well-ranked sites.",
           tags: ["Core Web Vitals", "SSR / SSG", "Open Graph"],
         },
         {
@@ -752,7 +752,7 @@ export const dictionaries = {
       ],
     },
     work: {
-      label: "— Selected work",
+      label: "Selected work",
       h1: "Recent projects.",
       all: "All work →",
     },
@@ -869,7 +869,7 @@ export const dictionaries = {
       ],
     },
     about: {
-      label: "— About",
+      label: "About",
       h1: "Turning complex products into fluid experiences.",
       cta: "Let's talk",
       p1: "Hi, I'm Jean-Marc, a front-end developer with 2+ years of experience building production web apps. I work mostly with the React / Next.js ecosystem in TypeScript, and I care about clean architecture, accessibility, and code that other developers can pick up and ship from.",
@@ -881,39 +881,39 @@ export const dictionaries = {
       p2f: "feature-component",
       p2g: ".",
       expLabel: "Experience",
-      period: "2024 — 26",
+      period: "2024-26",
       role: "Front-End Developer",
-      roleAt: "— Inexa",
+      roleAt: "at Inexa",
       roleCtx: "Fintech · Abidjan · CDC-CI / UMOA market",
       bullets: [
         "Built front-ends for institutional and B2B applications, including the CDC-CI extranet and a Custody Control app for the UMOA financial market.",
         "Set up a Next.js monorepo shared across several business products.",
         "Applied clean / hexagonal architecture and feature-component organisation across every project.",
-        "Worked in Scrum with sprints, dailys and code reviews — also occasionally on Angular legacy projects.",
+        "Worked in Scrum with sprints, dailys and code reviews, and occasionally on Angular legacy projects.",
       ],
     },
     contact: {
-      label: "— Contact",
+      label: "Contact",
       h1a: "Let's start building",
       h1b: "your next product",
       h1c: "together.",
       intro:
-        "Freelance opportunity or full-time role? Let's talk — I reply within 24h on weekdays.",
+        "Freelance opportunity or full-time role? Let's talk: I reply within 24h on weekdays.",
       cta: "Book a call",
       status: "Available",
     },
     footer: {
       tag: "Front-end developer · Abidjan, Ivory Coast. Available for freelance missions or a permanent role.",
       elsewhere: "Elsewhere",
-      rights: "© 2026 Jean-Marc Koffi — All rights reserved",
+      rights: "© 2026 Jean-Marc Koffi · All rights reserved",
       built: "Built with Next.js · Designed in Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Selection / 06 projects",
+      heroLabel: "Selection / 06 projects",
       heroH1a: "Recent",
       heroH1b: "work.",
       heroP:
-        "A selection of production projects across diverse sectors — AI, public, e-commerce, creative agency. Each illustrates a different facet of modern front-end work.",
+        "A selection of production projects across diverse sectors: AI, public, e-commerce, creative agency. Each illustrates a different facet of modern front-end work.",
       m1: "Projects in production",
       m2: "Technologies mastered",
       m3: "Professional experience",
@@ -922,12 +922,12 @@ export const dictionaries = {
       m4v: "4",
       ctaCase: "View case study →",
       ctaVisit: "Visit site →",
-      appLabel: "— My approach",
+      appLabel: "My approach",
       appH1: "Every project follows the same thread.",
       steps: [
         [
           "Understand the business before coding",
-          "Before the first line of code, I immerse myself in the domain — fintech, e-commerce, institutional. Code follows the need, not the other way around.",
+          "Before the first line of code, I immerse myself in the domain: fintech, e-commerce, institutional. Code follows the need, not the other way around.",
         ],
         [
           "Readable, testable architecture",
@@ -942,7 +942,7 @@ export const dictionaries = {
           "Short stories, continuous deploys, fast feedback. Iterate with the business and fix early.",
         ],
       ] as [string, string][],
-      ctaLabel: "— Next project",
+      ctaLabel: "Next project",
       ctaH1a: "Let's talk about your",
       ctaH1b: "next product",
       ctaDiscuss: "Start a discussion →",
@@ -957,7 +957,7 @@ export const dictionaries = {
       } as Record<string, string>,
     },
     servicesPage: {
-      heroLabel: "— Services",
+      heroLabel: "Services",
       heroH1a: "Four pillars,",
       heroH1b: "one",
       heroH1c: "ambition:",
@@ -965,7 +965,7 @@ export const dictionaries = {
       heroH1e: "work",
       heroH1f: "that lasts.",
       heroP:
-        "I work with product teams who want to ship fast and sustainably — from startups to public institutions, by way of creative agencies and e-commerces. The industry matters less than the rigor of the product.",
+        "I work with product teams who want to ship fast and sustainably, from startups to public institutions, by way of creative agencies and e-commerces. The industry matters less than the rigor of the product.",
       heroCta: "Start a mission",
       heroCtaB: "See the process",
       services: [
@@ -1010,7 +1010,7 @@ export const dictionaries = {
         },
         {
           title: "Product integration",
-          long: "My favourite ground: complex, information-dense workflows — whether in fintech, healthcare, edtech, B2B SaaS or internal tools. The denser, the better.",
+          long: "My favourite ground: complex, information-dense workflows, whether in fintech, healthcare, edtech, B2B SaaS or internal tools. The denser, the better.",
           tags: ["B2B", "SaaS", "Complex workflows", "Dense data"],
           deliv: [
             "Story breakdown",
@@ -1021,7 +1021,7 @@ export const dictionaries = {
         },
       ],
       delivHead: "Typical deliverables",
-      procLabel: "— Process",
+      procLabel: "Process",
       procH1: "From brief to deployment, in four phases.",
       procP:
         "An iterative, transparent approach. At each stage you see what's moving, what's blocked, and what's coming. No black box.",
@@ -1043,7 +1043,7 @@ export const dictionaries = {
           "Lighthouse audit, technical SEO, production monitoring, documentation and handover to the internal team.",
         ],
       ] as [string, string][],
-      faqLabel: "— Frequently asked",
+      faqLabel: "Frequently asked",
       faqH1: "The questions I get the most, answered upfront.",
       faqs: [
         [
@@ -1064,43 +1064,43 @@ export const dictionaries = {
         ],
         [
           "What's your day rate?",
-          "It varies with the mission, duration and engagement level. Best to talk — I send a tailored proposal within 48h.",
+          "It varies with the mission, duration and engagement level. Best to talk: I send a tailored proposal within 48h.",
         ],
         [
           "How long to start?",
           "Immediately for short missions (< 1 month), within 2 weeks of signing for long missions.",
         ],
       ] as [string, string][],
-      ctaLabel: "— Get started",
+      ctaLabel: "Get started",
       ctaH1a: "Mission in mind?",
       ctaH1b: "Let's talk.",
       ctaDiscuss: "Start a discussion →",
       ctaWork: "See my work",
     },
     aboutPage: {
-      heroLabel: "— About",
+      heroLabel: "About",
       heroH1a: "Front-end",
       heroH1b: "based in",
       heroH1c: "Abidjan",
       portraitRole: "Front-End Developer · 2+ years",
       bioLabel: "Bio",
       avail: "Available · Immediately",
-      p1: "Hi, I'm Jean-Marc, a front-end developer with 2+ years of experience building production web apps. I notably worked in the financial sector — but I care a lot more about product quality than industry.",
-      p2: "I build performant, accessible, SEO-friendly interfaces, grounded in modern architectures — clean architecture, hexagonal, feature-component. My goal: turn complex products into fluid, durable user experiences.",
+      p1: "Hi, I'm Jean-Marc, a front-end developer with 2+ years of experience building production web apps. I notably worked in the financial sector, but I care a lot more about product quality than industry.",
+      p2: "I build performant, accessible, SEO-friendly interfaces, grounded in modern architectures: clean architecture, hexagonal, feature-component. My goal: turn complex products into fluid, durable user experiences.",
       p3a: "I recently spent 2 years at ",
       p3inexa: "Inexa",
-      p3b: ", where I contributed to several financial-sector products — notably the extranet of the ",
+      p3b: ", where I contributed to several financial-sector products, notably the extranet of the ",
       p3cdc: "CDC-CI",
-      p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, the Ivorian equivalent of the French Caisse des dépôts) and a Custody Control application for the regional UMOA market. On the side, I led freelance missions for e-commerce, agency and institutional clients. Today, I'm looking for a new team to join — whatever the industry, as long as the product has real front-end engineering demands.",
+      p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, the Ivorian equivalent of the French Caisse des dépôts) and a Custody Control application for the regional UMOA market. On the side, I led freelance missions for e-commerce, agency and institutional clients. Today, I'm looking for a new team to join, whatever the industry, as long as the product has real front-end engineering demands.",
       stats: [
         ["2+", "years in production"],
         ["06", "projects in production"],
         ["4", "sectors (AI, institutional, e-commerce, agency)"],
         ["13+", "technologies mastered"],
       ] as [string, string][],
-      parLabel: "— Career",
+      parLabel: "Career",
       parH1: "Professional experience.",
-      parP: "A meaningful track record building demanding web applications — from public sector to e-commerce, through agencies and fintech.",
+      parP: "A meaningful track record building demanding web applications, from public sector to e-commerce, through agencies and fintech.",
       expRole: "Front-End Developer",
       expCtx: "Fintech · Abidjan · CDC-CI / UMOA market",
       bullets: [
@@ -1109,7 +1109,7 @@ export const dictionaries = {
         "Set up a Next.js monorepo shared across several business products.",
         "Applied clean / hexagonal architecture and a feature-component organisation.",
       ],
-      skLabel: "— Technical stack",
+      skLabel: "Technical stack",
       skH1: "What I use day to day.",
       skP: "A stack I've consolidated around Next.js and the modern React ecosystem. Regularly updated, deliberately chosen, no free hype.",
       skillsLocal: {
@@ -1143,7 +1143,7 @@ export const dictionaries = {
         ],
         Tools: ["Git", "GitHub Actions", "Vercel", "Figma", "pnpm"],
       } as Record<string, string[]>,
-      valLabel: "— Values",
+      valLabel: "Values",
       valH1: "What guides my work.",
       values: [
         [
@@ -1154,15 +1154,15 @@ export const dictionaries = {
         [
           "02",
           "Accessibility by default",
-          "WCAG AA is a floor, not a ceiling. Contrast, keyboard nav, HTML semantics — prerequisites, not options.",
+          "WCAG AA is a floor, not a ceiling. Contrast, keyboard nav, HTML semantics: prerequisites, not options.",
         ],
         [
           "03",
           "Business first",
-          "Before the stack, the need. I spend time understanding the domain — fintech, e-commerce, institutional — before writing code.",
+          "Before the stack, the need. I spend time understanding the domain (fintech, e-commerce, institutional) before writing code.",
         ],
       ] as [string, string, string][],
-      ctaLabel: "— Let's work together",
+      ctaLabel: "Let's work together",
       ctaH1a: "A team to strengthen",
       ctaH1b: "or a project to",
       ctaH1c: "launch",
@@ -1170,7 +1170,7 @@ export const dictionaries = {
       ctaCv: "Download my CV ↓",
     },
     contactPage: {
-      heroLabel: "— Contact",
+      heroLabel: "Contact",
       heroH1: "Let's talk",
       heroP:
         "Freelance mission, full-time role, or just a discussion about an idea you're kicking around: I reply within 24h on weekdays. A detailed email is always the best opener.",
@@ -1191,11 +1191,11 @@ export const dictionaries = {
       phMsg:
         "Context, goals, stack you have in mind, desired timeline, rough budget if possible…",
       disclaimer:
-        "Your info stays private. No marketing emails — I reply personally.",
+        "Your info stays private. No marketing emails: I reply personally.",
       send: "Send the message",
       sideEmailHead: "Direct email",
       sideEmailP:
-        "The fastest path. Be precise about context and timing — it helps me reply fast and well.",
+        "The fastest path. Be precise about context and timing: it helps me reply fast and well.",
       sideAvailHead: "Availability",
       sideAvailStrong: "Open to conversations",
       sideAvailP_a: "Available ",
@@ -1236,7 +1236,7 @@ export const dictionaries = {
             ["Client", "Personal Project"],
             ["Role", "Fullstack Developer"],
             ["Duration", "1 month (MVP)"],
-            ["Year", "2025 — In production"],
+            ["Year", "2025 · In production"],
           ] as [string, string][],
           coverVer: "v1.0 · production",
           coverDeployed: "Deployed",
@@ -1244,7 +1244,7 @@ export const dictionaries = {
           coverTypeValue: "AI SaaS Platform",
           coverStackLabel: "Main stack",
           coverStackValue: "Next.js 16 · Supabase · Inngest",
-          ctxLabel: "— Context",
+          ctxLabel: "Context",
           ctxH1:
             "Generative AI to help candidates sell themselves better.",
           ctxTags: [
@@ -1263,7 +1263,7 @@ export const dictionaries = {
           ctxP3b: "Mobile-first and Freemium approach",
           ctxP3c:
             ", this SaaS product orchestrates 6 AI agents via Inngest and handles payments via GeniusPay (XOF).",
-          appLabel: "— AI Architecture",
+          appLabel: "AI Architecture",
           appH1: "A strict 6-agent pipeline.",
           appP: "To avoid typical LLM hallucinations, the process is segmented: the drafting plan is the only channel for adaptation. Writers never see the raw job offer.",
           ch: [
@@ -1288,7 +1288,7 @@ export const dictionaries = {
               "GeniusPay integration for the local market (XOF) with HMAC webhook verification, coupled with Supabase Auth and Row Level Security (RLS) to protect data.",
             ],
           ] as [string, string, string][],
-          mockLabel: "— Features",
+          mockLabel: "Features",
           mockH1: "From job offer to PDF in 60s.",
           mockP:
             "A seamless experience with real-time tracking of the AI agents' progress.",
@@ -1334,7 +1334,7 @@ export const dictionaries = {
               "/projects/ciblea/CV_Ciblea_elegant.jpg"
             ],
           ] as [string, string, string][],
-          skLabel: "— Technical stack",
+          skLabel: "Technical stack",
           skH1: "What runs under the hood.",
           skP: "A modern architecture tailored for execution speed and resilience against external APIs.",
           skGroups: [
@@ -1348,14 +1348,14 @@ export const dictionaries = {
             ["Documents", ["React-PDF", "Zod"]],
             ["Deployment", ["Vercel"]],
           ] as [string, string[]][],
-          resLabel: "— In production",
+          resLabel: "In production",
           resH1: "The results.",
           res: [
             ["60s", "Average time to generate a CV and Cover Letter"],
             ["100%", "Success rate of background tasks via Inngest"],
             ["B2C", "First active users and positive feedback"],
           ] as [string, string][],
-          nextLabel: "— Next project",
+          nextLabel: "Next project",
           nextH1: "TaComFav.",
           nextProjLabel: "Agency · 2025",
           nextH3: "Communication agency website",

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 
-// Exposed so route changes can reset Lenis' scroll position —
+// Exposed so route changes can reset Lenis' scroll position:
 // otherwise ScrollTrigger reads stale values after navigation.
 export let lenisInstance: Lenis | null = null;
 

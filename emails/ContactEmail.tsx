@@ -19,7 +19,7 @@ export type ContactEmailProps = {
   message: string;
 };
 
-// Inlined on every block — Outlook strips most CSS but keeps inline font-family.
+// Inlined on every block: Outlook strips most CSS but keeps inline font-family.
 const FONT_STACK = 'Geist, "Helvetica Neue", Helvetica, Arial, sans-serif';
 
 export const ContactEmail = ({
@@ -28,7 +28,7 @@ export const ContactEmail = ({
   subjectLabel,
   message,
 }: ContactEmailProps) => {
-  const previewText = `${subjectLabel} — ${name}`;
+  const previewText = `${subjectLabel} · ${name}`;
   const firstName = name.split(/\s+/)[0] || name;
 
   return (
@@ -100,7 +100,7 @@ export const ContactEmail = ({
                         fontFamily: FONT_STACK,
                       }}
                     >
-                      JMK — Portfolio
+                      JMK · Portfolio
                     </Text>
                     <Heading
                       as="h1"

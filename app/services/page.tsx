@@ -85,7 +85,7 @@ export default function ServicesPage() {
               className={`sv-service ${featured ? "sv-service-featured" : ""} pf-reveal`}
             >
               <div>
-                <span className="sv-num">— 0{i + 1}</span>
+                <span className="sv-num">0{i + 1}</span>
               </div>
               <div>
                 <h2 className="pf-display">{s.title}</h2>

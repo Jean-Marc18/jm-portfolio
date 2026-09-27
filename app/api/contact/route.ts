@@ -83,7 +83,7 @@ export async function POST(request: Request) {
   }
 
   const subjectLabel = SUBJECT_LABELS[subject] ?? "Contact";
-  const mailSubject = `[Portfolio] ${subjectLabel} — ${name}`;
+  const mailSubject = `[Portfolio] ${subjectLabel} · ${name}`;
 
   const text = [
     `Nom: ${name}`,

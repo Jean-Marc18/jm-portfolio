@@ -58,7 +58,7 @@ export const useSplitIntro = (
       gsap.set(followupEls, { autoAlpha: 0, y: fromY });
 
       // Wait for an active cover (preloader / page transition) to clear
-      // before playing — otherwise the intro animates behind it.
+      // before playing, otherwise the intro animates behind it.
       const coverDelay = getCoverRemainingDelay();
       const effectiveDelay = coverDelay > 0 ? coverDelay : delay;
 

@@ -41,7 +41,7 @@ const Header = () => {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
-  // Build the timeline once paused, then play/reverse on toggle —
+  // Build the timeline once paused, then play/reverse on toggle:
   // avoids GSAP's revert lifecycle racing with React re-renders.
   useGSAP(
     () => {
@@ -128,7 +128,7 @@ const Header = () => {
             className="pf-brand"
             href="/"
             onClick={closeMenu}
-            aria-label={`Jean-Marc Koffi — ${t.nav.home}`}
+            aria-label={`Jean-Marc Koffi, ${t.nav.home}`}
           >
             <Logo size="md" />
           </Link>
@@ -192,7 +192,7 @@ const Header = () => {
           <Link
             className="pf-brand"
             href="/"
-            aria-label={`Jean-Marc Koffi — ${t.nav.home}`}
+            aria-label={`Jean-Marc Koffi, ${t.nav.home}`}
           >
             <Logo size="md" />
             <Pill
