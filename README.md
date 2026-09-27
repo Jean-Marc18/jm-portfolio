@@ -1,16 +1,17 @@
-# Jean-Marc Koffi — Portfolio
+# Jean-Marc Koffi · Portfolio
 
 Portfolio personnel présentant services, projets et compétences en développement front-end.
 
 **Live**: [jmk-portfolio.vercel.app](https://jmk-portfolio.vercel.app)
 
-![Portfolio thumbnail](./public/thmubnail.png)
+![Portfolio thumbnail](./web/public/thmubnail.png)
 
 ## Caractéristiques
 
 - **Bilingue** : Français/Anglais, détection automatique via `Accept-Language` puis cookie de préférence
 - **Dark mode** : basculement manuel via `next-themes` (attribut `data-theme`)
 - **Animations fluides** : GSAP + ScrollTrigger + SplitText, Lenis pour le smooth scroll
+- **Contenu géré dans Sanity** : les projets se modifient dans un Studio séparé, sans toucher au code
 - **Formulaire de contact** : Resend + React Email (template HTML responsive)
 - **SEO** : metadata Next.js, JSON-LD (`Person`, `WebSite`, `ProfilePage`), sitemap, robots
 - **Accessibilité** : WCAG 2.1 AA, skip link, `aria-expanded`/`aria-controls`, focus visible, `inert` sur les overlays
@@ -18,12 +19,12 @@ Portfolio personnel présentant services, projets et compétences en développem
 
 ## Sections
 
-- **Hero** — accroche + CV téléchargeable
-- **Stack** — technologies maîtrisées
-- **Services** — offre détaillée
-- **Projets** — case studies avec covers parallax
-- **À propos** — parcours et méthode
-- **Contact** — formulaire Resend + liens directs
+- **Hero** : accroche + CV téléchargeable
+- **Stack** : technologies maîtrisées
+- **Services** : offre détaillée
+- **Projets** : case studies avec covers parallax
+- **À propos** : parcours et méthode
+- **Contact** : formulaire Resend + liens directs
 
 ## Tech Stack
 
@@ -33,6 +34,7 @@ Portfolio personnel présentant services, projets et compétences en développem
 | UI         | React 19, TypeScript 5                    |
 | Styles     | Tailwind CSS 3, CSS personnalisé          |
 | Animations | GSAP 3 (`@gsap/react`), Lenis             |
+| CMS        | Sanity (Studio standalone, next-sanity)   |
 | Email      | Resend + React Email                      |
 | Thème      | next-themes                               |
 | Analytics  | Vercel Analytics                          |
@@ -40,56 +42,86 @@ Portfolio personnel présentant services, projets et compétences en développem
 
 ## Installation
 
+Le dépôt contient deux applications indépendantes :
+
+- `web/` : le site Next.js
+- `studio/` : le Sanity Studio (projet `ibpq0dxr`, dataset `production`)
+
 ```bash
 git clone https://github.com/Jean-Marc18/jm-portfolio.git
 cd jm-portfolio
-npm install
-npm run dev
+npm run install:all
+npm run dev          # site sur http://localhost:3000
+npm run dev:studio   # Studio sur http://localhost:3333
 ```
-
-Accès : <http://localhost:3000>
 
 ### Scripts disponibles
 
-| Script          | Description                                            |
-| --------------- | ------------------------------------------------------ |
-| `npm run dev`   | Lance le dev server (Next.js + Turbopack)              |
-| `npm run build` | Build de production                                    |
-| `npm start`     | Démarre le build de production                         |
-| `npm run lint`  | Lint (Next.js ESLint)                                  |
-| `npm run email` | Preview live des templates React Email (port 3001)     |
+À la racine :
+
+| Script                 | Description                                        |
+| ---------------------- | -------------------------------------------------- |
+| `npm run install:all`  | Installe les dépendances de `web` et `studio`      |
+| `npm run dev`          | Lance le site (Next.js + Turbopack)                |
+| `npm run dev:studio`   | Lance le Studio Sanity                             |
+| `npm run build`        | Build de production du site                        |
+| `npm run build:studio` | Build du Studio                                    |
+| `npm run typegen`      | Régénère `web/sanity.types.ts` depuis le schéma    |
+
+Dans `web/` : `npm run lint`, et `npm run email` pour prévisualiser les templates React Email (port 3001).
+
+Dans `studio/` : `npm run deploy` publie le Studio sur `*.sanity.studio`, `npm run import-projects` importe les projets actuels dans Sanity.
 
 ### Variables d'environnement
 
-Crée un `.env.local` à la racine :
+Copie `web/.env.example` vers `web/.env.local` :
 
 ```env
-# Clé API Resend pour le formulaire de contact
+NEXT_PUBLIC_SANITY_PROJECT_ID=ibpq0dxr
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_REVALIDATE_SECRET=un-secret-long-et-aleatoire
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxx
 ```
 
-Sans cette clé, le formulaire renverra une 500 mais le site reste fonctionnel.
+Sans clé Resend, le formulaire renverra une 500 mais le site reste fonctionnel.
+
+## Gérer le contenu avec Sanity
+
+Les projets (accueil, page Travaux, études de cas) viennent de Sanity. Chaque projet a ses textes en français et en anglais, une capture de couverture, sa stack, son lien et un ordre d'affichage.
+
+- **Mise en ligne** : le site relit Sanity au plus toutes les heures. Pour une mise à jour immédiate, crée un webhook dans [Sanity Manage](https://www.sanity.io/manage/project/ibpq0dxr/api/webhooks) : URL `https://jmk-portfolio.vercel.app/api/revalidate`, filtre `_type == "project"`, méthode POST, avec le même secret que `SANITY_REVALIDATE_SECRET`.
+- **Repli** : si Sanity ne contient aucun projet ou ne répond pas, le site affiche les projets définis dans `web/lib/i18n/dictionaries.ts`.
+- **Schéma** : après une modification dans `studio/schemaTypes`, lance `npm run typegen` puis `npx sanity schemas deploy` dans `studio/`.
 
 ## Structure du projet
 
 ```
 .
-├── app/                    # Routes et layouts Next.js (App Router)
-│   ├── api/contact/        # Endpoint POST pour le formulaire
-│   ├── layout.tsx          # Layout racine, metadata, JSON-LD, preloader gate
-│   ├── page.tsx            # Accueil
-│   └── ...                 # /travaux, /services, /a-propos, /contact, /projets/[slug]
-├── components/
-│   ├── layout/             # Header, Footer, Hero, sections par page
-│   ├── common/             # Preloader, SmoothScroll, RevealObserver, PageTransition
-│   └── ui/                 # Primitives (Button, Card, Pill, Logo, icons, etc.)
-├── emails/                 # Templates React Email (ContactEmail.tsx)
-├── lib/
-│   ├── animations/         # Cover coordinator, useSplitIntro, useCountUp
-│   ├── i18n/               # Dictionnaires FR/EN + LanguageContext + config
-│   └── gsap.ts             # Plugins GSAP + tokens d'easing/durée
-├── constants/              # Routes, NAV_ORDER, métadonnées projets
-└── public/                 # Fonts (Labil Grotesk), photos, CV PDF
+├── studio/                 # Sanity Studio standalone
+│   ├── schemaTypes/        # Modèle de contenu (project)
+│   ├── scripts/            # Import des projets existants
+│   └── sanity.cli.ts       # Projet, dataset, TypeGen
+└── web/                    # Site Next.js
+    ├── app/                    # Routes et layouts Next.js (App Router)
+    │   ├── api/contact/        # Endpoint POST pour le formulaire
+    │   ├── api/revalidate/     # Webhook Sanity, rafraîchit les projets
+    │   ├── layout.tsx          # Layout racine, metadata, JSON-LD, preloader gate
+    │   ├── page.tsx            # Accueil
+    │   └── ...                 # /travaux, /services, /a-propos, /contact, /projets/[slug]
+    ├── components/
+    │   ├── layout/             # Header, Footer, Hero, sections par page
+    │   ├── common/             # Preloader, SmoothScroll, RevealObserver, PageTransition
+    │   └── ui/                 # Primitives (Button, Card, Pill, Logo, icons, etc.)
+    ├── emails/                 # Templates React Email (ContactEmail.tsx)
+    ├── lib/
+    │   ├── animations/         # Cover coordinator, useSplitIntro, useCountUp
+    │   ├── i18n/               # Dictionnaires FR/EN + LanguageContext + config
+    │   ├── projects/           # Projets Sanity, repli sur les dictionnaires
+    │   └── gsap.ts             # Plugins GSAP + tokens d'easing/durée
+    ├── constants/              # Routes, NAV_ORDER, métadonnées projets
+    ├── sanity/                 # Client, requêtes GROQ, URL des images
+    ├── sanity.types.ts         # Types générés par TypeGen
+    └── public/                 # Fonts (Labil Grotesk), photos, CV PDF
 ```
 
 ## Configuration i18n
@@ -108,17 +140,17 @@ La locale détectée est passée en prop à un `LanguageProvider` client, ce qui
 
 Quelques choix qui sortent du template Next.js générique :
 
-- **Cover coordinator** ([lib/animations/cover.ts](./lib/animations/cover.ts)) — un module-level store qui permet au Preloader de "réserver" un délai *avant le mount React*, pour que les intros SplitText des heros attendent que l'overlay soit dégagé. Sans ça, les animations partent sous le preloader et l'utilisateur ne les voit pas.
+- **Cover coordinator** ([lib/animations/cover.ts](./web/lib/animations/cover.ts)) : un module-level store qui permet au Preloader de "réserver" un délai *avant le mount React*, pour que les intros SplitText des heros attendent que l'overlay soit dégagé. Sans ça, les animations partent sous le preloader et l'utilisateur ne les voit pas.
 
-- **Preloader sans flash** ([app/layout.tsx](./app/layout.tsx)) — un script inline dans `<head>` lit `sessionStorage` *avant* l'hydration et ajoute une classe sur `<html>` ; le CSS cache alors l'overlay instantanément pour les visites suivantes. Pattern inspiré de `next-themes`, évite l'effet "hero visible puis preloader par-dessus".
+- **Preloader sans flash** ([app/layout.tsx](./web/app/layout.tsx)) : un script inline dans `<head>` lit `sessionStorage` *avant* l'hydration et ajoute une classe sur `<html>` ; le CSS cache alors l'overlay instantanément pour les visites suivantes. Pattern inspiré de `next-themes`, évite l'effet "hero visible puis preloader par-dessus".
 
-- **i18n SSR-compatible** ([app/layout.tsx](./app/layout.tsx)) — le layout est `async`, lit cookies + `Accept-Language` côté serveur et passe la locale au provider client en prop. Aucun localStorage côté client, aucun mismatch.
+- **i18n SSR-compatible** ([app/layout.tsx](./web/app/layout.tsx)) : le layout est `async`, lit cookies + `Accept-Language` côté serveur et passe la locale au provider client en prop. Aucun localStorage côté client, aucun mismatch.
 
-- **GSAP + Strict Mode** ([components/layout/header/Header.tsx](./components/layout/header/Header.tsx)) — la timeline du menu mobile est construite **une seule fois** en `paused: true` via `useGSAP`, puis pilotée par `play()` / `reverse()`. Évite les courses avec le revert de `useGSAP` lors des re-renders.
+- **GSAP + Strict Mode** ([components/layout/header/Header.tsx](./web/components/layout/header/Header.tsx)) : la timeline du menu mobile est construite **une seule fois** en `paused: true` via `useGSAP`, puis pilotée par `play()` / `reverse()`. Évite les courses avec le revert de `useGSAP` lors des re-renders.
 
-- **Skip link a11y** ([app/layout.tsx](./app/layout.tsx), [app/globals.css](./app/globals.css)) — caché visuellement, visible au `Tab`, saute directement à `<main id="main-content">`.
+- **Skip link a11y** ([app/layout.tsx](./web/app/layout.tsx), [app/globals.css](./web/app/globals.css)) : caché visuellement, visible au `Tab`, saute directement à `<main id="main-content">`.
 
-- **Email template aligné design system** ([emails/ContactEmail.tsx](./emails/ContactEmail.tsx)) — couleurs et typo du site (Geist via `@import` + fallbacks inline pour Outlook), SVG logo inline pour la compatibilité maximale (Apple Mail, Gmail, Outlook web).
+- **Email template aligné design system** ([emails/ContactEmail.tsx](./web/emails/ContactEmail.tsx)) : couleurs et typo du site (Geist via `@import` + fallbacks inline pour Outlook), SVG logo inline pour la compatibilité maximale (Apple Mail, Gmail, Outlook web).
 
 ## Performance
 
