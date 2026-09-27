@@ -15,6 +15,8 @@ const LOCAL_SCREENSHOTS: Record<string, string> = {
   "pipv-pped": "/projects/pipv-pped.png",
   tacomfav: "/projects/tacomfav.png",
   "e-panacee": "/projects/e-panacee.png",
+  "maedow-flow": "/projects/maedow-flow.png",
+  "maedow-arch-docs": "/projects/maedow-arch-docs.png",
 };
 
 export default function TravauxPage() {
