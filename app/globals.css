@@ -897,6 +897,12 @@ html.jmk-preloaded .jm-preloader {
 .ho-cover-4 {
   background: linear-gradient(135deg, #e2e8d6 0%, #c8d4b5 100%);
 }
+.ho-cover-5 {
+  background: linear-gradient(135deg, #e6dcef 0%, #cdbde0 100%);
+}
+.ho-cover-6 {
+  background: linear-gradient(135deg, #efe6d2 0%, #ddcba6 100%);
+}
 .ho-cover-text {
   font-size: clamp(40px, 5vw, 56px);
   line-height: 0.9;
@@ -1077,6 +1083,12 @@ html.jmk-preloaded .jm-preloader {
 }
 .tv-cov-4 {
   background: linear-gradient(135deg, #e2e8d6, #c8d4b5);
+}
+.tv-cov-5 {
+  background: linear-gradient(135deg, #e6dcef, #cdbde0);
+}
+.tv-cov-6 {
+  background: linear-gradient(135deg, #efe6d2, #ddcba6);
 }
 .tv-cov-image {
   position: absolute;
