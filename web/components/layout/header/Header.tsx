@@ -6,20 +6,17 @@ import { ButtonLink, Logo, Pill, StatusDot } from "@/components/ui";
 import { Menu } from "@/components/ui/icons";
 import { NAV_ORDER, routePaths, type RouteKey } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-const EMAIL = "mailto:jeanmarc.dev.18@gmail.com";
 
-const SOCIAL = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/jean-marc-koffi/" },
-  { label: "GitHub", href: "https://github.com/Jean-Marc18" },
-  { label: "WhatsApp", href: "https://wa.me/+2250768910092" },
-];
 
 const Header = () => {
   const { t } = useLanguage();
+  const { settings } = useSiteContent();
+  const mailto = `mailto:${settings.email}`;
   const [menuOpen, setMenuOpen] = useState(false);
   const sheetRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
@@ -160,11 +157,11 @@ const Header = () => {
 
         <div className="pf-menu-foot">
           <ButtonLink
-            href={EMAIL}
+            href={mailto}
             variant="primary"
             style={{ justifyContent: "center" }}
           >
-            jeanmarc.dev.18@gmail.com
+            {settings.email}
           </ButtonLink>
 
           <div className="pf-menu-tools">
@@ -173,10 +170,10 @@ const Header = () => {
           </div>
 
           <div className="pf-menu-social">
-            {SOCIAL.map((s) => (
+            {settings.socialLinks.map((s) => (
               <a
-                key={s.href}
-                href={s.href}
+                key={s.url}
+                href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -199,7 +196,7 @@ const Header = () => {
               leading={<StatusDot />}
               style={{ padding: "4px 10px", fontSize: 11 }}
             >
-              {t.nav.available}
+              {settings.availabilityHeadline}
             </Pill>
           </Link>
           <nav className="pf-navlinks" aria-label={t.nav.menu}>
@@ -215,7 +212,7 @@ const Header = () => {
               <ThemeSwitch />
             </div>
             <ButtonLink
-              href={EMAIL}
+              href={mailto}
               variant="ghost"
               className="pf-nav-cta"
               style={{ padding: "8px 14px", fontSize: 13 }}

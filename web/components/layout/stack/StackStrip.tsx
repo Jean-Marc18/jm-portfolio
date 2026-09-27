@@ -2,27 +2,11 @@
 
 import { Label, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-
-const STACK = [
-  "Next.js",
-  "React",
-  "TypeScript",
-  "Tailwind CSS",
-  "TanStack Query",
-  "Zustand",
-  "React Hook Form",
-  "Zod",
-  "Radix UI",
-  "Framer Motion",
-  "GSAP",
-  "Sanity",
-  "NextAuth.js",
-  "Angular",
-  "React Native (Expo)",
-];
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 
 const StackStrip = () => {
   const { t } = useLanguage();
+  const { homeStack } = useSiteContent().settings;
 
   return (
     <section className="ho-stack-strip">
@@ -38,7 +22,7 @@ const StackStrip = () => {
         <div
           style={{ display: "flex", flexWrap: "wrap", gap: 8, flex: 1 }}
         >
-          {STACK.map((s) => (
+          {homeStack.map((s) => (
             <Tag key={s}>{s}</Tag>
           ))}
         </div>

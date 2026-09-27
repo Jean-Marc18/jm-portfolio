@@ -202,6 +202,8 @@ export const dictionaries = {
       period: "2024-26",
       role: "Développeur Front-End",
       roleAt: "chez Inexa",
+      at: "chez",
+      present: "aujourd'hui",
       roleCtx: "Fintech · Abidjan · CDC-CI / Marché UMOA",
       bullets: [
         "Développement de front-ends pour des applications institutionnelles et B2B, dont l'extranet CDC-CI et une application de Contrôle Dépositaire pour le marché financier UMOA.",
@@ -237,6 +239,7 @@ export const dictionaries = {
       m3: "Expérience pro",
       m4: "Secteurs explorés",
       m3v: "2+ ans",
+      yearsUnit: "ans",
       m4v: "4",
       ctaCase: "Voir le cas →",
       ctaVisit: "Visiter le site →",
@@ -884,6 +887,8 @@ export const dictionaries = {
       period: "2024-26",
       role: "Front-End Developer",
       roleAt: "at Inexa",
+      at: "at",
+      present: "present",
       roleCtx: "Fintech · Abidjan · CDC-CI / UMOA market",
       bullets: [
         "Built front-ends for institutional and B2B applications, including the CDC-CI extranet and a Custody Control app for the UMOA financial market.",
@@ -919,6 +924,7 @@ export const dictionaries = {
       m3: "Professional experience",
       m4: "Sectors explored",
       m3v: "2+ years",
+      yearsUnit: "years",
       m4v: "4",
       ctaCase: "View case study →",
       ctaVisit: "Visit site →",

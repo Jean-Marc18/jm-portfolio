@@ -17,6 +17,10 @@ import RevealObserver from "@/components/common/Reveal";
 import PageTransition from "@/components/common/PageTransition";
 import Preloader from "@/components/common/Preloader";
 import { getProjects } from "@/lib/projects/getProjects";
+import { getSiteContent } from "@/lib/content/getSiteContent";
+import { mergeSiteContent } from "@/lib/content/merge";
+import { pick } from "@/lib/content/localize";
+import type { SiteContent } from "@/lib/content/types";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -34,7 +38,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 const SITE_URL = "https://jmk-portfolio.vercel.app";
 
-export const metadata: Metadata = {
+const baseMetadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "Jean-Marc Koffi · Développeur Front-End",
@@ -106,6 +110,30 @@ export const metadata: Metadata = {
   },
 };
 
+// Title, description and share image come from Sanity (site settings),
+// with the values above as fallback.
+export async function generateMetadata(): Promise<Metadata> {
+  const { settings } = mergeSiteContent(await getSiteContent());
+  const title = pick(settings.seoTitle, "fr");
+  const description = pick(settings.seoDescription, "fr");
+  const images = settings.ogImage
+    ? [{ url: settings.ogImage, width: 1200, height: 630, alt: title }]
+    : baseMetadata.openGraph?.images;
+
+  return {
+    ...baseMetadata,
+    title: { default: title, template: "%s | Jean-Marc Koffi" },
+    description,
+    openGraph: { ...baseMetadata.openGraph, title, description, images },
+    twitter: {
+      ...baseMetadata.twitter,
+      title,
+      description,
+      ...(settings.ogImage ? { images: [settings.ogImage] } : {}),
+    },
+  };
+}
+
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F7F5F0" },
@@ -115,7 +143,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-const jsonLd = {
+const buildJsonLd = ({ settings, experiences }: SiteContent) => ({
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -125,7 +153,7 @@ const jsonLd = {
       alternateName: "Jean-Marc Koffi",
       jobTitle: "Développeur Front-End",
       url: SITE_URL,
-      email: "mailto:jeanmarc.dev.18@gmail.com",
+      email: `mailto:${settings.email}`,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Abidjan",
@@ -133,7 +161,7 @@ const jsonLd = {
       },
       worksFor: {
         "@type": "Organization",
-        name: "Inexa",
+        name: experiences[0]?.company ?? "Inexa",
       },
       knowsAbout: [
         "Next.js",
@@ -145,10 +173,9 @@ const jsonLd = {
         "Accessibility (WCAG)",
         "Performance & SEO",
       ],
-      sameAs: [
-        "https://www.linkedin.com/in/jean-marc-koffi/",
-        "https://github.com/Jean-Marc18",
-      ],
+      sameAs: settings.socialLinks
+        .map((l) => l.url)
+        .filter((url) => !url.startsWith("https://wa.me")),
     },
     {
       "@type": "WebSite",
@@ -168,14 +195,19 @@ const jsonLd = {
       mainEntity: { "@id": `${SITE_URL}#person` },
     },
   ],
-};
+});
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [cookieStore, projects] = await Promise.all([cookies(), getProjects()]);
+  const [cookieStore, projects, cmsContent] = await Promise.all([
+    cookies(),
+    getProjects(),
+    getSiteContent(),
+  ]);
+  const content = mergeSiteContent(cmsContent);
   const cookieValue = cookieStore.get(LOCALE_COOKIE)?.value;
 
   let initialLocale: Locale;
@@ -212,7 +244,7 @@ export default async function RootLayout({
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonLd(content)) }}
         />
       </head>
       <body className="font-sans">
@@ -221,7 +253,7 @@ export default async function RootLayout({
             ? "Skip to main content"
             : "Aller au contenu principal"}
         </a>
-        <Providers initialLocale={initialLocale} projects={projects}>
+        <Providers initialLocale={initialLocale} projects={projects} content={content}>
           <Preloader />
           {/* <PageTransition /> */}
           <SmoothScroll />

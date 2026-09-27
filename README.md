@@ -70,7 +70,7 @@ npm run dev:studio   # Studio sur http://localhost:3333
 
 Dans `web/` : `npm run lint`, et `npm run email` pour prévisualiser les templates React Email (port 3001).
 
-Dans `studio/` : `npm run deploy` publie le Studio sur `*.sanity.studio`, `npm run import-projects` importe les projets actuels dans Sanity.
+Dans `studio/` : `npm run deploy` publie le Studio sur `*.sanity.studio`, `npm run import-projects` et `npm run import-content` importent le contenu actuel dans Sanity.
 
 ### Variables d'environnement
 
@@ -87,10 +87,21 @@ Sans clé Resend, le formulaire renverra une 500 mais le site reste fonctionnel.
 
 ## Gérer le contenu avec Sanity
 
-Les projets (accueil, page Travaux, études de cas) viennent de Sanity. Chaque projet a ses textes en français et en anglais, une capture de couverture, sa stack, son lien et un ordre d'affichage.
+Le Studio est en ligne sur <https://jmk-portfolio.sanity.studio>. Tout le texte bilingue s'y saisit en français et en anglais.
 
-- **Mise en ligne** : le site relit Sanity au plus toutes les heures. Pour une mise à jour immédiate, crée un webhook dans [Sanity Manage](https://www.sanity.io/manage/project/ibpq0dxr/api/webhooks) : URL `https://jmk-portfolio.vercel.app/api/revalidate`, filtre `_type == "project"`, méthode POST, avec le même secret que `SANITY_REVALIDATE_SECRET`.
-- **Repli** : si Sanity ne contient aucun projet ou ne répond pas, le site affiche les projets définis dans `web/lib/i18n/dictionaries.ts`.
+| Dans le Studio         | Où ça s'affiche                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| Réglages du site       | Disponibilité, email, réseaux, localisation, langues, CV, chiffres clés, stack de l'accueil, SEO |
+| Projets                | Accueil, page Travaux, études de cas                                            |
+| Expériences            | Bandeau « Dernier poste », section À propos de l'accueil, page À propos         |
+| Services               | Accueil (résumé, 3 premiers tags) et page Services (description, livrables)     |
+| Questions fréquentes   | Page Services                                                                   |
+| Stack technique        | Page À propos                                                                   |
+
+- **Mise en ligne** : le site relit Sanity au plus toutes les heures. Pour une mise à jour immédiate, le webhook de [Sanity Manage](https://www.sanity.io/manage/project/ibpq0dxr/api/webhooks) appelle `https://jmk-portfolio.vercel.app/api/revalidate` (méthode POST, même secret que `SANITY_REVALIDATE_SECRET`) avec le filtre `_type in ["project", "siteSettings", "experience", "service", "faq", "skillCategory"]`.
+- **Repli** : champ par champ, tout ce qui est vide dans Sanity reprend la valeur définie dans `web/lib/content/defaults.ts` (tirée de `web/lib/i18n/dictionaries.ts`). Si Sanity ne répond pas, le site reste complet.
+- **Nombre de projets** : laisse le champ vide dans les Réglages pour compter automatiquement les projets publiés.
+- **Import initial** : dans `studio/`, `npm run import-projects` puis `npm run import-content`. Les deux scripts n'écrasent jamais un contenu existant.
 - **Schéma** : après une modification dans `studio/schemaTypes`, lance `npm run typegen` puis `npx sanity schemas deploy` dans `studio/`.
 
 ## Structure du projet
@@ -98,8 +109,9 @@ Les projets (accueil, page Travaux, études de cas) viennent de Sanity. Chaque p
 ```
 .
 ├── studio/                 # Sanity Studio standalone
-│   ├── schemaTypes/        # Modèle de contenu (project)
-│   ├── scripts/            # Import des projets existants
+│   ├── schemaTypes/        # Modèle de contenu
+│   ├── structure.ts        # Menu du Studio (Réglages en singleton)
+│   ├── scripts/            # Import du contenu existant
 │   └── sanity.cli.ts       # Projet, dataset, TypeGen
 └── web/                    # Site Next.js
     ├── app/                    # Routes et layouts Next.js (App Router)
@@ -116,6 +128,7 @@ Les projets (accueil, page Travaux, études de cas) viennent de Sanity. Chaque p
     ├── lib/
     │   ├── animations/         # Cover coordinator, useSplitIntro, useCountUp
     │   ├── i18n/               # Dictionnaires FR/EN + LanguageContext + config
+    │   ├── content/            # Réglages, expériences, services, FAQ, stack (Sanity + repli)
     │   ├── projects/           # Projets Sanity, repli sur les dictionnaires
     │   └── gsap.ts             # Plugins GSAP + tokens d'easing/durée
     ├── constants/              # Routes, NAV_ORDER, métadonnées projets

@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useMemo } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import type { Locale } from "@/lib/i18n/dictionaries";
 import { projectsFromDictionary } from "./fallback";
-import type { CmsProject, Localized, ProjectItem } from "./types";
+import { pick } from "@/lib/content/localize";
+import type { CmsProject, ProjectItem } from "./types";
 
 const ProjectsContext = createContext<CmsProject[] | null>(null);
 
@@ -18,8 +18,6 @@ export const ProjectsProvider = ({
   <ProjectsContext.Provider value={projects}>{children}</ProjectsContext.Provider>
 );
 
-const pick = (value: Localized, locale: Locale) =>
-  value[locale] ?? value[locale === "fr" ? "en" : "fr"] ?? "";
 
 /** Projects for the current locale: Sanity first, bundled dictionary otherwise. */
 export const useProjects = (): ProjectItem[] => {

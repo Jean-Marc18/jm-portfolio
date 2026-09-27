@@ -11,7 +11,8 @@
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "typegen": "sanity schemas extract --force && sanity typegen generate",
-    "import-projects": "sanity exec scripts/import-projects.ts --with-user-token"
+    "import-projects": "sanity exec scripts/import-projects.ts --with-user-token",
+    "import-content": "sanity exec scripts/import-content.ts --with-user-token"
   },
   "keywords": [
     "sanity"

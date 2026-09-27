@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { ContactEmail } from "@/emails/ContactEmail";
+import { getSiteContent } from "@/lib/content/getSiteContent";
+import { mergeSiteContent } from "@/lib/content/merge";
 
 // Must be a verified Resend address (no custom domain set up yet).
-const TO_ADDRESS = "jeanmarc.dev.18@gmail.com";
 const FROM_ADDRESS = "Portfolio <onboarding@resend.dev>";
 
 type ContactBody = {
@@ -98,7 +99,8 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: FROM_ADDRESS,
-      to: TO_ADDRESS,
+      // Same address as the one shown on the site (Sanity settings).
+      to: mergeSiteContent(await getSiteContent()).settings.email,
       replyTo: email,
       subject: mailSubject,
       react: ContactEmail({ name, email, subjectLabel, message }),

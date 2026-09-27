@@ -15,6 +15,91 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type LocaleString = {
+  _type: "localeString";
+  fr?: string;
+  en?: string;
+};
+
+export type Faq = {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  question?: InternationalizedArrayString;
+  answer?: InternationalizedArrayText;
+  orderRank?: number;
+};
+
+export type InternationalizedArrayText = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayTextValue
+>;
+
+export type InternationalizedArrayString = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayStringValue
+>;
+
+export type SkillCategory = {
+  _id: string;
+  _type: "skillCategory";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: InternationalizedArrayString;
+  items?: Array<string>;
+  orderRank?: number;
+};
+
+export type Service = {
+  _id: string;
+  _type: "service";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: InternationalizedArrayString;
+  summary?: InternationalizedArrayText;
+  description?: InternationalizedArrayText;
+  tags?: Array<
+    {
+      _key: string;
+    } & LocaleString
+  >;
+  deliverables?: Array<
+    {
+      _key: string;
+    } & LocaleString
+  >;
+  featured?: boolean;
+  badge?: InternationalizedArrayString;
+  orderRank?: number;
+};
+
+export type Experience = {
+  _id: string;
+  _type: "experience";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  company?: string;
+  role?: InternationalizedArrayString;
+  sector?: InternationalizedArrayString;
+  location?: InternationalizedArrayString;
+  context?: InternationalizedArrayString;
+  startYear?: string;
+  endYear?: string;
+  highlights?: Array<
+    {
+      _key: string;
+    } & LocaleString
+  >;
+  stack?: Array<string>;
+};
+
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
@@ -65,22 +150,58 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-export type InternationalizedArrayString = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayStringValue
->;
-
-export type InternationalizedArrayText = Array<
-  {
-    _key: string;
-  } & InternationalizedArrayTextValue
->;
-
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+};
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  availabilityHeadline?: InternationalizedArrayString;
+  availabilityShort?: InternationalizedArrayString;
+  availabilityDetail?: InternationalizedArrayString;
+  status?: InternationalizedArrayString;
+  email?: string;
+  socialLinks?: Array<{
+    label?: string;
+    url?: string;
+    _type: "socialLink";
+    _key: string;
+  }>;
+  location?: InternationalizedArrayString;
+  languages?: InternationalizedArrayString;
+  cv?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  yearsOfExperience?: string;
+  projectsCount?: string;
+  sectorsCount?: string;
+  sectorsList?: InternationalizedArrayString;
+  technologiesCount?: string;
+  homeStack?: Array<string>;
+  seoTitle?: InternationalizedArrayString;
+  seoDescription?: InternationalizedArrayText;
+  ogImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type InternationalizedArrayTextValue = {
@@ -193,13 +314,20 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | LocaleString
+  | Faq
+  | InternationalizedArrayText
+  | InternationalizedArrayString
+  | SkillCategory
+  | Service
+  | Experience
   | SanityImageAssetReference
   | Project
   | SanityImageCrop
   | SanityImageHotspot
-  | InternationalizedArrayString
-  | InternationalizedArrayText
   | Slug
+  | SanityFileAssetReference
+  | SiteSettings
   | InternationalizedArrayTextValue
   | InternationalizedArrayStringValue
   | SanityImagePaletteSwatch
@@ -246,10 +374,234 @@ export type PROJECTS_QUERY_RESULT = Array<{
   } | null;
 }>;
 
+// Source: ../web/sanity/queries.ts
+// Variable: SITE_CONTENT_QUERY
+// Query: {    "settings": *[_id == "siteSettings"][0]{      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },      email,      socialLinks[]{ label, url },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },      "cvUrl": cv.asset->url,      yearsOfExperience,      projectsCount,      sectorsCount,      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },      technologiesCount,      homeStack,      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },      "ogImage": ogImage.asset->url    },    "experiences": *[_type == "experience"] | order(startYear desc){      company,      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },      startYear,      endYear,      highlights[]{ fr, en },      stack    },    "skills": *[_type == "skillCategory"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      items    },    "services": *[_type == "service"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },      tags[]{ fr, en },      deliverables[]{ fr, en },      featured,      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }    },    "faqs": *[_type == "faq"] | order(orderRank asc){      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }    },    "projectCount": count(*[_type == "project" && defined(slug.current)])  }
+export type SITE_CONTENT_QUERY_RESULT = {
+  settings:
+    | {
+        availabilityHeadline: {
+          fr: null;
+          en: null;
+        };
+        availabilityShort: {
+          fr: null;
+          en: null;
+        };
+        availabilityDetail: {
+          fr: null;
+          en: null;
+        };
+        status: {
+          fr: null;
+          en: null;
+        };
+        email: null;
+        socialLinks: null;
+        location: {
+          fr: null;
+          en: null;
+        };
+        languages: {
+          fr: null;
+          en: null;
+        };
+        cvUrl: null;
+        yearsOfExperience: null;
+        projectsCount: null;
+        sectorsCount: null;
+        sectorsList: {
+          fr: null;
+          en: null;
+        };
+        technologiesCount: null;
+        homeStack: null;
+        seoTitle: {
+          fr: null;
+          en: null;
+        };
+        seoDescription: {
+          fr: null;
+          en: null;
+        };
+        ogImage: null;
+      }
+    | {
+        availabilityHeadline: {
+          fr: null;
+          en: null;
+        };
+        availabilityShort: {
+          fr: null;
+          en: null;
+        };
+        availabilityDetail: {
+          fr: null;
+          en: null;
+        };
+        status: {
+          fr: null;
+          en: null;
+        };
+        email: null;
+        socialLinks: null;
+        location: {
+          fr: string | null;
+          en: string | null;
+        };
+        languages: {
+          fr: null;
+          en: null;
+        };
+        cvUrl: null;
+        yearsOfExperience: null;
+        projectsCount: null;
+        sectorsCount: null;
+        sectorsList: {
+          fr: null;
+          en: null;
+        };
+        technologiesCount: null;
+        homeStack: null;
+        seoTitle: {
+          fr: null;
+          en: null;
+        };
+        seoDescription: {
+          fr: null;
+          en: null;
+        };
+        ogImage: null;
+      }
+    | {
+        availabilityHeadline: {
+          fr: string | null;
+          en: string | null;
+        };
+        availabilityShort: {
+          fr: string | null;
+          en: string | null;
+        };
+        availabilityDetail: {
+          fr: string | null;
+          en: string | null;
+        };
+        status: {
+          fr: string | null;
+          en: string | null;
+        };
+        email: string | null;
+        socialLinks: Array<{
+          label: string | null;
+          url: string | null;
+        }> | null;
+        location: {
+          fr: string | null;
+          en: string | null;
+        };
+        languages: {
+          fr: string | null;
+          en: string | null;
+        };
+        cvUrl: string | null;
+        yearsOfExperience: string | null;
+        projectsCount: string | null;
+        sectorsCount: string | null;
+        sectorsList: {
+          fr: string | null;
+          en: string | null;
+        };
+        technologiesCount: string | null;
+        homeStack: Array<string> | null;
+        seoTitle: {
+          fr: string | null;
+          en: string | null;
+        };
+        seoDescription: {
+          fr: string | null;
+          en: string | null;
+        };
+        ogImage: string | null;
+      }
+    | null;
+  experiences: Array<{
+    company: string | null;
+    role: {
+      fr: string | null;
+      en: string | null;
+    };
+    sector: {
+      fr: string | null;
+      en: string | null;
+    };
+    location: {
+      fr: string | null;
+      en: string | null;
+    };
+    context: {
+      fr: string | null;
+      en: string | null;
+    };
+    startYear: string | null;
+    endYear: string | null;
+    highlights: Array<{
+      fr: string | null;
+      en: string | null;
+    }> | null;
+    stack: Array<string> | null;
+  }>;
+  skills: Array<{
+    title: {
+      fr: string | null;
+      en: string | null;
+    };
+    items: Array<string> | null;
+  }>;
+  services: Array<{
+    title: {
+      fr: string | null;
+      en: string | null;
+    };
+    summary: {
+      fr: string | null;
+      en: string | null;
+    };
+    description: {
+      fr: string | null;
+      en: string | null;
+    };
+    tags: Array<{
+      fr: string | null;
+      en: string | null;
+    }> | null;
+    deliverables: Array<{
+      fr: string | null;
+      en: string | null;
+    }> | null;
+    featured: boolean | null;
+    badge: {
+      fr: string | null;
+      en: string | null;
+    };
+  }>;
+  faqs: Array<{
+    question: {
+      fr: string | null;
+      en: string | null;
+    };
+    answer: {
+      fr: string | null;
+      en: string | null;
+    };
+  }>;
+  projectCount: number;
+};
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
     '\n  *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    shortName,\n    year,\n    url,\n    stack,\n    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },\n    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },\n    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n    coverImage { asset, alt, hotspot, crop }\n  }\n': PROJECTS_QUERY_RESULT;
+    '{\n    "settings": *[_id == "siteSettings"][0]{\n      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },\n      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },\n      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },\n      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },\n      email,\n      socialLinks[]{ label, url },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },\n      "cvUrl": cv.asset->url,\n      yearsOfExperience,\n      projectsCount,\n      sectorsCount,\n      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },\n      technologiesCount,\n      homeStack,\n      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },\n      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },\n      "ogImage": ogImage.asset->url\n    },\n    "experiences": *[_type == "experience"] | order(startYear desc){\n      company,\n      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },\n      startYear,\n      endYear,\n      highlights[]{ fr, en },\n      stack\n    },\n    "skills": *[_type == "skillCategory"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      items\n    },\n    "services": *[_type == "service"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },\n      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n      tags[]{ fr, en },\n      deliverables[]{ fr, en },\n      featured,\n      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }\n    },\n    "faqs": *[_type == "faq"] | order(orderRank asc){\n      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },\n      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }\n    },\n    "projectCount": count(*[_type == "project" && defined(slug.current)])\n  }\n': SITE_CONTENT_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
