@@ -2,9 +2,11 @@
 
 import { ArrowLink, ButtonLink, Label, Pill, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 
 const Services = () => {
   const { t } = useLanguage();
+  const { services } = useSiteContent();
 
   return (
     <section className="ho-section" id="services">
@@ -49,8 +51,8 @@ const Services = () => {
       </div>
 
       <div className="ho-grid-services">
-        {t.services.items.map((s, i) => {
-          const featured = "featured" in s && s.featured;
+        {services.map((s, i) => {
+          const featured = s.featured;
           const tagVariant = featured ? "dark" : "default";
           return (
             <div
@@ -72,18 +74,18 @@ const Services = () => {
                       />
                     }
                   >
-                    0{i + 1}
+                    {String(i + 1).padStart(2, "0")}
                   </Pill>
-                  {featured && "badge" in s && (
+                  {featured && s.badge && (
                     <Tag variant="dark">{s.badge}</Tag>
                   )}
                 </div>
                 <h3 className="pf-display">{s.title}</h3>
-                <p>{s.desc}</p>
+                <p>{s.summary}</p>
               </div>
               <div className="ho-service-foot">
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                  {s.tags.map((tg) => (
+                  {s.tags.slice(0, 3).map((tg) => (
                     <Tag key={tg} variant={tagVariant}>
                       {tg}
                     </Tag>

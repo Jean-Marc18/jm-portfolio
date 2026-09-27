@@ -2,15 +2,11 @@
 
 import { ButtonLink, Logo } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-
-const SOCIAL_LINKS = [
-  { label: "LinkedIn ↗", href: "https://www.linkedin.com/in/jean-marc-koffi/" },
-  { label: "GitHub ↗", href: "https://github.com/Jean-Marc18" },
-  { label: "WhatsApp ↗", href: "https://wa.me/+2250768910092" },
-];
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 
 const Footer = () => {
   const { t } = useLanguage();
+  const { settings } = useSiteContent();
 
   return (
     <footer className="pf-footer">
@@ -41,21 +37,21 @@ const Footer = () => {
             {t.footer.tag}
           </p>
           <ButtonLink
-            href="mailto:jeanmarc.dev.18@gmail.com"
+            href={`mailto:${settings.email}`}
             variant="ghost"
             style={{ marginTop: 20, fontSize: 13 }}
           >
-            jeanmarc.dev.18@gmail.com
+            {settings.email}
           </ButtonLink>
         </div>
 
         <div className="pf-footer-col">
           <h3>{t.footer.elsewhere}</h3>
           <ul>
-            {SOCIAL_LINKS.map((s) => (
-              <li key={s.href}>
-                <a href={s.href} target="_blank" rel="noopener noreferrer">
-                  {s.label}
+            {settings.socialLinks.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} target="_blank" rel="noopener noreferrer">
+                  {s.label} ↗
                 </a>
               </li>
             ))}

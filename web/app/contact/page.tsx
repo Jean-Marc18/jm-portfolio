@@ -3,6 +3,7 @@
 import { Button, Label, Pill, StatusDot } from "@/components/ui";
 import { ArrowUpRight } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { getCoverRemainingDelay } from "@/lib/animations/cover";
 import { gsap, motion, prefersReducedMotion, useGSAP } from "@/lib/gsap";
@@ -11,7 +12,6 @@ import { useRef, useState, type FormEvent } from "react";
 // Aligned with `useSplitIntro` total duration (lines + followups).
 const HERO_INTRO_SEC = 1.6;
 
-const EMAIL = "jeanmarc.dev.18@gmail.com";
 
 type FormState = {
   name: string;
@@ -56,15 +56,13 @@ const SOCIAL_ICONS = {
   ),
 };
 
-const SOCIAL_LINKS: { label: keyof typeof SOCIAL_ICONS; href: string }[] = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/jean-marc-koffi/" },
-  { label: "GitHub", href: "https://github.com/Jean-Marc18" },
-  { label: "WhatsApp", href: "https://wa.me/+2250768910092" },
-];
+const SOCIAL_ICON_BY_LABEL: Record<string, React.ReactNode> = SOCIAL_ICONS;
 
 export default function ContactPage() {
   const { t, locale } = useLanguage();
   const cp = t.contactPage;
+  const { settings } = useSiteContent();
+  const EMAIL = settings.email;
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -343,15 +341,15 @@ export default function ContactPage() {
             <div className="ct-card" data-ct-reveal>
               <h3>{cp.sideLinksHead}</h3>
               <div className="ct-links">
-                {SOCIAL_LINKS.map(({ label, href }) => (
+                {settings.socialLinks.map(({ label, url }) => (
                   <a
-                    key={label}
+                    key={url}
                     className="ct-link-chip"
-                    href={href}
+                    href={url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {SOCIAL_ICONS[label]}
+                    {SOCIAL_ICON_BY_LABEL[label] ?? null}
                     {label}
                   </a>
                 ))}
@@ -371,7 +369,7 @@ export default function ContactPage() {
                   >
                     {cp.coordLoc}
                   </div>
-                  {cp.coordLocV}
+                  {settings.location}
                 </div>
                 <div>
                   <div
@@ -383,7 +381,7 @@ export default function ContactPage() {
                   >
                     {cp.coordLang}
                   </div>
-                  {cp.coordLangV}
+                  {settings.languages}
                 </div>
                 <div>
                   <div
@@ -395,7 +393,7 @@ export default function ContactPage() {
                   >
                     {cp.coordSt}
                   </div>
-                  {cp.coordStV}
+                  {settings.status}
                 </div>
               </div>
             </div>

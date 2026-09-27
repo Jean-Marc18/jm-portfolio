@@ -3,11 +3,14 @@
 import { ArrowLink, ButtonLink, Label, Pill } from "@/components/ui";
 import { Download } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { Fragment, useRef } from "react";
 
 const Hero = () => {
   const { t, locale } = useLanguage();
+  const { settings, experiences } = useSiteContent();
+  const latest = experiences[0];
   const root = useRef<HTMLElement>(null);
 
   useSplitIntro(root, {
@@ -52,7 +55,7 @@ const Hero = () => {
           </p>
           <div className="ho-hero-actions" data-intro-actions>
             <ButtonLink
-              href="/cv-jean-marc-koffi.pdf"
+              href={settings.cvUrl}
               download
               variant="primary"
               trailing={<Download />}
@@ -77,9 +80,9 @@ const Hero = () => {
                 className="pf-display"
                 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", lineHeight: 1 }}
               >
-                {t.banner.company}{" "}
+                {latest?.company}{" "}
                 <span className="ho-banner-meta" style={{ fontSize: "0.55em" }}>
-                  {t.banner.suffix}
+                  {latest?.sector && `· ${latest.sector}`}
                 </span>
               </div>
               <div
@@ -90,13 +93,13 @@ const Hero = () => {
                   color: "#1A1A18",
                 }}
               >
-                {t.banner.dates}
+                {latest?.period}
               </div>
               <div
                 style={{ fontSize: 14, marginTop: 2 }}
                 className="ho-banner-meta"
               >
-                {t.banner.ctx}
+                {[latest?.context, latest?.location].filter(Boolean).join(" · ")}
               </div>
             </div>
             <div

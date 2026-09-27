@@ -3,9 +3,12 @@
 import { ButtonLink, Label, Pill, StatusDot } from "@/components/ui";
 import { ArrowUpRight } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 
 const Contact = () => {
   const { t } = useLanguage();
+  const { settings } = useSiteContent();
+  const callLink = settings.socialLinks.find((l) => /wa\.me|whatsapp/i.test(l.url));
 
   return (
     <section
@@ -16,7 +19,7 @@ const Contact = () => {
       <div className="ho-contact-card pf-reveal">
         <div className="ho-contact-status">
           <Pill variant="dark" leading={<StatusDot />}>
-            {t.contact.status}
+            {settings.availabilityShort}
           </Pill>
         </div>
         <Label
@@ -48,20 +51,22 @@ const Contact = () => {
         </p>
         <div className="ho-contact-actions">
           <ButtonLink
-            href="mailto:jeanmarc.dev.18@gmail.com"
+            href={`mailto:${settings.email}`}
             variant="light"
             trailing={<ArrowUpRight />}
           >
-            jeanmarc.dev.18@gmail.com
+            {settings.email}
           </ButtonLink>
-          <ButtonLink
-            href="https://wa.me/+2250768910092"
-            target="_blank"
-            rel="noopener noreferrer"
-            variant="darkghost"
-          >
-            {t.contact.cta}
-          </ButtonLink>
+          {callLink && (
+            <ButtonLink
+              href={callLink.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="darkghost"
+            >
+              {t.contact.cta}
+            </ButtonLink>
+          )}
         </div>
       </div>
     </section>

@@ -2,12 +2,14 @@
 
 import { ButtonLink, Label, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { useRef } from "react";
 
 export default function ServicesPage() {
   const { t, locale } = useLanguage();
   const sp = t.servicesPage;
+  const { services, faqs } = useSiteContent();
 
   const heroRef = useRef<HTMLElement>(null);
   useSplitIntro(heroRef, {
@@ -77,19 +79,19 @@ export default function ServicesPage() {
       </section>
 
       <section className="sv-services">
-        {sp.services.map((s, i) => {
-          const featured = "featured" in s && s.featured;
+        {services.map((s, i) => {
+          const featured = s.featured;
           return (
             <div
               key={s.title}
               className={`sv-service ${featured ? "sv-service-featured" : ""} pf-reveal`}
             >
               <div>
-                <span className="sv-num">0{i + 1}</span>
+                <span className="sv-num">{String(i + 1).padStart(2, "0")}</span>
               </div>
               <div>
                 <h2 className="pf-display">{s.title}</h2>
-                <p>{s.long}</p>
+                <p>{s.description}</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                   {s.tags.map((tag) => (
                     <Tag key={tag} variant={featured ? "dark" : "default"}>
@@ -101,7 +103,7 @@ export default function ServicesPage() {
               <div>
                 <div className="sv-deliv-head">{sp.delivHead}</div>
                 <ul className="sv-deliv">
-                  {s.deliv.map((d) => (
+                  {s.deliverables.map((d) => (
                     <li key={d}>{d}</li>
                   ))}
                 </ul>
@@ -161,10 +163,10 @@ export default function ServicesPage() {
             </h2>
           </div>
           <div className="sv-faq-list pf-reveal">
-            {sp.faqs.map(([q, a]) => (
-              <div key={q} className="sv-faq-item">
-                <h3 className="pf-display sv-faq-q">{q}</h3>
-                <p className="sv-faq-a">{a}</p>
+            {faqs.map(({ question, answer }) => (
+              <div key={question} className="sv-faq-item">
+                <h3 className="pf-display sv-faq-q">{question}</h3>
+                <p className="sv-faq-a">{answer}</p>
               </div>
             ))}
           </div>

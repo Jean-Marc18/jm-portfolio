@@ -3,6 +3,7 @@
 import { ButtonLink, Label, Pill, Tag } from "@/components/ui";
 import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useProjects } from "@/lib/projects/ProjectsContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { useStatsCountUp } from "@/lib/animations/useCountUp";
@@ -14,6 +15,7 @@ import { useRef } from "react";
 export default function TravauxPage() {
   const { t, locale } = useLanguage();
   const tp = t.travauxPage;
+  const { settings } = useSiteContent();
   const projects = useProjects();
 
   const heroRef = useRef<HTMLElement>(null);
@@ -92,19 +94,19 @@ export default function TravauxPage() {
 
       <section className="ap-stats" ref={statsRef}>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>{tp.m3v}</strong>
+          <strong>{`${settings.yearsOfExperience} ${tp.yearsUnit}`}</strong>
           <span>{tp.m3}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>06</strong>
+          <strong>{settings.projectsCount}</strong>
           <span>{tp.m1}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>{tp.m4v}</strong>
+          <strong>{settings.sectorsCount}</strong>
           <span>{tp.m4}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>13+</strong>
+          <strong>{settings.technologiesCount}</strong>
           <span>{tp.m2}</span>
         </div>
       </section>

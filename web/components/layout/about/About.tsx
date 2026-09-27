@@ -3,9 +3,11 @@
 import { ButtonLink, Label } from "@/components/ui";
 import { ArrowDiagonal } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 
 const About = () => {
   const { t } = useLanguage();
+  const latest = useSiteContent().experiences[0];
 
   return (
     <section
@@ -84,13 +86,13 @@ const About = () => {
             </Label>
             <div className="ho-exp-row">
               <div className="pf-display" style={{ fontSize: 22 }}>
-                {t.about.period}
+                {latest?.periodShort}
               </div>
               <div>
                 <div style={{ fontSize: 18, fontWeight: 500, marginBottom: 4 }}>
-                  {t.about.role}{" "}
+                  {latest?.role}{" "}
                   <span style={{ color: "var(--muted)", fontWeight: 400 }}>
-                    {t.about.roleAt}
+                    {latest && `${t.about.at} ${latest.company}`}
                   </span>
                 </div>
                 <div
@@ -100,7 +102,7 @@ const About = () => {
                     marginBottom: 14,
                   }}
                 >
-                  {t.about.roleCtx}
+                  {[latest?.sector, latest?.location, latest?.context].filter(Boolean).join(" · ")}
                 </div>
                 <ul
                   style={{
@@ -114,7 +116,7 @@ const About = () => {
                     lineHeight: 1.5,
                   }}
                 >
-                  {t.about.bullets.map((b, j) => (
+                  {latest?.highlights.map((b, j) => (
                     <li key={j} className="text-pretty list-disc">
                       {b}
                     </li>

@@ -4,7 +4,8 @@ import { urlFor } from "@/sanity/image";
 import { PROJECTS_QUERY } from "@/sanity/queries";
 import type { CmsProject } from "./types";
 
-export const PROJECTS_TAG = "project";
+// One tag for all Sanity content: the webhook revalidates it on any change.
+export const SANITY_TAG = "sanity";
 
 /**
  * Loads projects from Sanity. Returns null when Sanity is unreachable or
@@ -15,7 +16,7 @@ export async function getProjects(): Promise<CmsProject[] | null> {
     const docs = await client.fetch(
       PROJECTS_QUERY,
       {},
-      { next: { revalidate: 3600, tags: [PROJECTS_TAG] } },
+      { next: { revalidate: 3600, tags: [SANITY_TAG] } },
     );
     if (!docs.length) return null;
 

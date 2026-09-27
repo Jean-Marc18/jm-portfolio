@@ -2,6 +2,7 @@
 
 import { ButtonLink, Label, Pill, StatusDot, Tag } from "@/components/ui";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
+import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { useStatsCountUp } from "@/lib/animations/useCountUp";
 import { useRef } from "react";
@@ -9,6 +10,17 @@ import { useRef } from "react";
 export default function AboutPage() {
   const { t, locale } = useLanguage();
   const ap = t.aboutPage;
+  const { settings, experiences, skills } = useSiteContent();
+  const sectorsLabel = ap.stats[2][1].split(" (")[0];
+  const stats: [string, string][] = [
+    [settings.yearsOfExperience, ap.stats[0][1]],
+    [settings.projectsCount, ap.stats[1][1]],
+    [
+      settings.sectorsCount,
+      settings.sectorsList ? `${sectorsLabel} (${settings.sectorsList})` : sectorsLabel,
+    ],
+    [settings.technologiesCount, ap.stats[3][1]],
+  ];
 
   const heroRef = useRef<HTMLElement>(null);
   const statsRef = useRef<HTMLElement>(null);
@@ -75,7 +87,7 @@ export default function AboutPage() {
             <Label style={{ display: "block", marginBottom: 14 }}>
               {ap.bioLabel}
             </Label>
-            <Pill leading={<StatusDot />}>{ap.avail}</Pill>
+            <Pill leading={<StatusDot />}>{settings.availabilityDetail}</Pill>
           </div>
           <div>
             <p>{ap.p1}</p>
@@ -96,7 +108,7 @@ export default function AboutPage() {
       </section>
 
       <section className="ap-stats pf-reveal" ref={statsRef}>
-        {ap.stats.map(([v, l]) => (
+        {stats.map(([v, l]) => (
           <div key={l} className="ap-stat mx-1">
             <strong>{v}</strong>
             <span>{l}</span>
@@ -134,38 +146,41 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="ap-exp-row pf-reveal">
-          <div className="ap-exp-meta">
-            <Label>2024-26</Label>
-            <strong className="pf-display">{ap.expRole}</strong>
-            <span>Inexa · {ap.expCtx}</span>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 5,
-                marginTop: 12,
-              }}
-            >
-              {[
-                "Next.js",
-                "TypeScript",
-                "TanStack Query",
-                "Radix UI",
-                "Tailwind",
-              ].map((s) => (
-                <Tag key={s} style={{ fontSize: 11 }}>
-                  {s}
-                </Tag>
-              ))}
+        {experiences.map((exp) => (
+          <div
+            key={`${exp.company}-${exp.period}`}
+            className="ap-exp-row pf-reveal"
+          >
+            <div className="ap-exp-meta">
+              <Label>{exp.periodShort}</Label>
+              <strong className="pf-display">{exp.role}</strong>
+              <span>
+                {[exp.company, exp.sector, exp.location, exp.context]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </span>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 5,
+                  marginTop: 12,
+                }}
+              >
+                {exp.stack.map((s) => (
+                  <Tag key={s} style={{ fontSize: 11 }}>
+                    {s}
+                  </Tag>
+                ))}
+              </div>
             </div>
+            <ul className="ap-exp-bullets">
+              {exp.highlights.map((b, j) => (
+                <li key={j}>{b}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="ap-exp-bullets">
-            {ap.bullets.map((b, j) => (
-              <li key={j}>{b}</li>
-            ))}
-          </ul>
-        </div>
+        ))}
       </section>
 
       <section className="ap-skills">
@@ -198,14 +213,14 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="ap-skills-grid">
-          {Object.entries(ap.skillsLocal).map(([cat, list]) => (
-            <div key={cat} className="ap-skill-cat pf-reveal">
+          {skills.map(({ title, items }) => (
+            <div key={title} className="ap-skill-cat pf-reveal">
               <h3>
-                <span>{cat}</span>
-                <span>{list.length}</span>
+                <span>{title}</span>
+                <span>{items.length}</span>
               </h3>
               <div className="ap-skill-tags">
-                {list.map((s) => (
+                {items.map((s) => (
                   <Tag key={s}>{s}</Tag>
                 ))}
               </div>
@@ -274,7 +289,7 @@ export default function AboutPage() {
           <ButtonLink href="/contact" variant="primary">
             {ap.ctaPrimary}
           </ButtonLink>
-          <ButtonLink href="/cv-jean-marc-koffi.pdf" download variant="ghost">
+          <ButtonLink href={settings.cvUrl} download variant="ghost">
             {ap.ctaCv}
           </ButtonLink>
         </div>
