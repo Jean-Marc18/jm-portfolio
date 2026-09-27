@@ -102,7 +102,7 @@ export default function TravauxPage() {
           <span>{tp.m3}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">
-          <strong>04</strong>
+          <strong>06</strong>
           <span>{tp.m1}</span>
         </div>
         <div className="ap-stat mx-1 pf-reveal">

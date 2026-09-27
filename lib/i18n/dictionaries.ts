@@ -100,6 +100,48 @@ export const dictionaries = {
           ],
         },
         {
+          slug: "maedow-flow",
+          name: "Maedow Flow",
+          shortName: "Maedow Flow",
+          tag: "Open Source · IA",
+          year: "2026",
+          sub: "Workflow de dev avec agents IA",
+          description:
+            "Workflow open source pour construire des applications solides avec des agents IA, du premier prompt à la production : cycle en 5 phases, 17 règles vérifiables, plugin Claude Code, kit installable en une commande et site lisible par les IA.",
+          url: "https://maedow-flow.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Fumadocs",
+            "GSAP",
+            "Claude Code",
+            "Node.js",
+            "GitHub Actions",
+          ],
+        },
+        {
+          slug: "maedow-arch-docs",
+          name: "Maedow Arch",
+          shortName: "Maedow Arch",
+          tag: "Open Source · DevTools",
+          year: "2026",
+          sub: "Standard d'architecture front-end",
+          description:
+            "Standard d'architecture logicielle pour applications TypeScript / Next.js : documentation complète, CLI de scaffolding, config ESLint qui fait respecter les frontières entre couches, et audit npx des projets existants.",
+          url: "https://maedow-arch-docs.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Fumadocs",
+            "Mermaid",
+            "ESLint",
+            "npm packages",
+            "TypeScript",
+          ],
+        },
+        {
           slug: "pipv-pped",
           name: "PIPV-PPED",
           shortName: "PIPV",
@@ -185,7 +227,7 @@ export const dictionaries = {
       built: "Construit avec Next.js · Conçu à Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Sélection / 04 projets",
+      heroLabel: "— Sélection / 06 projets",
       heroH1a: "Travaux",
       heroH1b: "récents.",
       heroP:
@@ -225,6 +267,8 @@ export const dictionaries = {
       ctaServices: "Voir mes services",
       roleByName: {
         Ciblea: "Développeur Fullstack · Créateur",
+        "Maedow Flow": "Créateur · Open source",
+        "Maedow Arch": "Créateur · Open source",
         "PIPV-PPED": "Développeur Front-End · 6 mois",
         TaComFav: "Développeur Front-End · 3 mois",
         "e-Panacee": "Développeur Front-End · 4 mois",
@@ -368,7 +412,7 @@ export const dictionaries = {
       p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, équivalent ivoirien de la Caisse des dépôts française) et une application de Contrôle Dépositaire pour le marché régional UMOA. En parallèle, j'ai mené des missions freelance pour des clients en e-commerce, agence et institutionnel. Aujourd'hui, je cherche une nouvelle équipe à rejoindre — quel que soit le secteur, du moment que le produit a une vraie exigence d'ingénierie front.",
       stats: [
         ["2+", "années en production"],
-        ["5+", "projets en production"],
+        ["06", "projets en production"],
         ["4", "secteurs (IA, institutionnel, e-commerce, agence)"],
         ["13+", "technologies maîtrisées"],
       ] as [string, string][],
@@ -738,6 +782,48 @@ export const dictionaries = {
           ],
         },
         {
+          slug: "maedow-flow",
+          name: "Maedow Flow",
+          shortName: "Maedow Flow",
+          tag: "Open Source · AI",
+          year: "2026",
+          sub: "AI-agent development workflow",
+          description:
+            "Open-source workflow for building solid apps with AI agents, from first prompt to production: a 5-phase cycle, 17 verifiable rules, a Claude Code plugin, a one-command project kit and an AI-readable site.",
+          url: "https://maedow-flow.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Fumadocs",
+            "GSAP",
+            "Claude Code",
+            "Node.js",
+            "GitHub Actions",
+          ],
+        },
+        {
+          slug: "maedow-arch-docs",
+          name: "Maedow Arch",
+          shortName: "Maedow Arch",
+          tag: "Open Source · DevTools",
+          year: "2026",
+          sub: "Front-end architecture standard",
+          description:
+            "Software architecture standard for TypeScript / Next.js apps: full documentation, a scaffolding CLI, an ESLint config enforcing layer boundaries, and an npx audit for existing projects.",
+          url: "https://maedow-arch-docs.vercel.app",
+          stack: [
+            "Next.js 16",
+            "React 19",
+            "Tailwind v4",
+            "Fumadocs",
+            "Mermaid",
+            "ESLint",
+            "npm packages",
+            "TypeScript",
+          ],
+        },
+        {
           slug: "pipv-pped",
           name: "PIPV-PPED",
           shortName: "PIPV",
@@ -823,7 +909,7 @@ export const dictionaries = {
       built: "Built with Next.js · Designed in Abidjan",
     },
     travauxPage: {
-      heroLabel: "— Selection / 04 projects",
+      heroLabel: "— Selection / 06 projects",
       heroH1a: "Recent",
       heroH1b: "work.",
       heroP:
@@ -863,6 +949,8 @@ export const dictionaries = {
       ctaServices: "See my services",
       roleByName: {
         Ciblea: "Fullstack Developer · Creator",
+        "Maedow Flow": "Creator · Open source",
+        "Maedow Arch": "Creator · Open source",
         "PIPV-PPED": "Front-End Developer · 6 months",
         TaComFav: "Front-End Developer · 3 months",
         "e-Panacee": "Front-End Developer · 4 months",
@@ -1006,7 +1094,7 @@ export const dictionaries = {
       p3c: " (Caisse des Dépôts et Consignations de Côte d'Ivoire, the Ivorian equivalent of the French Caisse des dépôts) and a Custody Control application for the regional UMOA market. On the side, I led freelance missions for e-commerce, agency and institutional clients. Today, I'm looking for a new team to join — whatever the industry, as long as the product has real front-end engineering demands.",
       stats: [
         ["2+", "years in production"],
-        ["04", "projects in production"],
+        ["06", "projects in production"],
         ["4", "sectors (AI, institutional, e-commerce, agency)"],
         ["13+", "technologies mastered"],
       ] as [string, string][],
