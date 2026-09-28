@@ -4,6 +4,7 @@ import { Card, Label, Pill, StatusDot, Tag } from "@/components/ui";
 import { ArrowUpRight } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useProjects } from "@/lib/projects/ProjectsContext";
+import { PROJECT_PATHS } from "@/constants";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { notFound } from "next/navigation";
@@ -16,7 +17,6 @@ type CaseStudy =
 
 const COVER_HEADLINE: Record<string, [string, string]> = {
   ciblea: ["Ciblea", "IA."],
-  tacomfav: ["TaCom", "Fav."],
   "e-panacee": ["e-", "Panacee."],
 };
 
@@ -47,7 +47,19 @@ export default function ProjectPage({
 
   const cases = t.projectPage.cases as Record<string, CaseStudy | undefined>;
   const study = cases[slug];
-  const project = useProjects().find((p) => p.slug === slug);
+  const projects = useProjects();
+  const index = projects.findIndex((p) => p.slug === slug);
+  const project = projects[index];
+  // Next project in the display order set in Sanity, wrapping around.
+  const next = projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
+  const nextCaseStudy = next && PROJECT_PATHS[next.slug];
+  const nextLinkProps = nextCaseStudy
+    ? { href: nextCaseStudy }
+    : {
+        href: next?.url ?? "/travaux",
+        target: "_blank" as const,
+        rel: "noopener noreferrer" as const,
+      };
 
   const heroRef = useRef<HTMLElement>(null);
   useSplitIntro(heroRef, {
@@ -388,54 +400,60 @@ export default function ProjectPage({
           <Label style={{ display: "block", marginBottom: 18 }}>
             {study.nextLabel}
           </Label>
-          <h2 className="pf-display">{study.nextH1}</h2>
+          <h2 className="pf-display">{next ? `${next.name}.` : null}</h2>
         </div>
 
-        <Link
-          href="/travaux"
-          style={{ textDecoration: "none", color: "inherit", display: "block" }}
-          className="pf-reveal"
-        >
-          <div className="pj-next-card">
-            <div className="pj-next-visual">
-              <h3 className="pf-display pj-cover-headline">
-                TaCom
-                <br />
-                <span style={{ fontStyle: "italic", fontWeight: 300 }}>
-                  Fav.
-                </span>
-              </h3>
-            </div>
-            <div className="pj-next-info">
-              <Pill style={{ alignSelf: "start" }}>{study.nextProjLabel}</Pill>
-              <h3 className="pf-display">{study.nextH3}</h3>
-              <p>{study.nextP}</p>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  gap: 5,
-                  marginTop: 4,
-                }}
-              >
-                {["Next.js 16", "Sanity", "GSAP", "Framer Motion", "Lenis"].map(
-                  (s) => (
+        {next && (
+          <Link
+            {...nextLinkProps}
+            style={{ textDecoration: "none", color: "inherit", display: "block" }}
+            className="pf-reveal"
+          >
+            <div className="pj-next-card">
+              <div className="pj-next-visual">
+                {next.cover ? (
+                  <Image
+                    src={next.cover.src}
+                    alt={next.cover.alt}
+                    fill
+                    sizes="(max-width: 980px) 100vw, 50vw"
+                    className="pj-next-image"
+                  />
+                ) : (
+                  <h3 className="pf-display pj-cover-headline">{next.shortName}</h3>
+                )}
+              </div>
+              <div className="pj-next-info">
+                <Pill style={{ alignSelf: "start" }}>
+                  {[next.tag, next.year].filter(Boolean).join(" · ")}
+                </Pill>
+                <h3 className="pf-display">{next.sub}</h3>
+                <p>{next.description}</p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 5,
+                    marginTop: 4,
+                  }}
+                >
+                  {next.stack.slice(0, 5).map((s) => (
                     <Tag key={s} style={{ fontSize: 11 }}>
                       {s}
                     </Tag>
-                  ),
-                )}
+                  ))}
+                </div>
+                <span
+                  className="pf-btn pf-btn-ghost"
+                  style={{ alignSelf: "start", marginTop: 12, fontSize: 13 }}
+                >
+                  {study.nextCta}
+                  <ArrowUpRight />
+                </span>
               </div>
-              <span
-                className="pf-btn pf-btn-ghost"
-                style={{ alignSelf: "start", marginTop: 12, fontSize: 13 }}
-              >
-                {study.nextCta}
-                <ArrowUpRight />
-              </span>
             </div>
-          </div>
-        </Link>
+          </Link>
+        )}
       </section>
     </>
   );
