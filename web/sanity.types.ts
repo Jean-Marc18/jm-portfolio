@@ -15,10 +15,108 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type CoverTitle = {
+  line1?: string;
+  line2?: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type FeatureImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown; // Unable to locate the referenced type "media" in schema
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  _type: "image";
+};
+
+export type SimpleBlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type LocaleText = {
+  _type: "localeText";
+  fr?: string;
+  en?: string;
+};
+
 export type LocaleString = {
   _type: "localeString";
   fr?: string;
   en?: string;
+};
+
+export type CaseStudy = {
+  _type: "caseStudy";
+  kicker?: InternationalizedArrayString;
+  intro?: InternationalizedArrayText;
+  facts?: Array<{
+    label?: LocaleString;
+    value?: LocaleString;
+    _type: "fact";
+    _key: string;
+  }>;
+  coverTitle?: CoverTitle;
+  version?: string;
+  productType?: InternationalizedArrayString;
+  mainStack?: string;
+  contextTitle?: InternationalizedArrayString;
+  contextTags?: Array<
+    {
+      _key: string;
+    } & LocaleString
+  >;
+  contextBody?: InternationalizedArraySimpleBlockContent;
+  approachLabel?: InternationalizedArrayString;
+  approachTitle?: InternationalizedArrayString;
+  approachIntro?: InternationalizedArrayText;
+  approachPoints?: Array<{
+    title?: LocaleString;
+    description?: LocaleText;
+    _type: "approachPoint";
+    _key: string;
+  }>;
+  featuresTitle?: InternationalizedArrayString;
+  featuresIntro?: InternationalizedArrayText;
+  features?: Array<{
+    title?: LocaleString;
+    description?: LocaleText;
+    image?: FeatureImage;
+    size?: "large" | "normal" | "small";
+    _type: "feature";
+    _key: string;
+  }>;
+  stackTitle?: InternationalizedArrayString;
+  stackIntro?: InternationalizedArrayText;
+  stackGroups?: Array<{
+    title?: LocaleString;
+    items?: Array<string>;
+    _type: "stackGroup";
+    _key: string;
+  }>;
+  resultsTitle?: InternationalizedArrayString;
+  results?: Array<{
+    value?: string;
+    label?: LocaleString;
+    _type: "result";
+    _key: string;
+  }>;
 };
 
 export type Faq = {
@@ -100,13 +198,6 @@ export type Experience = {
   stack?: Array<string>;
 };
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
 export type Project = {
   _id: string;
   _type: "project";
@@ -131,6 +222,8 @@ export type Project = {
     alt?: string;
     _type: "image";
   };
+  hasCaseStudy?: boolean;
+  caseStudy?: CaseStudy;
   orderRank?: number;
 };
 
@@ -149,6 +242,12 @@ export type SanityImageHotspot = {
   height?: number;
   width?: number;
 };
+
+export type InternationalizedArraySimpleBlockContent = Array<
+  {
+    _key: string;
+  } & InternationalizedArraySimpleBlockContentValue
+>;
 
 export type Slug = {
   _type: "slug";
@@ -202,6 +301,12 @@ export type SiteSettings = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+};
+
+export type InternationalizedArraySimpleBlockContentValue = {
+  _type: "internationalizedArraySimpleBlockContentValue";
+  value?: SimpleBlockContent;
+  language?: string;
 };
 
 export type InternationalizedArrayTextValue = {
@@ -314,20 +419,27 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | CoverTitle
+  | SanityImageAssetReference
+  | FeatureImage
+  | SimpleBlockContent
+  | LocaleText
   | LocaleString
+  | CaseStudy
   | Faq
   | InternationalizedArrayText
   | InternationalizedArrayString
   | SkillCategory
   | Service
   | Experience
-  | SanityImageAssetReference
   | Project
   | SanityImageCrop
   | SanityImageHotspot
+  | InternationalizedArraySimpleBlockContent
   | Slug
   | SanityFileAssetReference
   | SiteSettings
+  | InternationalizedArraySimpleBlockContentValue
   | InternationalizedArrayTextValue
   | InternationalizedArrayStringValue
   | SanityImagePaletteSwatch
@@ -341,7 +453,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../web/sanity/queries.ts
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {    _id,    name,    "slug": slug.current,    shortName,    year,    url,    stack,    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },    coverImage { asset, alt, hotspot, crop }  }
+// Query: *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {    _id,    name,    "slug": slug.current,    shortName,    year,    url,    stack,    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },    coverImage { asset, alt, hotspot, crop },    hasCaseStudy  }
 export type PROJECTS_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
@@ -372,6 +484,7 @@ export type PROJECTS_QUERY_RESULT = Array<{
     hotspot: SanityImageHotspot | null;
     crop: SanityImageCrop | null;
   } | null;
+  hasCaseStudy: boolean | null;
 }>;
 
 // Source: ../web/sanity/queries.ts
@@ -597,11 +710,130 @@ export type SITE_CONTENT_QUERY_RESULT = {
   projectCount: number;
 };
 
+// Source: ../web/sanity/queries.ts
+// Variable: CASE_STUDY_QUERY
+// Query: *[_type == "project" && slug.current == $slug][0]{    name,    hasCaseStudy,      "kicker": { "fr": caseStudy.kicker[language == "fr"][0].value, "en": caseStudy.kicker[language == "en"][0].value },      "intro": { "fr": caseStudy.intro[language == "fr"][0].value, "en": caseStudy.intro[language == "en"][0].value },      "facts": caseStudy.facts[]{ "label": label{ fr, en }, "value": value{ fr, en } },      "coverLine1": caseStudy.coverTitle.line1,      "coverLine2": caseStudy.coverTitle.line2,      "version": caseStudy.version,      "productType": { "fr": caseStudy.productType[language == "fr"][0].value, "en": caseStudy.productType[language == "en"][0].value },      "mainStack": caseStudy.mainStack,      "contextTitle": { "fr": caseStudy.contextTitle[language == "fr"][0].value, "en": caseStudy.contextTitle[language == "en"][0].value },      "contextTags": caseStudy.contextTags[]{ fr, en },      "contextBody": { "fr": caseStudy.contextBody[language == "fr"][0].value, "en": caseStudy.contextBody[language == "en"][0].value },      "approachLabel": { "fr": caseStudy.approachLabel[language == "fr"][0].value, "en": caseStudy.approachLabel[language == "en"][0].value },      "approachTitle": { "fr": caseStudy.approachTitle[language == "fr"][0].value, "en": caseStudy.approachTitle[language == "en"][0].value },      "approachIntro": { "fr": caseStudy.approachIntro[language == "fr"][0].value, "en": caseStudy.approachIntro[language == "en"][0].value },      "approachPoints": caseStudy.approachPoints[]{ "title": title{ fr, en }, "description": description{ fr, en } },      "featuresTitle": { "fr": caseStudy.featuresTitle[language == "fr"][0].value, "en": caseStudy.featuresTitle[language == "en"][0].value },      "featuresIntro": { "fr": caseStudy.featuresIntro[language == "fr"][0].value, "en": caseStudy.featuresIntro[language == "en"][0].value },      "features": caseStudy.features[]{ "title": title{ fr, en }, "description": description{ fr, en }, image{ asset, hotspot, crop }, size },      "stackTitle": { "fr": caseStudy.stackTitle[language == "fr"][0].value, "en": caseStudy.stackTitle[language == "en"][0].value },      "stackIntro": { "fr": caseStudy.stackIntro[language == "fr"][0].value, "en": caseStudy.stackIntro[language == "en"][0].value },      "stackGroups": caseStudy.stackGroups[]{ "title": title{ fr, en }, items },      "resultsTitle": { "fr": caseStudy.resultsTitle[language == "fr"][0].value, "en": caseStudy.resultsTitle[language == "en"][0].value },      "results": caseStudy.results[]{ value, "label": label{ fr, en } }  }
+export type CASE_STUDY_QUERY_RESULT = {
+  name: string | null;
+  hasCaseStudy: boolean | null;
+  kicker: {
+    fr: string | null;
+    en: string | null;
+  };
+  intro: {
+    fr: string | null;
+    en: string | null;
+  };
+  facts: Array<{
+    label: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+    value: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+  }> | null;
+  coverLine1: string | null;
+  coverLine2: string | null;
+  version: string | null;
+  productType: {
+    fr: string | null;
+    en: string | null;
+  };
+  mainStack: string | null;
+  contextTitle: {
+    fr: string | null;
+    en: string | null;
+  };
+  contextTags: Array<{
+    fr: string | null;
+    en: string | null;
+  }> | null;
+  contextBody: {
+    fr: SimpleBlockContent | null;
+    en: SimpleBlockContent | null;
+  };
+  approachLabel: {
+    fr: string | null;
+    en: string | null;
+  };
+  approachTitle: {
+    fr: string | null;
+    en: string | null;
+  };
+  approachIntro: {
+    fr: string | null;
+    en: string | null;
+  };
+  approachPoints: Array<{
+    title: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+    description: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+  }> | null;
+  featuresTitle: {
+    fr: string | null;
+    en: string | null;
+  };
+  featuresIntro: {
+    fr: string | null;
+    en: string | null;
+  };
+  features: Array<{
+    title: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+    description: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+    image: {
+      asset: SanityImageAssetReference | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+    size: "large" | "normal" | "small" | null;
+  }> | null;
+  stackTitle: {
+    fr: string | null;
+    en: string | null;
+  };
+  stackIntro: {
+    fr: string | null;
+    en: string | null;
+  };
+  stackGroups: Array<{
+    title: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+    items: Array<string> | null;
+  }> | null;
+  resultsTitle: {
+    fr: string | null;
+    en: string | null;
+  };
+  results: Array<{
+    value: string | null;
+    label: {
+      fr: string | null;
+      en: string | null;
+    } | null;
+  }> | null;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    shortName,\n    year,\n    url,\n    stack,\n    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },\n    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },\n    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n    coverImage { asset, alt, hotspot, crop }\n  }\n': PROJECTS_QUERY_RESULT;
+    '\n  *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    shortName,\n    year,\n    url,\n    stack,\n    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },\n    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },\n    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n    coverImage { asset, alt, hotspot, crop },\n    hasCaseStudy\n  }\n': PROJECTS_QUERY_RESULT;
     '{\n    "settings": *[_id == "siteSettings"][0]{\n      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },\n      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },\n      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },\n      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },\n      email,\n      socialLinks[]{ label, url },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },\n      "cvUrl": cv.asset->url,\n      yearsOfExperience,\n      projectsCount,\n      sectorsCount,\n      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },\n      technologiesCount,\n      homeStack,\n      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },\n      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },\n      "ogImage": ogImage.asset->url\n    },\n    "experiences": *[_type == "experience"] | order(startYear desc){\n      company,\n      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },\n      startYear,\n      endYear,\n      highlights[]{ fr, en },\n      stack\n    },\n    "skills": *[_type == "skillCategory"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      items\n    },\n    "services": *[_type == "service"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },\n      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n      tags[]{ fr, en },\n      deliverables[]{ fr, en },\n      featured,\n      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }\n    },\n    "faqs": *[_type == "faq"] | order(orderRank asc){\n      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },\n      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }\n    },\n    "projectCount": count(*[_type == "project" && defined(slug.current)])\n  }\n': SITE_CONTENT_QUERY_RESULT;
+    '\n  *[_type == "project" && slug.current == $slug][0]{\n    name,\n    hasCaseStudy,\n      "kicker": { "fr": caseStudy.kicker[language == "fr"][0].value, "en": caseStudy.kicker[language == "en"][0].value },\n      "intro": { "fr": caseStudy.intro[language == "fr"][0].value, "en": caseStudy.intro[language == "en"][0].value },\n      "facts": caseStudy.facts[]{ "label": label{ fr, en }, "value": value{ fr, en } },\n      "coverLine1": caseStudy.coverTitle.line1,\n      "coverLine2": caseStudy.coverTitle.line2,\n      "version": caseStudy.version,\n      "productType": { "fr": caseStudy.productType[language == "fr"][0].value, "en": caseStudy.productType[language == "en"][0].value },\n      "mainStack": caseStudy.mainStack,\n      "contextTitle": { "fr": caseStudy.contextTitle[language == "fr"][0].value, "en": caseStudy.contextTitle[language == "en"][0].value },\n      "contextTags": caseStudy.contextTags[]{ fr, en },\n      "contextBody": { "fr": caseStudy.contextBody[language == "fr"][0].value, "en": caseStudy.contextBody[language == "en"][0].value },\n      "approachLabel": { "fr": caseStudy.approachLabel[language == "fr"][0].value, "en": caseStudy.approachLabel[language == "en"][0].value },\n      "approachTitle": { "fr": caseStudy.approachTitle[language == "fr"][0].value, "en": caseStudy.approachTitle[language == "en"][0].value },\n      "approachIntro": { "fr": caseStudy.approachIntro[language == "fr"][0].value, "en": caseStudy.approachIntro[language == "en"][0].value },\n      "approachPoints": caseStudy.approachPoints[]{ "title": title{ fr, en }, "description": description{ fr, en } },\n      "featuresTitle": { "fr": caseStudy.featuresTitle[language == "fr"][0].value, "en": caseStudy.featuresTitle[language == "en"][0].value },\n      "featuresIntro": { "fr": caseStudy.featuresIntro[language == "fr"][0].value, "en": caseStudy.featuresIntro[language == "en"][0].value },\n      "features": caseStudy.features[]{ "title": title{ fr, en }, "description": description{ fr, en }, image{ asset, hotspot, crop }, size },\n      "stackTitle": { "fr": caseStudy.stackTitle[language == "fr"][0].value, "en": caseStudy.stackTitle[language == "en"][0].value },\n      "stackIntro": { "fr": caseStudy.stackIntro[language == "fr"][0].value, "en": caseStudy.stackIntro[language == "en"][0].value },\n      "stackGroups": caseStudy.stackGroups[]{ "title": title{ fr, en }, items },\n      "resultsTitle": { "fr": caseStudy.resultsTitle[language == "fr"][0].value, "en": caseStudy.resultsTitle[language == "en"][0].value },\n      "results": caseStudy.results[]{ value, "label": label{ fr, en } }\n  }\n': CASE_STUDY_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

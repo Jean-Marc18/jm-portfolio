@@ -92,7 +92,7 @@ Le Studio est en ligne sur <https://jmk-portfolio.sanity.studio>. Tout le texte 
 | Dans le Studio         | Où ça s'affiche                                                                 |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | Réglages du site       | Disponibilité, email, réseaux, localisation, langues, CV, chiffres clés, stack de l'accueil, SEO |
-| Projets                | Accueil, page Travaux, études de cas                                            |
+| Projets                | Accueil, page Travaux, et l'étude de cas du projet (onglet « Étude de cas » : activer « Publier une étude de cas ») |
 | Expériences            | Bandeau « Dernier poste », section À propos de l'accueil, page À propos         |
 | Services               | Accueil (résumé, 3 premiers tags) et page Services (description, livrables)     |
 | Questions fréquentes   | Page Services                                                                   |
@@ -100,6 +100,7 @@ Le Studio est en ligne sur <https://jmk-portfolio.sanity.studio>. Tout le texte 
 
 - **Mise en ligne** : le site relit Sanity au plus toutes les heures. Pour une mise à jour immédiate, le webhook de [Sanity Manage](https://www.sanity.io/manage/project/ibpq0dxr/api/webhooks) appelle `https://jmk-portfolio.vercel.app/api/revalidate` (méthode POST, même secret que `SANITY_REVALIDATE_SECRET`) avec le filtre `_type in ["project", "siteSettings", "experience", "service", "faq", "skillCategory"]`.
 - **Repli** : champ par champ, tout ce qui est vide dans Sanity reprend la valeur définie dans `web/lib/content/defaults.ts` (tirée de `web/lib/i18n/dictionaries.ts`). Si Sanity ne répond pas, le site reste complet.
+- **Études de cas** : une fois activée sur un projet, sa page `/projets/<slug>` existe et ses cartes y mènent au lieu du site en ligne. Désactivée, la page renvoie une 404. Le bloc « Projet suivant » suit l'ordre d'affichage des projets.
 - **Nombre de projets** : laisse le champ vide dans les Réglages pour compter automatiquement les projets publiés.
 - **Import initial** : dans `studio/`, `npm run import-projects` puis `npm run import-content`. Les deux scripts n'écrasent jamais un contenu existant.
 - **Schéma** : après une modification dans `studio/schemaTypes`, lance `npm run typegen` puis `npx sanity schemas deploy` dans `studio/`.
@@ -128,10 +129,11 @@ Le Studio est en ligne sur <https://jmk-portfolio.sanity.studio>. Tout le texte 
     ├── lib/
     │   ├── animations/         # Cover coordinator, useSplitIntro, useCountUp
     │   ├── i18n/               # Dictionnaires FR/EN + LanguageContext + config
+    │   ├── case-studies/       # Études de cas (Sanity + repli)
     │   ├── content/            # Réglages, expériences, services, FAQ, stack (Sanity + repli)
     │   ├── projects/           # Projets Sanity, repli sur les dictionnaires
     │   └── gsap.ts             # Plugins GSAP + tokens d'easing/durée
-    ├── constants/              # Routes, NAV_ORDER, métadonnées projets
+    ├── constants/              # Routes, NAV_ORDER
     ├── sanity/                 # Client, requêtes GROQ, URL des images
     ├── sanity.types.ts         # Types générés par TypeGen
     └── public/                 # Fonts (Labil Grotesk), photos, CV PDF

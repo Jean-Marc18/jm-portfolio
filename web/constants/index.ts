@@ -16,7 +16,3 @@ export const NAV_ORDER: RouteKey[] = [
   "about",
   "contact",
 ];
-
-export const PROJECT_PATHS: Record<string, string> = {
-  ciblea: "/projets/ciblea",
-};

@@ -14,6 +14,7 @@ export const project = defineType({
   groups: [
     {name: 'content', title: 'Contenu', default: true},
     {name: 'media', title: 'Visuel'},
+    {name: 'caseStudy', title: 'Étude de cas'},
     {name: 'meta', title: 'Réglages'},
   ],
   fields: [
@@ -102,6 +103,21 @@ export const project = defineType({
           validation: (rule) => rule.required().warning('Le texte alternatif aide l’accessibilité et le SEO.'),
         }),
       ],
+    }),
+    defineField({
+      name: 'hasCaseStudy',
+      title: 'Publier une étude de cas',
+      type: 'boolean',
+      group: 'caseStudy',
+      initialValue: false,
+      description: 'Active la page /projets/<slug>. Les cartes du projet y mènent au lieu du site en ligne.',
+    }),
+    defineField({
+      name: 'caseStudy',
+      title: 'Étude de cas',
+      type: 'caseStudy',
+      group: 'caseStudy',
+      hidden: ({document}) => !document?.hasCaseStudy,
     }),
     defineField({
       name: 'orderRank',

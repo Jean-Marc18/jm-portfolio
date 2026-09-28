@@ -21,7 +21,7 @@ export default defineConfig({
         {id: 'en', title: 'English'},
       ],
       defaultLanguages: ['fr', 'en'],
-      fieldTypes: ['string', 'text'],
+      fieldTypes: ['string', 'text', 'simpleBlockContent'],
       languageDisplay: 'titleAndCode',
     }),
   ],
