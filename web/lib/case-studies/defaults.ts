@@ -1,5 +1,6 @@
 import { dictionaries } from "../i18n/dictionaries";
 import type { Localized } from "../projects/types";
+import { paragraphs } from "../content/blocks";
 import type { Blocks, CaseStudy } from "./types";
 
 // Case studies bundled with the site: used when Sanity has none for a
@@ -9,27 +10,6 @@ const fr = dictionaries.fr.projectPage.cases;
 const en = dictionaries.en.projectPage.cases;
 
 const both = (frValue: string, enValue: string): Localized => ({ fr: frValue, en: enValue });
-
-/** Paragraphs as Portable Text; each paragraph is [plain, bold, plain] runs. */
-const paragraphs = (id: string, items: [string, string?, string?][]): Blocks =>
-  items.map((runs, i) => ({
-    _type: "block",
-    _key: `${id}${i}`,
-    style: "normal",
-    markDefs: [],
-    children: runs.flatMap((text, j) =>
-      text
-        ? [
-            {
-              _type: "span" as const,
-              _key: `${id}${i}s${j}`,
-              text,
-              marks: j === 1 ? ["strong"] : [],
-            },
-          ]
-        : [],
-    ),
-  }));
 
 const ciblea = (
   c: typeof fr.ciblea,

@@ -1,4 +1,5 @@
 import type { Localized } from "../projects/types";
+import type { LocalizedBlocks } from "./blocks";
 
 export type { Localized };
 
@@ -52,12 +53,29 @@ export type Service = {
 
 export type Faq = { question: Localized; answer: Localized };
 
+export type AboutContent = {
+  photo: { src: string; alt: string } | null;
+  portraitRole: Localized;
+  heroLine1: Localized;
+  heroLine2: Localized;
+  heroLine3: Localized;
+  bio: LocalizedBlocks;
+  careerTitle: Localized;
+  careerIntro: Localized;
+  stackTitle: Localized;
+  stackIntro: Localized;
+  valuesTitle: Localized;
+  values: { title: Localized; description: Localized }[];
+  homeIntro: LocalizedBlocks;
+};
+
 export type SiteContent = {
   settings: SiteSettings;
   experiences: Experience[];
   skills: SkillCategory[];
   services: Service[];
   faqs: Faq[];
+  about: AboutContent;
 };
 
 /** What Sanity may return: every part is optional, missing parts fall back to defaults. */
@@ -67,4 +85,5 @@ export type CmsSiteContent = {
   skills: SkillCategory[];
   services: Service[];
   faqs: Faq[];
+  about: Partial<AboutContent> | null;
 };

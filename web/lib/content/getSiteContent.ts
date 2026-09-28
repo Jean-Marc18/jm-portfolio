@@ -2,6 +2,7 @@ import "server-only";
 import { client } from "@/sanity/client";
 import { SITE_CONTENT_QUERY } from "@/sanity/queries";
 import { SANITY_TAG } from "@/lib/projects/getProjects";
+import { urlFor } from "@/sanity/image";
 import type { CmsSiteContent, Localized } from "./types";
 
 type RawLocalized = { fr: string | null; en: string | null } | null | undefined;
@@ -23,6 +24,7 @@ export async function getSiteContent(): Promise<
       { next: { revalidate: 3600, tags: [SANITY_TAG] } },
     );
     const s = data.settings;
+    const a = data.about;
 
     return {
       projectCount: data.projectCount,
@@ -72,6 +74,31 @@ export async function getSiteContent(): Promise<
         badge: loc(sv.badge),
       })),
       faqs: data.faqs.map((f) => ({ question: loc(f.question), answer: loc(f.answer) })),
+      about: a
+        ? {
+            photo: a.photo?.asset
+              ? {
+                  src: urlFor(a.photo).width(900).height(1200).fit("crop").auto("format").url(),
+                  alt: a.photo.alt ?? "Jean-Marc Koffi",
+                }
+              : null,
+            portraitRole: loc(a.portraitRole),
+            heroLine1: loc(a.heroLine1),
+            heroLine2: loc(a.heroLine2),
+            heroLine3: loc(a.heroLine3),
+            bio: { fr: a.bio.fr, en: a.bio.en },
+            careerTitle: loc(a.careerTitle),
+            careerIntro: loc(a.careerIntro),
+            stackTitle: loc(a.stackTitle),
+            stackIntro: loc(a.stackIntro),
+            valuesTitle: loc(a.valuesTitle),
+            values: list(a.values).map((v) => ({
+              title: loc(v.title),
+              description: loc(v.description),
+            })),
+            homeIntro: { fr: a.homeIntro.fr, en: a.homeIntro.en },
+          }
+        : null,
     };
   } catch (err) {
     console.error(

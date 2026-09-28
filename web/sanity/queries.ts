@@ -67,6 +67,21 @@ export const SITE_CONTENT_QUERY = defineQuery(`{
       "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },
       "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }
     },
+    "about": *[_id == "aboutPage"][0]{
+      "photo": photo{ asset, hotspot, crop, alt },
+      "portraitRole": { "fr": portraitRole[language == "fr"][0].value, "en": portraitRole[language == "en"][0].value },
+      "heroLine1": { "fr": heroLine1[language == "fr"][0].value, "en": heroLine1[language == "en"][0].value },
+      "heroLine2": { "fr": heroLine2[language == "fr"][0].value, "en": heroLine2[language == "en"][0].value },
+      "heroLine3": { "fr": heroLine3[language == "fr"][0].value, "en": heroLine3[language == "en"][0].value },
+      "bio": { "fr": bio[language == "fr"][0].value, "en": bio[language == "en"][0].value },
+      "careerTitle": { "fr": careerTitle[language == "fr"][0].value, "en": careerTitle[language == "en"][0].value },
+      "careerIntro": { "fr": careerIntro[language == "fr"][0].value, "en": careerIntro[language == "en"][0].value },
+      "stackTitle": { "fr": stackTitle[language == "fr"][0].value, "en": stackTitle[language == "en"][0].value },
+      "stackIntro": { "fr": stackIntro[language == "fr"][0].value, "en": stackIntro[language == "en"][0].value },
+      "valuesTitle": { "fr": valuesTitle[language == "fr"][0].value, "en": valuesTitle[language == "en"][0].value },
+      "values": values[]{ "title": title{ fr, en }, "description": description{ fr, en } },
+      "homeIntro": { "fr": homeIntro[language == "fr"][0].value, "en": homeIntro[language == "en"][0].value }
+    },
     "projectCount": count(*[_type == "project" && defined(slug.current)])
   }
 `);

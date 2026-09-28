@@ -1,12 +1,12 @@
 /**
  * Imports the site-wide content currently bundled in the web app (settings,
- * experiences, stack, services, FAQ, case studies) into Sanity.
+ * About page, experiences, stack, services, FAQ, case studies) into Sanity.
  *
  * Run once from the studio folder, while logged in (`npx sanity login`):
  *   npm run import-content
  *
- * Existing content is never overwritten: the settings are skipped if they
- * already exist, each list is skipped if it already has documents, and a
+ * Existing content is never overwritten: the settings and About page are
+ * skipped if they already exist, each list is skipped if it already has documents, and a
  * case study is skipped if its project already has the switch set.
  */
 import {createReadStream, existsSync} from 'node:fs'
@@ -48,6 +48,48 @@ async function uploadImage(publicPath: string | null) {
   return {_type: 'image', asset: {_type: 'reference', _ref: asset._id}}
 }
 
+const blocksFor = (value: Record<'fr' | 'en', unknown[] | null | undefined>) =>
+  (['fr', 'en'] as const)
+    .filter((language) => value[language]?.length)
+    .map((language) => ({
+      _key: key(),
+      _type: 'internationalizedArraySimpleBlockContentValue',
+      language,
+      value: (value[language] ?? []).map((b) => ({...(b as object), _key: key()})),
+    }))
+
+async function importAbout() {
+  if (await client.fetch<boolean>(`defined(*[_id == "aboutPage"][0]._id)`)) {
+    console.log('- Page À propos : existe déjà, ignorée')
+    return
+  }
+  const a = DEFAULT_SITE_CONTENT.about
+  const photo = await uploadImage(a.photo?.src ?? null)
+  await client.createIfNotExists({
+    _id: 'aboutPage',
+    _type: 'aboutPage',
+    ...(photo ? {photo: {...photo, alt: a.photo?.alt}} : {}),
+    portraitRole: localized('String', a.portraitRole),
+    heroLine1: localized('String', a.heroLine1),
+    heroLine2: localized('String', a.heroLine2),
+    heroLine3: localized('String', a.heroLine3),
+    bio: blocksFor({fr: a.bio.fr, en: a.bio.en}),
+    careerTitle: localized('String', a.careerTitle),
+    careerIntro: localized('Text', a.careerIntro),
+    stackTitle: localized('String', a.stackTitle),
+    stackIntro: localized('Text', a.stackIntro),
+    valuesTitle: localized('String', a.valuesTitle),
+    values: a.values.map((v) => ({
+      _key: key(),
+      _type: 'value',
+      title: localeString(v.title),
+      description: localeText(v.description),
+    })),
+    homeIntro: blocksFor({fr: a.homeIntro.fr, en: a.homeIntro.en}),
+  })
+  console.log(`+ Page À propos importée${photo ? ' (avec la photo)' : ''}`)
+}
+
 async function importCaseStudies() {
   for (const [slug, c] of Object.entries(DEFAULT_CASE_STUDIES)) {
     const project = await client.fetch<{_id: string; hasCaseStudy?: boolean} | null>(
@@ -73,9 +115,6 @@ async function importCaseStudies() {
         ...((await uploadImage(f.image).then((image) => (image ? {image} : {}))) as object),
       })
     }
-    const blocks = (value?: unknown[] | null) =>
-      (value ?? []).map((b) => ({...(b as object), _key: key()}))
-
     await client
       .patch(project._id)
       .set({
@@ -96,14 +135,7 @@ async function importCaseStudies() {
           mainStack: c.mainStack,
           contextTitle: localized('String', c.contextTitle),
           contextTags: localeStrings(c.contextTags),
-          contextBody: (['fr', 'en'] as const)
-            .filter((language) => c.contextBody[language]?.length)
-            .map((language) => ({
-              _key: key(),
-              _type: 'internationalizedArraySimpleBlockContentValue',
-              language,
-              value: blocks(c.contextBody[language]),
-            })),
+          contextBody: blocksFor({fr: c.contextBody.fr, en: c.contextBody.en}),
           approachLabel: localized('String', c.approachLabel),
           approachTitle: localized('String', c.approachTitle),
           approachIntro: localized('Text', c.approachIntro),
@@ -194,6 +226,7 @@ async function importList<T>(type: string, label: string, items: T[], toDoc: (it
 async function run() {
   const c = DEFAULT_SITE_CONTENT
   await importSettings()
+  await importAbout()
   await importList('experience', 'Expériences', c.experiences, (e) => ({
     company: e.company,
     role: localized('String', e.role),

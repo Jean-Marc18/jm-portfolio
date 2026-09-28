@@ -8,6 +8,7 @@ type WebhookPayload = { _type?: string };
 const CONTENT_TYPES = [
   "project",
   "siteSettings",
+  "aboutPage",
   "experience",
   "service",
   "faq",

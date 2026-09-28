@@ -1,18 +1,8 @@
 import type { Localized } from "../projects/types";
 
-/**
- * Portable Text paragraphs (the Studio's `simpleBlockContent`). Declared here
- * rather than imported from sanity.types.ts so the Studio import script can
- * share this file.
- */
-export type Blocks = Array<{
-  _type: "block";
-  _key: string;
-  style?: "normal";
-  markDefs?: unknown[] | null;
-  children?: Array<{ _type: "span"; _key: string; text?: string; marks?: string[] }>;
-}>;
-export type LocalizedBlocks = { fr?: Blocks | null; en?: Blocks | null };
+export type { Blocks, LocalizedBlocks } from "../content/blocks";
+import type { LocalizedBlocks } from "../content/blocks";
+
 export type FeatureSize = "large" | "normal" | "small";
 
 /** A case study as stored in Sanity: both locales, resolved on the client. */
