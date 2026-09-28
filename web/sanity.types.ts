@@ -255,6 +255,39 @@ export type Slug = {
   source?: string;
 };
 
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  photo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  portraitRole?: InternationalizedArrayString;
+  heroLine1?: InternationalizedArrayString;
+  heroLine2?: InternationalizedArrayString;
+  heroLine3?: InternationalizedArrayString;
+  bio?: InternationalizedArraySimpleBlockContent;
+  careerTitle?: InternationalizedArrayString;
+  careerIntro?: InternationalizedArrayText;
+  stackTitle?: InternationalizedArrayString;
+  stackIntro?: InternationalizedArrayText;
+  valuesTitle?: InternationalizedArrayString;
+  values?: Array<{
+    title?: LocaleString;
+    description?: LocaleText;
+    _type: "value";
+    _key: string;
+  }>;
+  homeIntro?: InternationalizedArraySimpleBlockContent;
+};
+
 export type SanityFileAssetReference = {
   _ref: string;
   _type: "reference";
@@ -437,6 +470,7 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | InternationalizedArraySimpleBlockContent
   | Slug
+  | AboutPage
   | SanityFileAssetReference
   | SiteSettings
   | InternationalizedArraySimpleBlockContentValue
@@ -489,7 +523,7 @@ export type PROJECTS_QUERY_RESULT = Array<{
 
 // Source: ../web/sanity/queries.ts
 // Variable: SITE_CONTENT_QUERY
-// Query: {    "settings": *[_id == "siteSettings"][0]{      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },      email,      socialLinks[]{ label, url },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },      "cvUrl": cv.asset->url,      yearsOfExperience,      projectsCount,      sectorsCount,      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },      technologiesCount,      homeStack,      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },      "ogImage": ogImage.asset->url    },    "experiences": *[_type == "experience"] | order(startYear desc){      company,      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },      startYear,      endYear,      highlights[]{ fr, en },      stack    },    "skills": *[_type == "skillCategory"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      items    },    "services": *[_type == "service"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },      tags[]{ fr, en },      deliverables[]{ fr, en },      featured,      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }    },    "faqs": *[_type == "faq"] | order(orderRank asc){      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }    },    "projectCount": count(*[_type == "project" && defined(slug.current)])  }
+// Query: {    "settings": *[_id == "siteSettings"][0]{      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },      email,      socialLinks[]{ label, url },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },      "cvUrl": cv.asset->url,      yearsOfExperience,      projectsCount,      sectorsCount,      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },      technologiesCount,      homeStack,      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },      "ogImage": ogImage.asset->url    },    "experiences": *[_type == "experience"] | order(startYear desc){      company,      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },      startYear,      endYear,      highlights[]{ fr, en },      stack    },    "skills": *[_type == "skillCategory"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      items    },    "services": *[_type == "service"] | order(orderRank asc){      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },      tags[]{ fr, en },      deliverables[]{ fr, en },      featured,      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }    },    "faqs": *[_type == "faq"] | order(orderRank asc){      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }    },    "about": *[_id == "aboutPage"][0]{      "photo": photo{ asset, hotspot, crop, alt },      "portraitRole": { "fr": portraitRole[language == "fr"][0].value, "en": portraitRole[language == "en"][0].value },      "heroLine1": { "fr": heroLine1[language == "fr"][0].value, "en": heroLine1[language == "en"][0].value },      "heroLine2": { "fr": heroLine2[language == "fr"][0].value, "en": heroLine2[language == "en"][0].value },      "heroLine3": { "fr": heroLine3[language == "fr"][0].value, "en": heroLine3[language == "en"][0].value },      "bio": { "fr": bio[language == "fr"][0].value, "en": bio[language == "en"][0].value },      "careerTitle": { "fr": careerTitle[language == "fr"][0].value, "en": careerTitle[language == "en"][0].value },      "careerIntro": { "fr": careerIntro[language == "fr"][0].value, "en": careerIntro[language == "en"][0].value },      "stackTitle": { "fr": stackTitle[language == "fr"][0].value, "en": stackTitle[language == "en"][0].value },      "stackIntro": { "fr": stackIntro[language == "fr"][0].value, "en": stackIntro[language == "en"][0].value },      "valuesTitle": { "fr": valuesTitle[language == "fr"][0].value, "en": valuesTitle[language == "en"][0].value },      "values": values[]{ "title": title{ fr, en }, "description": description{ fr, en } },      "homeIntro": { "fr": homeIntro[language == "fr"][0].value, "en": homeIntro[language == "en"][0].value }    },    "projectCount": count(*[_type == "project" && defined(slug.current)])  }
 export type SITE_CONTENT_QUERY_RESULT = {
   settings:
     | {
@@ -707,6 +741,118 @@ export type SITE_CONTENT_QUERY_RESULT = {
       en: string | null;
     };
   }>;
+  about:
+    | {
+        photo: null;
+        portraitRole: {
+          fr: null;
+          en: null;
+        };
+        heroLine1: {
+          fr: null;
+          en: null;
+        };
+        heroLine2: {
+          fr: null;
+          en: null;
+        };
+        heroLine3: {
+          fr: null;
+          en: null;
+        };
+        bio: {
+          fr: null;
+          en: null;
+        };
+        careerTitle: {
+          fr: null;
+          en: null;
+        };
+        careerIntro: {
+          fr: null;
+          en: null;
+        };
+        stackTitle: {
+          fr: null;
+          en: null;
+        };
+        stackIntro: {
+          fr: null;
+          en: null;
+        };
+        valuesTitle: {
+          fr: null;
+          en: null;
+        };
+        values: null;
+        homeIntro: {
+          fr: null;
+          en: null;
+        };
+      }
+    | {
+        photo: {
+          asset: SanityImageAssetReference | null;
+          hotspot: SanityImageHotspot | null;
+          crop: SanityImageCrop | null;
+          alt: string | null;
+        } | null;
+        portraitRole: {
+          fr: string | null;
+          en: string | null;
+        };
+        heroLine1: {
+          fr: string | null;
+          en: string | null;
+        };
+        heroLine2: {
+          fr: string | null;
+          en: string | null;
+        };
+        heroLine3: {
+          fr: string | null;
+          en: string | null;
+        };
+        bio: {
+          fr: SimpleBlockContent | null;
+          en: SimpleBlockContent | null;
+        };
+        careerTitle: {
+          fr: string | null;
+          en: string | null;
+        };
+        careerIntro: {
+          fr: string | null;
+          en: string | null;
+        };
+        stackTitle: {
+          fr: string | null;
+          en: string | null;
+        };
+        stackIntro: {
+          fr: string | null;
+          en: string | null;
+        };
+        valuesTitle: {
+          fr: string | null;
+          en: string | null;
+        };
+        values: Array<{
+          title: {
+            fr: string | null;
+            en: string | null;
+          } | null;
+          description: {
+            fr: string | null;
+            en: string | null;
+          } | null;
+        }> | null;
+        homeIntro: {
+          fr: SimpleBlockContent | null;
+          en: SimpleBlockContent | null;
+        };
+      }
+    | null;
   projectCount: number;
 };
 
@@ -832,7 +978,7 @@ export type CASE_STUDY_QUERY_RESULT = {
 declare global {
   interface SanityQueries {
     '\n  *[_type == "project" && defined(slug.current)] | order(orderRank asc, year desc) {\n    _id,\n    name,\n    "slug": slug.current,\n    shortName,\n    year,\n    url,\n    stack,\n    "tag": { "fr": category[language == "fr"][0].value, "en": category[language == "en"][0].value },\n    "sub": { "fr": subtitle[language == "fr"][0].value, "en": subtitle[language == "en"][0].value },\n    "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n    "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n    coverImage { asset, alt, hotspot, crop },\n    hasCaseStudy\n  }\n': PROJECTS_QUERY_RESULT;
-    '{\n    "settings": *[_id == "siteSettings"][0]{\n      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },\n      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },\n      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },\n      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },\n      email,\n      socialLinks[]{ label, url },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },\n      "cvUrl": cv.asset->url,\n      yearsOfExperience,\n      projectsCount,\n      sectorsCount,\n      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },\n      technologiesCount,\n      homeStack,\n      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },\n      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },\n      "ogImage": ogImage.asset->url\n    },\n    "experiences": *[_type == "experience"] | order(startYear desc){\n      company,\n      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },\n      startYear,\n      endYear,\n      highlights[]{ fr, en },\n      stack\n    },\n    "skills": *[_type == "skillCategory"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      items\n    },\n    "services": *[_type == "service"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },\n      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n      tags[]{ fr, en },\n      deliverables[]{ fr, en },\n      featured,\n      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }\n    },\n    "faqs": *[_type == "faq"] | order(orderRank asc){\n      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },\n      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }\n    },\n    "projectCount": count(*[_type == "project" && defined(slug.current)])\n  }\n': SITE_CONTENT_QUERY_RESULT;
+    '{\n    "settings": *[_id == "siteSettings"][0]{\n      "availabilityHeadline": { "fr": availabilityHeadline[language == "fr"][0].value, "en": availabilityHeadline[language == "en"][0].value },\n      "availabilityShort": { "fr": availabilityShort[language == "fr"][0].value, "en": availabilityShort[language == "en"][0].value },\n      "availabilityDetail": { "fr": availabilityDetail[language == "fr"][0].value, "en": availabilityDetail[language == "en"][0].value },\n      "status": { "fr": status[language == "fr"][0].value, "en": status[language == "en"][0].value },\n      email,\n      socialLinks[]{ label, url },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "languages": { "fr": languages[language == "fr"][0].value, "en": languages[language == "en"][0].value },\n      "cvUrl": cv.asset->url,\n      yearsOfExperience,\n      projectsCount,\n      sectorsCount,\n      "sectorsList": { "fr": sectorsList[language == "fr"][0].value, "en": sectorsList[language == "en"][0].value },\n      technologiesCount,\n      homeStack,\n      "seoTitle": { "fr": seoTitle[language == "fr"][0].value, "en": seoTitle[language == "en"][0].value },\n      "seoDescription": { "fr": seoDescription[language == "fr"][0].value, "en": seoDescription[language == "en"][0].value },\n      "ogImage": ogImage.asset->url\n    },\n    "experiences": *[_type == "experience"] | order(startYear desc){\n      company,\n      "role": { "fr": role[language == "fr"][0].value, "en": role[language == "en"][0].value },\n      "sector": { "fr": sector[language == "fr"][0].value, "en": sector[language == "en"][0].value },\n      "location": { "fr": location[language == "fr"][0].value, "en": location[language == "en"][0].value },\n      "context": { "fr": context[language == "fr"][0].value, "en": context[language == "en"][0].value },\n      startYear,\n      endYear,\n      highlights[]{ fr, en },\n      stack\n    },\n    "skills": *[_type == "skillCategory"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      items\n    },\n    "services": *[_type == "service"] | order(orderRank asc){\n      "title": { "fr": title[language == "fr"][0].value, "en": title[language == "en"][0].value },\n      "summary": { "fr": summary[language == "fr"][0].value, "en": summary[language == "en"][0].value },\n      "description": { "fr": description[language == "fr"][0].value, "en": description[language == "en"][0].value },\n      tags[]{ fr, en },\n      deliverables[]{ fr, en },\n      featured,\n      "badge": { "fr": badge[language == "fr"][0].value, "en": badge[language == "en"][0].value }\n    },\n    "faqs": *[_type == "faq"] | order(orderRank asc){\n      "question": { "fr": question[language == "fr"][0].value, "en": question[language == "en"][0].value },\n      "answer": { "fr": answer[language == "fr"][0].value, "en": answer[language == "en"][0].value }\n    },\n    "about": *[_id == "aboutPage"][0]{\n      "photo": photo{ asset, hotspot, crop, alt },\n      "portraitRole": { "fr": portraitRole[language == "fr"][0].value, "en": portraitRole[language == "en"][0].value },\n      "heroLine1": { "fr": heroLine1[language == "fr"][0].value, "en": heroLine1[language == "en"][0].value },\n      "heroLine2": { "fr": heroLine2[language == "fr"][0].value, "en": heroLine2[language == "en"][0].value },\n      "heroLine3": { "fr": heroLine3[language == "fr"][0].value, "en": heroLine3[language == "en"][0].value },\n      "bio": { "fr": bio[language == "fr"][0].value, "en": bio[language == "en"][0].value },\n      "careerTitle": { "fr": careerTitle[language == "fr"][0].value, "en": careerTitle[language == "en"][0].value },\n      "careerIntro": { "fr": careerIntro[language == "fr"][0].value, "en": careerIntro[language == "en"][0].value },\n      "stackTitle": { "fr": stackTitle[language == "fr"][0].value, "en": stackTitle[language == "en"][0].value },\n      "stackIntro": { "fr": stackIntro[language == "fr"][0].value, "en": stackIntro[language == "en"][0].value },\n      "valuesTitle": { "fr": valuesTitle[language == "fr"][0].value, "en": valuesTitle[language == "en"][0].value },\n      "values": values[]{ "title": title{ fr, en }, "description": description{ fr, en } },\n      "homeIntro": { "fr": homeIntro[language == "fr"][0].value, "en": homeIntro[language == "en"][0].value }\n    },\n    "projectCount": count(*[_type == "project" && defined(slug.current)])\n  }\n': SITE_CONTENT_QUERY_RESULT;
     '\n  *[_type == "project" && slug.current == $slug][0]{\n    name,\n    hasCaseStudy,\n      "kicker": { "fr": caseStudy.kicker[language == "fr"][0].value, "en": caseStudy.kicker[language == "en"][0].value },\n      "intro": { "fr": caseStudy.intro[language == "fr"][0].value, "en": caseStudy.intro[language == "en"][0].value },\n      "facts": caseStudy.facts[]{ "label": label{ fr, en }, "value": value{ fr, en } },\n      "coverLine1": caseStudy.coverTitle.line1,\n      "coverLine2": caseStudy.coverTitle.line2,\n      "version": caseStudy.version,\n      "productType": { "fr": caseStudy.productType[language == "fr"][0].value, "en": caseStudy.productType[language == "en"][0].value },\n      "mainStack": caseStudy.mainStack,\n      "contextTitle": { "fr": caseStudy.contextTitle[language == "fr"][0].value, "en": caseStudy.contextTitle[language == "en"][0].value },\n      "contextTags": caseStudy.contextTags[]{ fr, en },\n      "contextBody": { "fr": caseStudy.contextBody[language == "fr"][0].value, "en": caseStudy.contextBody[language == "en"][0].value },\n      "approachLabel": { "fr": caseStudy.approachLabel[language == "fr"][0].value, "en": caseStudy.approachLabel[language == "en"][0].value },\n      "approachTitle": { "fr": caseStudy.approachTitle[language == "fr"][0].value, "en": caseStudy.approachTitle[language == "en"][0].value },\n      "approachIntro": { "fr": caseStudy.approachIntro[language == "fr"][0].value, "en": caseStudy.approachIntro[language == "en"][0].value },\n      "approachPoints": caseStudy.approachPoints[]{ "title": title{ fr, en }, "description": description{ fr, en } },\n      "featuresTitle": { "fr": caseStudy.featuresTitle[language == "fr"][0].value, "en": caseStudy.featuresTitle[language == "en"][0].value },\n      "featuresIntro": { "fr": caseStudy.featuresIntro[language == "fr"][0].value, "en": caseStudy.featuresIntro[language == "en"][0].value },\n      "features": caseStudy.features[]{ "title": title{ fr, en }, "description": description{ fr, en }, image{ asset, hotspot, crop }, size },\n      "stackTitle": { "fr": caseStudy.stackTitle[language == "fr"][0].value, "en": caseStudy.stackTitle[language == "en"][0].value },\n      "stackIntro": { "fr": caseStudy.stackIntro[language == "fr"][0].value, "en": caseStudy.stackIntro[language == "en"][0].value },\n      "stackGroups": caseStudy.stackGroups[]{ "title": title{ fr, en }, items },\n      "resultsTitle": { "fr": caseStudy.resultsTitle[language == "fr"][0].value, "en": caseStudy.resultsTitle[language == "en"][0].value },\n      "results": caseStudy.results[]{ value, "label": label{ fr, en } }\n  }\n': CASE_STUDY_QUERY_RESULT;
   }
 }

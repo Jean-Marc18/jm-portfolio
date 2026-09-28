@@ -1,4 +1,5 @@
 import { dictionaries } from "../i18n/dictionaries";
+import { paragraphs } from "./blocks";
 import type { Localized, SiteContent } from "./types";
 
 // Content bundled with the site: used as fallback when Sanity has nothing,
@@ -103,6 +104,44 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
       ),
     };
   }),
+  about: {
+    photo: { src: "/photo2.jpg", alt: "Jean-Marc Koffi" },
+    portraitRole: both(fr.aboutPage.portraitRole, en.aboutPage.portraitRole),
+    heroLine1: both(fr.aboutPage.heroH1a, en.aboutPage.heroH1a),
+    heroLine2: both(fr.aboutPage.heroH1b, en.aboutPage.heroH1b),
+    heroLine3: both(fr.aboutPage.heroH1c, en.aboutPage.heroH1c),
+    bio: {
+      fr: paragraphs("bio", [
+        [fr.aboutPage.p1],
+        [fr.aboutPage.p2],
+        [fr.aboutPage.p3a, fr.aboutPage.p3inexa, fr.aboutPage.p3b, fr.aboutPage.p3cdc, fr.aboutPage.p3c],
+      ]),
+      en: paragraphs("bio", [
+        [en.aboutPage.p1],
+        [en.aboutPage.p2],
+        [en.aboutPage.p3a, en.aboutPage.p3inexa, en.aboutPage.p3b, en.aboutPage.p3cdc, en.aboutPage.p3c],
+      ]),
+    },
+    careerTitle: both(fr.aboutPage.parH1, en.aboutPage.parH1),
+    careerIntro: both(fr.aboutPage.parP, en.aboutPage.parP),
+    stackTitle: both(fr.aboutPage.skH1, en.aboutPage.skH1),
+    stackIntro: both(fr.aboutPage.skP, en.aboutPage.skP),
+    valuesTitle: both(fr.aboutPage.valH1, en.aboutPage.valH1),
+    values: fr.aboutPage.values.map(([, title, desc], i) => ({
+      title: both(title, en.aboutPage.values[i][1]),
+      description: both(desc, en.aboutPage.values[i][2]),
+    })),
+    homeIntro: {
+      fr: paragraphs("home", [
+        [fr.about.p1],
+        [fr.about.p2a, fr.about.p2b, fr.about.p2c, fr.about.p2d, fr.about.p2e, fr.about.p2f, fr.about.p2g],
+      ]),
+      en: paragraphs("home", [
+        [en.about.p1],
+        [en.about.p2a, en.about.p2b, en.about.p2c, en.about.p2d, en.about.p2e, en.about.p2f, en.about.p2g],
+      ]),
+    },
+  },
   faqs: fr.servicesPage.faqs.map(([question, answer], i) => ({
     question: both(question, en.servicesPage.faqs[i][0]),
     answer: both(answer, en.servicesPage.faqs[i][1]),

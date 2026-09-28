@@ -1,3 +1,4 @@
+import {aboutPage} from './documents/about-page'
 import {experience} from './documents/experience'
 import {faq} from './documents/faq'
 import {project} from './documents/project'
@@ -9,4 +10,4 @@ import {localeString} from './objects/locale-string'
 import {localeText} from './objects/locale-text'
 import {simpleBlockContent} from './objects/simple-block-content'
 
-export const schemaTypes = [siteSettings, project, experience, service, skillCategory, faq, caseStudy, localeString, localeText, simpleBlockContent]
+export const schemaTypes = [siteSettings, aboutPage, project, experience, service, skillCategory, faq, caseStudy, localeString, localeText, simpleBlockContent]

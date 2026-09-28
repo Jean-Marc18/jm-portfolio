@@ -3,6 +3,7 @@
 import { createContext, useContext, useMemo } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { DEFAULT_SITE_CONTENT } from "./defaults";
+import { pickBlocks } from "./blocks";
 import { pick } from "./localize";
 import type { Experience, SiteContent } from "./types";
 
@@ -41,6 +42,7 @@ export const useSiteContent = () => {
 
   return useMemo(() => {
     const s = content.settings;
+    const a = content.about;
     return {
       settings: {
         availabilityHeadline: pick(s.availabilityHeadline, locale),
@@ -76,6 +78,24 @@ export const useSiteContent = () => {
         question: pick(f.question, locale),
         answer: pick(f.answer, locale),
       })),
+      about: {
+        photo: a.photo,
+        portraitRole: pick(a.portraitRole, locale),
+        heroLine1: pick(a.heroLine1, locale),
+        heroLine2: pick(a.heroLine2, locale),
+        heroLine3: pick(a.heroLine3, locale),
+        bio: pickBlocks(a.bio, locale),
+        careerTitle: pick(a.careerTitle, locale),
+        careerIntro: pick(a.careerIntro, locale),
+        stackTitle: pick(a.stackTitle, locale),
+        stackIntro: pick(a.stackIntro, locale),
+        valuesTitle: pick(a.valuesTitle, locale),
+        values: a.values.map((v) => ({
+          title: pick(v.title, locale),
+          description: pick(v.description, locale),
+        })),
+        homeIntro: pickBlocks(a.homeIntro, locale),
+      },
     };
   }, [content, t, locale]);
 };

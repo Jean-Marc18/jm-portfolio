@@ -4,10 +4,48 @@ import { ButtonLink, Label } from "@/components/ui";
 import { ArrowDiagonal } from "@/components/ui/icons";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useSiteContent } from "@/lib/content/SiteContentContext";
+import { PortableText, type PortableTextComponents } from "next-sanity";
+
+// First paragraph is the lead; the next ones are muted, with ink bold words.
+const homeIntro: PortableTextComponents = {
+  block: {
+    normal: ({ children, index }) =>
+      index === 0 ? (
+        <p
+          style={{
+            fontSize: 17,
+            lineHeight: 1.6,
+            color: "var(--ink)",
+            marginTop: 0,
+            maxWidth: 600,
+          }}
+        >
+          {children}
+        </p>
+      ) : (
+        <p
+          style={{
+            fontSize: 15.5,
+            lineHeight: 1.65,
+            color: "var(--muted)",
+            maxWidth: 600,
+          }}
+        >
+          {children}
+        </p>
+      ),
+  },
+  marks: {
+    strong: ({ children }) => (
+      <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{children}</strong>
+    ),
+  },
+};
 
 const About = () => {
   const { t } = useLanguage();
-  const latest = useSiteContent().experiences[0];
+  const { experiences, about } = useSiteContent();
+  const latest = experiences[0];
 
   return (
     <section
@@ -40,39 +78,7 @@ const About = () => {
           </ButtonLink>
         </div>
         <div>
-          <p
-            style={{
-              fontSize: 17,
-              lineHeight: 1.6,
-              color: "var(--ink)",
-              marginTop: 0,
-              maxWidth: 600,
-            }}
-          >
-            {t.about.p1}
-          </p>
-          <p
-            style={{
-              fontSize: 15.5,
-              lineHeight: 1.65,
-              color: "var(--muted)",
-              maxWidth: 600,
-            }}
-          >
-            {t.about.p2a}
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              {t.about.p2b}
-            </strong>
-            {t.about.p2c}
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              {t.about.p2d}
-            </strong>
-            {t.about.p2e}
-            <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-              {t.about.p2f}
-            </strong>
-            {t.about.p2g}
-          </p>
+          <PortableText value={about.homeIntro} components={homeIntro} />
 
           <div
             style={{

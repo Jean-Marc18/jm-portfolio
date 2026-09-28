@@ -5,12 +5,23 @@ import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useSplitIntro } from "@/lib/animations/useSplitIntro";
 import { useStatsCountUp } from "@/lib/animations/useCountUp";
+import { PortableText, type PortableTextComponents } from "next-sanity";
+import Image from "next/image";
 import { useRef } from "react";
+
+// Bold words keep the ink color used by the original bio.
+const richText: PortableTextComponents = {
+  marks: {
+    strong: ({ children }) => (
+      <strong style={{ color: "var(--ink)", fontWeight: 500 }}>{children}</strong>
+    ),
+  },
+};
 
 export default function AboutPage() {
   const { t, locale } = useLanguage();
   const ap = t.aboutPage;
-  const { settings, experiences, skills } = useSiteContent();
+  const { settings, experiences, skills, about } = useSiteContent();
   const sectorsLabel = ap.stats[2][1].split(" (")[0];
   const stats: [string, string][] = [
     [settings.yearsOfExperience, ap.stats[0][1]],
@@ -49,9 +60,9 @@ export default function AboutPage() {
             data-intro-title
             style={{ overflow: "hidden" }}
           >
-            {ap.heroH1a}
+            {about.heroLine1}
             <br />
-            <span style={{ color: "var(--muted)" }}>{ap.heroH1b}</span>
+            <span style={{ color: "var(--muted)" }}>{about.heroLine2}</span>
             <br />
             <span
               style={{
@@ -60,12 +71,26 @@ export default function AboutPage() {
                 color: "var(--accent)",
               }}
             >
-              {ap.heroH1c}
+              {about.heroLine3}
             </span>
             .
           </h1>
         </div>
-        <div className="ap-portrait border" data-intro-portrait>
+        <div
+          className="ap-portrait border"
+          data-intro-portrait
+          style={about.photo ? { background: "none" } : undefined}
+        >
+          {about.photo && (
+            <Image
+              src={about.photo.src}
+              alt={about.photo.alt}
+              fill
+              priority
+              sizes="(max-width: 980px) 100vw, 40vw"
+              className="ap-portrait-photo"
+            />
+          )}
           <div className="ap-portrait-mono font-labil">JM</div>
           <div className="ap-portrait-label">
             <div
@@ -75,7 +100,7 @@ export default function AboutPage() {
               Jean-Marc Koffi
             </div>
             <div style={{ fontSize: 13, color: "#6B6961" }}>
-              {ap.portraitRole}
+              {about.portraitRole}
             </div>
           </div>
         </div>
@@ -90,19 +115,7 @@ export default function AboutPage() {
             <Pill leading={<StatusDot />}>{settings.availabilityDetail}</Pill>
           </div>
           <div>
-            <p>{ap.p1}</p>
-            <p>{ap.p2}</p>
-            <p>
-              {ap.p3a}
-              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-                {ap.p3inexa}
-              </strong>
-              {ap.p3b}
-              <strong style={{ color: "var(--ink)", fontWeight: 500 }}>
-                {ap.p3cdc}
-              </strong>
-              {ap.p3c}
-            </p>
+            <PortableText value={about.bio} components={richText} />
           </div>
         </div>
       </section>
@@ -130,7 +143,7 @@ export default function AboutPage() {
                 lineHeight: 1.05,
               }}
             >
-              {ap.parH1}
+              {about.careerTitle}
             </h2>
           </div>
           <p
@@ -142,7 +155,7 @@ export default function AboutPage() {
               maxWidth: 480,
             }}
           >
-            {ap.parP}
+            {about.careerIntro}
           </p>
         </div>
 
@@ -197,7 +210,7 @@ export default function AboutPage() {
                 lineHeight: 1.05,
               }}
             >
-              {ap.skH1}
+              {about.stackTitle}
             </h2>
           </div>
           <p
@@ -209,7 +222,7 @@ export default function AboutPage() {
               maxWidth: 480,
             }}
           >
-            {ap.skP}
+            {about.stackIntro}
           </p>
         </div>
         <div className="ap-skills-grid">
@@ -242,13 +255,13 @@ export default function AboutPage() {
               lineHeight: 1.05,
             }}
           >
-            {ap.valH1}
+            {about.valuesTitle}
           </h2>
         </div>
         <div className="ap-values-grid">
-          {ap.values.map(([n, title, desc]) => (
-            <div key={n} className="ap-value pf-reveal">
-              <div className="ap-value-num">{n}</div>
+          {about.values.map(({ title, description: desc }, i) => (
+            <div key={`${title}-${i}`} className="ap-value pf-reveal">
+              <div className="ap-value-num">{String(i + 1).padStart(2, "0")}</div>
               <div>
                 <h3 className="pf-display">{title}</h3>
                 <p>{desc}</p>
