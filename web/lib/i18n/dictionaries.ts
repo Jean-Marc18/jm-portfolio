@@ -547,6 +547,17 @@ export const dictionaries = {
     },
     projectPage: {
       back: "Tous les projets",
+      labels: {
+        context: "Contexte",
+        features: "Fonctionnalités",
+        stack: "Stack technique",
+        results: "En production",
+        next: "Projet suivant",
+        nextCta: "Voir le projet",
+        deployed: "Déployé",
+        type: "Type",
+        mainStack: "Stack principale",
+      },
       cases: {
         ciblea: {
           tag: "AI · SaaS",
@@ -560,12 +571,8 @@ export const dictionaries = {
             ["Année", "2025 · En production"],
           ] as [string, string][],
           coverVer: "v1.0 · production",
-          coverDeployed: "Déployé",
-          coverTypeLabel: "Type",
           coverTypeValue: "Plateforme SaaS IA",
-          coverStackLabel: "Stack principale",
           coverStackValue: "Next.js 16 · Supabase · Inngest",
-          ctxLabel: "Contexte",
           ctxH1:
             "L'IA générative pour aider les candidats à mieux se vendre.",
           ctxTags: [
@@ -609,7 +616,6 @@ export const dictionaries = {
               "Intégration de GeniusPay pour le marché local (XOF) avec vérification HMAC des webhooks, couplé à Supabase Auth et Row Level Security (RLS) pour protéger les données.",
             ],
           ] as [string, string, string][],
-          mockLabel: "Fonctionnalités",
           mockH1: "De l'offre au PDF en 60s.",
           mockP:
             "Une expérience fluide avec un suivi en temps réel de la progression des agents IA.",
@@ -655,7 +661,6 @@ export const dictionaries = {
               "/projects/ciblea/CV_Ciblea_elegant.jpg"
             ],
           ] as [string, string, string][],
-          skLabel: "Stack technique",
           skH1: "Ce qui tourne sous le capot.",
           skP: "Une architecture moderne taillée pour la rapidité d'exécution et la résilience face aux API externes.",
           skGroups: [
@@ -669,15 +674,12 @@ export const dictionaries = {
             ["Documents", ["React-PDF", "Zod"]],
             ["Déploiement", ["Vercel"]],
           ] as [string, string[]][],
-          resLabel: "En production",
           resH1: "Les résultats.",
           res: [
             ["60s", "Temps moyen pour générer un CV et une Lettre"],
             ["100%", "Succès des tâches background via Inngest"],
             ["B2C", "Premiers utilisateurs actifs et retours positifs"],
           ] as [string, string][],
-          nextLabel: "Projet suivant",
-          nextCta: "Voir le projet",
         },
       },
     },
@@ -1227,6 +1229,17 @@ export const dictionaries = {
     },
     projectPage: {
       back: "All projects",
+      labels: {
+        context: "Context",
+        features: "Features",
+        stack: "Technical stack",
+        results: "In production",
+        next: "Next project",
+        nextCta: "View project",
+        deployed: "Deployed",
+        type: "Type",
+        mainStack: "Main stack",
+      },
       cases: {
         ciblea: {
           tag: "AI · SaaS",
@@ -1240,12 +1253,8 @@ export const dictionaries = {
             ["Year", "2025 · In production"],
           ] as [string, string][],
           coverVer: "v1.0 · production",
-          coverDeployed: "Deployed",
-          coverTypeLabel: "Type",
           coverTypeValue: "AI SaaS Platform",
-          coverStackLabel: "Main stack",
           coverStackValue: "Next.js 16 · Supabase · Inngest",
-          ctxLabel: "Context",
           ctxH1:
             "Generative AI to help candidates sell themselves better.",
           ctxTags: [
@@ -1289,7 +1298,6 @@ export const dictionaries = {
               "GeniusPay integration for the local market (XOF) with HMAC webhook verification, coupled with Supabase Auth and Row Level Security (RLS) to protect data.",
             ],
           ] as [string, string, string][],
-          mockLabel: "Features",
           mockH1: "From job offer to PDF in 60s.",
           mockP:
             "A seamless experience with real-time tracking of the AI agents' progress.",
@@ -1335,7 +1343,6 @@ export const dictionaries = {
               "/projects/ciblea/CV_Ciblea_elegant.jpg"
             ],
           ] as [string, string, string][],
-          skLabel: "Technical stack",
           skH1: "What runs under the hood.",
           skP: "A modern architecture tailored for execution speed and resilience against external APIs.",
           skGroups: [
@@ -1349,15 +1356,12 @@ export const dictionaries = {
             ["Documents", ["React-PDF", "Zod"]],
             ["Deployment", ["Vercel"]],
           ] as [string, string[]][],
-          resLabel: "In production",
           resH1: "The results.",
           res: [
             ["60s", "Average time to generate a CV and Cover Letter"],
             ["100%", "Success rate of background tasks via Inngest"],
             ["B2C", "First active users and positive feedback"],
           ] as [string, string][],
-          nextLabel: "Next project",
-          nextCta: "View project",
         },
       },
     },

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useMemo } from "react";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
-import { projectsFromDictionary } from "./fallback";
+import { caseStudyHref, projectsFromDictionary } from "./fallback";
 import { pick } from "@/lib/content/localize";
 import type { CmsProject, ProjectItem } from "./types";
 
@@ -38,6 +38,7 @@ export const useProjects = (): ProjectItem[] => {
       description: pick(p.description, locale),
       role: pick(p.role, locale) || undefined,
       cover: p.cover ?? undefined,
+      caseStudyHref: caseStudyHref(p.slug, p.hasCaseStudy),
     }));
   }, [cms, t, locale]);
 };

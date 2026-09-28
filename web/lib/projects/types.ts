@@ -15,6 +15,8 @@ export type CmsProject = {
   description: Localized;
   role: Localized;
   cover: ProjectCover | null;
+  /** null: never set in the Studio. */
+  hasCaseStudy: boolean | null;
 };
 
 /** Project resolved for the current locale, as rendered by the UI. */
@@ -30,4 +32,6 @@ export type ProjectItem = {
   stack: string[];
   role?: string;
   cover?: ProjectCover;
+  /** Link to /projets/<slug> instead of the live site. */
+  caseStudyHref?: string;
 };

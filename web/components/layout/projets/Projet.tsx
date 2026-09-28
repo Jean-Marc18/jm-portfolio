@@ -2,7 +2,6 @@
 
 import { ButtonLink, Card, Label, Pill, TagList } from "@/components/ui";
 import { ArrowUpRightSm } from "@/components/ui/icons";
-import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useProjects } from "@/lib/projects/ProjectsContext";
 import {
@@ -87,7 +86,7 @@ const Projet = () => {
 
       <div className="ho-grid-projects">
         {projects.map((p, i) => {
-          const caseStudy = PROJECT_PATHS[p.slug];
+          const caseStudy = p.caseStudyHref;
           const linkProps = caseStudy
             ? { href: caseStudy }
             : {

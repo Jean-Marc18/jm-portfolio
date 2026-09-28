@@ -31,6 +31,7 @@ export async function getProjects(): Promise<CmsProject[] | null> {
       sub: doc.sub,
       description: doc.description,
       role: doc.role,
+      hasCaseStudy: doc.hasCaseStudy,
       cover: doc.coverImage?.asset
         ? {
             src: urlFor(doc.coverImage).width(1600).fit("max").auto("format").url(),

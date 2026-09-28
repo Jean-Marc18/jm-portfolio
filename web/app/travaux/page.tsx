@@ -1,7 +1,6 @@
 "use client";
 
 import { ButtonLink, Label, Pill, Tag } from "@/components/ui";
-import { PROJECT_PATHS } from "@/constants";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { useSiteContent } from "@/lib/content/SiteContentContext";
 import { useProjects } from "@/lib/projects/ProjectsContext";
@@ -113,7 +112,7 @@ export default function TravauxPage() {
 
       <section className="tv-list" ref={listRef}>
         {projects.map((p, i) => {
-          const caseStudy = PROJECT_PATHS[p.slug];
+          const caseStudy = p.caseStudyHref;
           const linkProps = caseStudy
             ? { href: caseStudy }
             : {
